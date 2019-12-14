@@ -1,0 +1,28 @@
+{
+    "suggest.noselect": false,
+    "suggest.minTriggerInputLength": 2,
+    "suggest.enablePreview":true,
+    "suggest.numberSelect":true,
+    "suggest.timeout":500,
+    "diagnostic.virtualText": true,
+    "codeLens.enable": true,
+    "coc.preferences.formatOnSaveFiletypes": [
+        "json",
+        "go"
+    ],
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "args": [],
+            "rootPatterns": [
+                "go.mod",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "filetypes": [
+                "go"
+            ]
+        }
+    }
+}
