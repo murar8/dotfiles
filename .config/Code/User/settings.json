@@ -1,0 +1,21 @@
+{
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.colorTheme": "One Dark Pro",
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "editor.suggestSelection": "first",
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "window.zoomLevel": 0,
+  "terminal.integrated.fontFamily": "ubuntu mono, monospace",
+  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.experimentalRefreshOnResume": true,
+  "git.enableSmartCommit": true,
+  "yaml.format.enable": true,
+  "yaml.validate": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "python.linting.flake8Enabled": true,
+  "python.formatting.provider": "autopep8",
+  "go.useLanguageServer": false,
+  "go.lintTool": "golangci-lint"
+}
