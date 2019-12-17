@@ -28,16 +28,14 @@ antigen theme romkatv/powerlevel10k
 
 antigen apply
 
-# Needed for zsh-completions
-# autoload -U compinit && compinit
-
 # User configuration
+
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Documenti
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 
-alias vim=nvim
+# alias vim=nvim
 alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 source $HOME/.local/bin/virtualenvwrapper_lazy.sh

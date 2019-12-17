@@ -4,8 +4,12 @@
     "suggest.enablePreview":true,
     "suggest.numberSelect":true,
     "suggest.timeout":500,
-    "diagnostic.virtualText": true,
-    "codeLens.enable": true,
+    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+    "suggest.floatEnable": true,
+    "diagnostic.level": "hint",
+    "snippets.ultisnips.directories": [
+        "gosnippets/UltiSnips"
+    ],
     "coc.preferences.formatOnSaveFiletypes": [
         "json",
         "go"

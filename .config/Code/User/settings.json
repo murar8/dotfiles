@@ -1,6 +1,7 @@
 {
   "workbench.iconTheme": "vscode-icons",
   "workbench.colorTheme": "One Dark Pro",
+  "workbench.activityBar.visible": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
   "editor.suggestSelection": "first",
@@ -16,6 +17,31 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "python.linting.flake8Enabled": true,
   "python.formatting.provider": "autopep8",
-  "go.useLanguageServer": false,
-  "go.lintTool": "golangci-lint"
+  "go.useLanguageServer": true,
+  "go.languageServerExperimentalFeatures": {
+    "format": false,
+    "autoComplete": true,
+    "rename": true,
+    "goToDefinition": true,
+    "hover": true,
+    "signatureHelp": true,
+    "goToTypeDefinition": true,
+    "goToImplementation": true,
+    "documentSymbols": true,
+    "workspaceSymbols": true,
+    "findReferences": true,
+    "diagnostics": true,
+    "documentLink": true,
+    "highlight": true
+  },
+  "vim.statusBarColorControl": true,
+  "vim.hlsearch": true,
+  "vim.leader": " ",
+  "vim.whichwrap": "h,l,<,>,[,]",
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f"
+  },
+  "C_Cpp.clang_format_fallbackStyle": "Google",
 }
