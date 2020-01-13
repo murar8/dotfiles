@@ -1,0 +1,7 @@
+#!/bin/sh
+
+alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+dot add -u
+dot commit -m "Automatic commit $(date)"
+dot push origin master
