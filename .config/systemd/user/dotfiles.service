@@ -1,0 +1,9 @@
+[Unit]
+Description=Sync local dotfile changes with github.
+
+[Service]
+Type=oneshot
+ExecStart=/home/lorenzo/.local/bin/dotupdate
+
+[Install]
+WantedBy=multi-user.target
