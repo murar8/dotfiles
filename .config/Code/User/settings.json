@@ -23,8 +23,8 @@
   "go.lintTool": "golangci-lint",
   "rust.clippy_preference": "on",
   "rust.wait_to_build": 250,
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.tsserver.maxTsServerMemory": 6192,
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "typescript.tsserver.log": "verbose",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -37,5 +37,9 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.wordWrap": "on"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
