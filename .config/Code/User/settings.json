@@ -6,6 +6,9 @@
   "explorer.confirmDelete": false,
   "editor.suggestSelection": "first",
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": false
+  },
   "files.autoSave": "onFocusChange",
   "window.zoomLevel": 0,
   "terminal.integrated.fontFamily": "ubuntu mono, monospace",
