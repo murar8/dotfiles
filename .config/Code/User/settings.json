@@ -13,7 +13,6 @@
   "window.zoomLevel": 0,
   "terminal.integrated.fontFamily": "ubuntu mono, monospace",
   "terminal.integrated.fontSize": 16,
-  "terminal.integrated.experimentalRefreshOnResume": true,
   "eslint.format.enable": true,
   "git.enableSmartCommit": true,
   "yaml.format.enable": true,
