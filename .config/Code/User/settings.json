@@ -9,6 +9,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
   },
+  "editor.rulers": [100],
   "files.autoSave": "onFocusChange",
   "window.zoomLevel": 0,
   "terminal.integrated.fontFamily": "ubuntu mono, monospace",
