@@ -1,32 +1,3 @@
 {
-    "suggest.noselect": false,
-    "suggest.minTriggerInputLength": 2,
-    "suggest.enablePreview":true,
-    "suggest.numberSelect":true,
-    "suggest.timeout":500,
-    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-    "suggest.floatEnable": true,
-    "diagnostic.level": "hint",
-    "snippets.ultisnips.directories": [
-        "gosnippets/UltiSnips"
-    ],
-    "coc.preferences.formatOnSaveFiletypes": [
-        "json",
-        "go"
-    ],
-    "languageserver": {
-        "golang": {
-            "command": "gopls",
-            "args": [],
-            "rootPatterns": [
-                "go.mod",
-                ".vim/",
-                ".git/",
-                ".hg/"
-            ],
-            "filetypes": [
-                "go"
-            ]
-        }
-    }
+
 }

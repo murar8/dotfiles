@@ -2,26 +2,18 @@
   "workbench.iconTheme": "vscode-icons",
   "workbench.colorTheme": "One Dark Pro",
   "workbench.activityBar.visible": false,
-  "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
-  "editor.suggestSelection": "first",
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-  },
+  "explorer.sortOrder": "type",
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
   "editor.rulers": [100],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": { "source.fixAll": true },
   "files.autoSave": "onFocusChange",
   "window.zoomLevel": 0,
   "terminal.integrated.fontFamily": "ubuntu mono, monospace",
   "terminal.integrated.fontSize": 16,
-  "eslint.format.enable": true,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue"
-  ],
   "git.enableSmartCommit": true,
   "yaml.format.enable": true,
   "yaml.validate": true,
@@ -36,9 +28,14 @@
   "typescript.tsserver.maxTsServerMemory": 4096,
   "typescript.tsserver.log": "verbose",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.associations": {
     "*.snap": "javascript"
   },
-
+  "search.smartCase": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSurroundingLines": 3,
+  "editor.formatOnSave": true,
+  "editor.suggest.insertMode": "replace",
+  "editor.suggest.localityBonus": true,
+  "python.jediEnabled": false
 }
