@@ -7,9 +7,12 @@
   "editor.suggestSelection": "recentlyUsedByPrefix",
   "editor.fontFamily": "Fira Code",
   "editor.fontLigatures": true,
-  "editor.rulers": [100],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": { "source.fixAll": true },
+  "editor.rulers": [
+    100
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
   "files.autoSave": "onFocusChange",
   "window.zoomLevel": 0,
   "terminal.integrated.fontFamily": "ubuntu mono, monospace",
@@ -19,7 +22,6 @@
   "yaml.validate": true,
   "C_Cpp.clang_format_fallbackStyle": "Google",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "python.linting.flake8Enabled": true,
   "python.formatting.provider": "autopep8",
   "go.useLanguageServer": true,
   "go.lintTool": "golangci-lint",
@@ -37,5 +39,13 @@
   "editor.formatOnSave": true,
   "editor.suggest.insertMode": "replace",
   "editor.suggest.localityBonus": true,
-  "python.jediEnabled": false
+  "python.jediEnabled": false,
+  "yaml.format.printWidth": 100,
+  "prettier.printWidth": 100,
+  "[json]": {
+    "editor.wordWrap": "on"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
