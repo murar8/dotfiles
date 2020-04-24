@@ -48,4 +48,3 @@ function dotsync {
     dot push origin master
 }
 
-A=1112345678
