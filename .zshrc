@@ -38,3 +38,5 @@ function dot {
 function dotsync {
     dot pull origin master
 }
+
+alias test="ls"
