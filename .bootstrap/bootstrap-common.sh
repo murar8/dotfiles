@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 echo "Starting bootstrap procedure."
 
@@ -17,29 +17,19 @@ checkcmd() {
     done
 }
 
-checkcmd sudo
+dot() {
+    $(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
+}
 
-if iscmd "apt-get"; then
-    echo "Installing dependencies automatically."
-    sudo apt-get update
-    sudo apt-get install -y --no-install-recommends fonts-firacode fonts-powerline ca-certificates neovim git vim zsh curl 
-fi
-
-checkcmd git zsh vim curl
-
-alias dot="$(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+checkcmd sudo git zsh vim curl
 
 if [ ! -d $HOME/.dotfiles ]; then
-    echo "Creating the repository in $HOME/.dotfiles"
+    echo "Creating repository in $HOME/.dotfiles."
     git init --bare $HOME/.dotfiles
+    command -v dot
     dot config status.showUntrackedFiles no
     dot remote add origin https://github.com/murar8/dotfiles
 fi
-
-echo "Pulling the repository data."
-dot fetch --all
-dot reset --hard origin/master
-dot pull origin master
 
 if [ ! -d $HOME/.antigen/antigen.zsh ]; then
     echo "Installing antigen."
@@ -50,16 +40,21 @@ fi
 if [ ! -d $HOME/.vim/autoload/plug.vim ]; then
     echo "Installing vim-plug."
     curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    vim +PlugInstall +qall
 fi
 
 if [ ${SHELL} != $(which zsh) ]; then
     echo "Changing the default shell."
-    sudo usermod -s $(which zsh) $USER
+    sudo usermod -s $(which zsh) $(whoami)
 fi
 
-# systemctl enable --user dotfiles.service
+echo "Pulling the repository data."
+dot fetch --all
+dot reset --hard origin/master
+dot pull origin master
 
-echo "Bootstrap completed successfully!"
+echo "Installing vim plugins."
+vim +PlugInstall +qall
 
-zsh
+echo "Bootstrap completed successfully."
+
+$(which zsh)

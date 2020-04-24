@@ -1,7 +1,6 @@
 # oh-my-zsh
 DISABLE_MAGIC_FUNCTIONS=true
 COMPLETION_WAITING_DOTS="true"
-ZSH_THEME=powerlevel10k/powerlevel10k
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)

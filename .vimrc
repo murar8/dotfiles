@@ -88,8 +88,16 @@ if !has('nvim') | set ttymouse=sgr | endif
 " Highlight current line
 if has('nvim') | set cursorline | endif           
 
-let dir='~/.vim/swap'
-let undodir='~/.vim/undo'
+if !isdirectory($HOME."/.vim/undo")
+    call mkdir($HOME."/.vim/undo", "", 0700)
+endif
+
+if !isdirectory($HOME."/.vim/swap")
+    call mkdir($HOME."/.vim/swap", "", 0700)
+endif
+
+let dir=$HOME."/.vim/swap"
+let undodir=$HOME."~/.vim/undo"
 
 let mapleader = " " " <Space> is a more reachable leader
 
