@@ -25,12 +25,16 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 
-antigen theme denysdovhan/spaceship-prompt
+antigen bundle denysdovhan/spaceship-prompt
 
 antigen apply
 
 # User configuration
 
-alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+function dot {
+    git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
+}
 
-alias dot-sync='https://raw.githubusercontent.com/simonthum/git-sync/master/git-sync'
+function dotsync {
+    dot pull origin master
+}
