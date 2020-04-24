@@ -31,12 +31,21 @@ antigen apply
 
 # User configuration
 
-function dot {
-    git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
-}
+alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 function dotsync {
-    dot pull origin master
+    if [[ -z $(dot status --porcelain) ]]; then return 0; fi
+
+    dot add -u
+    dot commit -m "changes from $(uname -n) on $(date)."
+
+    dot fetch origin master
+
+    dot merge --ff --squash origin/master
+
+    if [ $? != 0 ]; then return 1; fi
+
+    dot push origin master
 }
 
-alias test="ls"
+A=11123456
