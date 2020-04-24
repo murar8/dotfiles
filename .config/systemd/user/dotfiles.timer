@@ -1,9 +1,0 @@
-[Unit]
-Description=Run dotfiles.service weekly
-
-[Timer]
-OnCalendar=weekly
-Persistent=true
-
-[Install]
-WantedBy=timers.target
