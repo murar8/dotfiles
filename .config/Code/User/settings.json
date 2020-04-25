@@ -22,30 +22,18 @@
   "yaml.validate": true,
   "C_Cpp.clang_format_fallbackStyle": "Google",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "python.formatting.provider": "autopep8",
-  "go.useLanguageServer": true,
-  "go.lintTool": "golangci-lint",
-  "rust.clippy_preference": "on",
-  "rust.wait_to_build": 250,
   "typescript.tsserver.maxTsServerMemory": 4096,
   "typescript.tsserver.log": "verbose",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "files.associations": {
-    "*.snap": "javascript"
-  },
   "search.smartCase": true,
   "editor.cursorBlinking": "smooth",
   "editor.cursorSurroundingLines": 3,
   "editor.formatOnSave": true,
   "editor.suggest.insertMode": "replace",
   "editor.suggest.localityBonus": true,
-  "python.jediEnabled": false,
   "yaml.format.printWidth": 100,
   "prettier.printWidth": 100,
   "[json]": {
     "editor.wordWrap": "on"
   },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
 }

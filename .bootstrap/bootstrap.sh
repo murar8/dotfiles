@@ -11,7 +11,7 @@ iscmd() {
 checkcmd() {
     for cmd in $@; do
         if ! iscmd $cmd;then
-            echo "Error: could not find command $cmd."
+            echo "Error: could not find command '$cmd'."
             exit 1
         fi
     done
