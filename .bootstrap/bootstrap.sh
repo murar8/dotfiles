@@ -34,14 +34,6 @@ fi
 echo "Pulling files from upstream."
 
 dot fetch --all
-dot reset --hard origin/master
 dot pull origin master
-
-if [ -z "$PS1" ] && [ $SHELL != $(which zsh) ]; then
-    chsh -s $(which zsh)
-else
-    echo "Please remember to set your default shell to zsh!"
-    echo
-fi
 
 echo "Bootstrap procedure completed successfully."
