@@ -31,7 +31,7 @@ antigen apply
 
 # User configuration
 
-setopt aliases
+setopt aliases complete_aliases
 
 alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
