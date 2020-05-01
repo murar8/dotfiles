@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 if [ $# -lt 3 ]; then 
     echo "Error: Not enough arguments." 
     echo "Usage: bootstrap-docker.sh <username> <user-uid> <user-gid>"
