@@ -8,7 +8,12 @@ fi
 
 # oh-my-zsh
 DISABLE_MAGIC_FUNCTIONS=true
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
+
+# spaceship-prompt
+# SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_CHAR_SYMBOL="~ "
+SPACESHIP_CHAR_SYMBOL_ROOT="# "
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
