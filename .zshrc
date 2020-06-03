@@ -7,21 +7,6 @@
 setopt aliases
 alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
-# dotfiles installation
-
-REPO_URL=https://github.com/murar8/dotfiles
-REPO_DIR=$HOME/.dotfiles
-
-if [ ! -d $REPO_DIR ]; then
-    echo "Creating dotfiles repository!..."
-
-    git init --bare $REPO_DIR
-    dot config status.showUntrackedFiles no
-    dot remote add origin $REPO_URL
-    dot fetch --all
-    dot pull origin master
-fi
-
 # oh-my-zsh
 
 DISABLE_MAGIC_FUNCTIONS=true
