@@ -56,6 +56,8 @@ antigen apply
 
 STARSHIP_PATH=$HOME/.local/bin
 
+export PATH=$PATH:$STARSHIP_PATH
+
 if [ ! -f $STARSHIP_PATH/starship ]; then
     mkdir -p $STARSHIP_PATH
     curl -fsSL https://starship.rs/install.sh | bash -s -- --yes --bin-dir $STARSHIP_PATH
