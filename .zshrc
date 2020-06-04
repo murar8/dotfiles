@@ -59,8 +59,9 @@ STARSHIP_PATH=$HOME/.local/bin
 export PATH=$PATH:$STARSHIP_PATH
 
 if [ ! -f $STARSHIP_PATH/starship ]; then
+    echo "Installing starship!..."
     mkdir -p $STARSHIP_PATH
-    curl -fsSL https://starship.rs/install.sh | bash -s -- --yes --bin-dir $STARSHIP_PATH
+    curl -fsSL https://starship.rs/install.sh | bash -s -- --yes --bin-dir $STARSHIP_PATH  > /dev/null
 fi
 
 eval "$($STARSHIP_PATH/starship init zsh)"
