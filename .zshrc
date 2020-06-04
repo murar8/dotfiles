@@ -50,6 +50,15 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 
-antigen bundle denysdovhan/spaceship-prompt
-
 antigen apply
+
+# starship
+
+STARSHIP_PATH=$HOME/.local/bin
+
+if [ ! -f $STARSHIP_PATH/starship ]; then
+    mkdir -p $STARSHIP_PATH
+    curl -fsSL https://starship.rs/install.sh | bash -s -- --yes --bin-dir $STARSHIP_PATH
+fi
+
+eval "$($STARSHIP_PATH/starship init zsh)"
