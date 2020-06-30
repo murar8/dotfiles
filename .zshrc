@@ -15,7 +15,6 @@ fi
 # oh-my-zsh
 
 DISABLE_MAGIC_FUNCTIONS=true
-# COMPLETION_WAITING_DOTS="true"
 
 # spaceship-prompt
 
