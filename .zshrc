@@ -5,7 +5,12 @@
 # user configuration
 
 setopt aliases
+
 alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+if ! dot fetch --dry-run &> /dev/null ; then
+    echo "Warning: Your dotfiles have been updated! $?"
+fi
 
 # oh-my-zsh
 
