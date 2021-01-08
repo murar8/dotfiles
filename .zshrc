@@ -8,6 +8,14 @@ setopt aliases
 
 alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
+if [ "$TERM_PROGRAM" = 'vscode' ]; then
+    export EDITOR="$(which code) -w"
+elif command -v nvim &> /dev/null; then
+    export EDITOR=nvim
+elif command -v vim &> /dev/null; then
+    export EDITOR=vim
+fi
+
 # oh-my-zsh
 
 DISABLE_MAGIC_FUNCTIONS=true
