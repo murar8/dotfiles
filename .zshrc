@@ -73,16 +73,16 @@ function check-status {
     PURPLE="\033[0;35m"
     NC="\033[0m"
 
-    UPSTREAM=${1:-'@{u}'}
+    UPSTREAM="origin/master"
     LOCAL=$(dot rev-parse @)
     REMOTE=$(dot rev-parse "$UPSTREAM")
     BASE=$(dot merge-base @ "$UPSTREAM")
 
-    if [ $LOCAL = $BASE ]; then
+    if [ "$LOCAL" = "$BASE" ]; then
         echo "${YELLOW}Warning: Your configuration files are outdated.${NC}"
-    elif [ $REMOTE = $BASE ]; then
+    elif [ "$REMOTE" = "$BASE" ]; then
         echo "${PURPLE}Warning: Remember to push Your committed changes files to the remote branch.${NC}"
-    elif [ $LOCAL != $REMOTE ]; then
+    elif [ "$LOCAL" != "$REMOTE" ]; then
         echo "${RED}Warning: Local and remote have diverged.${NC}"
     fi
 }
