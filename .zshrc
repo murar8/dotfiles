@@ -47,6 +47,50 @@ antigen bundle zsh-users/zsh-completions
 
 antigen apply
 
+# environment
+
+if [ "$TERM_PROGRAM" = 'vscode' ]; then
+    export EDITOR="$(which code) -w"
+elif command -v nvim &> /dev/null; then
+    export EDITOR=nvim
+elif command -v vim &> /dev/null; then
+    export EDITOR=vim
+fi
+
+# dotfile status
+
+setopt aliases
+
+alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+function dot-status {
+    dot remote update &> /dev/null
+
+    RED="\e[0;31m"
+    YELLOW="\e[0;33m"
+    PURPLE="\e[0;35m"
+    NC="\e[0m"
+
+    UPSTREAM="origin/master"
+    LOCAL=$(dot rev-parse @)
+    REMOTE=$(dot rev-parse "$UPSTREAM")
+    BASE=$(dot merge-base @ "$UPSTREAM")
+
+    if [ "$LOCAL" = "$REMOTE" ]; then
+        echo "Configuration is up to date."
+    elif [ "$LOCAL" = "$BASE" ]; then
+        echo "${YELLOW}Warning: Your configuration files are outdated.${NC}"
+    elif [ "$REMOTE" = "$BASE" ]; then
+        echo "${PURPLE}Warning: Remember to push Your committed changes files to the remote branch.${NC}"
+    else
+        echo "${RED}Warning: Local and remote have diverged.${NC}"
+    fi
+}
+
+alias timeout="timeout 1 "
+echo "$(timeout dot-status)"
+unalias timeout
+
 # starship
 
 STARSHIP_PATH=$HOME/.local/bin
@@ -60,40 +104,3 @@ if [ ! -f $STARSHIP_PATH/starship ]; then
 fi
 
 eval "$($STARSHIP_PATH/starship init zsh)"
-
-# dotfiles
-
-setopt aliases
-
-alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-
-function check-status {
-    RED="\033[0;31m"
-    YELLOW="\033[0;33m"
-    PURPLE="\033[0;35m"
-    NC="\033[0m"
-
-    UPSTREAM="origin/master"
-    LOCAL=$(dot rev-parse @)
-    REMOTE=$(dot rev-parse "$UPSTREAM")
-    BASE=$(dot merge-base @ "$UPSTREAM")
-
-    if [ "$LOCAL" = "$BASE" ]; then
-        echo "${YELLOW}Warning: Your configuration files are outdated.${NC}"
-    elif [ "$REMOTE" = "$BASE" ]; then
-        echo "${PURPLE}Warning: Remember to push Your committed changes files to the remote branch.${NC}"
-    elif [ "$LOCAL" != "$REMOTE" ]; then
-        echo "${RED}Warning: Local and remote have diverged.${NC}"
-    fi
-}
-
-alias timeout='timeout 1 '
-timeout dot remote update &> /dev/null && check-status
-
-# environment
-
-if [ "$TERM_PROGRAM" = 'vscode' ]; then
-    export EDITOR="$(which code) -w"
-elif command -v nvim &> /dev/null; then
-    export EDITOR=nvim
-fi
