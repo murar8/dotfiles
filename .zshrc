@@ -64,8 +64,6 @@ setopt aliases
 alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 function dot-status {
-    dot remote update &> /dev/null
-
     RED="\e[0;31m"
     YELLOW="\e[0;33m"
     PURPLE="\e[0;35m"
@@ -88,8 +86,10 @@ function dot-status {
 }
 
 alias timeout="timeout 1 "
-echo "$(timeout dot-status)"
+timeout dot remote update &> /dev/null
 unalias timeout
+dot-status
+echo
 
 # starship
 
