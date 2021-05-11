@@ -89,3 +89,11 @@ function check-status {
 
 alias timeout='timeout 1 '
 timeout dot remote update &> /dev/null && check-status
+
+# environment
+
+if [ "$TERM_PROGRAM" = 'vscode' ]; then
+    export EDITOR="$(which code) -w"
+elif command -v nvim &> /dev/null; then
+    export EDITOR=nvim
+fi
