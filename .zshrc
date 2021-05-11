@@ -75,21 +75,22 @@ function dot-status {
     BASE=$(dot merge-base @ "$UPSTREAM")
 
     if [ "$LOCAL" = "$REMOTE" ]; then
-        echo "Configuration is up to date."
-    elif [ "$LOCAL" = "$BASE" ]; then
-        echo "${YELLOW}Warning: Your configuration files are outdated.${NC}"
+        return
+    fi
+
+    if [ "$LOCAL" = "$BASE" ]; then
+        echo "${YELLOW}Warning: Your configuration files are outdated.${NC}\n"
     elif [ "$REMOTE" = "$BASE" ]; then
-        echo "${PURPLE}Warning: Remember to push Your committed changes files to the remote branch.${NC}"
+        echo "${PURPLE}Warning: Remember to push Your committed changes to the remote branch.${NC}\n"
     else
-        echo "${RED}Warning: Local and remote have diverged.${NC}"
+        echo "${RED}Warning: Local and remote have diverged.${NC}\n"
     fi
 }
 
-alias timeout="timeout 1 "
-timeout dot remote update &> /dev/null
+alias timeout="timeout " # Make the shell parse expand all the aliases
+timeout 1 dot fetch &> /dev/null
 unalias timeout
 dot-status
-echo
 
 # starship
 
