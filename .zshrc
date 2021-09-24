@@ -49,7 +49,7 @@ antigen apply
 
 # environment
 
-if [ "$TERM_PROGRAM" = 'vscode' ]; then
+if command -v code &> /dev/null && ([ "$TERM_PROGRAM" = 'vscode' ] || [ -t 0 ]); then
     export EDITOR="$(which code) -w"
 elif command -v nvim &> /dev/null; then
     export EDITOR=nvim
