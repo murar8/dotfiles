@@ -49,11 +49,11 @@ antigen apply
 
 # environment
 
-if command -v code &> /dev/null && ([ "$TERM_PROGRAM" = 'vscode' ] || [ -t 0 ]); then
+if command -v code &>/dev/null && ([ "$TERM_PROGRAM" = 'vscode' ] || [ -t 0 ]); then
     export EDITOR="$(which code) -w"
-elif command -v nvim &> /dev/null; then
+elif command -v nvim &>/dev/null; then
     export EDITOR=nvim
-elif command -v vim &> /dev/null; then
+elif command -v vim &>/dev/null; then
     export EDITOR=vim
 fi
 
@@ -88,7 +88,7 @@ function dot-status {
 }
 
 alias timeout="timeout " # Make the shell parse expand all the aliases
-timeout 1 dot fetch &> /dev/null
+timeout 1 dot fetch &>/dev/null
 unalias timeout
 dot-status
 
