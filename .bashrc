@@ -6,6 +6,21 @@
 
 STARSHIP_PATH=$HOME/.local/bin
 
+# aliases
+
+alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+# completion
+
+if [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]]; then
+    source /usr/share/bash-completion/bash_completion
+fi
+
+if [[ $PS1 && -f /usr/share/bash-completion/completions/git ]]; then
+    source /usr/share/bash-completion/completions/git
+    complete -F _git dot
+fi
+
 # editor
 
 if command -v code &>/dev/null && ([ "$TERM_PROGRAM" = 'vscode' ] || [ -t 0 ]); then
@@ -15,10 +30,6 @@ elif command -v nvim &>/dev/null; then
 elif command -v vim &>/dev/null; then
     export EDITOR="$(which vim) -w"
 fi
-
-# aliases
-
-alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # starship
 
