@@ -10,12 +10,9 @@ if ! command -v git >/dev/null; then
     exit 1
 fi
 
-if [ -d $REPO_DIR ]; then
-    echo "Error: it looks like the $REPO_DIR folder is already present."
-    exit 1
+if [ ! -d $REPO_DIR ]; then
+    git clone --bare $REPO_URL $REPO_DIR
 fi
-
-git clone --bare $REPO_URL $REPO_DIR
 
 dot() {
     git --git-dir=$REPO_DIR/ --work-tree=$HOME $@
