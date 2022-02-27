@@ -3,8 +3,6 @@
 REPO_URL=git@github.com:murar8/dotfiles.git
 REPO_DIR=$HOME/.dotfiles
 
-set -e
-
 if ! command -v git >/dev/null; then
     echo "Error: could not locate git in your path."
     exit 1
@@ -19,4 +17,8 @@ dot() {
 }
 
 dot config status.showUntrackedFiles no
-dot checkout
+dot checkout 2>/dev/null
+
+if [ $? -ne 0 ]; then
+    dot stash save backup
+fi
