@@ -2,6 +2,10 @@
 #
 # Author: Lorenzo Murarotto <lnzmrr@gmail.com>
 
+# stop logging of repeated identical commands
+
+export HISTCONTROL=ignoredups
+
 # config
 
 STARSHIP_PATH=$HOME/.local/bin
@@ -21,14 +25,19 @@ if [[ $PS1 && -f /usr/share/bash-completion/completions/git ]]; then
     complete -F _git dot
 fi
 
+# history completion
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
 # editor
 
 if command -v code &>/dev/null && ([ "$TERM_PROGRAM" = 'vscode' ] || [ -t 0 ]); then
     export EDITOR="$(which code) -w"
 elif command -v nvim &>/dev/null; then
-    export EDITOR="$(which nvim) -w"
+    export EDITOR="$(which nvim)"
 elif command -v vim &>/dev/null; then
-    export EDITOR="$(which vim) -w"
+    export EDITOR="$(which vim)"
 fi
 
 # starship
