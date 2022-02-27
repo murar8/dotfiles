@@ -2,6 +2,10 @@
 #
 # Author: Lorenzo Murarotto <lnzmrr@gmail.com>
 
+# if not running interactively don't do anything
+
+[ -z "$PS1" ] && return
+
 # stop logging of repeated identical commands
 
 export HISTCONTROL=ignoredups
@@ -22,7 +26,7 @@ fi
 
 if [[ $PS1 && -f /usr/share/bash-completion/completions/git ]]; then
     source /usr/share/bash-completion/completions/git
-    complete -F _git dot
+    __git_complete dot git
 fi
 
 # history completion
