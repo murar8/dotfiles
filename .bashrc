@@ -20,11 +20,11 @@ alias dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # completion
 
-if [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]]; then
+if [[ -f /usr/share/bash-completion/bash_completion ]]; then
     source /usr/share/bash-completion/bash_completion
 fi
 
-if [[ $PS1 && -f /usr/share/bash-completion/completions/git ]]; then
+if [[ -f /usr/share/bash-completion/completions/git ]]; then
     source /usr/share/bash-completion/completions/git
     __git_complete dot git
 fi
@@ -53,3 +53,9 @@ if [ ! -f $STARSHIP_PATH/starship ]; then
 fi
 
 eval "$($STARSHIP_PATH/starship init bash)"
+
+# host specific configuration
+
+if [[ -f $HOME/.bashrc.host ]]; then
+    source $HOME/.bashrc.host
+fi
