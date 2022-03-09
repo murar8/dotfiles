@@ -56,6 +56,6 @@ eval "$($STARSHIP_PATH/starship init bash)"
 
 # host specific configuration
 
-if [[ -f $HOME/.bashrc.host ]]; then
-    source $HOME/.bashrc.host
+if [[ -f $HOME/.bashrc.local ]]; then
+    source $HOME/.bashrc.local
 fi
