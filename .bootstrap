@@ -18,7 +18,9 @@ if [ ! -d $REPO_DIR ]; then
 fi
 
 cd $HOME
+dot checkout 2>/dev/null
 
-if dot checkout 2>/dev/null; then
+if [ $? -ne 0 ]; then
+    echo "stash"
     dot stash save backup
 fi
