@@ -19,5 +19,4 @@ fi
 
 cd $HOME
 
-dot checkout
 dot stash save backup
