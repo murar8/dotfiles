@@ -16,6 +16,8 @@ dot() {
     git --git-dir=$REPO_DIR/ --work-tree=$HOME $@
 }
 
+cd $HOME
+
 dot config status.showUntrackedFiles no
 dot checkout 2>/dev/null
 
