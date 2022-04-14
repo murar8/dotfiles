@@ -1,7 +1,17 @@
+scan_timeout = 10
+command_timeout = 100
 add_newline = false
 
 [aws]
 disabled = true
 
-[gcloud]
+[azure]
 disabled = true
+
+[character]
+success_symbol = "[⬤](bold green) "
+error_symbol = "[⬤](bold red) "
+
+[cmd_duration]
+min_time = 500
+show_milliseconds = true
