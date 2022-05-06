@@ -88,8 +88,8 @@ prompt() {
     local exit_code="$?"
     local current_branch=$(command -v git &>/dev/null && git symbolic-ref --short HEAD 2>/dev/null)
 
-    PS1="${cyan}\u${white}@${blue}\h ${purple}\w"
-    if [[ ! -z current_branch ]]; then PS1+=" ${green}${current_branch}"; fi
+    PS1="${cyan}\u${blue}@\h ${purple}\w"
+    if [[ -n $current_branch ]]; then PS1+=" ${green}${current_branch}"; fi
     if [[ exit_code -eq 0 ]]; then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
     PS1+=" ${clear}"
 }
