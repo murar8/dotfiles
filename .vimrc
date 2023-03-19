@@ -8,7 +8,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdcommenter'
@@ -26,12 +25,11 @@ call plug#end()
 syntax on
 filetype plugin indent on
 
-" set spelllang=en,it   " Set spell check languages
-" set spell             " Enable spell checking
-"
-" set foldenable        " Enable folding
-" set foldlevel=3       " Fold only deeper in the tree
-" set foldmethod=syntax " Folding based on syntax highlighting
+" set spelllang=en,it              " Set spell check languages
+" set spell                        " Enable spell checking
+" set foldenable                   " Enable folding
+" set foldlevel=3                  " Fold only deeper in the tree
+" set foldmethod=syntax            " Folding based on syntax highlighting
 
 set autoindent                     " Auto keep indentation
 set autoread                       " Read file changes from outside
@@ -107,8 +105,6 @@ let undodir=$HOME."~/.vim/undo"
 
 let mapleader = " " " <Space> is a more reachable leader
 
-silent! colorscheme gruvbox " Set color scheme
-
 """ Autocmds
 
 " Returns either the git root or the directory of currently open file
@@ -157,9 +153,6 @@ nnoremap <silent> <leader>bl :ls<CR>
 nnoremap <leader>q @q
 
 """ Plugins
-
-" Gruvbox
-let g:gruvbox_italic = 1
 
 " vim-airline
 let g:airline_powerline_fonts = 1
