@@ -6,22 +6,26 @@ if [[ $- != *i* ]]; then
     return # if not running interactively don't do anything
 fi
 
-# Options
+### Options
 
 shopt -s checkwinsize # check the window size after each command and update the values of LINES and COLUMNS
 shopt -s histappend   # append to history on quit instead of overwriting it
 shopt -s autocd       # automatically prepend cd when entering just a path in the shell
 shopt -s dotglob      # include filenames beginning with a dot in the results of pathname expansion
+shopt -s nullglob     # when a glob expands to nothing, make it an empty string
 
 set -o noclobber # disallow existing files to be overwritten by redirection of shell output
 
-# Variables
+### Variables
 
-export HISTCONTROL=ignoreboth # stop logging of repeated commands and lines starting with space
-export HISTFILESIZE=10000     # expand the on disk history size
-export HISTSIZE=1000          # expand the in memory history size
+# erasedups  => remove all but the last identical command
+# ignoreboth => avoid saving consecutive identical commands, and commands that start with a space
+export HISTCONTROL=erasedups:ignoreboth
 
-# Aliases
+export HISTFILESIZE=10000 # expand the on disk history size
+export HISTSIZE=1000      # expand the in memory history size
+
+### Aliases
 
 ll() {
     ls -Alhg --color=auto $@
@@ -31,13 +35,40 @@ cc() {
     cd "$@" && ll
 }
 
+extract() {
+    if [ "$#" -ne 1 ]; then
+        echo "Expected one argument."
+        return 1
+    fi
+
+    if [ ! -f $1 ]; then
+        echo "'$1' is not a valid file."
+        return 1
+    fi
+
+    case $1 in
+    *.tar.bz2) tar xjf $1 ;;
+    *.tar.gz) tar xzf $1 ;;
+    *.bz2) bunzip2 $1 ;;
+    *.rar) rar x $1 ;;
+    *.gz) gunzip $1 ;;
+    *.tar) tar xf $1 ;;
+    *.tbz2) tar xjf $1 ;;
+    *.tgz) tar xzf $1 ;;
+    *.zip) unzip $1 ;;
+    *.Z) uncompress $1 ;;
+    *.7z) 7z x $1 ;;
+    *) echo "Don't know how to extract '$1'." ;;
+    esac
+}
+
 dot() {
     git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
 }
 
 dotup() {
     if [ "$#" -ne 1 ]; then
-        echo "dotup: Expected one argument."
+        echo "Expected a commit message."
         return 1
     fi
 
