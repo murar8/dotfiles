@@ -85,6 +85,8 @@ yellow='\[\033[33m\]'
 clear='\[\033[0m\]'
 
 prompt() {
+    history -a # append the current session history to the content of the history file
+
     local exit_code="$?"
     local current_branch=$(command -v git &>/dev/null && git symbolic-ref --short HEAD 2>/dev/null)
 
