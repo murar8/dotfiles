@@ -1,9 +1,10 @@
-# .bashrc
-#
-# Author: Lorenzo Murarotto <lnzmrr@gmail.com>
+#!/bin/bash
+# Author:   Lorenzo Murarotto <lnzmrr@gmail.com>
+# Repo:     https://github.com/murar8/dotfiles
 
+# if not running interactively don't do anything
 if [[ $- != *i* ]]; then
-    return # if not running interactively don't do anything
+    return
 fi
 
 ### Options
@@ -28,11 +29,7 @@ export HISTSIZE=1000      # expand the in memory history size
 ### Aliases
 
 ll() {
-    ls -Alhg --color=auto $@
-}
-
-cc() {
-    cd "$@" && ll
+    ls -Alhg --color=auto "$@"
 }
 
 extract() {
@@ -41,29 +38,29 @@ extract() {
         return 1
     fi
 
-    if [ ! -f $1 ]; then
+    if [ ! -f "$1" ]; then
         echo "'$1' is not a valid file."
         return 1
     fi
 
     case $1 in
-    *.tar.bz2) tar xjf $1 ;;
-    *.tar.gz) tar xzf $1 ;;
-    *.bz2) bunzip2 $1 ;;
-    *.rar) rar x $1 ;;
-    *.gz) gunzip $1 ;;
-    *.tar) tar xf $1 ;;
-    *.tbz2) tar xjf $1 ;;
-    *.tgz) tar xzf $1 ;;
-    *.zip) unzip $1 ;;
-    *.Z) uncompress $1 ;;
-    *.7z) 7z x $1 ;;
+    *.tar.bz2) tar xjf "$1" ;;
+    *.tar.gz) tar xzf "$1" ;;
+    *.bz2) bunzip2 "$1" ;;
+    *.rar) rar x "$1" ;;
+    *.gz) gunzip "$1" ;;
+    *.tar) tar xf "$1" ;;
+    *.tbz2) tar xjf "$1" ;;
+    *.tgz) tar xzf "$1" ;;
+    *.zip) unzip "$1" ;;
+    *.Z) uncompress "$1" ;;
+    *.7z) 7z x "$1" ;;
     *) echo "Don't know how to extract '$1'." ;;
     esac
 }
 
 dot() {
-    git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
+    git --git-dir="$HOME"/.dotfiles/ --work-tree="$HOME" "$@"
 }
 
 dotup() {
@@ -95,31 +92,36 @@ bind '"\e[B": history-search-forward'  # ↑ ↑ ↑
 
 ### Editor
 
-if command -v code &>/dev/null && ([ "$TERM_PROGRAM" = 'vscode' ] || [ -t 0 ]); then
-    export EDITOR="$(which code) -w"
+if command -v code &>/dev/null && { [ "$TERM_PROGRAM" = 'vscode' ] || [ -t 0 ]; }; then
+    EDITOR="$(which code) -w"
+    export EDITOR
 elif command -v nvim &>/dev/null; then
-    export EDITOR="$(which nvim)"
+    EDITOR="$(which nvim)"
+    export EDITOR
 elif command -v vim &>/dev/null; then
-    export EDITOR="$(which vim)"
+    EDITOR="$(which vim)"
+    export EDITOR
 fi
 
 ### Prompt
 
-black='\[\033[30m\]'
+# black='\[\033[30m\]'
+# yellow='\[\033[33m\]'
 blue='\[\033[34m\]'
+clear='\[\033[0m\]'
 cyan='\[\033[36m\]'
 green='\[\033[32m\]'
 purple='\[\033[35m\]'
 red='\[\033[31m\]'
 white='\[\033[37m\]'
-yellow='\[\033[33m\]'
-clear='\[\033[0m\]'
 
 prompt() {
     history -a # append the current session history to the content of the history file
 
-    local exit_code="$?"
-    local current_branch=$(command -v git &>/dev/null && git symbolic-ref --short HEAD 2>/dev/null)
+    local exit_code
+    local current_branch
+    exit_code="$?"
+    current_branch=$(command -v git &>/dev/null && git symbolic-ref --short HEAD 2>/dev/null)
 
     PS1="${cyan}\u${blue}@\h ${purple}\w"
     if [[ -n $current_branch ]]; then PS1+=" ${green}${current_branch}"; fi
@@ -133,5 +135,5 @@ PROMPT_DIRTRIM=1
 ### Local configuration
 
 if [[ -f $HOME/.bashrc.local ]]; then
-    source $HOME/.bashrc.local
+    source "$HOME"/.bashrc.local
 fi
