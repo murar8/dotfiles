@@ -92,7 +92,7 @@ bind '"\e[B": history-search-forward'  # ↑ ↑ ↑
 
 ### Editor
 
-if command -v code &>/dev/null && { [ "$TERM_PROGRAM" = 'vscode' ] || [ -t 0 ]; }; then
+if command -v code &>/dev/null && { [ "$TERM_PROGRAM" = 'vscode' ] || [ -n "$DISPLAY" ]; }; then
     EDITOR="$(which code) -w"
     export EDITOR
 elif command -v nvim &>/dev/null; then
