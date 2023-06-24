@@ -120,11 +120,11 @@ red='\[\033[31m\]'
 white='\[\033[37m\]'
 
 prompt() {
+    local exit_code="$?"
+
     history -a # append the current session history to the content of the history file
 
-    local exit_code
     local current_branch
-    exit_code="$?"
     current_branch=$(command -v git &>/dev/null && git symbolic-ref --short HEAD 2>/dev/null)
 
     PS1="${cyan}\u${blue}@\h ${purple}\w"
