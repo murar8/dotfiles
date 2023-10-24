@@ -62,10 +62,12 @@ if !has('nvim') | set ttymouse=sgr | endif
 " Highlight current line
 if has('nvim') | set cursorline | endif           
 
+if !isdirectory($HOME."/.vim")
+    call mkdir($HOME."/.vim", "", 0700)
+endif
 if !isdirectory($HOME."/.vim/undo")
     call mkdir($HOME."/.vim/undo", "", 0700)
 endif
-
 if !isdirectory($HOME."/.vim/swap")
     call mkdir($HOME."/.vim/swap", "", 0700)
 endif
