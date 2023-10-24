@@ -1,35 +1,5 @@
-""" Vim plug
-
-" automatic installation
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdcommenter'
-Plug 'preservim/nerdtree'
-Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-surround'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'sheerun/vim-polyglot'
-
-call plug#end()
-
 syntax on
 filetype plugin indent on
-
-" set spelllang=en,it              " Set spell check languages
-" set spell                        " Enable spell checking
-" set foldenable                   " Enable folding
-" set foldlevel=3                  " Fold only deeper in the tree
-" set foldmethod=syntax            " Folding based on syntax highlighting
 
 set autoindent                     " Auto keep indentation
 set autoread                       " Read file changes from outside
@@ -105,6 +75,7 @@ let undodir=$HOME."~/.vim/undo"
 
 let mapleader = " " " <Space> is a more reachable leader
 
+
 """ Autocmds
 
 " Returns either the git root or the directory of currently open file
@@ -135,6 +106,7 @@ augroup cmds
     endif
 augroup END
 
+
 """ Mappings
 
 " Move by visual lines
@@ -151,27 +123,3 @@ nnoremap <silent> <leader>bd :bdelete<CR>
 nnoremap <silent> <leader>bl :ls<CR>
 
 nnoremap <leader>q @q
-
-""" Plugins
-
-" vim-airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-
-" easy align
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ea <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ea <Plug>(EasyAlign)
-
-" fzf.vim
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>ag :Ag<CR>
-
-" NERDTree
-let NERDTreeShowHidden = 1
-let NERDTreeHighlightCursorline=1
-
-nnoremap <leader>e :NERDTreeToggleVCS<CR>
