@@ -1,99 +1,106 @@
+" Basic
+
 syntax on
 filetype plugin indent on
 
-set autoindent                     " Auto keep indentation
-set autoread                       " Read file changes from outside
-set backspace=indent,eol,start     " Cool backspace that works
-set belloff=all                    " No bells
-set breakindent                    " Wrapped lines continue to be indented
-set clipboard=unnamed,unnamedplus  " Integrate with system clipboard
-set cmdheight=3                    " Set the command window height
-set completeopt=longest,menuone    " Always show completion menu
-set confirm                        " Display a confirmation dialog when closing an unsaved file
-set encoding=utf-8                 " Default file encoding
-set expandtab                      " Use spaces instead of tabs
-set gcr=a:blinkon0                 " Don't blink
-set hidden                         " Abandoned buffers are hidden
-set history=1000                   " Command history size
-set hlsearch                       " Highlight searches
-set incsearch                      " Search while you type
-set laststatus=2                   " Show statusline always
-set lazyredraw                     " Don't update the display while executing macros
-set linebreak                      " Break lines at word (requires Wrap lines)
-set magic                          " Regex without escaping
-set mouse=a                        " Enable mouse usage
-set mousehide                      " Hide mouse while typing
-set nocompatible                   " No Vi emulation
-set nostartofline                  " Don't go to start of line for page movements
-set number                         " Show line numbers
-set scrolloff=2                    " Keep some lines above/below cursor
-set sessionoptions-=options,blanks " Discard useless session data
-set shiftround                     " Indent to nearest multiple of shiftwidth
-set shiftwidth=4                   " Number of auto-indent spaces
-set shortmess+=aIc                 " Set abbreviated messages
-set showbreak=^                    " Wrap-broken line prefix
-set showmatch                      " Highlight matching brace
-set signcolumn=yes                 " Always show signcolumn
-set smartcase                      " Case-sensitive search if term contains uppercase letters
-set smartindent                    " Enable smart-indent
-set smarttab                       " Auto tab alignment
-set softtabstop=4                  " Number of spaces added when hitting Tab
-set splitbelow splitright          " Set more natural split direction
-set tabstop=4                      " Number of spaces per Tab
-set termguicolors                  " Enable 24bit TUI colors
-set timeoutlen=250                 " Set key sequence timeout
-set title                          " Show the filename in the window title bar
-set ttimeoutlen=0                  " Don't wait for a single keycode to be inserted
-set ttyfast                        " Better performance
-set undofile                       " Maintain undo history between sessions
-set undolevels=1000                " More undo history
-set updatetime=250                 " Time to trigger CursorHold
-set whichwrap=b,s,<,>,[,]          " Backspace and cursor keys wrap too
-set wildmenu                       " Commandline completion
-set wildmode=list:longest,full     " Complete longest common match, then full
+set nocompatible                   " Don't try to be vi compatible.
+set ttyfast                        " Improves smoothness of redrawing.
 
-" Don't complete some files
-set wildignore+=*.o,*~,*.pyc,*.swp,*.*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/tmp/*,*.so
 
-" Set the type of mouse codes vim will recognize  
-if !has('nvim') | set ttymouse=sgr | endif 
+" Behaviour
 
-" Highlight current line
-if has('nvim') | set cursorline | endif 
+set autoread                       " Automatically re-read files if unmodified inside Vim.
+set nohidden                       " Unload the current buffer when it is abandoned.
+set confirm                        " Display a confirmation dialog when closing an unsaved file.
+set encoding=utf-8                 " Use an encoding that supports unicode.
+set backspace=indent,eol,start     " Allow backspacing over indentation, line breaks and insertion start.
+set clipboard=unnamed,unnamedplus  " Use system clipboard.
+
+
+" Appearance
+
+set title                          " Set the window's title, reflecting the file currently being edited.
+set number                         " Show line numbers on the sidebar.
+set relativenumber                 " Show line number on the current line and relative numbers on all other lines.
+set scrolloff=3                    " The number of screen lines to keep above and below the cursor.
+set ruler                          " Always show cursor position.
+set cursorline                     " Highlight the line currently under cursor.
+set laststatus=2                   " Always display the status bar.
+set lazyredraw                     " Don't update screen during macro and script execution.
+
+
+" Indentation
+
+set tabstop=4                      " Indent using four spaces.
+set softtabstop=4                  " How many columns the cursor moves right when you press <Tab>. 
+set shiftwidth=4                   " When shifting, indent using four spaces.
+set expandtab                      " Convert tabs to spaces.
+set smarttab                       " Insert tabstop number of spaces when the tab key is pressed.
+set autoindent                     " New lines inherit the indentation of previous lines.
+set smartindent                    " Intelligently indent new lines based on rules.
+set shiftround                     " When shifting lines, round the indentation to the nearest multiple of shiftwidth.
+
+
+" Search
+
+set hlsearch                       " Enable search highlighting.
+set incsearch                      " Incremental search that shows partial matches.
+set smartcase                      " Automatically switch search to case-sensitive when search query contains an uppercase letter.
+set showmatch                      " Live match highlighting.
+
+
+" Wrapping
+
+set linebreak                      " Avoid wrapping a line in the middle of a word.
+set breakindent                    " Every wrapped line will continue visually indented.
+set showbreak=^                    " String to put at the start of lines that have been wrapped.
+
+
+" Mouse
+
+set mouse=a                        " Enable mouse in all modes.
+set mousehide                      " Hide the mouse pointer is hidden when characters are typed.
+
+if !has('nvim') | set ttymouse=sgr | endif " Set the type of mouse codes vim will recognize.
+
+
+" Completion
+
+set wildmenu                       " Horizontal and unobtrusive little completion menu.
+set wildmode=list:longest,full     " First tab will complete to longest string and show the the match list, second tab opens wildmenu.
+
+set wildignore+=*.o,*~,*.pyc,*.swp,*.*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/tmp/*,*.so " Don't complete some files.
+
+
+" Undo / Swap
 
 if !isdirectory($HOME."/.vim")      | call mkdir($HOME."/.vim", "", 0700)      | endif
 if !isdirectory($HOME."/.vim/undo") | call mkdir($HOME."/.vim/undo", "", 0700) | endif
 if !isdirectory($HOME."/.vim/swap") | call mkdir($HOME."/.vim/swap", "", 0700) | endif
 
-let dir=$HOME."/.vim/swap"
-let undodir=$HOME."~/.vim/undo"
+let dir=$HOME."/.vim/swap"         " Directory to store swap files.
+let undodir=$HOME."~/.vim/undo"    " Directory to store undo history.
 
-let mapleader = " " " <Space> is a more reachable leader
+set undofile                       " Enable undo file.
+set undolevels=1000                " Increase undo levels.
+set history=1000                   " Increase the undo limit.
 
 
 """ Autocmds
 
-" Returns either the git root or the directory of currently open file
-function! GetRootDir()
-    let path = expand('%:p:h')
-    let git_path = system("git -C " . path . " rev-parse --show-toplevel")
-    let is_file = filereadable(path . "/" . expand("%:t"))
-    if !v:shell_error && is_file
-        return git_path 
-    else
-        return path
-    endif
-endfunction
-
 augroup cmds
     autocmd!
-    " Source vimrc on write
+    " Source vimrc on write.
     au BufWritePost init.vim,.vimrc source %
 
-    " Return to last position in file
+    " Return to last position in file.
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-    " Set pwd to GetRootDir value
-    au VimEnter * cd `=GetRootDir()`
 augroup END
 
+
+""" Mappings
+
+let mapleader = " " " <Space> is a more reachable leader.
+
+nnoremap <leader>=  gg=G<C-o> " Format whole file.
+nnoremap <CR>       :noh<CR><CR> " Clear search highlight on return.
