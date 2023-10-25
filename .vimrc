@@ -3,7 +3,6 @@ filetype plugin indent on
 
 set autoindent                     " Auto keep indentation
 set autoread                       " Read file changes from outside
-set background=dark                " Dark background
 set backspace=indent,eol,start     " Cool backspace that works
 set belloff=all                    " No bells
 set breakindent                    " Wrapped lines continue to be indented
@@ -25,7 +24,6 @@ set magic                          " Regex without escaping
 set mouse=a                        " Enable mouse usage
 set mousehide                      " Hide mouse while typing
 set nocompatible                   " No Vi emulation
-set noshowmode                     " Redundant (shown with vim-airline)
 set nostartofline                  " Don't go to start of line for page movements
 set number                         " Show line numbers
 set scrolloff=2                    " Keep some lines above/below cursor
@@ -58,19 +56,14 @@ set wildmode=list:longest,full     " Complete longest common match, then full
 set wildignore+=*.o,*~,*.pyc,*.swp,*.*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/tmp/*,*.so
 
 " Set the type of mouse codes vim will recognize  
-if !has('nvim') | set ttymouse=sgr | endif
-" Highlight current line
-if has('nvim') | set cursorline | endif           
+if !has('nvim') | set ttymouse=sgr | endif 
 
-if !isdirectory($HOME."/.vim")
-    call mkdir($HOME."/.vim", "", 0700)
-endif
-if !isdirectory($HOME."/.vim/undo")
-    call mkdir($HOME."/.vim/undo", "", 0700)
-endif
-if !isdirectory($HOME."/.vim/swap")
-    call mkdir($HOME."/.vim/swap", "", 0700)
-endif
+" Highlight current line
+if has('nvim') | set cursorline | endif 
+
+if !isdirectory($HOME."/.vim")      | call mkdir($HOME."/.vim", "", 0700)      | endif
+if !isdirectory($HOME."/.vim/undo") | call mkdir($HOME."/.vim/undo", "", 0700) | endif
+if !isdirectory($HOME."/.vim/swap") | call mkdir($HOME."/.vim/swap", "", 0700) | endif
 
 let dir=$HOME."/.vim/swap"
 let undodir=$HOME."~/.vim/undo"
@@ -96,32 +89,11 @@ augroup cmds
     autocmd!
     " Source vimrc on write
     au BufWritePost init.vim,.vimrc source %
+
     " Return to last position in file
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
     " Set pwd to GetRootDir value
     au VimEnter * cd `=GetRootDir()`
-    if has('nvim')
-        " Don't show numbers in terminal
-        autocmd TermOpen term://* setlocal nonumber
-        " Start insert mode right away in terminal
-        autocmd TermOpen term://* startinsert
-    endif
 augroup END
 
-
-""" Mappings
-
-" Move by visual lines
-nnoremap j gj
-nnoremap k gk
-" Exit terminal insert mode with ESC
-tnoremap <silent> <Esc> <C-\><C-n>
-" Clear search highlighting
-nmap <silent> ,/ :nohlsearch<CR>
-" Buffers
-nnoremap <silent> <leader>bn :bnext<CR>
-nnoremap <silent> <leader>bp :bprev<CR>
-nnoremap <silent> <leader>bd :bdelete<CR>
-nnoremap <silent> <leader>bl :ls<CR>
-
-nnoremap <leader>q @q
