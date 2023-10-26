@@ -2,29 +2,30 @@
 # Author:   Lorenzo Murarotto <lnzmrr@gmail.com>
 # Repo:     https://github.com/murar8/dotfiles
 
-# if not running interactively don't do anything
+# if not running interactively don't do anything.
 if [[ $- != *i* ]]; then
     return
 fi
 
 ### Options
 
-shopt -s checkwinsize # check the window size after each command and update the values of LINES and COLUMNS
-shopt -s histappend   # append to history on quit instead of overwriting it
-shopt -s autocd       # automatically prepend cd when entering just a path in the shell
-shopt -s dotglob      # include filenames beginning with a dot in the results of pathname expansion
-shopt -s nullglob     # when a glob expands to nothing, make it an empty string
+shopt -s checkwinsize # Check the window size after each command and update the values of LINES and COLUMNS.
+shopt -s histappend   # Append to history on quit instead of overwriting it.
+shopt -s autocd       # Automatically prepend cd when entering just a path in the shell.
+shopt -s dotglob      # Include filenames beginning with a dot in the results of pathname expansion.
+shopt -s nullglob     # When a glob expands to nothing, make it an empty string.
 
-set -o noclobber # disallow existing files to be overwritten by redirection of shell output
+set -o noclobber # Disallow existing files to be overwritten by redirection of shell output.
+set -o vi        # Enable vi mode.
 
 ### Variables
 
-# erasedups  => remove all but the last identical command
-# ignoreboth => avoid saving consecutive identical commands, and commands that start with a space
+# erasedups  => Remove all but the last identical command.
+# ignoreboth => Avoid saving consecutive identical commands, and commands that start with a space.
 export HISTCONTROL=erasedups:ignoreboth
 
-export HISTFILESIZE=10000 # expand the on disk history size
-export HISTSIZE=1000      # expand the in memory history size
+export HISTFILESIZE=10000 # Expand the on disk history size.
+export HISTSIZE=1000      # Expand the in memory history size.
 
 ### Aliases
 
@@ -89,10 +90,10 @@ if [[ -f /usr/share/bash-completion/completions/git ]]; then
     __git_complete dot __git_main
 fi
 
-bind "set show-all-if-ambiguous on"    # show auto-completion list without double tab
-bind "set completion-ignore-case on"   # ignore case on completion
-bind '"\e[A": history-search-backward' # get completions from history
-bind '"\e[B": history-search-forward'  # ↑ ↑ ↑
+bind "set show-all-if-ambiguous on"    # Show auto-completion list without double tab.
+bind "set completion-ignore-case on"   # Ignore case on completion.
+bind '"\e[A": history-search-backward' # Get completions from history (backward).
+bind '"\e[B": history-search-forward'  # Get completions from history (forward).
 
 ### Editor
 
@@ -122,7 +123,7 @@ white='\[\033[37m\]'
 prompt() {
     local exit_code="$?"
 
-    history -a # append the current session history to the content of the history file
+    history -a # Append the current session history to the content of the history file.
 
     local current_branch
     current_branch=$(command -v git &>/dev/null && git symbolic-ref --short HEAD 2>/dev/null)
