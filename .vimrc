@@ -7,27 +7,30 @@ if empty(glob('~/.vim/autoload/plug.vim'))
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/0.11.0/plug.vim
 endif
 
-" Run PlugInstall if there are missing plugins.
-" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation-of-missing-plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-            \| PlugInstall --sync | source $MYVIMRC
-            \| endif
+augroup plug
+    autocmd!
+    " Run PlugInstall if there are missing plugins.
+    " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation-of-missing-plugins
+    autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+                \| PlugInstall --sync | source $MYVIMRC
+                \| endif
+augroup end
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'altercation/vim-colors-solarized', { 'commit': '528a59f' }
 Plug 'junegunn/vim-easy-align',          { 'tag': '2.10.0' }
 Plug 'tpope/vim-sensible',               { 'tag': 'v2.0' }
 Plug 'tpope/vim-surround',               { 'tag': 'v2.2' }
 Plug 'vim-airline/vim-airline',          { 'tag': 'v0.11' }
 Plug 'vim-airline/vim-airline-themes',   { 'commit': 'dd81554' }
-Plug 'altercation/vim-colors-solarized', { 'commit': '528a59f' }
 
 call plug#end()
 
 " junegunn/vim-easy-align
 
-xmap ga <Plug>(EasyAlign)| " Start interactive EasyAlign in visual mode (e.g. vipga)
-nmap ga <Plug>(EasyAlign)| " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+xmap ga <Plug>(EasyAlign)| " Start interactive EasyAlign in visual mode (e.g. vipga).
+nmap ga <Plug>(EasyAlign)| " Start interactive EasyAlign for a motion/text object (e.g. gaip).
 
 " vim-airline/vim-airline
 
@@ -133,10 +136,14 @@ set undolevels=1000 " Increase undo levels.
 
 """ Autocmds
 
-augroup cmds
+augroup vimrc
     autocmd!
     " Source vimrc on write.
     au BufWritePost init.vim,.vimrc source %
+augroup END
+
+augroup restorepos
+    autocmd!
     " Return to last position in file.
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup END
@@ -148,4 +155,7 @@ let mapleader = " " " <Space> is a more reachable leader.
 
 nnoremap <leader>=  gg=G<C-o>       " Format whole file.
 nnoremap <CR>       :noh<CR><CR>    " Clear search highlight on return.
+
+nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR " Insert a new line below without leaving normal mode.
+nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR " Insert a new line above without leaving normal mode.
 
