@@ -18,12 +18,16 @@ augroup end
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized', { 'commit': '528a59f' }
-Plug 'junegunn/vim-easy-align',          { 'tag': '2.10.0' }
-Plug 'tpope/vim-sensible',               { 'tag': 'v2.0' }
-Plug 'tpope/vim-surround',               { 'tag': 'v2.2' }
-Plug 'vim-airline/vim-airline',          { 'tag': 'v0.11' }
-Plug 'vim-airline/vim-airline-themes',   { 'commit': 'dd81554' }
+Plug 'junegunn/vim-easy-align', { 'tag': '2.10.0' }
+Plug 'tpope/vim-sensible',      { 'tag': 'v2.0' }
+Plug 'tpope/vim-surround',      { 'tag': 'v2.2' }
+
+" Some plugin are not necessary when running inside vscode-neovim.
+if !exists('g:vscode')
+    Plug 'altercation/vim-colors-solarized', { 'commit': '528a59f' }
+    Plug 'vim-airline/vim-airline',          { 'tag': 'v0.11' }
+    Plug 'vim-airline/vim-airline-themes',   { 'commit': 'dd81554' }
+endif
 
 call plug#end()
 
@@ -35,9 +39,9 @@ nmap ga <Plug>(EasyAlign)| " Start interactive EasyAlign for a motion/text objec
 " vim-airline/vim-airline
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = "solarized"
-let g:airline_symbols_ascii = 1
 let g:airline_highlighting_cache = 0 " Caches the changes to the highlighting groups.
+let g:airline_symbols_ascii = 1
+let g:airline_theme = "solarized"
 
 " altercation/vim-colors-solarized
 
