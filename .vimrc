@@ -19,11 +19,14 @@ augroup end
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/vim-easy-align', { 'tag': '2.10.0' }
+Plug 'mg979/vim-visual-multi',  { 'commit': 'aec289a' }
+Plug 'tpope/vim-commentary',    { 'tag': 'v1.3' }
 Plug 'tpope/vim-sensible',      { 'tag': 'v2.0' }
 Plug 'tpope/vim-surround',      { 'tag': 'v2.2' }
 
 " Some plugin are not necessary when running inside vscode-neovim.
 if !exists('g:vscode')
+    Plug 'airblade/vim-gitgutter',           { 'commit': 'f7b9766' }
     Plug 'altercation/vim-colors-solarized', { 'commit': '528a59f' }
     Plug 'vim-airline/vim-airline',          { 'tag': 'v0.11' }
     Plug 'vim-airline/vim-airline-themes',   { 'commit': 'dd81554' }
@@ -160,6 +163,6 @@ let mapleader = " " " <Space> is a more reachable leader.
 nnoremap <leader>=  gg=G<C-o>       " Format whole file.
 nnoremap <CR>       :noh<CR><CR>    " Clear search highlight on return.
 
-nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR " Insert a new line below without leaving normal mode.
-nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR " Insert a new line above without leaving normal mode.
+:nnoremap <Leader>o mpo<Esc>`p " Insert a new line below without leaving normal mode.
+:nnoremap <Leader>O mpO<Esc>`p " Insert a new line above without leaving normal mode.
 
