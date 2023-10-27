@@ -57,6 +57,7 @@ let g:VM_maps = {}
 let g:VM_maps['Find Under']         = '<C-k>' " Clashes with vscode keybindings.
 let g:VM_maps['Find Subword Under'] = '<C-k>' " Clashes with vscode keybindings.
 
+
 " Basic
 
 syntax on
@@ -74,6 +75,7 @@ set clipboard=unnamed,unnamedplus " Use system clipboard.
 set confirm                       " Display a confirmation dialog when closing an unsaved file.
 set encoding=utf-8                " Use an encoding that supports unicode.
 set magic                         " Regex without escape.
+set matchpairs+=<:>               " Use % to jump from < to >.
 set nohidden                      " Unload the current buffer when it is abandoned.
 
 
@@ -103,6 +105,7 @@ set tabstop=4     " Indent using four spaces.
 
 " Search
 
+set gdefault  " Global search by default.
 set hlsearch  " Enable search highlighting.
 set incsearch " Incremental search that shows partial matches.
 set showmatch " Live match highlighting.
