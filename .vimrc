@@ -26,10 +26,9 @@ Plug 'tpope/vim-surround',      { 'tag': 'v2.2' }
 
 " Some plugin are not necessary when running inside vscode-neovim.
 if !exists('g:vscode')
-    Plug 'airblade/vim-gitgutter',           { 'commit': 'f7b9766' }
-    Plug 'altercation/vim-colors-solarized', { 'commit': '528a59f' }
-    Plug 'vim-airline/vim-airline',          { 'tag': 'v0.11' }
-    Plug 'vim-airline/vim-airline-themes',   { 'commit': 'dd81554' }
+    Plug 'airblade/vim-gitgutter',         { 'commit': 'f7b9766' }
+    Plug 'morhetz/gruvbox',                { 'commit': 'f1ecde8' }
+    Plug 'vim-airline/vim-airline',        { 'tag': 'v0.11' }
 endif
 
 call plug#end()
@@ -44,12 +43,14 @@ nmap ga <Plug>(EasyAlign)| " Start interactive EasyAlign for a motion/text objec
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_highlighting_cache = 0 " Caches the changes to the highlighting groups.
 let g:airline_symbols_ascii = 1
-let g:airline_theme = "solarized"
 
-" altercation/vim-colors-solarized
+" morhetz/gruvbox
 
+let g:gruvbox_italic=1
+set termguicolors
 set background=dark
-silent! colorscheme solarized
+silent! colorscheme gruvbox
+silent! let g:airline_theme = "gruvbox"
 
 " mg979/vim-visual-multi
 
