@@ -23,13 +23,9 @@ Plug 'mg979/vim-visual-multi',  { 'commit': 'aec289a' }
 Plug 'tpope/vim-commentary',    { 'tag': 'v1.3' }
 Plug 'tpope/vim-sensible',      { 'tag': 'v2.0' }
 Plug 'tpope/vim-surround',      { 'tag': 'v2.2' }
-
-" Some plugin are not necessary when running inside vscode-neovim.
-if !exists('g:vscode')
-    Plug 'airblade/vim-gitgutter',         { 'commit': 'f7b9766' }
-    Plug 'morhetz/gruvbox',                { 'commit': 'f1ecde8' }
-    Plug 'vim-airline/vim-airline',        { 'tag': 'v0.11' }
-endif
+Plug 'airblade/vim-gitgutter',  { 'commit': 'f7b9766' }
+Plug 'morhetz/gruvbox',         { 'commit': 'f1ecde8' }
+Plug 'vim-airline/vim-airline', { 'tag': 'v0.11' }
 
 call plug#end()
 
