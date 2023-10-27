@@ -51,6 +51,11 @@ let g:airline_theme = "solarized"
 set background=dark
 silent! colorscheme solarized
 
+" mg979/vim-visual-multi
+
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-k>' " Clashes with vscode keybindings.
+let g:VM_maps['Find Subword Under'] = '<C-k>' " Clashes with vscode keybindings.
 
 " Basic
 
@@ -163,6 +168,6 @@ let mapleader = " " " <Space> is a more reachable leader.
 nnoremap <leader>=  gg=G<C-o>       " Format whole file.
 nnoremap <CR>       :noh<CR><CR>    " Clear search highlight on return.
 
-:nnoremap <Leader>o mpo<Esc>`p " Insert a new line below without leaving normal mode.
-:nnoremap <Leader>O mpO<Esc>`p " Insert a new line above without leaving normal mode.
+nnoremap <silent><leader>o :set paste<CR>m`o<Esc>``:set nopaste<CR> " Insert a new line below without leaving normal mode.
+nnoremap <silent><leader>O :set paste<CR>m`O<Esc>``:set nopaste<CR> " Insert a new line above without leaving normal mode.
 
