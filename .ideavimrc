@@ -4,3 +4,6 @@ set clipboard+=ideaput
 set ideajoin
 set surround
 set commentary
+set multiple-cursors
+set highlightedyank
+set quickscope
