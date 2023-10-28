@@ -36,11 +36,10 @@ set title          " Set the window's title, reflecting the file currently being
 set autoindent    " New lines inherit the indentation of previous lines.
 set expandtab     " Convert tabs to spaces.
 set shiftround    " When shifting lines, round the indentation to the nearest multiple of shiftwidth.
-set shiftwidth=4  " When shifting, indent using four spaces.
-set smartindent   " Intelligently indent new lines based on rules.
+set shiftwidth=4  " For indenting lines.
 set smarttab      " Insert tabstop number of spaces when the tab key is pressed.
-set softtabstop=4 " How many columns the cursor moves right when you press <Tab>.
-set tabstop=4     " Indent using four spaces.
+set softtabstop=4 " When you press the Tab key.
+set tabstop=4     " Visual length of a tab character \t.
 
 
 " Search
@@ -71,21 +70,24 @@ set mousehide " Hide the mouse pointer is hidden when characters are typed.
 set wildmenu                   " Horizontal and unobtrusive little completion menu.
 set wildmode=list:longest,full " First tab will complete to longest string and show the the match list, second tab opens wildmenu.
 
-set wildignore+=*.o,*~,*.pyc,*.swp,*.*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/tmp/*,*.so " Don't complete some files.
+" Don't complete some files.
+set wildignore+=*.o,*~,*.pyc,*.swp,*.*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/tmp/*,*.so
 
 
 " History
 
-if !isdirectory($HOME."/.vim")      | call mkdir($HOME."/.vim", "", 0700)      | endif
-if !isdirectory($HOME."/.vim/undo") | call mkdir($HOME."/.vim/undo", "", 0700) | endif
-if !isdirectory($HOME."/.vim/swap") | call mkdir($HOME."/.vim/swap", "", 0700) | endif
+let $dir = $HOME."/.vim/swap-".v:version
+let $undodir = $HOME."/.vim/undo-".v:version
 
-let dir="~/.vim/swap"     " Directory to store swap files.
-let undodir="~/.vim/undo" " Directory to store undo history.
+if !isdirectory($HOME."/.vim") | call mkdir($HOME."/.vim", "", 0700) | endif
+if !isdirectory($undodir)      | call mkdir($undodir)                | endif
+if !isdirectory($dir)          | call mkdir($dir)                    | endif
 
-set history=1000    " Increase the undo limit.
-set undofile        " Enable undo file.
-set undolevels=1000 " Increase undo levels.
+set dir=$dir         " Directory to store swap files.
+set history=1000     " Increase the undo limit.
+set undodir=$undodir " Directory to store undo history.
+set undofile         " Enable undo file.
+set undolevels=1000  " Increase undo levels.
 
 
 """ Mappings
@@ -115,4 +117,62 @@ augroup restorepos
 	" Return to last position in file.
 	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup END
+
+
+" Plugins
+
+" Install vim-plug if not found.
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+				\ https://raw.githubusercontent.com/junegunn/vim-plug/0.11.0/plug.vim
+endif
+
+augroup plug
+	autocmd!
+	" Run PlugInstall if there are missing plugins.
+	" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation-of-missing-plugins
+	autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+				\| PlugInstall --sync | source $MYVIMRC
+				\| endif
+augroup end
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'airblade/vim-gitgutter',  { 'commit': 'f7b9766' }
+Plug 'github/copilot.vim',      { 'tag': 'v1.11.3' }
+Plug 'junegunn/vim-easy-align', { 'tag': '2.10.0' }
+Plug 'mg979/vim-visual-multi',  { 'commit': 'aec289a' }
+Plug 'morhetz/gruvbox',         { 'commit': 'f1ecde8' }
+Plug 'tpope/vim-commentary',    { 'tag': 'v1.3' }
+Plug 'tpope/vim-sensible',      { 'tag': 'v2.0' }
+Plug 'tpope/vim-surround',      { 'tag': 'v2.2' }
+Plug 'vim-airline/vim-airline', { 'tag': 'v0.11' }
+
+call plug#end()
+
+" junegunn/vim-easy-align
+
+" Start interactive EasyAlign in visual mode (e.g. vipga).
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip).
+nmap ga <Plug>(EasyAlign)
+
+" vim-airline/vim-airline
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_highlighting_cache = 0 " Caches the changes to the highlighting groups.
+let g:airline_symbols_ascii = 1
+
+" morhetz/gruvbox
+
+let g:gruvbox_italic=1
+set termguicolors
+set background=dark
+silent! colorscheme gruvbox
+silent! let g:airline_theme = "gruvbox"
+
+" github/copilot.vim
+
+highlight CopilotSuggestion guifg=#665C54
 
