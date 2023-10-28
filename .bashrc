@@ -101,10 +101,7 @@ bind '"\e[B": history-search-forward'  # Get completions from history (forward).
 
 ### Editor
 
-if command -v code &>/dev/null && { [ "$TERM_PROGRAM" = 'vscode' ] || [ -n "$DISPLAY" ]; }; then
-    EDITOR="$(which code) -w"
-    export EDITOR
-elif command -v nvim &>/dev/null; then
+if command -v nvim &>/dev/null; then
     EDITOR="$(which nvim)"
     export EDITOR
 elif command -v vim &>/dev/null; then
