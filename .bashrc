@@ -77,6 +77,10 @@ dotup() {
 
 ### Completions
 
+if command -v terraform &>/dev/null; then
+	complete -C "$(which terraform)" terraform
+fi
+
 if command -v kubectl &>/dev/null; then
     source <(kubectl completion bash)
 fi
