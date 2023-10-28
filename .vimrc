@@ -69,19 +69,17 @@ set mousehide " Hide the mouse pointer is hidden when characters are typed.
 
 set wildmenu                   " Horizontal and unobtrusive little completion menu.
 set wildmode=list:longest,full " First tab will complete to longest string and show the the match list, second tab opens wildmenu.
-
-" Don't complete some files.
-set wildignore+=*.o,*~,*.pyc,*.swp,*.*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/tmp/*,*.so
+set wildignore+=*.o,*~,*.pyc,*.swp,*.*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/tmp/*,*.so " Don't complete some files.
 
 
 " History
 
-let $dir = $HOME."/.vim/swap-".v:version
-let $undodir = $HOME."/.vim/undo-".v:version
+" History and undo file format is incompatible between Vim versions so we keep them separate.
+let $dir = $HOME."/.vim/swap/".v:version
+let $undodir = $HOME."/.vim/undo/".v:version
 
-if !isdirectory($HOME."/.vim") | call mkdir($HOME."/.vim", "", 0700) | endif
-if !isdirectory($undodir)      | call mkdir($undodir)                | endif
-if !isdirectory($dir)          | call mkdir($dir)                    | endif
+if !isdirectory($dir) | call mkdir($dir, "p") | endif
+if !isdirectory($undodir) | call mkdir($undodir, "p") | endif
 
 set dir=$dir         " Directory to store swap files.
 set history=1000     " Increase the undo limit.
