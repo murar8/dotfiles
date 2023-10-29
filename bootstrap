@@ -1,10 +1,4 @@
 #!/usr/bin/env sh
-#
-# This script assumes that the dotfiles repository will be initially cloned as
-# a non-bare repository. It will then be converted to a bare repository with
-# the working directory set to $HOME. Alternatively, the repository can be
-# cloned as a bare repository to $HOME/.dotfiles, and this script can be
-# ignored.
 
 set errexit  # Exit on error.
 set nounset  # Error on undeclared variables.
@@ -32,14 +26,34 @@ if ! command -v git >/dev/null; then
 fi
 
 if [ ! -d "$REPO_DIR" ]; then
-	git clone --bare "$SCRIPT_DIR" "$REPO_DIR"
+	if [ -d "$SCRIPT_DIR/.git" ]; then
+		# Most providers (e.g. GitHub) will not allow you to clone into a bare
+		# repository directly, so we clone into a temporary directory and then
+		# convert it to a bare repository.
+		echo "Cloning local repository to $REPO_DIR"
+		echo
+		git clone --bare "$SCRIPT_DIR" "$REPO_DIR"
+		dot remote set-url origin $REPO_URL
+		echo
+		echo "Cloned local repository to $REPO_DIR, deleting $SCRIPT_DIR"
+		rm -rf "$SCRIPT_DIR"
+		echo "Deleted $SCRIPT_DIR"
+	else
+		# If the script directory is not a git repository, we can just clone
+		# the repository directly.
+		echo "Cloning repository to $REPO_DIR"
+		echo
+		git clone --bare "$REPO_URL" "$REPO_DIR"
+		echo
+		echo "Cloned repository to $REPO_DIR"
+	fi
+
 	dot config status.showUntrackedFiles no
-	dot remote set-url origin $REPO_URL
-	echo "Cloned repository to $REPO_DIR, deleting $SCRIPT_DIR"
-	rm -rf "$SCRIPT_DIR"
 	echo
 fi
 
-STASH_NAME="dotfiles-backup-$(date +%F)"
-echo "Stashing potential conflicts in $STASH_NAME"
-dot -c user.name="$USER" -c user.email="$USER"@localhost stash save "$STASH_NAME"
+if [ -n "$(dot status --porcelain)" ]; then
+	echo "Stashing potential conflicts in $STASH_NAME"
+	echo
+	dot -c user.name="$USER" -c user.email="$USER"@localhost stash save "$STASH_NAME"
+fi
