@@ -78,10 +78,11 @@ dotup() {
 ### Completions
 
 if command -v terraform &>/dev/null; then
-	complete -C "$(which terraform)" terraform
+    complete -C "$(which terraform)" terraform
 fi
 
 if command -v kubectl &>/dev/null; then
+    # shellcheck disable=SC1090
     source <(kubectl completion bash)
 fi
 
@@ -141,5 +142,6 @@ PROMPT_DIRTRIM=1
 ### Local configuration
 
 if [[ -f $HOME/.bashrc.local ]]; then
+    # shellcheck disable=SC1091
     source "$HOME"/.bashrc.local
 fi
