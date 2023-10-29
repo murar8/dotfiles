@@ -139,7 +139,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/vim-easy-align',       { 'tag': '2.10.0' }
 Plug 'machakann/vim-highlightedyank', { 'commit': 'fa3f57b' }
-Plug 'mg979/vim-visual-multi',        { 'commit': 'aec289a' }
 Plug 'tpope/vim-commentary',          { 'tag': 'v1.3' }
 Plug 'tpope/vim-sensible',            { 'tag': 'v2.0' }
 Plug 'tpope/vim-surround',            { 'tag': 'v2.2' }
@@ -148,6 +147,7 @@ if !exists('g:vscode')
 	Plug 'airblade/vim-gitgutter',  { 'commit': 'f7b9766' }
 	Plug 'github/copilot.vim',      { 'tag': 'v1.11.3' }
 	Plug 'jiangmiao/auto-pairs',    { 'commit': '39f06b8' }
+	Plug 'mg979/vim-visual-multi',  { 'commit': 'aec289a' }
 	Plug 'morhetz/gruvbox',         { 'commit': 'f1ecde8' }
 	Plug 'vim-airline/vim-airline', { 'tag': 'v0.11' }
 endif
