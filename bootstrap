@@ -25,32 +25,28 @@ if ! command -v git >/dev/null; then
 	exit 1
 fi
 
-if [ ! -d "$REPO_DIR" ]; then
-	if [ -d "$SCRIPT_DIR/.git" ]; then
-		# Most providers (e.g. GitHub) will not allow you to clone into a bare
-		# repository directly, so we clone into a temporary directory and then
-		# convert it to a bare repository.
-		echo "Cloning local repository to $REPO_DIR"
-		echo
-		git clone --bare "$SCRIPT_DIR" "$REPO_DIR"
-		dot remote set-url origin $REPO_URL
-		echo
-		echo "Cloned local repository to $REPO_DIR, deleting $SCRIPT_DIR"
-		rm -rf "$SCRIPT_DIR"
-		echo "Deleted $SCRIPT_DIR"
-	else
-		# If the script directory is not a git repository, we can just clone
-		# the repository directly.
-		echo "Cloning repository to $REPO_DIR"
-		echo
-		git clone --bare "$REPO_URL" "$REPO_DIR"
-		echo
-		echo "Cloned repository to $REPO_DIR"
-	fi
-
-	dot config status.showUntrackedFiles no
-	echo
+if [ -d "$REPO_DIR" ]; then
+	echo "Aborting: $REPO_DIR already exists."
+	exit 0
 fi
+
+# Most providers (e.g. GitHub) will not allow you to clone into a bare
+# repository directly, so we clone into a temporary directory and then convert
+# it to a bare repository.
+if [ -d "$SCRIPT_DIR/.git" ]; then
+	echo "Non bare repository detected in $SCRIPT_DIR, deleting..."
+fi
+
+echo "Cloning repository to $REPO_DIR"
+echo
+
+git clone --bare "$REPO_URL" "$REPO_DIR"
+
+echo
+echo "Cloned repository to $REPO_DIR"
+
+dot config status.showUntrackedFiles no
+echo
 
 if [ -n "$(dot status --porcelain)" ]; then
 	echo "Stashing potential conflicts in $STASH_NAME"
