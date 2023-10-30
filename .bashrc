@@ -86,6 +86,11 @@ if command -v kubectl &>/dev/null; then
     source <(kubectl completion bash)
 fi
 
+if command -v devpod &>/dev/null; then
+    # shellcheck disable=SC1090
+    source <(devpod completion bash)
+fi
+
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
     source /usr/share/bash-completion/bash_completion
 fi
