@@ -61,8 +61,7 @@ extract() {
 }
 
 dot() {
-    # shellcheck disable=SC2068
-    git --git-dir="$REPO_DIR" -C "$REPO_DIR" --work-tree="$HOME" $@
+    git --git-dir="$HOME"/.dotfiles -C $"HOME/".dotfiles --work-tree="$HOME" "$@"
 }
 
 dotup() {
