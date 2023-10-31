@@ -13,34 +13,38 @@ echo "Repository:       $REPO_URL"
 echo "Target directory: $REPO_DIR"
 echo
 
-dot() {
-	# shellcheck disable=SC2068
-	git --git-dir="$REPO_DIR" -C "$REPO_DIR" --work-tree="$HOME" $@
-}
+if [ -d "$REPO_DIR" ]; then
+	echo "$REPO_DIR already exists, exiting."
+	exit 0
+fi
 
 if ! command -v git >/dev/null; then
 	echo "Error: could not locate git in your path."
 	exit 1
 fi
-
-if [ -d "$REPO_DIR" ]; then
-	echo "$REPO_DIR already exists, exiting."
-	exit 0
+if ! command -v ssh-keygen >/dev/null; then
+	echo "Error: could not locate ssh-keygen in your path."
+	exit 1
 fi
+
+dot() {
+	# shellcheck disable=SC2068
+	git --git-dir="$REPO_DIR" -C "$REPO_DIR" --work-tree="$HOME" $@
+}
 
 # Most providers (e.g. GitHub) will not allow you to clone into a bare
 # repository directly, so we clone into a temporary directory and then convert
 # it to a bare repository.
 if [ -d "$SCRIPT_DIR/.git" ]; then
 	echo "Non bare repository detected in $SCRIPT_DIR, converting to bare repository..."
-	git clone --bare "$SCRIPT_DIR" "$REPO_DIR" >/dev/null 2>&1
+	git clone --bare "$SCRIPT_DIR" "$REPO_DIR" >/dev/null
 	dot remote set-url origin "$REPO_URL"
 	rm -rf "$SCRIPT_DIR"
 else
 	echo "Cloning repository to $REPO_DIR..."
 	mkdir -p "$HOME"/.ssh
-	ssh-keyscan -t rsa github.com >>"$HOME"/.ssh/known_hosts 2>/dev/null
-	git clone --bare "$REPO_URL" "$REPO_DIR" >/dev/null 2>&1
+	ssh-keyscan -t rsa github.com >>"$HOME"/.ssh/known_hosts
+	git clone --bare "$REPO_URL" "$REPO_DIR" >/dev/null
 fi
 
 dot config status.showUntrackedFiles no
@@ -48,6 +52,6 @@ dot config status.showUntrackedFiles no
 if [ -n "$(dot status --porcelain)" ]; then
 	stash_name="bootstrap-$(date +%s)"
 	user=$(whoami)
-	echo "Stashing potential conflicts in $stash_name"
+	echo "Stashing conflicts in $stash_name"
 	dot -c user.name="$user" -c user.email="$user"@localhost stash save "$stash_name" >/dev/null
 fi
