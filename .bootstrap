@@ -63,8 +63,7 @@ fi
 if [ -n "$(dot status --porcelain)" ]; then
 	stash_name="bootstrap-$(date +%s)"
 	user=$(whoami)
-	echo "Stashing conflicts in $stash_name"
-	echo
+	echo "Stashing conflicts in $stash_name..."
 	dot -c user.name="$user" -c user.email="$user"@localhost stash save "$stash_name"
 	echo
 fi
