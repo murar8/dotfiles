@@ -61,7 +61,7 @@ extract() {
 }
 
 dot() {
-    git --git-dir="$HOME"/.dotfiles --work-tree="$HOME" "$@"
+    git --git-dir="$HOME"/.dotfiles -C "$HOME"/.dotfiles --work-tree="$HOME" "$@"
 }
 
 dotup() {
