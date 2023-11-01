@@ -1,3 +1,11 @@
+" Install vim-plug if not found.
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+				\ https://raw.githubusercontent.com/junegunn/vim-plug/0.11.0/plug.vim
+endif
+
+
 " Basic
 
 syntax on
@@ -118,13 +126,6 @@ augroup END
 
 
 " Plugins
-
-" Install vim-plug if not found.
-" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
-if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/0.11.0/plug.vim
-endif
 
 augroup plug
 	autocmd!
