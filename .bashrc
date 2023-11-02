@@ -81,6 +81,11 @@ if command -v terraform &>/dev/null; then
     complete -C "$(which terraform)" terraform
 fi
 
+if command -v doctl &>/dev/null; then
+    # shellcheck disable=SC1090
+    source <(doctl completion bash)
+fi
+
 if command -v kubectl &>/dev/null; then
     # shellcheck disable=SC1090
     source <(kubectl completion bash)
