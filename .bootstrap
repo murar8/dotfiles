@@ -29,7 +29,7 @@ fi
 
 dot() {
 	# shellcheck disable=SC2068
-	git --git-dir="$REPO_DIR" -C "$REPO_DIR" --work-tree="$HOME" $@
+	git --git-dir="$REPO_DIR" -C "$HOME" --work-tree="$HOME" $@
 }
 
 # This is to avoid ssh prompting for confirmation when cloning.
