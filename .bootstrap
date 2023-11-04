@@ -71,6 +71,8 @@ fi
 dot config status.showUntrackedFiles no
 dot config remote.origin.url "$REPO_URL"
 dot config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+dot fetch origin main
 dot branch --set-upstream-to=origin/main main
 
+echo
 echo "All done!"
