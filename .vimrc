@@ -138,20 +138,17 @@ augroup end
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'airblade/vim-gitgutter',        { 'commit': 'f7b9766' }
+Plug 'github/copilot.vim',            { 'tag': 'v1.11.3' }
+Plug 'jiangmiao/auto-pairs',          { 'commit': '39f06b8' }
 Plug 'junegunn/vim-easy-align',       { 'tag': '2.10.0' }
 Plug 'machakann/vim-highlightedyank', { 'commit': 'fa3f57b' }
+Plug 'morhetz/gruvbox',               { 'commit': 'f1ecde8' }
 Plug 'tpope/vim-commentary',          { 'tag': 'v1.3' }
 Plug 'tpope/vim-sensible',            { 'tag': 'v2.0' }
 Plug 'tpope/vim-surround',            { 'tag': 'v2.2' }
 Plug 'unblevable/quick-scope',        { 'tag': 'v2.6.1'}
-
-if !exists('g:vscode')
-	Plug 'airblade/vim-gitgutter',  { 'commit': 'f7b9766' }
-	Plug 'github/copilot.vim',      { 'tag': 'v1.11.3' }
-	Plug 'jiangmiao/auto-pairs',    { 'commit': '39f06b8' }
-	Plug 'morhetz/gruvbox',         { 'commit': 'f1ecde8' }
-	Plug 'vim-airline/vim-airline', { 'tag': 'v0.11' }
-endif
+Plug 'vim-airline/vim-airline',       { 'tag': 'v0.11' }
 
 call plug#end()
 
@@ -185,10 +182,3 @@ highlight CopilotSuggestion guifg=#665C54
 let g:highlightedyank_highlight_duration = 200
 let g:highlightedyank_highlight_in_visual = 0
 
-" unblevable/quick-scope
-
-" https://github.com/vscode-neovim/vscode-neovim/wiki/Plugins#quick-scope
-if exists('g:vscode')
-	highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-	highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-endif
