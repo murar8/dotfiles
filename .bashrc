@@ -72,7 +72,7 @@ dotup() {
 
     dot add -u
     dot commit -m "$1"
-    dot -c push.default=current push origin
+    dot push origin main
 }
 
 ### Completions
