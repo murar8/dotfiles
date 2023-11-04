@@ -105,9 +105,9 @@ nnoremap <CR> :noh<CR><CR>
 " Format whole file.
 nnoremap <silent><leader>= :set paste<CR>m`gg=G``:set nopaste<CR>
 " Insert a new line below without leaving normal mode.
-nnoremap <silent><leader>o :set paste<CR>m`o<Esc>``h:set nopaste<CR>
+nnoremap <silent><leader>o :set paste<CR>m`o<Esc>``:set nopaste<CR>
 " Insert a new line above without leaving normal mode.
-nnoremap <silent><leader>O :set paste<CR>m`O<Esc>``h:set nopaste<CR>
+nnoremap <silent><leader>O :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 
 """ Autocmds
