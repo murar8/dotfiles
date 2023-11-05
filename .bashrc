@@ -11,12 +11,12 @@ fi
 
 shopt -s checkwinsize # Check the window size after each command and update the values of LINES and COLUMNS.
 shopt -s histappend   # Append to history on quit instead of overwriting it.
+shopt -s cmdhist      # Save multi-line commands as one command.
 shopt -s autocd       # Automatically prepend cd when entering just a path in the shell.
 shopt -s dotglob      # Include filenames beginning with a dot in the results of pathname expansion.
 shopt -s nullglob     # When a glob expands to nothing, make it an empty string.
 
 set -o noclobber # Disallow existing files to be overwritten by redirection of shell output.
-set -o vi        # Enable vi mode.
 
 ### Variables
 
@@ -24,8 +24,8 @@ set -o vi        # Enable vi mode.
 # ignoreboth => Avoid saving consecutive identical commands, and commands that start with a space.
 export HISTCONTROL=erasedups:ignoreboth
 
-export HISTFILESIZE=10000 # Expand the on disk history size.
-export HISTSIZE=1000      # Expand the in memory history size.
+export HISTFILESIZE=1000000 # Expand the on disk history size.
+export HISTSIZE=1000000     # Expand the in memory history size.
 
 ### Aliases
 
@@ -107,12 +107,16 @@ fi
 
 bind "set show-all-if-ambiguous on"    # Show auto-completion list without double tab.
 bind "set completion-ignore-case on"   # Ignore case on completion.
+bind "set completion-map-case on"      # Treat hyphens and underscores as equivalent.
 bind '"\e[A": history-search-backward' # Get completions from history (backward).
 bind '"\e[B": history-search-forward'  # Get completions from history (forward).
 
 ### Editor
 
-if command -v nvim &>/dev/null; then
+if command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
+    EDITOR="$(which code) --wait"
+    export EDITOR
+elif command -v nvim &>/dev/null; then
     EDITOR="$(which nvim)"
     export EDITOR
 elif command -v vim &>/dev/null; then
@@ -139,19 +143,23 @@ prompt() {
     local current_branch
     current_branch=$(command -v git &>/dev/null && git symbolic-ref --short HEAD 2>/dev/null)
 
+    local dirty_count
+    dirty_count=$(command -v git &>/dev/null && git status --porcelain 2>/dev/null | wc -l)
+
     local direnv_allowed
     direnv_allowed=$(command -v direnv &>/dev/null && direnv status | grep -oP 'Found RC allowed \K\w+')
 
     PS1="${cyan}\u${blue}@\h ${purple}\w"
     if [[ -n $current_branch ]]; then PS1+=" ${green}${current_branch}"; fi
+    if [[ $dirty_count -gt 0 ]]; then PS1+="${yellow}[${dirty_count}]"; fi
     if [[ $direnv_allowed == 'true' ]]; then PS1+=" ${green}[direnv]"; fi
-    if [[ $direnv_allowed == 'false' ]]; then PS1+=" ${yellow}[direnv]"; fi
+    if [[ $direnv_allowed == 'false' ]]; then PS1+=" ${red}[direnv]"; fi
     if [[ exit_code -eq 0 ]]; then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
     PS1+=" ${clear}"
 }
 
 PROMPT_COMMAND=prompt
-PROMPT_DIRTRIM=1
+PROMPT_DIRTRIM=1 # Trim the working directory to the last directory name.
 
 ### Environment
 
