@@ -122,8 +122,7 @@ fi
 
 ### Prompt
 
-# black='\[\033[30m\]'
-# yellow='\[\033[33m\]'
+yellow='\[\033[33m\]'
 blue='\[\033[34m\]'
 clear='\[\033[0m\]'
 cyan='\[\033[36m\]'
@@ -140,14 +139,25 @@ prompt() {
     local current_branch
     current_branch=$(command -v git &>/dev/null && git symbolic-ref --short HEAD 2>/dev/null)
 
+    local direnv_allowed
+    direnv_allowed=$(command -v direnv &>/dev/null && direnv status | grep -oP 'Found RC allowed \K\w+')
+
     PS1="${cyan}\u${blue}@\h ${purple}\w"
     if [[ -n $current_branch ]]; then PS1+=" ${green}${current_branch}"; fi
+    if [[ $direnv_allowed == 'true' ]]; then PS1+=" ${green}[direnv]"; fi
+    if [[ $direnv_allowed == 'false' ]]; then PS1+=" ${yellow}[direnv]"; fi
     if [[ exit_code -eq 0 ]]; then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
     PS1+=" ${clear}"
 }
 
 PROMPT_COMMAND=prompt
 PROMPT_DIRTRIM=1
+
+### Environment
+
+if command -v direnv &>/dev/null; then
+    eval "$(direnv hook bash)"
+fi
 
 ### Local configuration
 
