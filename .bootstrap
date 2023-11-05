@@ -8,9 +8,7 @@ REPO_URL=git@github.com:murar8/dotfiles.git
 REPO_DIR=$HOME/.dotfiles
 SCRIPT_DIR=$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 
-echo "Setup started"
-echo "Repository:       $REPO_URL"
-echo "Target directory: $REPO_DIR"
+echo "Cloning $REPO_URL into $REPO_DIR..."
 echo
 
 if [ -d "$REPO_DIR" ]; then
@@ -24,6 +22,11 @@ if ! command -v git >/dev/null; then
 fi
 if ! command -v ssh >/dev/null; then
 	echo "Error: could not locate ssh in your path."
+	exit 1
+fi
+
+if ! ssh-add -l >/dev/null 2>&1; then
+	echo "Error: could not find any identities in your ssh-agent."
 	exit 1
 fi
 
@@ -47,10 +50,8 @@ fi
 # repository directly, so we clone into a temporary directory and then convert
 # it to a bare repository.
 if [ -d "$SCRIPT_DIR/.git" ]; then
-	echo "Non bare repository detected in $SCRIPT_DIR, converting to bare repository..."
-	echo
+	echo "Non bare repository detected in $SCRIPT_DIR, copying from local..."
 	git clone --bare "$SCRIPT_DIR" "$REPO_DIR"
-	dot remote set-url origin "$REPO_URL"
 	echo
 	echo "Removing $SCRIPT_DIR..."
 	rm -rf "$SCRIPT_DIR"
@@ -71,8 +72,11 @@ fi
 dot config status.showUntrackedFiles no
 dot config remote.origin.url "$REPO_URL"
 dot config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-dot fetch origin main
-dot branch --set-upstream-to=origin/main main
 
+echo "Fetching origin..."
+dot pull origin main
 echo
+dot branch --set-upstream-to=origin/main main
+echo
+
 echo "All done!"
