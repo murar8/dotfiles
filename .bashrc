@@ -1,6 +1,4 @@
-#!/bin/bash
-# Author:   Lorenzo Murarotto <lnzmrr@gmail.com>
-# Repo:     https://github.com/murar8/dotfiles
+#!/usr/bin/env bash
 
 # if not running interactively don't do anything.
 if [[ $- != *i* ]]; then
@@ -140,18 +138,21 @@ prompt() {
 
     history -a # Append the current session history to the content of the history file.
 
-    local current_branch
-    current_branch=$(command -v git &>/dev/null && git symbolic-ref --short HEAD 2>/dev/null)
-
-    local dirty_count
-    dirty_count=$(command -v git &>/dev/null && git status --porcelain 2>/dev/null | wc -l)
-
+    local git_branch
+    local git_dirty
     local direnv_allowed
-    direnv_allowed=$(command -v direnv &>/dev/null && direnv status | grep -oP 'Found RC allowed \K\w+')
+
+    if command -v git &>/dev/null; then
+        git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+        git_dirty=$(git status --porcelain 2>/dev/null | wc -l)
+    fi
+    if command -v direnv &>/dev/null; then
+        direnv_allowed=$(direnv status | grep -oP 'Found RC allowed \K\w+')
+    fi
 
     PS1="${cyan}\u${blue}@\h ${purple}\w"
-    if [[ -n $current_branch ]]; then PS1+=" ${green}${current_branch}"; fi
-    if [[ $dirty_count -gt 0 ]]; then PS1+="${yellow}[${dirty_count}]"; fi
+    if [[ -n $git_branch ]]; then PS1+=" ${green}${git_branch}"; fi
+    if [[ $git_dirty -gt 0 ]]; then PS1+="${yellow}[${git_dirty}]"; fi
     if [[ $direnv_allowed == 'true' ]]; then PS1+=" ${green}[direnv]"; fi
     if [[ $direnv_allowed == 'false' ]]; then PS1+=" ${red}[direnv]"; fi
     if [[ exit_code -eq 0 ]]; then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
