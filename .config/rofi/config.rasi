@@ -1,6 +1,5 @@
 configuration {
-    font: "Ubuntu 12";
-	combi-modi: "window,drun,ssh";
+    font: "FiraMono Nerd Font 12";
 }
 
 @theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
