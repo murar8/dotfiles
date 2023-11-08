@@ -15,8 +15,7 @@ exec --no-startup-id dex --autostart --environment i3
 # Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
+# Desktop environment-independent system tray GUI for NetworkManager.
 exec --no-startup-id nm-applet
 
 # Use picom to avoid screen tearing.
@@ -35,8 +34,9 @@ exec_always --no-startup-id greenclip daemon>/dev/null
 # Bluetooth.
 exec_always --no-startup-id blueman-applet
 
-# Audio.
-exec_always --no-startup-id killall -q pasystray || true && pasystray --notify=all
+# Audio control.
+# Already executes automatically.
+# exec_always --no-startup-id killall -q pasystray || true && pasystray 
 
 
 # Keybindings.
