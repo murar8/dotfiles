@@ -1,1 +1,6 @@
-@theme "~/.config/rofi/themes/gruvbox/gruvbox-dark.rasi"
+configuration {
+    font: "Ubuntu 12";
+	combi-modi: "window,drun,ssh";
+}
+
+@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
