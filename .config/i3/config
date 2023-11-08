@@ -34,6 +34,10 @@ exec_always --no-startup-id "setxkbmap -option 'grp:win_space_toggle'"
 
 # Clipboard tool.
 exec_always --no-startup-id greenclip daemon>/dev/null
+
+# Browser.
+bindsym $mod+i exec firefox || sensible-browser
+
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
 
 # Use pactl to adjust volume in PulseAudio.
