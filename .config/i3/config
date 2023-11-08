@@ -4,10 +4,6 @@
 
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:Ubuntu 10
-
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
@@ -66,7 +62,7 @@ bindsym $mod+q kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-bindcode $mod+40 exec "rofi -show combi"
+bindcode $mod+40 exec "rofi -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
@@ -192,7 +188,16 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Gruvbox colors
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Ubuntu 10
+
+# Gaps.
+gaps inner 4
+gaps outer 1
+default_border pixel 0
+
+# Gruvbox colors.
 # https://gist.github.com/thepont/3f71150cec091bae5ef304e28e3d9097
 client.focused          #665c54 #665c54 #eddbb2 #2e9ef4   #665c54
 client.focused_inactive #282828 #5f676a #ffffff #484e50   #5f676a
@@ -201,4 +206,5 @@ client.urgent           #cc241d #cc241d #ebdbb2 #cc241d   #cc241d
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
-exec_always --no-startup-id xsetroot -solid "#FFFFFF"
+exec_always --no-startup-id xsetroot -solid "#282828"
+exec_always --no-startup-id hsetroot -solid "#282828" # For picom.
