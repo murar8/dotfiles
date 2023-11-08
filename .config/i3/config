@@ -203,24 +203,13 @@ default_floating_border pixel 2
 
 # Gaps.
 gaps inner 4
-smart_gaps on
 
-set $bg #282828
-set $red #cc241d
-set $green #98971a
-set $yellow #d79921
-set $blue #458588
-set $purple #b16286
-set $aqua #689d68
-set $gray #a89984
-set $darkgray #1d2021
-set $lightgray #bdae93
-
-client.focused          $lightgray $lightgray $bg $purple $darkgray
-client.focused_inactive $darkgray $darkgray $lightgray $purple $darkgray
-client.unfocused        $darkgray $darkgray $lightgray $purple $darkgray
-client.urgent           $red $red $white $red $red
+client.background #1E272B
+client.focused #EAD49B #1E272B #EAD49B #9D6A47 #9D6A47
+client.unfocused #EAD49B #1E272B #EAD49B #78824B #78824B
+client.focused_inactive #EAD49B #1E272B #EAD49B #78824B #78824B
+client.urgent #EAD49B #1E272B #EAD49B #78824B #78824B
+client.placeholder #EAD49B #1E272B #EAD49B #78824B #78824B
 
 exec_always --no-startup-id xsetroot -solid "#282828"
 exec_always --no-startup-id hsetroot -solid "#282828" # For picom.
-
