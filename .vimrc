@@ -143,6 +143,7 @@ Plug 'github/copilot.vim',            { 'tag': 'v1.11.3' }
 Plug 'jiangmiao/auto-pairs',          { 'commit': '39f06b8' }
 Plug 'junegunn/vim-easy-align',       { 'tag': '2.10.0' }
 Plug 'machakann/vim-highlightedyank', { 'commit': 'fa3f57b' }
+Plug 'mboughaba/i3config.vim' ,       { 'tag':'0.5.0'}
 Plug 'morhetz/gruvbox',               { 'commit': 'f1ecde8' }
 Plug 'tpope/vim-commentary',          { 'tag': 'v1.3' }
 Plug 'tpope/vim-sensible',            { 'tag': 'v2.0' }
@@ -181,4 +182,3 @@ highlight CopilotSuggestion guifg=#665C54
 
 let g:highlightedyank_highlight_duration = 200
 let g:highlightedyank_highlight_in_visual = 0
-
