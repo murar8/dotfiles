@@ -193,9 +193,8 @@ bindsym $mod+r mode "resize"
 font pango:Ubuntu 10
 
 # Gaps.
-gaps inner 4
-gaps outer 1
-default_border pixel 0
+gaps inner 8
+smart_gaps on
 
 # Gruvbox colors.
 # https://gist.github.com/thepont/3f71150cec091bae5ef304e28e3d9097
