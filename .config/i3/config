@@ -71,8 +71,8 @@ bindsym $mod+q kill
 bindcode $mod+40 exec "rofi -show drun"
 
 # Clipboard Screenshots.
-bindsym Print exec maim -s -u | xclip -selection clipboard -t image/png -i
-bindsym Shift+Print exec maim -u | xclip -selection clipboard -t image/png -i
+bindsym Print exec --no-startup-id maim -s -u | xclip -selection clipboard -t image/png -i
+bindsym Shift+Print exec --no-startup-id maim -u | xclip -selection clipboard -t image/png -i
 
 # change focus
 bindsym $mod+h focus left
