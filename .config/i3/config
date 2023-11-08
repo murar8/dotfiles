@@ -205,14 +205,21 @@ default_floating_border pixel 2
 gaps inner 4
 smart_gaps on
 
-# Gruvbox colors.
-# https://gist.github.com/thepont/3f71150cec091bae5ef304e28e3d9097
-client.focused          #665c54 #665c54 #eddbb2 #2e9ef4   #665c54
-client.focused_inactive #282828 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #3c3836 #3c3836 #a89984 #292d2e   #222222
-client.urgent           #cc241d #cc241d #ebdbb2 #cc241d   #cc241d
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-client.background       #ffffff
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+set $lightgray #bdae93
+
+client.focused          $lightgray $lightgray $bg $purple $darkgray
+client.focused_inactive $darkgray $darkgray $lightgray $purple $darkgray
+client.unfocused        $darkgray $darkgray $lightgray $purple $darkgray
+client.urgent           $red $red $white $red $red
 
 exec_always --no-startup-id xsetroot -solid "#282828"
 exec_always --no-startup-id hsetroot -solid "#282828" # For picom.
