@@ -167,7 +167,7 @@ mode "resize" {
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
 
 # Application launcher.
-bindcode $mod+40 exec "rofi -show drun"
+bindcode $mod+40 exec rofi -show drun
 
 # Window switcher.
 bindsym $mod+Tab exec --no-startup-id rofi -show window
