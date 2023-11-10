@@ -5,8 +5,10 @@ Wants=graphical.target
 
 [Service]
 Type=simple
-Restart=Always
-ExecStart=/usr/bin/wl-paste --watch cliphist store
+Restart=on-failure
+RestartSec=5s
+ExecStartPre=/usr/bin/sleep 5
+ExecStart=/usr/bin/wl-paste --watch cliphist store 
 
 [Install]
 WantedBy=default.target
