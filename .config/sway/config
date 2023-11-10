@@ -123,11 +123,10 @@ output eDP-1 scale 1.2
 
 font Fira Code 11
 
-gaps outer 4
 gaps inner 4
 
-default_border normal 2
-default_floating_border normal 2
+default_border normal 4
+default_floating_border normal 4
 
 set $color_base03   "#282828"
 set $color_base02   "#3c3836"
@@ -162,9 +161,9 @@ client.background $color_base03
 
 bar {
 	position top
-    height 32
+    height 24
     tray_padding 4
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+    status_command i3status
 
   colors {
     background         $color_base03
