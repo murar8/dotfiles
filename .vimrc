@@ -112,6 +112,12 @@ nnoremap <silent><leader>O :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 """ Autocmds
 
+augroup sway
+	autocmd!
+	" Reload sway config on write.
+	au BufWritePost ~/.config/sway/config silent exec "! sway reload"
+augroup END
+
 augroup vimrc
 	autocmd!
 	" Source vimrc on write.
