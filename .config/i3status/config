@@ -4,6 +4,7 @@ general {
     color_good     = "#689D6A"
     color_degraded = "#D79921"
     color_bad      = "#CC241D"
+    separator      = ""
 }
 
 order += "ethernet enp2s0f0"
@@ -17,13 +18,15 @@ order += "volume master"
 order += "tztime local"
 
 wireless wlp3s0 {
-    format_up   = " %essid  %quality"
-    format_down = " "
+    format_up             = " %essid %quality"
+    format_down           = ""
+    separator_block_width = 32
 }
 
 ethernet enp2s0f0 {
-    format_up   = " %ip"
-    format_down = " "
+    format_up             = " %ip"
+    format_down           = ""
+    separator_block_width = 16
 }
 
 battery 0 {
@@ -33,30 +36,37 @@ battery 0 {
     status_bat               = " "
     status_full              = " "
     status_unk               = "?"
+    separator_block_width    = 32
 }
 
 tztime local {
-    format = " %a %d/%m/%y   %H:%M"
+    format                = " %a %d/%m/%y   %H:%M"
+    separator_block_width = 32
 }
 
 memory {
-    format = " %percentage_used"
+    format                = " %percentage_used"
+    separator_block_width = 32
 }
 
 cpu_usage {
-    format = " %usage"
+    format                = " %usage"
+    separator_block_width = 32
 }
 
 cpu_temperature 0 {
-	format = " %degrees°C"
+	format                = " %degrees°C"
+    separator_block_width = 32
 }
 
 disk "/" {
-	format = " %percentage_used"
+	format                = " %percentage_used"
+    separator_block_width = 32
 }
 
 volume master {
-    format       = " %volume"
-    format_muted = " "
+    format                = " %volume"
+    format_muted          = " "
+    separator_block_width = 32
 }
 

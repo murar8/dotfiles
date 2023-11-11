@@ -100,6 +100,7 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway
 bindsym $mod+Return exec alacritty
 bindsym $mod+p exec flatpak run org.mozilla.firefox
 bindsym $mod+d exec fuzzel
+bindsym $mod+m exec pavucontrol
 bindsym $mod+c exec alacritty --class=floating -e bash -c "cliphist list | fzf -d $'\t' --with-nth 2 | cliphist decode | wl-copy"
 
 
@@ -162,7 +163,7 @@ client.background $color_base03
 
 bar {
 	position top
-    height 24
+    height 26
     tray_padding 4
     status_command i3status
 
