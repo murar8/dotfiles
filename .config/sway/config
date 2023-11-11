@@ -119,6 +119,7 @@ for_window [window_type="menu"] floating enable
 
 # Appearance
 
+output * bg /usr/share/backgrounds/gnome/blobs-l.svg fill
 output eDP-1 scale 1.2
 
 font Fira Code 11
