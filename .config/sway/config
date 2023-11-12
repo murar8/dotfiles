@@ -124,6 +124,9 @@ for_window [window_type="menu"] floating enable
 # Services
 
 exec --no-startup-id /usr/bin/wl-paste --watch cliphist store 
+exec --no-startup-id /usr/bin/wl-paste --watch primary store
+
+exec --no-startup-id dex -a
 
 # https://wiki.archlinux.org/title/sway#Idle
 exec swayidle -w \
