@@ -95,9 +95,9 @@ mode "resize" {
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
 bindsym $mod+Return exec alacritty
 bindsym $mod+p exec flatpak run org.mozilla.firefox
-bindsym $mod+d exec fuzzel
+bindsym $mod+d exec wofi --show drun 
 bindsym $mod+m exec pavucontrol
-bindsym $mod+c exec alacritty --class=floating -e bash -c "cliphist list | fzf -d $'\t' --with-nth 2 | cliphist decode | wl-copy"
+bindsym $mod+c exec cliphist list | wofi --dmenu --pre-display-cmd "echo '%s' | cut -f2 | tr -d '\n'" | cliphist decode | wl-copy
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0
 bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
@@ -110,7 +110,6 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
 # Rules
 
-for_window [app_id="floating"] floating enable
 for_window [app_id="discord"] floating enable
 for_window [app_id="Slack"] floating enable
 for_window [app_id="blueman-manager"] floating enable
