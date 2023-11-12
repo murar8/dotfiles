@@ -87,6 +87,7 @@ mode "resize" {
     bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
 
+    bindsym $mod+r mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -136,6 +137,21 @@ exec swayidle -w \
     before-sleep 'swaylock -f'
 
 
+# Devices
+
+input 2:7:SynPS/2_Synaptics_TouchPad {
+    tap enabled
+    natural_scroll disabled
+    pointer_accel 0.5
+}
+
+input type:keyboard {
+    xkb_numlock enabled    
+    xkb_layout "us,it" 
+    xkb_options "grp:win_space_toggle"
+}
+
+
 # Appearance
 
 output * bg /usr/share/backgrounds/gnome/blobs-l.svg fill
@@ -145,8 +161,8 @@ font Fira Code 11
 
 gaps inner 4
 
-default_border normal 4
-default_floating_border normal 4
+default_border pixel 4
+default_floating_border pixel 4
 
 set $color_base03   "#282828"
 set $color_base02   "#3c3836"
@@ -179,27 +195,12 @@ client.urgent           $color_base03 $color_red    $color_base3 $color_red    $
 
 client.background $color_base03
 
-bar {
-	position top
-    height 26
-    tray_padding 4
-    status_command i3status
-
-  colors {
-    background         $color_base03
-    statusline         $color_base1
-    separator          $color_blue
-    focused_workspace  $color_base02 $color_base02 $color_base2
-    active_workspace   $color_base02 $color_base02 $color_base00
-    inactive_workspace $color_base03 $color_base03 $color_base00
-    urgent_workspace   $color_red    $color_red    $color_base3
-  }
-}
+bar swaybar_command waybar
 
 # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'Gruvbox-Dark-BL'
+    gsettings set $gnome-schema gtk-theme 'Adwaita-dark'
     gsettings set $gnome-schema font-name 'Fira Code'
     gsettings set $gnome-schema cursor-theme 'Adwaita'
     gsettings set $gnome-schema color-scheme 'prefer-dark'
