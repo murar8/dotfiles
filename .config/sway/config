@@ -154,9 +154,8 @@ input type:keyboard {
 # Appearance
 
 output * bg /usr/share/backgrounds/gnome/blobs-l.svg fill
-output eDP-1 scale 1.2
 
-font Fira Code 11
+font Fira Code 12
 
 gaps inner 4
 

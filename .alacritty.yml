@@ -3,7 +3,7 @@ window:
   padding: { x: 8, y: 8 }
 
 font:
-  size: 12
+  size: 14
   normal: { family: Fira Code }
 
 mouse_bindings:
