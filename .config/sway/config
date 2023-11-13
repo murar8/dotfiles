@@ -110,8 +110,8 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
 # Rules
 
-for_window [app_id="discord"] floating enable
-for_window [app_id="Slack"] floating enable
+for_window [class="discord"] floating enable
+for_window [class="Slack"] floating enable
 for_window [app_id="blueman-manager"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
