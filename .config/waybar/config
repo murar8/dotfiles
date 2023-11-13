@@ -29,6 +29,10 @@
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
     },
+    "sway/language": {
+        "format": " {}",
+        "on-click": "swaymsg input type:keyboard xkb_switch_layout next"
+    },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -41,7 +45,7 @@
     },
     "clock": {
         "format": " {:%H:%M}",
-        "format-alt": " {:%A, %B %d, %Y  %R}",
+        "format-alt": " {:%A, %B %d, %Y  %R}"
     },
     "cpu": {
         "format": " {usage}%",
@@ -62,7 +66,7 @@
     "backlight": {
         "format": "{icon} {percent}%",
         "format-icons": [
-            "",
+            ""
         ]
     },
     "battery": {
