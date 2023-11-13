@@ -98,6 +98,9 @@ bindsym $mod+p exec flatpak run org.mozilla.firefox
 bindsym $mod+d exec fuzzel
 bindsym $mod+m exec pavucontrol
 bindsym $mod+c exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
+bindsym Print exec grimshot copy screen
+bindsym Print+a exec grimshot copy area
+bindsym Print+w exec grimshot copy window
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0
 bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
