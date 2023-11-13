@@ -5,8 +5,5 @@ text-color=#EBDBB2
 border-color=#7C6F64
 progress-color=source #3C3836
 
-[app-name="NetworkManager Applet"]
-default-timeout=5000
-[app-name="blueman"]
 default-timeout=5000
 
