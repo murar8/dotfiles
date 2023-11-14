@@ -50,21 +50,6 @@ button:hover {
     margin-right: 8px;
 }
 
-#window,
-#workspaces {
-    margin: 0 4px;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left>widget:first-child>#workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right>widget:last-child>#workspaces {
-    margin-right: 0;
-}
-
 #battery.charging,
 #battery.plugged {
     color: #98971a;
@@ -78,16 +63,12 @@ label:focus {
     background-color: #665c54;
 }
 
-#network.disconnected {
-    background-color: #cc241d;
-}
-
 #pulseaudio.muted {
     color: #d79921;
 }
 
 #temperature.critical {
-    background-color: #cc241d;
+    color: #cc241d;
 }
 
 #tray>.passive {
@@ -96,7 +77,7 @@ label:focus {
 
 #tray>.needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: #cc241d;
+    color: #cc241d;
 }
 
 #idle_inhibitor.activated {
