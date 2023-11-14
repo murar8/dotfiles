@@ -160,8 +160,8 @@ font Fira Code 12
 
 gaps inner 4
 
-default_border pixel 4
-default_floating_border pixel 4
+default_border pixel 2
+default_floating_border pixel 2
 
 set $color_base03   "#282828"
 set $color_base02   "#3c3836"
