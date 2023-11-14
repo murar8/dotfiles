@@ -76,6 +76,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 bindsym $mod+r mode "resize"
+
 mode "resize" {
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
@@ -95,9 +96,9 @@ mode "resize" {
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
 bindsym $mod+Return exec alacritty
 bindsym $mod+p exec flatpak run org.mozilla.firefox
-bindsym $mod+d exec fuzzel
+bindsym $mod+d exec wofi --show=drun
 bindsym $mod+m exec pavucontrol
-bindsym $mod+c exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
+bindsym $mod+c exec cliphist list | wofi --dmenu --matching=fuzzy | cliphist decode | wl-copy
 bindsym Print exec grimshot copy screen
 bindsym Print+a exec grimshot copy area
 bindsym Print+w exec grimshot copy window
@@ -113,9 +114,6 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
 # Rules
 
-for_window [class="discord"] floating enable
-for_window [class="Slack"] floating enable
-for_window [app_id="blueman-manager"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
