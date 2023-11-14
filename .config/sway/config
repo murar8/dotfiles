@@ -97,8 +97,8 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway
 bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec flatpak run org.mozilla.firefox
 
-bindsym $mod+d exec wofi --show=drun
-bindsym $mod+x exec cliphist list | wofi --dmenu --matching=fuzzy | cliphist decode | wl-copy
+bindsym $mod+d exec wofi --show=drun --width=30%
+bindsym $mod+x exec cliphist list | wofi --dmenu --matching=fuzzy --width=60% | cliphist decode | wl-copy
 
 bindsym Print exec grimshot copy screen
 bindsym Shift+Print exec grimshot copy area
