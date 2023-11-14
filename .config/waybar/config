@@ -27,11 +27,17 @@
             ""
         ],
         "tooltip": true,
-        "tooltip-format": "{app}: {title}"
+        "tooltip-format": "{app}: {title}",
+        "on-click": "swaymsg scratchpad show"
     },
     "sway/language": {
         "format": " {}",
         "on-click": "swaymsg input type:keyboard xkb_switch_layout next"
+    },
+    "sway/window": {
+        "on-click": "swaymsg floating toggle",
+        "on-click-middle": "swaymsg kill",
+        "on-click-right": "swaymsg move scratchpad"
     },
     "idle_inhibitor": {
         "format": "{icon}",
