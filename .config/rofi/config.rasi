@@ -1,7 +1,0 @@
-@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
-
-configuration {
-    font: "Fira Code 12";
-    show-icons: true;
-    drun-show-actions: true;
-}
