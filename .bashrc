@@ -103,6 +103,14 @@ if [[ -f /usr/share/bash-completion/completions/git ]]; then
     __git_complete dot __git_main
 fi
 
+if [ -f /usr/share/bash-completion/completions/fzf ]; then
+    source /usr/share/bash-completion/completions/fzf
+fi
+
+if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
+    source /usr/share/doc/fzf/examples/key-bindings.bash
+fi
+
 bind "set show-all-if-ambiguous on"    # Show auto-completion list without double tab.
 bind "set completion-ignore-case on"   # Ignore case on completion.
 bind "set completion-map-case on"      # Treat hyphens and underscores as equivalent.
