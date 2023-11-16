@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
 
-# if not running interactively don't do anything.
+# If not running interactively don't do anything.
 if [[ $- != *i* ]]; then
     return
+fi
+
+### System configuration
+
+if [ -f /etc/bashrc ]; then
+    source /etc/bashrc
+fi
+
+### Local configuration
+
+if [ -f "$HOME"/.local.bashrc ]; then
+    source "$HOME"/.local.bashrc
 fi
 
 ### Options
@@ -16,7 +28,7 @@ shopt -s nullglob     # When a glob expands to nothing, make it an empty string.
 
 set -o noclobber # Disallow existing files to be overwritten by redirection of shell output.
 
-### Variables
+### History
 
 # erasedups  => Remove all but the last identical command.
 # ignoreboth => Avoid saving consecutive identical commands, and commands that start with a space.
@@ -27,11 +39,11 @@ export HISTSIZE=1000000     # Expand the in memory history size.
 
 ### Aliases
 
-ll() {
+function ll() {
     ls -Alhg --color=auto "$@"
 }
 
-extract() {
+function extract() {
     if [ "$#" -ne 1 ]; then
         echo "Expected one argument."
         return 1
@@ -58,11 +70,11 @@ extract() {
     esac
 }
 
-dot() {
+function dot() {
     git --git-dir="$HOME"/.dotfiles -C "$HOME" --work-tree="$HOME" "$@"
 }
 
-dotup() {
+function dotup() {
     if [ "$#" -ne 1 ]; then
         echo "Expected a commit message."
         return 1
@@ -80,17 +92,14 @@ if command -v terraform &>/dev/null; then
 fi
 
 if command -v doctl &>/dev/null; then
-    # shellcheck disable=SC1090
     source <(doctl completion bash)
 fi
 
 if command -v kubectl &>/dev/null; then
-    # shellcheck disable=SC1090
     source <(kubectl completion bash)
 fi
 
 if command -v devpod &>/dev/null; then
-    # shellcheck disable=SC1090
     source <(devpod completion bash)
 fi
 
@@ -103,12 +112,12 @@ if [[ -f /usr/share/bash-completion/completions/git ]]; then
     __git_complete dot __git_main
 fi
 
-if [ -f /usr/share/bash-completion/completions/fzf ]; then
-    source /usr/share/bash-completion/completions/fzf
+if [ -f /etc/bash_completion.d/fzf ]; then
+    source /etc/bash_completion.d/fzf
 fi
 
-if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
-    source /usr/share/doc/fzf/examples/key-bindings.bash
+if [ -f /usr/share/fzf/shell/key-bindings.bash ]; then
+    source /usr/share/fzf/shell/key-bindings.bash
 fi
 
 bind "set show-all-if-ambiguous on"    # Show auto-completion list without double tab.
@@ -174,11 +183,4 @@ PROMPT_DIRTRIM=1 # Trim the working directory to the last directory name.
 
 if command -v direnv &>/dev/null; then
     eval "$(direnv hook bash)"
-fi
-
-### Local configuration
-
-if [[ -f $HOME/.bashrc.local ]]; then
-    # shellcheck disable=SC1091
-    source "$HOME"/.bashrc.local
 fi
