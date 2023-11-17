@@ -103,11 +103,11 @@ if command -v devpod &>/dev/null; then
     source <(devpod completion bash)
 fi
 
-if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+if [ -f /usr/share/bash-completion/bash_completion ]; then
     source /usr/share/bash-completion/bash_completion
 fi
 
-if [[ -f /usr/share/bash-completion/completions/git ]]; then
+if [ -f /usr/share/bash-completion/completions/git ]; then
     source /usr/share/bash-completion/completions/git
     __git_complete dot __git_main
 fi
@@ -160,7 +160,7 @@ prompt() {
     local direnv_allowed
 
     if command -v git &>/dev/null; then
-        git_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+        git_branch=$(git symbolic-ref --short HEAD 2>/dev/null | sed 's/\(.\{16\}\).*\(.\{16\}\)/\1...\2/')
         git_dirty=$(git status --porcelain 2>/dev/null | wc -l)
     fi
     if command -v direnv &>/dev/null; then
