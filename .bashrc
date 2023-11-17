@@ -39,11 +39,11 @@ export HISTSIZE=1000000     # Expand the in memory history size.
 
 ### Aliases
 
-function ll() {
+la() {
     ls -Alhg --color=auto "$@"
 }
 
-function extract() {
+extract() {
     if [ "$#" -ne 1 ]; then
         echo "Expected one argument."
         return 1
@@ -70,11 +70,11 @@ function extract() {
     esac
 }
 
-function dot() {
+dot() {
     git --git-dir="$HOME"/.dotfiles -C "$HOME" --work-tree="$HOME" "$@"
 }
 
-function dotup() {
+dotup() {
     if [ "$#" -ne 1 ]; then
         echo "Expected a commit message."
         return 1
