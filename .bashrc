@@ -103,6 +103,10 @@ if command -v devpod &>/dev/null; then
     source <(devpod completion bash)
 fi
 
+if command -v minikube &>/dev/null; then
+    source <(minikube completion bash)
+fi
+
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     source /usr/share/bash-completion/bash_completion
 fi
