@@ -138,17 +138,16 @@ augroup end
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'airblade/vim-gitgutter',        { 'commit': 'f7b9766' }
-Plug 'github/copilot.vim',            { 'tag': 'v1.11.3' }
-Plug 'jiangmiao/auto-pairs',          { 'commit': '39f06b8' }
-Plug 'junegunn/vim-easy-align',       { 'tag': '2.10.0' }
-Plug 'machakann/vim-highlightedyank', { 'commit': 'fa3f57b' }
-Plug 'morhetz/gruvbox',               { 'commit': 'f1ecde8' }
-Plug 'tpope/vim-commentary',          { 'tag': 'v1.3' }
-Plug 'tpope/vim-sensible',            { 'tag': 'v2.0' }
-Plug 'tpope/vim-surround',            { 'tag': 'v2.2' }
-Plug 'unblevable/quick-scope',        { 'tag': 'v2.6.1'}
-Plug 'vim-airline/vim-airline',       { 'tag': 'v0.11' }
+Plug 'github/copilot.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
+Plug 'machakann/vim-highlightedyank'
+Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'unblevable/quick-scope'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
