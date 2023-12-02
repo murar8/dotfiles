@@ -91,6 +91,10 @@ if command -v terraform &>/dev/null; then
     complete -C "$(which terraform)" terraform
 fi
 
+if command -v aws_completer &>/dev/null; then
+    complete -C "$(which aws_completer)" aws
+fi
+
 if command -v doctl &>/dev/null; then
     source <(doctl completion bash)
 fi
