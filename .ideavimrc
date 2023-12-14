@@ -1,9 +1,24 @@
-source ~/.vimrc
 
-set clipboard+=ideaput
+""" Mappings
+let mapleader = " "
+map <ESC> :nohlsearch<CR>
+
+""" Settings
+set clipboard=unnamed,unnamedplus,ideaput
+set gdefault
+set hlsearch
 set ideajoin
-set surround
+set ignorecase
+set incsearch
+set matchpairs+=<:>
+set scrolloff=5
+set smartcase
+set timeout
+set timeoutlen=400
+
+""" Plugins
 set commentary
-set multiple-cursors
 set highlightedyank
 set quickscope
+set surround
+set textobj-entire
