@@ -53,24 +53,24 @@ vim.g.mapleader = " " -- Set <leader> as the leader key.
 -- https://neovim.io/doc/user/lua.html#vim.highlight
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank({ on_visual = false, timeout = 400 })
-	end,
+    group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank({ on_visual = false, timeout = 400 })
+    end,
 })
 
 -- Go back to last editing position
 -- https://github.com/creativenull/dotfiles/blob/9ae60de4f926436d5682406a5b801a3768bbc765/config/nvim/init.lua#L70-L86
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-	group = vim.api.nvim_create_augroup("back_to_last_position", { clear = true }),
-	callback = function(args)
-		local valid_line = vim.fn.line([['"]]) >= 1 and vim.fn.line([['"]]) < vim.fn.line("$")
-		local not_commit = vim.b[args.buf].filetype ~= "commit"
-		if valid_line and not_commit then
-			vim.cmd([[normal! g`"]])
-		end
-	end,
+    group = vim.api.nvim_create_augroup("back_to_last_position", { clear = true }),
+    callback = function(args)
+        local valid_line = vim.fn.line([['"]]) >= 1 and vim.fn.line([['"]]) < vim.fn.line("$")
+        local not_commit = vim.b[args.buf].filetype ~= "commit"
+        if valid_line and not_commit then
+            vim.cmd([[normal! g`"]])
+        end
+    end,
 })
 
 -- lazy.nvim
@@ -80,72 +80,72 @@ vim.opt.rtp:prepend(lazypath)
 
 -- https://github.com/folke/lazy.nvim#-installation
 if not vim.loop.fs_stat(lazypath) then
-	local repo = "https://github.com/folke/lazy.nvim.git"
-	vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
+    local repo = "https://github.com/folke/lazy.nvim.git"
+    vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
 end
 
 require("lazy").setup({
-	{ "tpope/vim-commentary" },
-	{ "tpope/vim-surround" },
-	{ "tpope/vim-sleuth" },
-	{ "airblade/vim-rooter" },
-	{ "github/copilot.vim" },
-	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
-	{
-		"junegunn/vim-easy-align",
-		keys = {
-			{ "ga", "<Plug>(EasyAlign)", mode = "x" }, -- Start interactive EasyAlign in visual mode (e.g. vipga)
-			{ "ga", "<Plug>(EasyAlign)", mode = "n" }, -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-		},
-	},
-	{
-		"ellisonleao/gruvbox.nvim",
-		priority = 1000,
-		opts = {},
-		config = function(_, opts)
-			require("gruvbox").setup(opts)
-			vim.cmd.colorscheme("gruvbox")
-		end,
-	},
-	{
-		"nvim-lualine/lualine.nvim",
-		opts = {
-			options = { theme = "gruvbox" },
-		},
-	},
-	{ "williamboman/mason.nvim", opts = {} },
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		opts = {
-			ensure_installed = { "stylua", "shfmt", "prettierd" },
-		},
-	},
-	{
-		"mhartington/formatter.nvim",
-		config = function()
-			require("formatter").setup({
-				filetype = {
-					javascript = { require("formatter.filetypes.javascript").prettierd },
-					javascriptreact = { require("formatter.filetypes.javascriptreact").prettierd },
-					json = { require("formatter.filetypes.json").prettierd },
-					jsonc = { require("formatter.filetypes.json").prettierd },
-					lua = { require("formatter.filetypes.lua").stylua },
-					sh = { require("formatter.filetypes.sh").shfmt },
-					typescript = { require("formatter.filetypes.typescript").prettierd },
-					typescriptreact = { require("formatter.filetypes.typescriptreact").prettierd },
-					yaml = { require("formatter.filetypes.yaml").prettierd },
-				},
-			})
+    { "tpope/vim-commentary" },
+    { "tpope/vim-surround" },
+    { "tpope/vim-sleuth" },
+    { "airblade/vim-rooter" },
+    { "github/copilot.vim" },
+    { "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
+    {
+        "junegunn/vim-easy-align",
+        keys = {
+            { "ga", "<Plug>(EasyAlign)", mode = "x" }, -- Start interactive EasyAlign in visual mode (e.g. vipga)
+            { "ga", "<Plug>(EasyAlign)", mode = "n" }, -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
+        },
+    },
+    {
+        "ellisonleao/gruvbox.nvim",
+        priority = 1000,
+        opts = {},
+        config = function(_, opts)
+            require("gruvbox").setup(opts)
+            vim.cmd.colorscheme("gruvbox")
+        end,
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        opts = {
+            options = { theme = "gruvbox" },
+        },
+    },
+    { "williamboman/mason.nvim", opts = {} },
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        opts = {
+            ensure_installed = { "stylua", "shfmt", "prettierd" },
+        },
+    },
+    {
+        "mhartington/formatter.nvim",
+        config = function()
+            require("formatter").setup({
+                filetype = {
+                    javascript = { require("formatter.filetypes.javascript").prettierd },
+                    javascriptreact = { require("formatter.filetypes.javascriptreact").prettierd },
+                    json = { require("formatter.filetypes.json").prettierd },
+                    jsonc = { require("formatter.filetypes.json").prettierd },
+                    lua = { require("formatter.filetypes.lua").stylua },
+                    sh = { require("formatter.filetypes.sh").shfmt },
+                    typescript = { require("formatter.filetypes.typescript").prettierd },
+                    typescriptreact = { require("formatter.filetypes.typescriptreact").prettierd },
+                    yaml = { require("formatter.filetypes.yaml").prettierd },
+                },
+            })
 
-			vim.keymap.set("n", "<leader>fb", "<cmd>Format<CR>", { desc = "Format current buffer" })
-			vim.keymap.set("n", "<leader>fw", "<cmd>FormatWrite<CR>", { desc = "Format and write current buffer" })
+            vim.keymap.set("n", "<leader>fb", "<cmd>Format<CR>", { desc = "Format current buffer" })
+            vim.keymap.set("n", "<leader>fw", "<cmd>FormatWrite<CR>", { desc = "Format and write current buffer" })
 
-			vim.api.nvim_create_autocmd("BufWritePost", {
-				group = vim.api.nvim_create_augroup("format_on_save", { clear = true }),
-				callback = function()
-					vim.cmd([[FormatWrite]])
-				end,
-			})
-		end,
-	},
+            vim.api.nvim_create_autocmd("BufWritePost", {
+                group = vim.api.nvim_create_augroup("format_on_save", { clear = true }),
+                callback = function()
+                    vim.cmd([[FormatWrite]])
+                end,
+            })
+        end,
+    },
 })
