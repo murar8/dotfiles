@@ -102,8 +102,10 @@ set undolevels=1000  " Increase undo levels.
 
 """ Mappings
 
-let mapleader = " "         " <Space> is a more reachable leader.
-nnoremap <ESC> :noh<CR><CR> " Clear search highlight on return.
+let mapleader = " " " <Space> is a more reachable leader.
+
+" Clear search highlight.
+nnoremap <ESC> :noh<CR>
 
 """ Autocmds
 
