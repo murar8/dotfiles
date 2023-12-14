@@ -1,4 +1,3 @@
-
 """ Mappings
 let mapleader = " "
 map <ESC> :nohlsearch<CR>

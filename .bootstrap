@@ -12,61 +12,61 @@ echo "Cloning $REPO_URL into $REPO_DIR..."
 echo
 
 if [ -d "$REPO_DIR" ]; then
-	echo "$REPO_DIR already exists, exiting."
-	exit 0
+    echo "$REPO_DIR already exists, exiting."
+    exit 0
 fi
 
 if ! command -v git >/dev/null; then
-	echo "Error: could not locate git in your path."
-	exit 1
+    echo "Error: could not locate git in your path."
+    exit 1
 fi
 if ! command -v ssh >/dev/null; then
-	echo "Error: could not locate ssh in your path."
-	exit 1
+    echo "Error: could not locate ssh in your path."
+    exit 1
 fi
 
 if ! ssh-add -l >/dev/null 2>&1; then
-	echo "Error: could not find any identities in your ssh-agent."
-	exit 1
+    echo "Error: could not find any identities in your ssh-agent."
+    exit 1
 fi
 
 dot() {
-	# shellcheck disable=SC2068
-	git --git-dir="$REPO_DIR" -C "$HOME" --work-tree="$HOME" $@
+    # shellcheck disable=SC2068
+    git --git-dir="$REPO_DIR" -C "$HOME" --work-tree="$HOME" $@
 }
 
 # This is to avoid ssh prompting for confirmation when cloning.
 if [ ! -f "$HOME"/.ssh/known_hosts ]; then
-	mkdir -p "$HOME"/.ssh
-	touch "$HOME"/.ssh/known_hosts
+    mkdir -p "$HOME"/.ssh
+    touch "$HOME"/.ssh/known_hosts
 fi
 if ! ssh-keygen -F github.com >/dev/null; then
-	echo "Adding github.com to known hosts..."
-	ssh-keyscan -t rsa github.com >>"$HOME"/.ssh/known_hosts
-	echo
+    echo "Adding github.com to known hosts..."
+    ssh-keyscan -t rsa github.com >>"$HOME"/.ssh/known_hosts
+    echo
 fi
 
 # Most providers (e.g. GitHub) will not allow you to clone into a bare
 # repository directly, so we clone into a temporary directory and then convert
 # it to a bare repository.
 if [ -d "$SCRIPT_DIR/.git" ]; then
-	echo "Non bare repository detected in $SCRIPT_DIR, copying from local..."
-	git clone --bare "$SCRIPT_DIR" "$REPO_DIR"
-	echo
-	echo "Removing $SCRIPT_DIR..."
-	rm -rf "$SCRIPT_DIR"
-	echo
+    echo "Non bare repository detected in $SCRIPT_DIR, copying from local..."
+    git clone --bare "$SCRIPT_DIR" "$REPO_DIR"
+    echo
+    echo "Removing $SCRIPT_DIR..."
+    rm -rf "$SCRIPT_DIR"
+    echo
 else
-	git clone --bare "$REPO_URL" "$REPO_DIR"
-	echo
+    git clone --bare "$REPO_URL" "$REPO_DIR"
+    echo
 fi
 
 if [ -n "$(dot status --porcelain)" ]; then
-	stash_name="bootstrap-$(date +%s)"
-	user=$(whoami)
-	echo "Stashing conflicts in $stash_name..."
-	dot -c user.name="$user" -c user.email="$user"@localhost stash save "$stash_name"
-	echo
+    stash_name="bootstrap-$(date +%s)"
+    user=$(whoami)
+    echo "Stashing conflicts in $stash_name..."
+    dot -c user.name="$user" -c user.email="$user"@localhost stash save "$stash_name"
+    echo
 fi
 
 dot config status.showUntrackedFiles no
