@@ -1,8 +1,8 @@
 " Install vim-plug if not found.
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/0.11.0/plug.vim
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/0.11.0/plug.vim
 endif
 
 
@@ -22,30 +22,34 @@ set backspace=indent,eol,start    " Allow backspacing over indentation, line bre
 set clipboard=unnamed,unnamedplus " Use system clipboard.
 set confirm                       " Display a confirmation dialog when closing an unsaved file.
 set encoding=utf-8                " Use an encoding that supports unicode.
+set hidden                        " Allow editing other files witout writing the current buffer.
 set magic                         " Regex without escape.
 set matchpairs+=<:>               " Use % to jump from < to >.
-set hidden                        " Allow editing other files witout writing the current buffer.
+set timeoutlen=400                " Time in milliseconds to wait for a mapped sequence to complete.
 
+set splitbelow " Open new windows below the current window.
+set splitright " Open new windows right of the current window.
 
 " Appearance
 
-set cursorline     " Highlight the line currently under cursor.
-set laststatus=2   " Always display the status bar.
-set lazyredraw     " Don't update screen during macro and script execution.
-set number         " Show line numbers on the sidebar.
-set relativenumber " Show line number on the current line and relative numbers on all other lines.
-set ruler          " Always show cursor position.
-set scrolloff=3    " The number of screen lines to keep above and below the cursor.
-set title          " Set the window's title, reflecting the file currently being edited.
+set cursorline           " Highlight the line currently under cursor.
+set cursorlineopt=number " Show cursor position on the sidebar.
+
+set laststatus=2 " Always display the status bar.
+set number       " Show line numbers on the sidebar.
+set ruler        " Always show cursor position.
+set scrolloff=5  " The number of screen lines to keep above and below the cursor.
+set title        " Set the window's title, reflecting the file currently being edited.
 
 
 " Indentation
 
-set autoindent    " New lines inherit the indentation of previous lines.
-set expandtab     " Convert tabs to spaces.
-set shiftround    " When shifting lines, round the indentation to the nearest multiple of shiftwidth.
+set autoindent " New lines inherit the indentation of previous lines.
+set expandtab  " Convert tabs to spaces.
+set shiftround " When shifting lines, round the indentation to the nearest multiple of shiftwidth.
+set smarttab   " Insert tabstop number of spaces when the tab key is pressed.
+
 set shiftwidth=4  " For indenting lines.
-set smarttab      " Insert tabstop number of spaces when the tab key is pressed.
 set softtabstop=4 " When you press the Tab key.
 set tabstop=4     " Visual length of a tab character \t.
 
@@ -64,7 +68,7 @@ set smartcase  " Automatically switch search to case-sensitive when search query
 
 set breakindent " Every wrapped line will continue visually indented.
 set linebreak   " Avoid wrapping a line in the middle of a word.
-set showbreak=^ " String to put at the start of lines that have been wrapped.
+set showbreak=↪ " String to put at the start of lines that have been wrapped.
 
 
 " Mouse
@@ -82,7 +86,7 @@ set wildignore+=*.o,*~,*.pyc,*.swp,*.*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/tmp
 
 " History
 
-" History and undo file format is incompatible between Vim versions so we keep them separate.
+" Swap and undo file format is incompatible between Vim versions so we keep them separate.
 let $dir = $HOME."/.vim/swap/".v:version
 let $undodir = $HOME."/.vim/undo/".v:version
 
@@ -98,46 +102,38 @@ set undolevels=1000  " Increase undo levels.
 
 """ Mappings
 
-let mapleader = " " " <Space> is a more reachable leader.
-
-" Clear search highlight on return.
-nnoremap <CR> :noh<CR><CR>
-" Format whole file.
-nnoremap <silent><leader>= :set paste<CR>m`gg=G``:set nopaste<CR>
-" Insert a new line below without leaving normal mode.
-nnoremap <silent><leader>o :set paste<CR>m`o<Esc>``:set nopaste<CR>
-" Insert a new line above without leaving normal mode.
-nnoremap <silent><leader>O :set paste<CR>m`O<Esc>``:set nopaste<CR>
-
+let mapleader = " "         " <Space> is a more reachable leader.
+nnoremap <ESC> :noh<CR><CR> " Clear search highlight on return.
 
 """ Autocmds
 
 augroup vimrc
-	autocmd!
-	" Source vimrc on write.
-	au BufWritePost init.vim,.vimrc source %
+    autocmd!
+    " Source vimrc on write.
+    au BufWritePost .vimrc source %
 augroup END
 
 augroup restorepos
-	autocmd!
-	" Return to last position in file.
-	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd!
+    " Return to last position in file.
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup END
 
 
 " Plugins
 
 augroup plug
-	autocmd!
-	" Run PlugInstall if there are missing plugins.
-	" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation-of-missing-plugins
-	autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-				\| PlugInstall --sync | source $MYVIMRC
-				\| endif
+    autocmd!
+    " Run PlugInstall if there are missing plugins.
+    " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation-of-missing-plugins
+    autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+                \| PlugInstall --sync | source $MYVIMRC
+                \| endif
 augroup end
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'airblade/vim-rooter'
 Plug 'github/copilot.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
@@ -145,6 +141,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
 Plug 'vim-airline/vim-airline'
