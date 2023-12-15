@@ -5,6 +5,9 @@ let mapleader = " "
 vmap <S-J> <Action>(MoveLineDown)
 vmap <S-K> <Action>(MoveLineUp)
 
+map <leader>ff <Action>(GotoFile)
+map <leader>ft <Action>(TextSearchAction)
+map <leader>fc <Action>(GotoAction)
 
 """ Settings
 
