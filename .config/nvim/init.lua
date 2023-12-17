@@ -4,7 +4,7 @@ vim.opt.clipboard = "unnamed,unnamedplus" -- Use system clipboard.
 vim.opt.confirm = true -- Prompt to save changes before exiting.
 vim.opt.matchpairs:append({ "<:>" }) -- Add angle brackets to matchpairs.
 vim.opt.timeoutlen = 300 -- Time in milliseconds to wait for a mapped sequence to complete.
-vim.opt.wildmode = { "longest", "list", "full" } -- First longest common substring, then list all matches, then complete the first match.
+vim.opt.wildmode = { "longest:list", "full" } -- First match longest and list all matches, then complete full string.
 
 vim.opt.splitbelow = true -- Put new windows below current.
 vim.opt.splitright = true -- Put new windows right of current.
@@ -113,11 +113,37 @@ require("lazy").setup({
             options = { theme = "gruvbox" },
         },
     },
+    {
+        "nvim-telescope/telescope.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            local telescope = require("telescope")
+            local actions = require("telescope.actions")
+            local builtin = require("telescope.builtin")
+
+            vim.keymap.set("n", "<leader>tf", builtin.find_files, { desc = "Search files in working directory" })
+            vim.keymap.set("n", "<leader>tg", builtin.git_files, { desc = "Search through git ls-files" })
+            vim.keymap.set("n", "<leader>tc", builtin.live_grep, { desc = "Search file contents in working directory" })
+            vim.keymap.set("n", "<leader>tb", builtin.buffers, { desc = "Search buffers" })
+            vim.keymap.set("n", "<leader>th", builtin.help_tags, { desc = "Search help tags" })
+
+            telescope.setup({
+                defaults = {
+                    mappings = {
+                        i = {
+                            -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#mapping-esc-to-quit-in-insert-mode
+                            ["<esc>"] = actions.close,
+                        },
+                    },
+                },
+            })
+        end,
+    },
     { "williamboman/mason.nvim", opts = {} },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
-            ensure_installed = { "stylua", "shfmt", "prettierd" },
+            ensure_installed = { "stylua", "shfmt" },
         },
     },
     {
@@ -125,15 +151,8 @@ require("lazy").setup({
         config = function()
             require("formatter").setup({
                 filetype = {
-                    javascript = { require("formatter.filetypes.javascript").prettierd },
-                    javascriptreact = { require("formatter.filetypes.javascriptreact").prettierd },
-                    json = { require("formatter.filetypes.json").prettierd },
-                    jsonc = { require("formatter.filetypes.json").prettierd },
                     lua = { require("formatter.filetypes.lua").stylua },
                     sh = { require("formatter.filetypes.sh").shfmt },
-                    typescript = { require("formatter.filetypes.typescript").prettierd },
-                    typescriptreact = { require("formatter.filetypes.typescriptreact").prettierd },
-                    yaml = { require("formatter.filetypes.yaml").prettierd },
                 },
             })
 
