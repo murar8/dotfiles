@@ -111,6 +111,10 @@ if command -v minikube &>/dev/null; then
     source <(minikube completion bash)
 fi
 
+if command -v rustup &>/dev/null; then
+    source <(rustup completions bash cargo)
+fi
+
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     source /usr/share/bash-completion/bash_completion
 fi
