@@ -112,6 +112,7 @@ if command -v minikube &>/dev/null; then
 fi
 
 if command -v rustup &>/dev/null; then
+    source <(rustup completions bash)
     source <(rustup completions bash cargo)
 fi
 
