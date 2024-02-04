@@ -85,12 +85,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 require("lazy").setup({
-    { "tpope/vim-commentary" },
-    { "tpope/vim-surround" },
-    { "tpope/vim-sleuth" },
-    { "airblade/vim-rooter" },
-    { "github/copilot.vim" },
-    { "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
+    {
+        "tpope/vim-surround",
+    },
+    {
+        "tpope/vim-commentary",
+    },
     {
         "junegunn/vim-easy-align",
         keys = {
@@ -99,7 +99,26 @@ require("lazy").setup({
         },
     },
     {
+        "tpope/vim-sleuth",
+        cond = not vim.g.vscode,
+    },
+    {
+        "airblade/vim-rooter",
+        cond = not vim.g.vscode,
+    },
+    {
+        "github/copilot.vim",
+        cond = not vim.g.vscode,
+    },
+    {
+        "windwp/nvim-autopairs",
+        cond = not vim.g.vscode,
+        event = "InsertEnter",
+        opts = {},
+    },
+    {
         "ellisonleao/gruvbox.nvim",
+        cond = not vim.g.vscode,
         priority = 1000,
         opts = {},
         config = function(_, opts)
@@ -109,45 +128,26 @@ require("lazy").setup({
     },
     {
         "nvim-lualine/lualine.nvim",
+        cond = not vim.g.vscode,
         opts = {
             options = { theme = "gruvbox" },
         },
     },
     {
-        "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            local telescope = require("telescope")
-            local actions = require("telescope.actions")
-            local builtin = require("telescope.builtin")
-
-            vim.keymap.set("n", "<leader>tf", builtin.find_files, { desc = "Search files in working directory" })
-            vim.keymap.set("n", "<leader>tg", builtin.git_files, { desc = "Search through git ls-files" })
-            vim.keymap.set("n", "<leader>tc", builtin.live_grep, { desc = "Search file contents in working directory" })
-            vim.keymap.set("n", "<leader>tb", builtin.buffers, { desc = "Search buffers" })
-            vim.keymap.set("n", "<leader>th", builtin.help_tags, { desc = "Search help tags" })
-
-            telescope.setup({
-                defaults = {
-                    mappings = {
-                        i = {
-                            -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#mapping-esc-to-quit-in-insert-mode
-                            ["<esc>"] = actions.close,
-                        },
-                    },
-                },
-            })
-        end,
+        "williamboman/mason.nvim",
+        cond = not vim.g.vscode,
+        opts = {},
     },
-    { "williamboman/mason.nvim", opts = {} },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
+        cond = not vim.g.vscode,
         opts = {
             ensure_installed = { "stylua", "shfmt" },
         },
     },
     {
         "mhartington/formatter.nvim",
+        cond = not vim.g.vscode,
         config = function()
             require("formatter").setup({
                 filetype = {
