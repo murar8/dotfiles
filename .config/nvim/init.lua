@@ -99,6 +99,13 @@ require("lazy").setup({
         },
     },
     {
+        "vscode-neovim/vscode-multi-cursor.nvim",
+        dependencies = { "folke/flash.nvim" },
+        event = "VeryLazy",
+        cond = not not vim.g.vscode,
+        opts = {},
+    },
+    {
         "tpope/vim-sleuth",
         cond = not vim.g.vscode,
     },
