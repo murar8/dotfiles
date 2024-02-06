@@ -92,6 +92,20 @@ require("lazy").setup({
         "tpope/vim-commentary",
     },
     {
+        "tpope/vim-sleuth",
+    },
+    {
+        "airblade/vim-rooter",
+    },
+    {
+        "github/copilot.vim",
+    },
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        opts = {},
+    },
+    {
         "junegunn/vim-easy-align",
         keys = {
             { "ga", "<Plug>(EasyAlign)", mode = "x" }, -- Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -99,62 +113,44 @@ require("lazy").setup({
         },
     },
     {
-        "vscode-neovim/vscode-multi-cursor.nvim",
-        dependencies = { "folke/flash.nvim" },
-        event = "VeryLazy",
-        cond = not not vim.g.vscode,
-        opts = {},
-    },
-    {
-        "tpope/vim-sleuth",
-        cond = not vim.g.vscode,
-    },
-    {
-        "airblade/vim-rooter",
-        cond = not vim.g.vscode,
-    },
-    {
-        "github/copilot.vim",
-        cond = not vim.g.vscode,
-    },
-    {
-        "windwp/nvim-autopairs",
-        cond = not vim.g.vscode,
-        event = "InsertEnter",
-        opts = {},
-    },
-    {
         "ellisonleao/gruvbox.nvim",
-        cond = not vim.g.vscode,
         priority = 1000,
-        opts = {},
-        config = function(_, opts)
-            require("gruvbox").setup(opts)
+        config = function()
+            require("gruvbox").setup()
             vim.cmd.colorscheme("gruvbox")
         end,
     },
     {
         "nvim-lualine/lualine.nvim",
-        cond = not vim.g.vscode,
         opts = {
             options = { theme = "gruvbox" },
         },
     },
     {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function()
+            local configs = require("nvim-treesitter.configs")
+
+            configs.setup({
+                auto_install = true,
+                highlight = { enable = true },
+                indent = { enable = true },
+            })
+        end,
+    },
+    {
         "williamboman/mason.nvim",
-        cond = not vim.g.vscode,
         opts = {},
     },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        cond = not vim.g.vscode,
         opts = {
             ensure_installed = { "stylua", "shfmt" },
         },
     },
     {
         "mhartington/formatter.nvim",
-        cond = not vim.g.vscode,
         config = function()
             require("formatter").setup({
                 filetype = {
