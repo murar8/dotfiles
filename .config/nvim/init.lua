@@ -174,7 +174,7 @@ require("lazy").setup({
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         opts = {
-            ensure_installed = { "stylua", "shfmt" },
+            ensure_installed = { "stylua", "shfmt", "jq" },
         },
     },
     {
@@ -184,6 +184,8 @@ require("lazy").setup({
                 filetype = {
                     lua = { require("formatter.filetypes.lua").stylua },
                     sh = { require("formatter.filetypes.sh").shfmt },
+                    json = { require("formatter.filetypes.json").jq },
+                    jsonc = { require("formatter.filetypes.json").jq },
                 },
             })
 
