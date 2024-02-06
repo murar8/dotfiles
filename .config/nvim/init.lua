@@ -20,6 +20,7 @@ vim.opt.number = true -- Print line number.
 vim.opt.scrolloff = 5 -- Keep 5 lines above and below the cursor.
 vim.opt.termguicolors = true -- Use 24-bit RGB colors in the TUI.
 vim.opt.title = true -- Set the title of window to the name of the file being edited.
+vim.opt.signcolumn = "yes" -- Always show the sign column.
 
 vim.opt.cursorline = true -- Highlight the current line.
 vim.opt.cursorlineopt = "number" -- Highlight the current line number.
@@ -53,7 +54,7 @@ vim.g.mapleader = " " -- Set <leader> as the leader key.
 -- https://neovim.io/doc/user/lua.html#vim.highlight
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-    group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+    group = vim.api.nvim_create_augroup("HighlightYank", { clear = true }),
     callback = function()
         vim.highlight.on_yank({ on_visual = false, timeout = 400 })
     end,
@@ -63,7 +64,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- https://github.com/creativenull/dotfiles/blob/9ae60de4f926436d5682406a5b801a3768bbc765/config/nvim/init.lua#L70-L86
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-    group = vim.api.nvim_create_augroup("back_to_last_position", { clear = true }),
+    group = vim.api.nvim_create_augroup("RestorePosition", { clear = true }),
     callback = function(args)
         local valid_line = vim.fn.line([['"]]) >= 1 and vim.fn.line([['"]]) < vim.fn.line("$")
         local not_commit = vim.b[args.buf].filetype ~= "commit"
@@ -102,8 +103,8 @@ require("lazy").setup({
     },
     {
         "windwp/nvim-autopairs",
-        event = "InsertEnter",
         opts = {},
+        event = "InsertEnter",
     },
     {
         "junegunn/vim-easy-align",
@@ -131,7 +132,7 @@ require("lazy").setup({
         build = ":TSUpdate",
         config = function()
             local configs = require("nvim-treesitter.configs")
-
+            ---@diagnostic disable-next-line: missing-fields
             configs.setup({
                 auto_install = true,
                 highlight = { enable = true },
@@ -140,8 +141,35 @@ require("lazy").setup({
         end,
     },
     {
+        "neovim/nvim-lspconfig",
+        config = function()
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("LspConfig", {}),
+                callback = function(ev)
+                    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc" -- Enable completion triggered by <c-x><c-o>
+                end,
+            })
+        end,
+    },
+    {
         "williamboman/mason.nvim",
         opts = {},
+    },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/neodev.nvim" },
+        config = function()
+            require("mason-lspconfig").setup()
+            require("mason-lspconfig").setup_handlers({
+                function(server_name)
+                    require("lspconfig")[server_name].setup()
+                end,
+                ["lua_ls"] = function()
+                    require("neodev").setup()
+                    require("lspconfig").lua_ls.setup()
+                end,
+            })
+        end,
     },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
