@@ -20,7 +20,6 @@ vim.opt.number = true -- Print line number.
 vim.opt.scrolloff = 5 -- Keep 5 lines above and below the cursor.
 vim.opt.termguicolors = true -- Use 24-bit RGB colors in the TUI.
 vim.opt.title = true -- Set the title of window to the name of the file being edited.
-vim.opt.signcolumn = "yes" -- Always show the sign column.
 
 vim.opt.cursorline = true -- Highlight the current line.
 vim.opt.cursorlineopt = "number" -- Highlight the current line number.
@@ -86,26 +85,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 require("lazy").setup({
-    {
-        "tpope/vim-surround",
-    },
-    {
-        "tpope/vim-commentary",
-    },
-    {
-        "tpope/vim-sleuth",
-    },
-    {
-        "airblade/vim-rooter",
-    },
-    {
-        "github/copilot.vim",
-    },
-    {
-        "windwp/nvim-autopairs",
-        opts = {},
-        event = "InsertEnter",
-    },
+    "tpope/vim-surround",
+    "tpope/vim-commentary",
+    "tpope/vim-sleuth",
+    "github/copilot.vim",
+    { "windwp/nvim-autopairs", opts = {}, event = "InsertEnter" },
     {
         "junegunn/vim-easy-align",
         keys = {
@@ -121,93 +105,30 @@ require("lazy").setup({
             vim.cmd.colorscheme("gruvbox")
         end,
     },
-    {
-        "nvim-lualine/lualine.nvim",
-        opts = {
-            options = { theme = "gruvbox" },
-        },
-    },
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            local actions = require("telescope.actions")
-            require("telescope").setup({
-                defaults = {
-                    mappings = {
-                        -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#mapping-esc-to-quit-in-insert-mode
-                        i = { ["<esc>"] = actions.close },
-                    },
-                },
-            })
-
-            local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-            vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-            vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-            vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-        end,
-    },
+    { "nvim-lualine/lualine.nvim", opts = { options = { theme = "gruvbox" } } },
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function()
             local configs = require("nvim-treesitter.configs")
             ---@diagnostic disable-next-line: missing-fields
-            configs.setup({
-                auto_install = true,
-                highlight = { enable = true },
-                indent = { enable = true },
-            })
+            configs.setup({ auto_install = true, highlight = { enable = true }, indent = { enable = true } })
         end,
     },
-    {
-        "neovim/nvim-lspconfig",
-        config = function()
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("LspConfig", {}),
-                callback = function(ev)
-                    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc" -- Enable completion triggered by <c-x><c-o>
-                end,
-            })
-        end,
-    },
-    {
-        "williamboman/mason.nvim",
-        opts = {},
-    },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/neodev.nvim" },
-        config = function()
-            require("mason-lspconfig").setup()
-            require("mason-lspconfig").setup_handlers({
-                function(server_name)
-                    require("lspconfig")[server_name].setup()
-                end,
-                ["lua_ls"] = function()
-                    require("neodev").setup()
-                    require("lspconfig").lua_ls.setup()
-                end,
-            })
-        end,
-    },
+    { "williamboman/mason.nvim", opts = {} },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        opts = {
-            ensure_installed = { "stylua", "shfmt", "jq" },
-        },
+        dependencies = { "williamboman/mason.nvim" },
+        opts = { ensure_installed = { "stylua", "shfmt", "jq" } },
     },
     {
         "mhartington/formatter.nvim",
         config = function()
+            local stylua = require("formatter.filetypes.lua").stylua
+            local shfmt = require("formatter.filetypes.sh").shfmt
+            local jq = require("formatter.filetypes.json").jq
             require("formatter").setup({
-                filetype = {
-                    lua = { require("formatter.filetypes.lua").stylua },
-                    sh = { require("formatter.filetypes.sh").shfmt },
-                    json = { require("formatter.filetypes.json").jq },
-                    jsonc = { require("formatter.filetypes.json").jq },
-                },
+                filetype = { lua = { stylua }, sh = { shfmt }, json = { jq }, jsonc = { jq } },
             })
 
             vim.keymap.set("n", "<leader>fb", "<cmd>Format<CR>", { desc = "Format current buffer" })
