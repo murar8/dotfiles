@@ -116,6 +116,14 @@ if command -v rustup &>/dev/null; then
     source <(rustup completions bash cargo)
 fi
 
+if command -v scala-cli &>/dev/null; then
+    _scala-cli_completions() {
+        local IFS=$'\n'
+        eval "$(scala-cli complete bash-v1 "$((COMP_CWORD + 1))" "${COMP_WORDS[@]}")"
+    }
+    complete -F _scala-cli_completions scala-cli
+fi
+
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     source /usr/share/bash-completion/bash_completion
 fi
