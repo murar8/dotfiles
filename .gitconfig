@@ -3,3 +3,5 @@
 	name = Lorenzo Murarotto
 [init]
 	defaultBranch = main
+[rerere]
+	enabled = true
