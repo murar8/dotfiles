@@ -4,16 +4,12 @@
       "class": "Sync2"
     },
     {
-      "class": "Floating Window Exceptions",
-      "title": "Floating Window Exceptions"
+      "class": "jetbrains-idea",
+      "title": "splash"
     },
     {
       "class": "Lens",
       "title": "Loading"
-    },
-    {
-      "class": "jetbrains-idea",
-      "title": "splash"
     }
   ],
   "skiptaskbarhidden": [],
