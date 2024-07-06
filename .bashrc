@@ -37,37 +37,22 @@ export HISTCONTROL=erasedups:ignoreboth
 export HISTFILESIZE=1000000 # Expand the on disk history size.
 export HISTSIZE=1000000     # Expand the in memory history size.
 
+### Extract script
+
+EXTRACT_SCRIPT_PATH="$HOME"/.local/share/com.github.murar8.dotfiles
+if [ ! -f "$EXTRACT_SCRIPT_PATH"/extract.sh ] && command -v curl &>/dev/null; then
+    echo "Installing xvoland/Extract..."
+    mkdir -p "$EXTRACT_SCRIPT_PATH"
+    curl -sL https://raw.githubusercontent.com/xvoland/Extract/master/extract.sh -o "$EXTRACT_SCRIPT_PATH"/extract.sh
+fi
+if [ -f "$EXTRACT_SCRIPT_PATH"/extract.sh ]; then
+    . "$EXTRACT_SCRIPT_PATH"/extract.sh
+fi
+
 ### Aliases
 
 la() {
     ls -Alhg --color=auto "$@"
-}
-
-extract() {
-    if [ "$#" -ne 1 ]; then
-        echo "Expected one argument."
-        return 1
-    fi
-
-    if [ ! -f "$1" ]; then
-        echo "'$1' is not a valid file."
-        return 1
-    fi
-
-    case $1 in
-    *.tar.bz2) tar xjf "$1" ;;
-    *.tar.gz) tar xzf "$1" ;;
-    *.bz2) bunzip2 "$1" ;;
-    *.rar) rar x "$1" ;;
-    *.gz) gunzip "$1" ;;
-    *.tar) tar xf "$1" ;;
-    *.tbz2) tar xjf "$1" ;;
-    *.tgz) tar xzf "$1" ;;
-    *.zip) unzip "$1" ;;
-    *.Z) uncompress "$1" ;;
-    *.7z) 7z x "$1" ;;
-    *) echo "Don't know how to extract '$1'." ;;
-    esac
 }
 
 dot() {
@@ -197,7 +182,7 @@ prompt() {
     PS1+=" ${clear}"
 }
 
-PROMPT_COMMAND=prompt
+PROMPT_COMMAND=('prompt')
 PROMPT_DIRTRIM=1 # Trim the working directory to the last directory name.
 
 ### Environment
