@@ -27,8 +27,7 @@ normal = { family = "Fira Code", style = "Regular" }
 size = 12.0
 
 [mouse]
-# Broken
-# hide_when_typing = true
+hide_when_typing = true
 
 [selection]
 save_to_clipboard = true
