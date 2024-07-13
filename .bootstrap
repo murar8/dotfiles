@@ -26,10 +26,12 @@ fi
 USE_SSH=true
 if ! command -v ssh >/dev/null; then
     echo "Warning: could not locate ssh in your path, falling back to HTTPS."
+    echo
     USE_SSH=false
 fi
 if ! ssh-add -l >/dev/null 2>&1; then
     echo "Warning: could not find any SSH keys in your ssh-agent, falling back to HTTPS."
+    echo
     USE_SSH=false
 fi
 
@@ -41,9 +43,11 @@ dot() {
 if $USE_SSH; then
     # This is to avoid ssh prompting for confirmation when cloning.
     if [ ! -f "$HOME"/.ssh/known_hosts ]; then
+        echo "Creating $HOME/.ssh/known_hosts..."
         mkdir -p "$HOME"/.ssh
         touch "$HOME"/.ssh/known_hosts
         chmod 600 "$HOME"/.ssh/known_hosts
+        echo
     fi
     if ! ssh-keygen -F github.com >/dev/null; then
         echo "Adding github.com to known hosts..."
