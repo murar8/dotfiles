@@ -4,7 +4,9 @@ set errexit  # Exit on error.
 set nounset  # Error on undeclared variables.
 set pipefail # Error if any command in a pipe fails.
 
-REPO_URL=git@github.com:murar8/dotfiles.git
+REPO_URL_SSH=git@github.com:murar8/dotfiles.git
+REPO_URL_HTTPS=https://github.com/murar8/dotfiles.git
+
 REPO_DIR=$HOME/.dotfiles
 SCRIPT_DIR=$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 
@@ -20,14 +22,15 @@ if ! command -v git >/dev/null; then
     echo "Error: could not locate git in your path."
     exit 1
 fi
-if ! command -v ssh >/dev/null; then
-    echo "Error: could not locate ssh in your path."
-    exit 1
-fi
 
+USE_SSH=true
+if ! command -v ssh >/dev/null; then
+    echo "Warning: could not locate ssh in your path, falling back to HTTPS."
+    USE_SSH=false
+fi
 if ! ssh-add -l >/dev/null 2>&1; then
-    echo "Error: could not find any identities in your ssh-agent."
-    exit 1
+    echo "Warning: could not find any SSH keys in your ssh-agent, falling back to HTTPS."
+    USE_SSH=false
 fi
 
 dot() {
@@ -35,15 +38,24 @@ dot() {
     git --git-dir="$REPO_DIR" -C "$HOME" --work-tree="$HOME" $@
 }
 
-# This is to avoid ssh prompting for confirmation when cloning.
-if [ ! -f "$HOME"/.ssh/known_hosts ]; then
-    mkdir -p "$HOME"/.ssh
-    touch "$HOME"/.ssh/known_hosts
+if $USE_SSH; then
+    # This is to avoid ssh prompting for confirmation when cloning.
+    if [ ! -f "$HOME"/.ssh/known_hosts ]; then
+        mkdir -p "$HOME"/.ssh
+        touch "$HOME"/.ssh/known_hosts
+        chmod 600 "$HOME"/.ssh/known_hosts
+    fi
+    if ! ssh-keygen -F github.com >/dev/null; then
+        echo "Adding github.com to known hosts..."
+        ssh-keyscan -t rsa github.com >>"$HOME"/.ssh/known_hosts
+        echo
+    fi
 fi
-if ! ssh-keygen -F github.com >/dev/null; then
-    echo "Adding github.com to known hosts..."
-    ssh-keyscan -t rsa github.com >>"$HOME"/.ssh/known_hosts
-    echo
+
+if $USE_SSH; then
+    REPO_URL=$REPO_URL_SSH
+else
+    REPO_URL=$REPO_URL_HTTPS
 fi
 
 # Most providers (e.g. GitHub) will not allow you to clone into a bare
