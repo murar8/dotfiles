@@ -45,6 +45,14 @@ vim.opt.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for.
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
 
+-- Neovide
+
+vim.opt.guifont = "Fira Code:h12" -- Set the font for Neovide.
+vim.g.neovide_scale_factor = 1.25
+vim.g.neovide_cursor_vfx_mode = "ripple"
+vim.g.neovide_cursor_animation_length = 0.01
+vim.g.neovide_cursor_smooth_blink = true
+
 -- Keybindings
 
 vim.g.mapleader = " " -- Set <leader> as the leader key.
