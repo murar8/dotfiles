@@ -10,9 +10,6 @@ REPO_URL_HTTPS=https://github.com/murar8/dotfiles.git
 REPO_DIR=$HOME/.dotfiles
 SCRIPT_DIR=$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)
 
-echo "Cloning $REPO_URL into $REPO_DIR..."
-echo
-
 if [ -d "$REPO_DIR" ]; then
     echo "$REPO_DIR already exists, exiting."
     exit 0
@@ -94,5 +91,23 @@ dot pull origin main
 echo
 dot branch --set-upstream-to=origin/main main
 echo
+
+if [ "$REMOTE_CONTAINERS" = true ]; then
+    if ! command -v jq >/dev/null; then
+        echo "Warning: jq not found in your path, skipping neovim installation."
+    elif command -v nvim >/dev/null; then
+        echo "Neovim is already installed, skipping."
+    elif [ "$(arch)" != "x86_64" ]; then
+        echo "Running in a remote container, but not on x86_64, skipping neovim installation."
+    else
+        echo "Running in a remote container, installing neovim..."
+        echo
+        curl -fsSL https://api.github.com/repos/neovim/neovim/releases/latest |
+            jq -r '.assets[] | select(.name | endswith("linux64.tar.gz")) | .browser_download_url' |
+            xargs curl -fsSL |
+            sudo tar xzf - -C /usr/local --strip-components=1
+        echo
+    fi
+fi
 
 echo "All done!"
