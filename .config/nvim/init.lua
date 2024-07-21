@@ -1,13 +1,13 @@
 -- Behavior
 
-vim.opt.clipboard = "unnamed,unnamedplus" -- Use system clipboard.
-vim.opt.confirm = true -- Prompt to save changes before exiting.
-vim.opt.matchpairs:append({ "<:>" }) -- Add angle brackets to matchpairs.
-vim.opt.timeoutlen = 300 -- Time in milliseconds to wait for a mapped sequence to complete.
+vim.opt.clipboard = "unnamed,unnamedplus"     -- Use system clipboard.
+vim.opt.confirm = true                        -- Prompt to save changes before exiting.
+vim.opt.matchpairs:append({ "<:>" })          -- Add angle brackets to matchpairs.
+vim.opt.timeoutlen = 300                      -- Time in milliseconds to wait for a mapped sequence to complete.
 vim.opt.wildmode = { "longest:list", "full" } -- First match longest and list all matches, then complete full string.
 
-vim.opt.splitbelow = true -- Put new windows below current.
-vim.opt.splitright = true -- Put new windows right of current.
+vim.opt.splitbelow = true                     -- Put new windows below current.
+vim.opt.splitright = true                     -- Put new windows right of current.
 
 -- Wrapping
 
@@ -16,29 +16,29 @@ vim.opt.showbreak = "↪" -- String to put at the start of lines that have been 
 
 -- Appearance
 
-vim.opt.number = true -- Print line number.
-vim.opt.scrolloff = 5 -- Keep 5 lines above and below the cursor.
-vim.opt.termguicolors = true -- Use 24-bit RGB colors in the TUI.
-vim.opt.title = true -- Set the title of window to the name of the file being edited.
+vim.opt.number = true            -- Print line number.
+vim.opt.scrolloff = 5            -- Keep 5 lines above and below the cursor.
+vim.opt.termguicolors = true     -- Use 24-bit RGB colors in the TUI.
+vim.opt.title = true             -- Set the title of window to the name of the file being edited.
 
-vim.opt.cursorline = true -- Highlight the current line.
+vim.opt.cursorline = true        -- Highlight the current line.
 vim.opt.cursorlineopt = "number" -- Highlight the current line number.
 
 -- Search
 
-vim.opt.gdefault = true -- Use global substitution by default.
+vim.opt.gdefault = true   -- Use global substitution by default.
 vim.opt.ignorecase = true -- Ignore case when searching.
-vim.opt.smartcase = true -- Override ignorecase if search pattern contains uppercase characters.
+vim.opt.smartcase = true  -- Override ignorecase if search pattern contains uppercase characters.
 
 -- Indentation
 
-vim.opt.expandtab = true -- Use spaces instead of tabs.
-vim.opt.shiftround = true -- Round indent to multiple of shiftwidth.
+vim.opt.expandtab = true   -- Use spaces instead of tabs.
+vim.opt.shiftround = true  -- Round indent to multiple of shiftwidth.
 vim.opt.smartindent = true -- Insert indents automatically.
 
-vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent.
-vim.opt.softtabstop = 4 -- Number of spaces that a <Tab> counts for while performing editing operations.
-vim.opt.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for.
+vim.opt.shiftwidth = 4     -- Number of spaces to use for each step of (auto)indent.
+vim.opt.softtabstop = 4    -- Number of spaces that a <Tab> counts for while performing editing operations.
+vim.opt.tabstop = 4        -- Number of spaces that a <Tab> in the file counts for.
 
 -- Undo
 
@@ -54,7 +54,7 @@ vim.g.neovide_cursor_smooth_blink = true
 
 -- Keybindings
 
-vim.g.mapleader = " " -- Set <leader> as the leader key.
+vim.g.mapleader = " " -- Set <space> as the leader key.
 
 -- Highlight yanked text
 -- https://neovim.io/doc/user/lua.html#vim.highlight
@@ -94,5 +94,9 @@ end
 require("lazy").setup({
     { import = "user.common" },
     { import = "user.terminal", cond = not vim.g.vscode },
-    { import = "user.code", cond = not not vim.g.vscode },
+    { import = "user.lsp",      cond = not vim.g.vscode },
+    { import = "user.ui",       cond = not vim.g.vscode },
+    { import = "user.code",     cond = not not vim.g.vscode },
+}, {
+    change_detection = { notify = false }
 })
