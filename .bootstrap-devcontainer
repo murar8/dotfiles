@@ -103,6 +103,12 @@ if [ "$REMOTE_CONTAINERS" = "true" ]; then
             sudo tar xzf - -C /usr/local --strip-components=1
         echo
     fi
+
+    if command -v nvim >/dev/null; then
+        echo "Installing neovim plugins..."
+        nvim --headless "+Lazy! install" +qa
+        echo
+    fi
 fi
 
 echo "All done! Restart your shell to apply changes."
