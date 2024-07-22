@@ -79,36 +79,4 @@ dot config status.showUntrackedFiles no
 dot config remote.origin.url "$REPO_URL"
 dot config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
 
-if [ "$REMOTE_CONTAINERS" = "true" ]; then
-    if ! command -v jq >/dev/null; then
-        echo "Installing jq..."
-        curl -fsSL 'https://i.jpillora.com/jqlang/jq!' | bash
-        echo
-    fi
-
-    if command -v nvim >/dev/null; then
-        echo "Neovim is already installed, skipping installation."
-        echo
-    elif [ "$(arch)" != "x86_64" ]; then
-        echo "Warning: unsupported platform $(arch), skipping neovim installation."
-        echo
-    elif [ "$(uname -s)" != "Linux" ]; then
-        echo "Warning: unsupported platform $(uname -s), skipping neovim installation."
-        echo
-    else
-        echo "Installing neovim..."
-        curl -fsSL https://api.github.com/repos/neovim/neovim/releases/latest |
-            jq -r '.assets[] | select(.name | endswith("nvim-linux64.tar.gz")) | .browser_download_url' |
-            xargs curl -fsSL |
-            sudo tar xzf - -C /usr/local --strip-components=1
-        echo
-    fi
-
-    if command -v nvim >/dev/null; then
-        echo "Installing neovim plugins..."
-        nvim --headless "+Lazy! install" +qa
-        echo
-    fi
-fi
-
 echo "All done! Restart your shell to apply changes."
