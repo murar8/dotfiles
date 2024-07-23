@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+set errexit  # Exit on error.
+set nounset  # Error on undeclared variables.
+set pipefail # Error if any command in a pipe fails.
+
+. "$(dirname "$0")/.bootstrap"
+echo
+
+if ! command -v jq >/dev/null; then
+    echo "Installing jq..."
+    curl -fsSL 'https://i.jpillora.com/jqlang/jq!' | bash
+    echo
+fi
+
+if command -v nvim >/dev/null; then
+    echo "Neovim is already installed, skipping."
+elif [ "$(arch)" != "x86_64" ]; then
+    echo "Warning: Neovim is not available for $(arch)."
+elif [ "$(uname -s)" != "Linux" ]; then
+    echo "Warning: Neovim is not available for $(uname -s)."
+else
+    echo "Installing Neovim..."
+    echo
+    curl -fsSL https://api.github.com/repos/neovim/neovim/releases/latest |
+        jq -r '.assets[] | select(.name | endswith("linux64.tar.gz")) | .browser_download_url' |
+        xargs curl -fsSL |
+        sudo tar xzf - -C /usr/local --strip-components=1
+    echo
+fi
