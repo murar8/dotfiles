@@ -47,7 +47,7 @@ vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
 
 -- Neovide
 
-vim.opt.guifont = "Fira Code:h14" -- Set the font for Neovide.
+vim.opt.guifont = "Fira Code:h12" -- Set the font for Neovide.
 vim.g.neovide_cursor_vfx_mode = "ripple"
 vim.g.neovide_cursor_animation_length = 0.01
 vim.g.neovide_cursor_smooth_blink = true
@@ -91,12 +91,6 @@ if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
 end
 
-require("lazy").setup({
-    { import = "user.common" },
-    { import = "user.terminal", cond = not vim.g.vscode },
-    { import = "user.lsp",      cond = not vim.g.vscode },
-    { import = "user.ui",       cond = not vim.g.vscode },
-    { import = "user.code",     cond = not not vim.g.vscode },
-}, {
+require("lazy").setup("plugins", {
     change_detection = { notify = false }
 })
