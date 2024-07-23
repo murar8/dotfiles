@@ -38,6 +38,8 @@ return {
                     end,
                 },
                 mapping = cmp.mapping.preset.insert({
+                    ['<Tab>'] = cmp_action.luasnip_supertab(),
+                    ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
                     ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
