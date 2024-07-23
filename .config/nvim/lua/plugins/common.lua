@@ -1,6 +1,9 @@
 return {
     { "tpope/vim-surround" },
     { "tpope/vim-commentary" },
+    { "tpope/vim-sleuth" },
+    { "windwp/nvim-autopairs",   opts = {}, event = "InsertEnter" },
+    { "ahmedkhalf/project.nvim", opts = {}, main = "project_nvim" },
     {
         "junegunn/vim-easy-align",
         keys = {
