@@ -194,3 +194,11 @@ PROMPT_DIRTRIM=1 # Trim the working directory to the last directory name.
 if command -v direnv &>/dev/null; then
     eval "$(direnv hook bash)"
 fi
+
+# NVM
+
+if [ -f "$HOME"/.nvm/nvm.sh ] && [ -f "$HOME"/.nvm/bash_completion ]; then
+    export NVM_DIR="$HOME/.nvm"
+    . "$NVM_DIR/nvm.sh"
+    . "$NVM_DIR/bash_completion"
+fi
