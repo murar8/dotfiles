@@ -1,0 +1,6 @@
+fork = true
+frame = "none"
+
+[font]
+normal = "Fira Code"
+size = 12.0
