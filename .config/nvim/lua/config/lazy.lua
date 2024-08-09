@@ -1,8 +1,8 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 
--- https://github.com/folke/lazy.nvim#-installation
-if not vim.fn.isdirectory(lazypath) then
+-- https://lazy.folke.io/installation
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local repo = "https://github.com/folke/lazy.nvim.git"
 	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
 	if vim.v.shell_error ~= 0 then
@@ -11,6 +11,8 @@ if not vim.fn.isdirectory(lazypath) then
 			{ out, "WarningMsg" },
 			{ "\nPress any key to exit..." },
 		}, true, {})
+    vim.fn.getchar()
+    os.exit(1)
 	end
 end
 
