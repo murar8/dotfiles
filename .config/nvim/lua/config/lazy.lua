@@ -11,8 +11,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 			{ out, "WarningMsg" },
 			{ "\nPress any key to exit..." },
 		}, true, {})
-    vim.fn.getchar()
-    os.exit(1)
+		vim.fn.getchar()
+		os.exit(1)
 	end
 end
 
@@ -24,14 +24,39 @@ require("lazy").setup({
 	},
 	change_detection = { notify = false },
 	checker = { enabled = true },
-	defaults = {
-		version = false, -- always use the latest git commit
-	},
+	defaults = { version = false }, -- always use the latest git commit
 	performance = {
+		-- See https://github.com/NvChad/starter/blob/935ea570afe449fc86d9c88dd47eacb5c345a68e/lua/configs/lazy.lua
 		rtp = {
-			-- See http://www.lazyvim.org/configuration/lazy.nvim
-			-- Not sure if this is necessary.
-			disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin" },
+			disabled_plugins = {
+				"2html_plugin",
+				"tohtml",
+				"getscript",
+				"getscriptPlugin",
+				"gzip",
+				"logipat",
+				"netrw",
+				"netrwPlugin",
+				"netrwSettings",
+				"netrwFileHandlers",
+				"matchit",
+				"tar",
+				"tarPlugin",
+				"rrhelper",
+				"spellfile_plugin",
+				"vimball",
+				"vimballPlugin",
+				"zip",
+				"zipPlugin",
+				"tutor",
+				"rplugin",
+				"syntax",
+				"synmenu",
+				"optwin",
+				"compiler",
+				"bugreport",
+				"ftplugin",
+			},
 		},
 	},
 })
