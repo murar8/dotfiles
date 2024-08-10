@@ -202,3 +202,9 @@ if [ -f "$HOME"/.nvm/nvm.sh ] && [ -f "$HOME"/.nvm/bash_completion ]; then
     . "$NVM_DIR/nvm.sh"
     . "$NVM_DIR/bash_completion"
 fi
+
+# rustup
+
+if [ -f "$HOME"/.cargo/env ]; then
+    . "$HOME"/.cargo/env
+fi
