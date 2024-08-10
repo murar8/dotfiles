@@ -6,7 +6,7 @@ return {
 		cmp.setup({
 			---@diagnostic disable-next-line: missing-fields
 			formatting = {
-				format = lspkind.cmp_format({ mode = "symbol" }),
+				format = lspkind.cmp_format({}),
 			},
 		})
 	end,

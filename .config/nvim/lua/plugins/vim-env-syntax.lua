@@ -1,7 +1,10 @@
 return {
 	"overleaf/vim-env-syntax",
+	lazy = false,
 	init = function()
-		vim.filetype.add({ pattern = { [".env.*"] = "env" } })
-		vim.filetype.add({ pattern = { ["*.env"] = "env" } })
+		vim.filetype.add({
+			extension = { env = "env" },
+			pattern = { [".env.*"] = "env" },
+		})
 	end,
 }
