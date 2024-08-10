@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# vim: ft=bash
+#
+# Keep the external monitor brightness in sync with the DBUS brightness.
+#
+# Author: Lorenzo Murarotto <lnzmrr@gmail.com>
+# License: MIT
+# Dependencies: ddcutil
+
+set -o errexit  # Exit on error.
+set -o nounset  # Trigger error when expanding unset variables.
+set -o pipefail # Use last non-zero exit code in a pipeline.
+
+DBUS_PATH="/org/gnome/SettingsDaemon/Power"
+DBUS_TYPE="signal"
+DBUS_MEMBER="PropertiesChanged"
+DBUS_INTERFACE="org.freedesktop.DBus.Properties"
+DBUS_GET_METHOD="org.freedesktop.DBus.Properties.Get"
+DBUS_ARG0="org.gnome.SettingsDaemon.Power.Screen"
+
+# Wait time in seconds before propagating the brightness change.
+# On my system the ddcutil command takes a while to execute, so if the
+# brightness changes in quick succession, it will start lagging behind.
+WAIT_TIME_SECONDS=0.2
+
+function update_brightness() {
+    echo "Setting external monitor brightness to $1"
+    until ddcutil setvcp 10 "$1"; do
+        echo "Failed to set brightness, retrying in 1 second" >&2
+        sleep 1
+    done
+}
+
+function schedule_brightness_update() {
+    sleep $WAIT_TIME_SECONDS
+    update_brightness "$1"
+}
+
+update_brightness "$(
+    dbus-send \
+        --session \
+        --dest=org.gnome.SettingsDaemon.Power \
+        --type=method_call \
+        --print-reply \
+        $DBUS_PATH \
+        $DBUS_GET_METHOD \
+        string:"$DBUS_ARG0" \
+        string:"Brightness" |
+        grep -oP '(?<=variant       int32 )\d+'
+)"
+
+dbus-monitor --monitor "type=${DBUS_TYPE},interface=${DBUS_INTERFACE},member=${DBUS_MEMBER},arg0=${DBUS_ARG0}" |
+    while read -r line; do
+        if [[ "$line" =~ variant[[:space:]]+int32[[:space:]]+([[:digit:]]+) ]]; then
+            if [[ -n "${last_pid:-}" ]]; then kill "$last_pid" 2>/dev/null || true; fi
+            schedule_brightness_update "${BASH_REMATCH[1]}" &
+            last_pid=$!
+        fi
+    done

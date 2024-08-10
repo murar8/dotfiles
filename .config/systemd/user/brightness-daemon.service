@@ -1,0 +1,20 @@
+# vim: ft=systemd.unit
+#
+# Systemd service file for the brightness-daemon script.
+#
+# Author: Lorenzo Murarotto <lnzmrr@gmail.com>
+# License: MIT
+
+[Unit]
+Description=Daemon to sync the brightness level of external monitors.
+After=dbus.socket
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/brightness-daemon 
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+
