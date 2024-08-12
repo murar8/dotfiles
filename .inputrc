@@ -4,6 +4,8 @@ $include /etc/inputrc
 
 set echo-control-characters off
 
+set keyseq-timeout 0
+
 set editing-mode vi
 set show-mode-in-prompt on
 # Block cursor.
