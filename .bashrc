@@ -130,12 +130,6 @@ if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
     source /usr/share/doc/fzf/examples/key-bindings.bash
 fi
 
-bind "set show-all-if-ambiguous on"    # Show auto-completion list without double tab.
-bind "set completion-ignore-case on"   # Ignore case on completion.
-bind "set completion-map-case on"      # Treat hyphens and underscores as equivalent.
-bind '"\e[A": history-search-backward' # Get completions from history (backward).
-bind '"\e[B": history-search-forward'  # Get completions from history (forward).
-
 ### Editor
 
 if command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
