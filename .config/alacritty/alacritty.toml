@@ -39,15 +39,8 @@ save_to_clipboard = true
 dynamic_padding = true
 decorations = "none"
 
-[window.padding]
-x = 4
-y = 4
-
 [scrolling]
 history = 100000
-
-[cursor.vi_mode_style]
-shape = "Underline"
 
 # See https://wiki.archlinux.org/title/Alacritty#Spawn_new_instance_in_same_directory
 [keyboard]
