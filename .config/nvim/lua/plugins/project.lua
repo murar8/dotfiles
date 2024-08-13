@@ -2,8 +2,7 @@ return {
 	"ahmedkhalf/project.nvim",
 	optional = true,
 	opts = {
-		ignore_lsp = { "copilot" },
-		manual_mode = false,
+		detection_methods = { "pattern" },
 		show_hidden = true,
 	},
 }
