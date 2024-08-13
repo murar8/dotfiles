@@ -24,7 +24,6 @@ require("lazy").setup({
 	},
 	change_detection = { notify = false },
 	checker = { enabled = true },
-	defaults = { version = false }, -- always use the latest git commit
 	performance = {
 		-- See https://github.com/NvChad/starter/blob/935ea570afe449fc86d9c88dd47eacb5c345a68e/lua/configs/lazy.lua
 		rtp = {
