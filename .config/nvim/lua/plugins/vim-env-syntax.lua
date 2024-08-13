@@ -1,10 +1,8 @@
+vim.cmd([[
+	autocmd BufRead,BufNewFile *.env 	setfiletype env
+	autocmd BufRead,BufNewFile .env.* setfiletype env
+]])
+
 return {
 	"overleaf/vim-env-syntax",
-	lazy = false,
-	init = function()
-		vim.filetype.add({
-			extension = { env = "env" },
-			pattern = { [".env.*"] = "env" },
-		})
-	end,
 }
