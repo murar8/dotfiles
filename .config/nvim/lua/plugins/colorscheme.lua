@@ -1,11 +1,11 @@
 return {
 	{ "folke/tokyonight.nvim", enabled = false },
 	{ "catppuccin/nvim", enabled = false },
-	{ "sainnhe/gruvbox-material" },
+	{ "ellisonleao/gruvbox.nvim" },
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "gruvbox-material",
+			colorscheme = "gruvbox",
 		},
 	},
 }
