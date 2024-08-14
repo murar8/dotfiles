@@ -5,4 +5,5 @@ vim.cmd([[
 
 return {
 	"overleaf/vim-env-syntax",
+	ft = "env",
 }
