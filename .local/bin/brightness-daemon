@@ -25,10 +25,7 @@ WAIT_TIME_SECONDS=0.2
 
 function update_brightness() {
     echo "Setting external monitor brightness to $1"
-    until ddcutil setvcp 10 "$1"; do
-        echo "Failed to set brightness, retrying in 1 second" >&2
-        sleep 1
-    done
+    ddcutil setvcp 10 "$1"
 }
 
 function schedule_brightness_update() {
