@@ -1,6 +1,7 @@
 -- See https://github.com/iamcco/markdown-preview.nvim/issues/690#issuecomment-2254280534
 return {
 	"iamcco/markdown-preview.nvim",
+	optional = true,
 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 	ft = { "markdown" },
 	build = function(plugin)
