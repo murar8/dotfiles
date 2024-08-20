@@ -1,5 +1,6 @@
 return {
 	"nvim-cmp",
+	optional = true,
 	dependencies = {
 		{
 			"onsails/lspkind.nvim",
