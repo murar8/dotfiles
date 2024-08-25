@@ -46,7 +46,7 @@ save_to_clipboard = true
 
 [window]
 dynamic_padding = true
-decorations = "none"
+decorations = "full"
 
 [scrolling]
 history = 100000
