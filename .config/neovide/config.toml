@@ -1,5 +1,6 @@
 fork = true
 frame = "none"
+maximized = true
 
 [font]
 normal = "Fira Code"
