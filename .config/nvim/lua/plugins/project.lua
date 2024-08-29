@@ -1,4 +1,6 @@
-vim.g.root_spec = { "cwd" } -- Handled by project.nvim
+-- Handled by project.nvim
+-- See https://github.com/LazyVim/LazyVim/issues/4330
+vim.g.root_spec = { "cwd" }
 
 return {
 	"ahmedkhalf/project.nvim",
