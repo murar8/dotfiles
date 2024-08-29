@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd({ "BufNew", "VimResized" }, {
 	pattern = { "*" },
 	callback = function()
-		local scroll = math.floor(vim.fn.winheight(0) / 4)
+		local scroll = math.floor(vim.fn.winheight(0) / 3)
 		vim.api.nvim_set_option_value("scroll", scroll, { scope = "local" })
 	end,
 })
