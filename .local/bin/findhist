@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -o errexit  # exit on error
+set -o pipefail # exit on pipe error
+set -o nounset  # exit on unset variable
+
+JQ_EXPRESSION='.[].content | select(type=="string")'
+PREVIEW_CMD='echo {} | jq -r'
+PICKER_CMD="clipboard history | jq -c ${JQ_EXPRESSION@Q} | fzf --preview=${PREVIEW_CMD@Q} | jq -r"
+COPY_CMD="clipboard copy \"\$($PICKER_CMD)\""
+
+if [ -t 0 ]; then
+  eval "$COPY_CMD"
+else
+  alacritty --class findhist -e bash -c "$COPY_CMD"
+fi
