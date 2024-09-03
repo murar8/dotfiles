@@ -121,13 +121,14 @@ fi
 if [ -f /etc/bash_completion.d/fzf ]; then
     source /etc/bash_completion.d/fzf
 fi
-
 if [ -f /usr/share/fzf/shell/key-bindings.bash ]; then
     source /usr/share/fzf/shell/key-bindings.bash
 fi
-
 if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
     source /usr/share/doc/fzf/examples/key-bindings.bash
+fi
+if command -v fzf &>/dev/null && fzf --bash &>/dev/null; then
+    eval "$(fzf --bash)"
 fi
 
 ### Editor
