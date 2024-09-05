@@ -37,22 +37,14 @@ export HISTCONTROL=erasedups:ignoreboth
 export HISTFILESIZE=1000000 # Expand the on disk history size.
 export HISTSIZE=1000000     # Expand the in memory history size.
 
-### Extract script
-
-EXTRACT_SCRIPT_PATH="$HOME"/.local/share/com.github.murar8.dotfiles
-if [ ! -f "$EXTRACT_SCRIPT_PATH"/extract.sh ] && command -v curl &>/dev/null; then
-    echo "Installing xvoland/Extract..."
-    mkdir -p "$EXTRACT_SCRIPT_PATH"
-    curl -sL https://raw.githubusercontent.com/xvoland/Extract/master/extract.sh -o "$EXTRACT_SCRIPT_PATH"/extract.sh
-fi
-if [ -f "$EXTRACT_SCRIPT_PATH"/extract.sh ]; then
-    . "$EXTRACT_SCRIPT_PATH"/extract.sh
-fi
-
 ### Aliases
 
 la() {
     ls -Alhg --color=auto "$@"
+}
+
+clob() {
+    set +o noclobber
 }
 
 dot() {
