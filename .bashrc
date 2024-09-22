@@ -93,7 +93,7 @@ if command -v rustup &>/dev/null; then
     source <(rustup completions bash cargo)
 fi
 
-if command -v gold &>/dev/null; then
+if command -v goldwarden &>/dev/null; then
     source <(goldwarden completion bash)
 fi
 
