@@ -93,6 +93,10 @@ if command -v rustup &>/dev/null; then
     source <(rustup completions bash cargo)
 fi
 
+if command -v gold &>/dev/null; then
+    source <(goldwarden completion bash)
+fi
+
 if command -v scala-cli &>/dev/null; then
     _scala-cli_completions() {
         local IFS=$'\n'
