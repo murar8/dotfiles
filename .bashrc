@@ -11,12 +11,6 @@ if [ -f /etc/bashrc ]; then
     source /etc/bashrc
 fi
 
-### Local configuration
-
-if [ -f "$HOME"/.local.bashrc ]; then
-    source "$HOME"/.local.bashrc
-fi
-
 ### Options
 
 shopt -s checkwinsize # Check the window size after each command and update the values of LINES and COLUMNS.
@@ -131,14 +125,14 @@ fi
 
 if command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
     EDITOR="$(which code) --wait"
-    export EDITOR
 elif command -v nvim &>/dev/null; then
     EDITOR="$(which nvim)"
-    export EDITOR
 elif command -v vim &>/dev/null; then
     EDITOR="$(which vim)"
-    export EDITOR
 fi
+VISUAL=$EDITOR
+export VISUAL
+export EDITOR
 
 ### Prompt
 
@@ -198,4 +192,10 @@ fi
 
 if [ -f "$HOME"/.cargo/env ]; then
     . "$HOME"/.cargo/env
+fi
+
+### Local configuration
+
+if [ -f "$HOME"/.local.bashrc ]; then
+    source "$HOME"/.local.bashrc
 fi
