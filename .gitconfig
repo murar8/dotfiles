@@ -1,7 +1,9 @@
-[user]
-	email = lnzmrr@gmail.com
-	name = Lorenzo Murarotto
+[core]
+	editor = nvim
 [init]
 	defaultBranch = main
 [rerere]
 	enabled = true
+[user]
+	email = lnzmrr@gmail.com
+	name = Lorenzo Murarotto
