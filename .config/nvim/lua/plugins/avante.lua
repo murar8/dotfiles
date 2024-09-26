@@ -6,6 +6,9 @@ return {
 		windows = {
 			width = 50,
 		},
+		hints = {
+			enabled = false,
+		},
 		claude = {
 			api_key_name = { "secret-tool", "lookup", "key", "anthropic-api-key" },
 		},
