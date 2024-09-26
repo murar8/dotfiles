@@ -121,6 +121,10 @@ if command -v fzf &>/dev/null && fzf --bash &>/dev/null; then
     eval "$(fzf --bash)"
 fi
 
+if command -v register-python-argcomplete &>/dev/null && command -v pipx &>/dev/null; then
+    eval "$(register-python-argcomplete pipx)"
+fi
+
 ### Editor
 
 if command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
