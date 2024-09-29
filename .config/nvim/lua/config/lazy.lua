@@ -17,14 +17,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 
 -- https://github.com/folke/lazy.nvim/issues/702#issuecomment-1903484213
-vim.api.nvim_create_autocmd("VimEnter", {
-	group = vim.api.nvim_create_augroup("AutoUpdateLazy", {}),
-	callback = function()
-		if require("lazy.status").has_updates then
-			require("lazy").update({ show = false })
-		end
-	end,
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+-- 	group = vim.api.nvim_create_augroup("AutoUpdateLazy", {}),
+-- 	callback = function()
+-- 		if require("lazy.status").has_updates then
+-- 			require("lazy").update({ show = false })
+-- 		end
+-- 	end,
+-- })
 
 require("lazy").setup({
 	spec = {

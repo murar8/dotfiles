@@ -1,7 +1,7 @@
 return {
 	"yetone/avante.nvim",
 	event = "VeryLazy",
-	lazy = false,
+	dependencies = { "stevearc/dressing.nvim", "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
 	opts = {
 		windows = {
 			width = 50,
@@ -13,33 +13,24 @@ return {
 			api_key_name = { "secret-tool", "lookup", "key", "anthropic-api-key" },
 		},
 	},
-	dependencies = {
-		"stevearc/dressing.nvim",
-		"nvim-lua/plenary.nvim",
-		"MunifTanjim/nui.nvim",
-		"echasnovski/mini.icons",
-		{
-			-- support for image pasting
-			"HakonHarnes/img-clip.nvim",
-			event = "VeryLazy",
-			opts = {
-				-- recommended settings
-				default = {
-					use_absolute_path = true, -- required for Windows users
-					embed_image_as_base64 = false,
-					prompt_for_file_name = false,
-					drag_and_drop = {
-						insert_mode = true,
-					},
-				},
-			},
-		},
+	specs = {
 		{
 			"MeanderingProgrammer/render-markdown.nvim",
 			optional = true,
-			ft = { "markdown", "norg", "rmd", "org", "Avante" },
+			opts = function(_, opts)
+				opts.file_types = vim.list_extend(opts.file_types or {}, { "Avante" })
+			end,
+			ft = function(_, ft)
+				vim.list_extend(ft, { "Avante" })
+			end,
+		},
+		{
+			"folke/which-key.nvim",
+			optional = true,
 			opts = {
-				file_types = { "markdown", "norg", "rmd", "org", "Avante" },
+				spec = {
+					{ "<leader>a", group = "ai", mode = { "i", "v" } },
+				},
 			},
 		},
 	},

@@ -56,6 +56,12 @@ dotup() {
     dot push origin main
 }
 
+if command -v lazygit &>/dev/null; then
+    lazydot() {
+        GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit
+    }
+fi
+
 ### Completions
 
 if command -v terraform &>/dev/null; then
