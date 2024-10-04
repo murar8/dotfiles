@@ -16,15 +16,12 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	end
 end
 
--- https://github.com/folke/lazy.nvim/issues/702#issuecomment-1903484213
--- vim.api.nvim_create_autocmd("VimEnter", {
--- 	group = vim.api.nvim_create_augroup("AutoUpdateLazy", {}),
--- 	callback = function()
--- 		if require("lazy.status").has_updates then
--- 			require("lazy").update({ show = false })
--- 		end
--- 	end,
--- })
+-- Not sure why it's needed.
+-- See https://github.com/folke/lazy.nvim/discussions/1768
+local cwd = vim.fn.expand("%:p:h", true)
+if cwd ~= "" and vim.fn.isdirectory(cwd) then
+	vim.api.nvim_set_current_dir(cwd)
+end
 
 require("lazy").setup({
 	spec = {
@@ -32,6 +29,7 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins" },
 		{ import = "plugins" },
 	},
+	local_spec = true,
 	change_detection = { notify = false },
 	performance = {
 		-- See https://github.com/NvChad/starter/blob/935ea570afe449fc86d9c88dd47eacb5c345a68e/lua/configs/lazy.lua
