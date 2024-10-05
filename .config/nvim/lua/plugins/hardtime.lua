@@ -9,6 +9,7 @@ return {
 	},
 	opts = {
 		disable_mouse = false,
+		restriction_mode = "hint",
 	},
 	specs = {
 		{
