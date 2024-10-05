@@ -23,7 +23,7 @@ return {
 			optional = true,
 			opts = {
 				spec = {
-					{ "\\\\", group = "multicursor", mode = { "n", "v" } },
+					{ "<leader>m", group = "multicursor", mode = { "n", "v" } },
 				},
 			},
 		},
@@ -34,9 +34,13 @@ return {
 
 		{ "<c-s-k>", mc("lineAddCursor", -1), mode = { "n", "v" }, desc = "Add Cursor Above" },
 		{ "<c-s-j>", mc("lineAddCursor", 1), mode = { "n", "v" }, desc = "Add Cursor Below" },
+		{ "<c-s-up>", mc("lineSkipCursor", -1), mode = { "n", "v" }, desc = "Skip Cursor Above" },
+		{ "<c-s-down>", mc("lineSkipCursor", 1), mode = { "n", "v" }, desc = "Skip Cursor Below" },
 
 		{ "<c-s-n>", mc("matchAddCursor", -1), mode = { "n", "v" }, desc = "Add Previous Match" },
 		{ "<c-n>", mc("matchAddCursor", 1), mode = { "n", "v" }, desc = "Add Next Match" },
+		{ "<c-s-t>", mc("matchSkipCursor", -1), mode = { "n", "v" }, desc = "Skip Previous Match" },
+		{ "<c-t>", mc("matchSkipCursor", 1), mode = { "n", "v" }, desc = "Skip Next Match" },
 		{ "<c-s-l>", mc("matchAllAddCursors"), mode = { "n", "v" }, desc = "Add All Matches" },
 
 		{ "I", mc("insertVisual"), mode = "v", desc = "Insert at Visual Start" },
@@ -45,28 +49,23 @@ return {
 		{ "S", mc("splitCursors"), mode = "v", desc = "Split Cursors" },
 		{ "M", mc("matchCursors"), mode = "v", desc = "Match Cursors" },
 
-		{ "\\\\L", mc("lineSkipCursor", -1), mode = { "n", "v" }, desc = "Skip Cursor Above" },
-		{ "\\\\l", mc("lineSkipCursor", 1), mode = { "n", "v" }, desc = "Skip Cursor Below" },
+		{ "<leader>mp", mc("prevCursor"), mode = { "n", "v" }, desc = "Previous Cursor" },
+		{ "<leader>mn", mc("nextCursor"), mode = { "n", "v" }, desc = "Next Cursor" },
+		{ "<leader>mf", mc("firstCursor"), mode = { "n", "v" }, desc = "Go to First Cursor" },
+		{ "<leader>ml", mc("lastCursor"), mode = { "n", "v" }, desc = "Go to Last Cursor" },
 
-		{ "\\\\S", mc("matchSkipCursor", -1), mode = { "n", "v" }, desc = "Skip Previous Match" },
-		{ "\\\\s", mc("matchSkipCursor", 1), mode = { "n", "v" }, desc = "Skip Next Match" },
+		{ "<leader>md", mc("deleteCursor"), mode = { "n", "v" }, desc = "Delete Cursor" },
+		{ "<leader>mo", mc("toggleCursor"), mode = { "n", "v" }, desc = "Toggle Cursor" },
 
-		{ "\\\\N", mc("prevCursor"), mode = { "n", "v" }, desc = "Previous Cursor" },
-		{ "\\\\n", mc("nextCursor"), mode = { "n", "v" }, desc = "Next Cursor" },
-		{ "\\\\F", mc("firstCursor"), mode = { "n", "v" }, desc = "Go to First Cursor" },
-		{ "\\\\f", mc("lastCursor"), mode = { "n", "v" }, desc = "Go to Last Cursor" },
+		{ "<leader>mc", mc("clearCursors"), mode = { "n", "v" }, desc = "Clear All Cursors" },
+		{ "<leader>mu", mc("duplicateCursors"), mode = { "n", "v" }, desc = "Duplicate Cursors" },
+		{ "<leader>mr", mc("restoreCursors"), mode = "n", desc = "Restore Cursors" },
+		{ "<leader>ma", mc("alignCursors"), mode = "v", desc = "Align Cursors" },
 
-		{ "\\\\d", mc("deleteCursor"), mode = { "n", "v" }, desc = "Delete Cursor" },
-		{ "\\\\t", mc("toggleCursor"), mode = { "n", "v" }, desc = "Toggle Cursor" },
-		{ "\\\\c", mc("clearCursors"), mode = { "n", "v" }, desc = "Clear All Cursors" },
-		{ "\\\\d", mc("duplicateCursors"), mode = { "n", "v" }, desc = "Duplicate Cursors" },
-		{ "\\\\r", mc("restoreCursors"), mode = "n", desc = "Restore Cursors" },
-		{ "\\\\a", mc("alignCursors"), mode = "v", desc = "Align Cursors" },
+		{ "<leader>mT", mc("transposeCursors", -1), mode = "v", desc = "Transpose Cursors Backward" },
+		{ "<leader>mt", mc("transposeCursors", 1), mode = "v", desc = "Transpose Cursors Forward" },
 
-		{ "\\\\t", mc("transposeCursors", 1), mode = "v", desc = "Transpose Cursors Forward" },
-		{ "\\\\T", mc("transposeCursors", -1), mode = "v", desc = "Transpose Cursors Backward" },
-
-		{ "\\\\D", mc("enableCursors"), mode = { "n", "v" }, desc = "Enable Cursors" },
-		{ "\\\\d", mc("disableCursors"), mode = { "n", "v" }, desc = "Disable Cursors" },
+		{ "<leader>mE", mc("disableCursors"), mode = { "n", "v" }, desc = "Disable Cursors" },
+		{ "<leader>me", mc("enableCursors"), mode = { "n", "v" }, desc = "Enable Cursors" },
 	},
 }
