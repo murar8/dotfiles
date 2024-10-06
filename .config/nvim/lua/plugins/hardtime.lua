@@ -3,9 +3,9 @@ return {
 	dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
 	event = { "BufRead" },
 	keys = {
-		{ "<leader>He", "<cmd>Hardtime enable<cr>", desc = "Enable Hardtime" },
-		{ "<leader>Hd", "<cmd>Hardtime disable<cr>", desc = "Disable Hardtime" },
-		{ "<leader>Ht", "<cmd>Hardtime toggle<cr>", desc = "Toggle Hardtime" },
+		{ "<leader>Te", "<cmd>Hardtime enable<cr>", desc = "Enable Hardtime" },
+		{ "<leader>Td", "<cmd>Hardtime disable<cr>", desc = "Disable Hardtime" },
+		{ "<leader>Tt", "<cmd>Hardtime toggle<cr>", desc = "Toggle Hardtime" },
 	},
 	opts = {
 		disable_mouse = false,

@@ -16,13 +16,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	end
 end
 
--- Not sure why it's needed.
--- See https://github.com/folke/lazy.nvim/discussions/1768
-local cwd = vim.fn.expand("%:p:h", true)
-if cwd ~= "" and vim.fn.isdirectory(cwd) then
-	vim.api.nvim_set_current_dir(cwd)
-end
-
 require("lazy").setup({
 	spec = {
 		{ "LazyVim/LazyVim" },
