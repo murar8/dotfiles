@@ -32,3 +32,15 @@ vim.api.nvim_create_autocmd({ "BufEnter", "DirChanged" }, {
 		end
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter" }, {
+	pattern = { "*" },
+	callback = function()
+		local cwd = vim.uv.cwd()
+		local home = vim.fn.expand("~")
+		if cwd == home then
+			local path = vim.fn.expand("%:p:h", true)
+			pcall(vim.api.nvim_set_current_dir, path)
+		end
+	end,
+})
