@@ -6,6 +6,6 @@ return {
 		vim.g.undotree_SetFocusWhenToggle = true
 	end,
 	keys = {
-		{ "<leader>h", vim.cmd.UndotreeToggle, desc = "Undo tree" },
+		{ "<leader>y", vim.cmd.UndotreeToggle, desc = "Undo tree" },
 	},
 }
