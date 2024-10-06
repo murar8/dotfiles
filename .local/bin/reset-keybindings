@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-gsettings set org.gnome.desktop.wm.preferences workspace-names "['α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', 'θ', 'ι', 'κ']"
+gsettings set org.gnome.desktop.wm.preferences workspace-names "[]"
 gsettings set org.gnome.desktop.datetime automatic-timezone "true"
 gsettings set org.gnome.desktop.wm.preferences num-workspaces "10"
 gsettings set org.gnome.mutter dynamic-workspaces "false"
@@ -41,7 +41,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
 
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/']"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/binding "'<Super>e'"
-dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/command "'/home/lmurarotto/.appimage/neovide_fdbd577265105bef4f76e497f8c22e76.AppImage'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/command "'neovide'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/name "'Neovide'"
 
 dconf write /org/gnome/shell/extensions/tilingshell/move-window-down "['<Control><Super>Down','<Control><Super>j']"
