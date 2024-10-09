@@ -10,6 +10,8 @@ local function onEscape()
 		multicursor.enableCursors()
 	elseif multicursor.hasCursors() then
 		multicursor.clearCursors()
+	else
+		vim.cmd("nohlsearch")
 	end
 end
 
