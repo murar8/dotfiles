@@ -17,7 +17,7 @@ return {
 			optional = true,
 			opts = {
 				spec = {
-					{ "<leader>H", "hardtime" },
+					{ "<leader>T", "hardtime" },
 				},
 			},
 		},
