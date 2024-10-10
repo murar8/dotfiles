@@ -22,7 +22,6 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins" },
 		{ import = "plugins" },
 	},
-	local_spec = true,
 	change_detection = { notify = false },
 	performance = {
 		-- See https://github.com/NvChad/starter/blob/935ea570afe449fc86d9c88dd47eacb5c345a68e/lua/configs/lazy.lua
