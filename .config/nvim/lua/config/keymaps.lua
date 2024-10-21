@@ -95,10 +95,12 @@ local mappings = {
 	{
 		key = "<leader>bb", -- Switch to Other Buffer
 		modes = { "n" },
+		action = "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
 	},
 	{
 		key = "<leader>`", -- Switch to Other Buffer
 		modes = { "n" },
+		action = "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
 	},
 	{
 		key = "<leader>bd", -- Delete Buffer
@@ -181,7 +183,6 @@ local mappings = {
 	{
 		key = "<leader>cd", -- Line Diagnostics
 		modes = { "n" },
-		action = "editor.action.showHover",
 	},
 	{
 		key = "]d", -- Next Diagnostic
@@ -233,12 +234,11 @@ local mappings = {
 	{
 		key = "<leader>ud", -- Toggle Diagnostics
 		modes = { "n" },
-		action = "workbench.actions.view.toggleProblems",
+		action = "workbench.actions.view.problems",
 	},
 	{
 		key = "<leader>ul", -- Toggle Line Numbers
 		modes = { "n" },
-		action = "editor.action.toggleLineNumbers",
 	},
 	{
 		key = "<leader>uc", -- Toggle conceallevel
@@ -269,12 +269,12 @@ local mappings = {
 	{
 		key = "<leader>gb", -- Git Blame Line
 		modes = { "n" },
-		action = "gitlens.toggleFileBlame",
+		action = "gitlens.openBlamePriorToChange",
 	},
 	{
 		key = "<leader>gB", -- Git Browse
 		modes = { "n" },
-		action = "gitlens.openFileOnRemote",
+		action = "gitlens.openOnRemote",
 	},
 	{
 		key = "<leader>gf", -- Lazygit Current File History
@@ -299,7 +299,6 @@ local mappings = {
 	{
 		key = "<leader>ui", -- Inspect Pos
 		modes = { "n" },
-		action = "editor.action.showHover",
 	},
 	{
 		key = "<leader>uI", -- Inspect Tree
@@ -339,7 +338,6 @@ local mappings = {
 	{
 		key = "<leader>w", -- Windows
 		modes = { "n" },
-		action = "workbench.action.quickSwitchWindow",
 	},
 	{
 		key = "<leader>-", -- Split Window Below
@@ -389,6 +387,7 @@ local mappings = {
 		key = "<leader><tab>[", -- Previous Tab
 		modes = { "n" },
 	},
+	-- LSP
 	{
 		key = "<leader>cl", -- Lsp Info
 		modes = { "n" },
@@ -416,6 +415,7 @@ local mappings = {
 	{
 		key = "gD", -- Goto Declaration
 		modes = { "n" },
+		action = "editor.action.peekDefinition",
 	},
 	{
 		key = "K", -- Hover
@@ -474,6 +474,32 @@ local mappings = {
 	{
 		key = "<a-p>", -- Prev Reference
 		modes = { "n" },
+	},
+	-- Bufferline
+	{
+		key = "[B",
+		modes = { "n" },
+		action = "workbench.action.moveEditorLeftInGroup",
+	},
+	{
+		key = "]B",
+		modes = { "n" },
+		action = "workbench.action.moveEditorRightInGroup",
+	},
+	{
+		key = "<leader>bl",
+		modes = { "n" },
+		action = "workbench.action.closeEditorsToTheLeft",
+	},
+	{
+		key = "<leader>br",
+		modes = { "n" },
+		action = "workbench.action.closeEditorsToTheRight",
+	},
+	{
+		key = "<leader>bo",
+		modes = { "n" },
+		action = "workbench.action.closeOtherEditors",
 	},
 }
 
