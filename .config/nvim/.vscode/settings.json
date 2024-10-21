@@ -1,3 +1,4 @@
 {
-  "git.untrackedChanges": "hidden"
+  "git.untrackedChanges": "hidden",
+  "Lua.diagnostics.globals": ["vim", "LazyVim"]
 }
