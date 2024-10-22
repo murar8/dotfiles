@@ -5,5 +5,8 @@ return {
 		inlay_hints = {
 			enabled = false,
 		},
+		servers = {
+			denols = {},
+		},
 	},
 }
