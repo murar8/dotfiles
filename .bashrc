@@ -97,6 +97,10 @@ if command -v goldwarden &>/dev/null; then
     source <(goldwarden completion bash)
 fi
 
+if command -v deno &>/dev/null; then
+    source <(deno completions bash)
+fi
+
 if command -v scala-cli &>/dev/null; then
     _scala-cli_completions() {
         local IFS=$'\n'
