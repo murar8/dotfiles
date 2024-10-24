@@ -23,17 +23,17 @@ return {
 
 --[[ keybindings.json (VSCode)
 [
-  {
-    "args": "<c-n>",
-    "command": "vscode-neovim.send",
-    "key": "ctrl+n",
-    "when": "editorFocus && neovim.init"
-  },
-  {
-    "args": "<c-s-l>",
-    "command": "vscode-neovim.send",
-    "key": "ctrl+shift+l",
-    "when": "editorFocus && neovim.init"
-  }
+	{
+		"args": "<c-n>",
+		"command": "vscode-neovim.send",
+		"key": "ctrl+n",
+		"when": "neovim.init && editorFocus"
+	},
+	{
+		"args": "<c-s-l>",
+		"command": "vscode-neovim.send",
+		"key": "ctrl+shift+l",
+		"when": "neovim.init && editorFocus"
+	}
 ]
 --]]
