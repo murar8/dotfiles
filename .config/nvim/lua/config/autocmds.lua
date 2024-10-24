@@ -33,6 +33,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
 		else
 			vim.env.GIT_WORK_TREE = vim.v.null
 			vim.env.GIT_DIR = vim.v.null
+			pcall(vim.api.nvim_set_current_dir, root_dir)
 		end
 	end,
 })
