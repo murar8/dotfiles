@@ -17,6 +17,19 @@ return {
 					require("neo-tree.command").execute({ action = "close" })
 				end,
 			},
+			-- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/546#issuecomment-1259752317
+			{
+				event = "after_render",
+				handler = function()
+					vim.schedule(function()
+						local state = require("neo-tree.sources.manager").get_state("filesystem")
+						if not require("neo-tree.sources.common.preview").is_active() then
+							state.config = state.config or {}
+							state.commands.toggle_preview(state)
+						end
+					end)
+				end,
+			},
 		},
 	},
 }
