@@ -18,7 +18,7 @@ end
 
 if vim.fn.len(vim.fn.argv()) > 0 then
 	local argv = vim.fn.fnamemodify(vim.fn.argv()[1], ":p:h")
-	vim.api.nvim_set_current_dir(argv)
+	pcall(vim.api.nvim_set_current_dir, argv)
 end
 
 require("lazy").setup({
