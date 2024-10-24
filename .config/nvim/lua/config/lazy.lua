@@ -16,11 +16,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	end
 end
 
-if vim.fn.len(vim.fn.argv()) > 0 then
-	local argv = vim.fn.fnamemodify(vim.fn.argv()[1], ":p:h")
-	pcall(vim.api.nvim_set_current_dir, argv)
-end
-
 require("lazy").setup({
 	spec = {
 		{ "LazyVim/LazyVim" },
