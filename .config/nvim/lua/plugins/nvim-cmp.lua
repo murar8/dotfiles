@@ -3,6 +3,13 @@
 return {
 	"hrsh7th/nvim-cmp",
 	optional = true,
+	specs = {
+		{
+			"Exafunction/codeium.nvim",
+			commit = "ca38490ef963b066d6f686146d73213c70ef7f6b", -- https://github.com/Exafunction/codeium.nvim/issues/256
+			optional = true,
+		},
+	},
 	---@param opts cmp.ConfigSchema
 	opts = function(_, opts)
 		local cmp = require("cmp")
