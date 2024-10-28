@@ -10,8 +10,8 @@ set ideajoin
 set matchpairs+=<:>
 set scrolloff=5
 
-set timeout
-set timeoutlen=400
+" set timeout
+" set timeoutlen=400
 
 set gdefault
 set hlsearch
@@ -27,3 +27,16 @@ set commentary
 set highlightedyank
 set surround
 set textobj-entire
+set multiple-cursors
+
+""" https://github.com/JetBrains/ideavim/blob/master/doc/IdeaVim%20Plugins.md#instructions-4
+nmap <C-n> <Plug>NextWholeOccurrence
+nmap <C-s-l> <Plug>AllWholeOccurrences
+nmap g<C-n> <Plug>NextOccurrence
+nmap g<C-s-l> <Plug>AllOccurrences
+xmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+xmap <C-s-l> <Plug>AllWholeOccurrences
+xmap <C-x> <Plug>SkipOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap g<C-s-l> <Plug>AllOccurrences
