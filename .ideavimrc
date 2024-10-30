@@ -1,6 +1,7 @@
-""" Mappings
+""" General
 
 let mapleader = " "
+let maplocalleader = "\\"
 
 
 """ Settings
@@ -10,9 +11,6 @@ set ideajoin
 set matchpairs+=<:>
 set scrolloff=5
 
-" set timeout
-" set timeoutlen=400
-
 set gdefault
 set hlsearch
 set incsearch
@@ -20,23 +18,101 @@ set incsearch
 set ignorecase
 set smartcase
 
+set notimeout
+set ttimeout
+
 
 """ Plugins
 
+set argtextobj
 set commentary
+set easymotion
+set exchange
 set highlightedyank
+set matchit
+set multiple-cursors
+set NERDTree
+set quickscope
 set surround
 set textobj-entire
-set multiple-cursors
+set which-key
 
-""" https://github.com/JetBrains/ideavim/blob/master/doc/IdeaVim%20Plugins.md#instructions-4
+let g:argtextobj_pairs="(:),{:},<:>,[:]" " https://incrementalelm.com/editor-config/
+
+
+""" Mappings
+
+" Activate
+nmap <leader>ap <Action>(ActivateProjectToolWindow)
+
+nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
+nmap ]] <Action>(GotoNextElementUnderCaretUsage)
+nmap [e <Action>(GotoPrevError)
+nmap ]e <Action>(GotoNextError)
+
+""" https://youtrack.jetbrains.com/issue/VIM-2178/multiple-cursors-defines-incorrect-keys#focus=Comments-27-7067864.0-0
 nmap <C-n> <Plug>NextWholeOccurrence
-nmap <C-s-l> <Plug>AllWholeOccurrences
-nmap g<C-n> <Plug>NextOccurrence
-nmap g<C-s-l> <Plug>AllOccurrences
 xmap <C-n> <Plug>NextWholeOccurrence
-xmap <C-p> <Plug>RemoveOccurrence
-xmap <C-s-l> <Plug>AllWholeOccurrences
-xmap <C-x> <Plug>SkipOccurrence
+omap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
 xmap g<C-n> <Plug>NextOccurrence
-xmap g<C-s-l> <Plug>AllOccurrences
+omap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+nmap <S-C-n> <Plug>AllWholeOccurrences
+xmap <S-C-n> <Plug>AllWholeOccurrences
+omap <S-C-n> <Plug>AllWholeOccurrences
+nmap g<S-C-n> <Plug>AllOccurrences
+xmap g<S-C-n> <Plug>AllOccurrences
+omap g<S-C-n> <Plug>AllOccurrences
+
+nmap <c-s-k> <Action>(EditorCloneCaretAbove)
+nmap <c-s-j> <Action>(EditorCloneCaretBelow)
+
+map <a-s-k> <Action>(MoveLineUp)
+map <a-s-j> <Action>(MoveLineDown)
+
+nmap <leader>ea <Action>(CloseAllEditors)
+nmap <leader>eo <Action>(CloseAllEditorsButActive)
+nmap <leader>eu <Action>(CloseAllUnmodifiedEditors)
+nmap <leader>ed <Action>(CloseEditor)
+nmap <leader>eg <Action>(CloseEditorsGroup)
+
+nmap <leader>t1 <Action>(GoToTab1)
+nmap <leader>t2 <Action>(GoToTab2)
+nmap <leader>t3 <Action>(GoToTab3)
+nmap <leader>t4 <Action>(GoToTab4)
+nmap <leader>t5 <Action>(GoToTab5)
+nmap <leader>t6 <Action>(GoToTab6)
+nmap <leader>t7 <Action>(GoToTab7)
+nmap <leader>t8 <Action>(GoToTab8)
+nmap <leader>t9 <Action>(GoToTab9)
+nmap <leader>te <Action>(GoToLastTab)
+
+nmap <leader>tu <Action>(ReopenClosedTab)
+nmap <leader>td <Action>(CloseActiveTab)
+nmap <leader>tl <Action>(CloseAllToTheLeft)
+nmap <leader>tr <Action>(CloseAllToTheRight)
+
+nmap <leader>to <Action>(MoveEditorToOppositeTabGroup)
+
+nmap <leader>th <Action>(MoveTabDown)
+nmap <leader>tv <Action>(MoveTabRight)
+
+nmap <s-h> <Action>(PreviousTab)
+nmap <s-l> <Action>(NextTab)
+
+nmap <leader>sm <Action>(MaximizeEditorInSplit)
+nmap <leader>sr <Action>(OpenInRightSplit)
+
+nmap <c-s-h> <Action>(PrevSplitter)
+nmap <c-s-l> <Action>(NextSplitter)
+
+nmap <leader>sh <Action>(SplitHorizontally)
+nmap <leader>sv <Action>(SplitVertically)
+
+nmap <leader>su <Action>(Unsplit)
+nmap <leader>sa <Action>(UnsplitAll)
+
+nmap <leader>pa <Action>(CloseAllUnpinnedEditors)
+nmap <leader>pp <Action>(PinActiveTabToggle)
