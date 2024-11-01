@@ -88,10 +88,10 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Super>
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Super><Shift>Page_Down', '<Super><Shift><Alt>Right', '<Control><Shift><Alt>Right', '<Super><Shift><Alt>l', '<Control><Shift><Alt>l']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up "['<Control><Shift><Alt>Up', '<Control><Shift><Alt>k']"
 
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Control><Alt>Down', '<Control><Alt>j']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super>Page_Up', '<Super><Alt>Left', '<Control><Alt>Left', '<Super><Alt>h', '<Control><Alt>h']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>Page_Down', '<Super><Alt>Right', '<Control><Alt>Right', '<Super><Alt>l', '<Control><Alt>l']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Control><Alt>Up', '<Control><Alt>k']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Control><Super><Alt>Down', '<Control><Super><Alt>j']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super>Page_Up', '<Super><Alt>Left', '<Control><Super><Alt>Left', '<Super><Alt>h', '<Control><Super><Alt>h']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>Page_Down', '<Super><Alt>Right', '<Control><Super><Alt>Right', '<Super><Alt>l', '<Control><Super><Alt>l']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Control><Super><Alt>Up', '<Control><Super><Alt>k']"
 
 gsettings set org.gnome.shell.keybindings shift-overview-down "['<Super><Alt>Down', '<Super><Alt>j']"
 gsettings set org.gnome.shell.keybindings shift-overview-up "['<Super><Alt>Up', '<Super><Alt>k']"
