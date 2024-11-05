@@ -47,53 +47,102 @@ let g:WhichKey_ShowVimActions = "true"
 vnoremap < <gv
 vnoremap > >gv
 
-noremap <ESC> <ESC>:nohlsearch<CR>
+nnoremap <esc> :noh<return><esc>
 
 " Multiple cursors
 " https://youtrack.jetbrains.com/issue/VIM-2178/multiple-cursors-defines-incorrect-keys#focus=Comments-27-7067864.0-0
-nmap <C-n> <Plug>NextWholeOccurrence
-xmap <C-n> <Plug>NextWholeOccurrence
-omap <C-n> <Plug>NextWholeOccurrence
-nmap g<C-n> <Plug>NextOccurrence
-xmap g<C-n> <Plug>NextOccurrence
-omap g<C-n> <Plug>NextOccurrence
-xmap <C-x> <Plug>SkipOccurrence
-xmap <C-p> <Plug>RemoveOccurrence
-nmap <A-n> <Plug>AllWholeOccurrences
-xmap <A-n> <Plug>AllWholeOccurrences
-omap <A-n> <Plug>AllWholeOccurrences
-nmap g<A-n> <Plug>AllOccurrences
-xmap g<A-n> <Plug>AllOccurrences
-omap g<A-n> <Plug>AllOccurrences
+nmap <c-n> <Plug>NextOccurrence
+xmap <c-n> <Plug>NextOccurrence
+omap <c-n> <Plug>NextOccurrence
+xmap <c-x> <Plug>SkipOccurrence
+xmap <c-p> <Plug>RemoveOccurrence
+nmap <c-s-l> <Plug>AllOccurrences
+xmap <c-s-l> <Plug>AllOccurrences
+omap <c-s-l> <Plug>AllOccurrences
 
-nmap mm <Action>(ToggleBookmark)
-nmap ms <Action>(ShowBookmarks)
-
-nmap [[ <Action>(PreviousTab)
-nmap ]] <Action>(NextTab)
 nmap [e <Action>(GotoPreviousError)
 nmap ]e <Action>(GotoNextError)
-nmap [u <Action>(GotoPrevElementUnderCaretUsage)
-nmap ]u <Action>(GotoNextElementUnderCaretUsage)
 nmap [m <Action>(MethodUp)
 nmap ]m <Action>(MethodDown)
 nmap [c <Action>(JumpToLastChange)
 nmap ]c <Action>(JumpToNextChange)
+nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
+nmap ]] <Action>(GotoNextElementUnderCaretUsage)
 nmap [s <Action>(PrevSplitter)
 nmap ]s <Action>(NextSplitter)
 
-nmap <leader>a <Action>(GotoAction)
-nmap <leader>c <Action>(GotoClass)
-nmap <leader>f <Action>(GotoFile)
-nmap <leader>s <Action>(GotoSymbol)
-nmap <leader>b <Action>(TextSearchAction)
+nmap <s-l> <Action>(NextTab)
+nmap <s-h> <Action>(PreviousTab)
 
-nmap <leader>pa <Action>(CloseAllUnpinnedEditors)
-nmap <leader>pp <Action>(PinActiveTabToggle)
+nmap <s-k> <Action>(ParameterInfo)
+nmap <s-n> <Action>(ShowErrorDescription)
 
-nmap <leader>sh <Action>(SplitHorizontally)
-nmap <leader>sv <Action>(SplitVertically)
-nmap <leader>su <Action>(Unsplit)
-nmap <leader>sa <Action>(UnsplitAll)
-nmap <leader>sm <Action>(MaximizeEditorInSplit)
-nmap <leader>sr <Action>(OpenInRightSplit)
+nmap <c-w> <Action>(EditorSelectWord)
+xmap <c-w> <Action>(EditorSelectWord)
+nmap <c-s-w> <Action>(EditorUnSelectWord)
+xmap <c-s-w> <Action>(EditorUnSelectWord)
+
+let g:WhichKeyDesc_t = "<leader>t Toggle NERDTree"
+nmap <leader>t :NERDTreeToggle<cr>
+
+let g:WhichKeyDesc_w = "<leader>w Hide all tool windows"
+nmap <leader>q <Action>(HideAllWindows)
+
+let g:WhichKeyDesc_bs = "<leader><bs> Close"
+nmap <leader><bs> <Action>(CloseEditor)
+
+let g:WhichKeyDesc_d = "<leader>d Debugging"
+let g:WhichKeyDesc_de = "<leader>de Evaluate expression"
+nmap <leader>de <Action>(EvaluateExpression)
+let g:WhichKeyDesc_dr = "<leader>dr Resume program"
+nmap <leader>dr <Action>(Resume)
+let g:WhichKeyDesc_dc = "<leader>dc Run to cursor"
+nmap <leader>dc <Action>(RunToCursor)
+let g:WhichKeyDesc_ds = "<leader>ds Smart step into"
+nmap <leader>ds <Action>(SmartStepInto)
+let g:WhichKeyDesc_di = "<leader>di Step into"
+nmap <leader>di <Action>(StepInto)
+let g:WhichKeyDesc_do = "<leader>do Step out"
+nmap <leader>do <Action>(StepOut)
+let g:WhichKeyDesc_dx = "<leader>dx Step over"
+nmap <leader>dx <Action>(StepOver)
+let g:WhichKeyDesc_dv = "<leader>dv View breakpoints"
+nmap <leader>dv <Action>(ViewBreakpoints)
+
+let g:WhichKeyDesc_e = "<leader>e Editing"
+let g:WhichKeyDesc_ec = "<leader>ec Context info"
+nmap <leader>ec <Action>(EditorContextInfo)
+let g:WhichKeyDesc_em = "<leader>em Implement methods"
+nmap <leader>em <Action>(ImplementMethods)
+let g:WhichKeyDesc_ei = "<leader>ei Optimize imports"
+nmap <leader>ei <Action>(OptimizeImports)
+let g:WhichKeyDesc_eo = "<leader>eo Override methods"
+nmap <leader>eo <Action>(OverrideMethods)
+let g:WhichKeyDesc_ep = "<leader>ep Parameter info"
+nmap <leader>ep <Action>(ParameterInfo)
+let g:WhichKeyDesc_er = "<leader>er Reformat code"
+nmap <leader>er <Action>(ReformatCode)
+
+let g:WhichKeyDesc_r = "<leader>r Refactoring"
+let g:WhichKeyDesc_rr = "<leader>rr Rename"
+nmap <leader>rr <Action>(RenameElement)
+let g:WhichKeyDesc_rc = "<leader>rc Change Signature"
+nmap <leader>rc <Action>(ChangeSignature)
+let g:WhichKeyDesc_ry = "<leader>ry Copy"
+nmap <leader>ry <Action>(CopyElement)
+let g:WhichKeyDesc_re = "<leader>re Extract Method"
+nmap <leader>re <Action>(ExtractMethod)
+let g:WhichKeyDesc_ri = "<leader>ri Inline"
+nmap <leader>ri <Action>(Inline)
+let g:WhichKeyDesc_rm = "<leader>rm Move"
+nmap <leader>rm <Action>(Move)
+let g:WhichKeyDesc_rt = "<leader>rt Refactor this"
+nmap <leader>rt <Action>(Refactorings.QuickListPopupAction)
+let g:WhichKeyDesc_rd = "<leader>rd Safe Delete"
+nmap <leader>rd <Action>(SafeDelete)
+
+let g:WhichKeyDesc_f = "<leader>f Search/Replace"
+let g:WhichKeyDesc_ff = "<leader>ff Find File"
+nmap <leader>ff <Action>(GotoFile)
+let g:WhichKeyDesc_fa = "<leader>fa Find Action"
+nmap <leader>fa <Action>(GotoAction)

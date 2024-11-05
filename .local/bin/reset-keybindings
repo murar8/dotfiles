@@ -83,10 +83,10 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Super><S
 gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Super><Shift>Right','<Super><Shift>l']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-up "['<Super><Shift>Up','<Super><Shift>k']"
 
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-down "['<Control><Shift><Alt>Down', '<Control><Shift><Alt>j']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Super><Shift>Page_Up', '<Super><Shift><Alt>Left', '<Control><Shift><Alt>Left', '<Control><Shift><Alt>h', '<Super><Shift><Alt>h']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Super><Shift>Page_Down', '<Super><Shift><Alt>Right', '<Control><Shift><Alt>Right', '<Super><Shift><Alt>l', '<Control><Shift><Alt>l']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up "['<Control><Shift><Alt>Up', '<Control><Shift><Alt>k']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-down "['<Control><Shift><Super>Down', '<Control><Shift><Super>j']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Super><Shift>Page_Up', '<Super><Shift><Alt>Left', '<Control><Shift><Super>Left', '<Control><Shift><Super>h', '<Super><Shift><Alt>h']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Super><Shift>Page_Down', '<Super><Shift><Alt>Right', '<Control><Shift><Super>Right', '<Super><Shift><Alt>l', '<Control><Shift><Super>l']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up "['<Control><Shift><Super>Up', '<Control><Shift><Super>k']"
 
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Control><Super><Alt>Down', '<Control><Super><Alt>j']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super>Page_Up', '<Super><Alt>Left', '<Control><Super><Alt>Left', '<Super><Alt>h', '<Control><Super><Alt>h']"
