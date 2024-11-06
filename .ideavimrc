@@ -85,10 +85,10 @@ xmap <c-s-w> <Action>(EditorUnSelectWord)
 let g:WhichKeyDesc_t = "<leader>t Toggle NERDTree"
 nmap <leader>t :NERDTreeToggle<cr>
 
-let g:WhichKeyDesc_w = "<leader>w Hide all tool windows"
+let g:WhichKeyDesc_q = "<leader>q Hide all tool windows"
 nmap <leader>q <Action>(HideAllWindows)
 
-let g:WhichKeyDesc_bs = "<leader><bs> Close"
+let g:WhichKeyDesc_bs = "<leader><Retroceso> Close"
 nmap <leader><bs> <Action>(CloseEditor)
 
 let g:WhichKeyDesc_d = "<leader>d Debugging"
@@ -134,6 +134,7 @@ let g:WhichKeyDesc_re = "<leader>re Extract Method"
 nmap <leader>re <Action>(ExtractMethod)
 let g:WhichKeyDesc_ri = "<leader>ri Inline"
 nmap <leader>ri <Action>(Inline)
+
 let g:WhichKeyDesc_rm = "<leader>rm Move"
 nmap <leader>rm <Action>(Move)
 let g:WhichKeyDesc_rt = "<leader>rt Refactor this"
