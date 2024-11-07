@@ -15,7 +15,7 @@ set ignorecase
 set smartcase
 
 set notimeout
-set ttimeout
+" set ttimeout
 
 let mapleader = " "
 let maplocalleader = "\\"
@@ -25,7 +25,6 @@ let maplocalleader = "\\"
 
 set argtextobj
 set commentary
-set easymotion
 set exchange
 set highlightedyank
 set matchit
@@ -34,6 +33,7 @@ set NERDTree
 set surround
 set textobj-entire
 set textobj-indent
+set easymotion
 set which-key
 
 let g:argtextobj_pairs="(:),{:},<:>,[:]" " https://incrementalelm.com/editor-config/
@@ -51,14 +51,20 @@ nnoremap <esc> :noh<return><esc>
 
 " Multiple cursors
 " https://youtrack.jetbrains.com/issue/VIM-2178/multiple-cursors-defines-incorrect-keys#focus=Comments-27-7067864.0-0
-nmap <c-n> <Plug>NextOccurrence
-xmap <c-n> <Plug>NextOccurrence
-omap <c-n> <Plug>NextOccurrence
+nmap <c-n> <Plug>NextWholeOccurrence
+xmap <c-n> <Plug>NextWholeOccurrence
+omap <c-n> <Plug>NextWholeOccurrence
+nmap g<c-n> <Plug>NextOccurrence
+xmap g<c-n> <Plug>NextOccurrence
+omap g<c-n> <Plug>NextOccurrence
 xmap <c-x> <Plug>SkipOccurrence
 xmap <c-p> <Plug>RemoveOccurrence
-nmap <c-s-l> <Plug>AllOccurrences
-xmap <c-s-l> <Plug>AllOccurrences
-omap <c-s-l> <Plug>AllOccurrences
+nmap <a-n> <Plug>AllWholeOccurrences
+xmap <a-n> <Plug>AllWholeOccurrences
+omap <a-n> <Plug>AllWholeOccurrences
+nmap g<a-n> <Plug>AllOccurrences
+xmap g<a-n> <Plug>AllOccurrences
+omap g<a-n> <Plug>AllOccurrences
 
 nmap [e <Action>(GotoPreviousError)
 nmap ]e <Action>(GotoNextError)
@@ -74,7 +80,7 @@ nmap ]s <Action>(NextSplitter)
 nmap <s-l> <Action>(NextTab)
 nmap <s-h> <Action>(PreviousTab)
 
-nmap <s-k> <Action>(ParameterInfo)
+nmap <s-k> <Action>(ShowHoverInfo)
 nmap <s-n> <Action>(ShowErrorDescription)
 
 nmap <c-w> <Action>(EditorSelectWord)
@@ -82,68 +88,10 @@ xmap <c-w> <Action>(EditorSelectWord)
 nmap <c-s-w> <Action>(EditorUnSelectWord)
 xmap <c-s-w> <Action>(EditorUnSelectWord)
 
+let g:WhichKeyDesc_leader = "<leader><leader> Easymotion"
 let g:WhichKeyDesc_t = "<leader>t Toggle NERDTree"
-nmap <leader>t :NERDTreeToggle<cr>
-
 let g:WhichKeyDesc_q = "<leader>q Hide all tool windows"
+let g:WhichKeyDesc_backspace = "<leader><Retroceso> Close Editor"
+nmap <leader>t :NERDTreeToggle<cr>
 nmap <leader>q <Action>(HideAllWindows)
-
-let g:WhichKeyDesc_bs = "<leader><Retroceso> Close"
 nmap <leader><bs> <Action>(CloseEditor)
-
-let g:WhichKeyDesc_d = "<leader>d Debugging"
-let g:WhichKeyDesc_de = "<leader>de Evaluate expression"
-nmap <leader>de <Action>(EvaluateExpression)
-let g:WhichKeyDesc_dr = "<leader>dr Resume program"
-nmap <leader>dr <Action>(Resume)
-let g:WhichKeyDesc_dc = "<leader>dc Run to cursor"
-nmap <leader>dc <Action>(RunToCursor)
-let g:WhichKeyDesc_ds = "<leader>ds Smart step into"
-nmap <leader>ds <Action>(SmartStepInto)
-let g:WhichKeyDesc_di = "<leader>di Step into"
-nmap <leader>di <Action>(StepInto)
-let g:WhichKeyDesc_do = "<leader>do Step out"
-nmap <leader>do <Action>(StepOut)
-let g:WhichKeyDesc_dx = "<leader>dx Step over"
-nmap <leader>dx <Action>(StepOver)
-let g:WhichKeyDesc_dv = "<leader>dv View breakpoints"
-nmap <leader>dv <Action>(ViewBreakpoints)
-
-let g:WhichKeyDesc_e = "<leader>e Editing"
-let g:WhichKeyDesc_ec = "<leader>ec Context info"
-nmap <leader>ec <Action>(EditorContextInfo)
-let g:WhichKeyDesc_em = "<leader>em Implement methods"
-nmap <leader>em <Action>(ImplementMethods)
-let g:WhichKeyDesc_ei = "<leader>ei Optimize imports"
-nmap <leader>ei <Action>(OptimizeImports)
-let g:WhichKeyDesc_eo = "<leader>eo Override methods"
-nmap <leader>eo <Action>(OverrideMethods)
-let g:WhichKeyDesc_ep = "<leader>ep Parameter info"
-nmap <leader>ep <Action>(ParameterInfo)
-let g:WhichKeyDesc_er = "<leader>er Reformat code"
-nmap <leader>er <Action>(ReformatCode)
-
-let g:WhichKeyDesc_r = "<leader>r Refactoring"
-let g:WhichKeyDesc_rr = "<leader>rr Rename"
-nmap <leader>rr <Action>(RenameElement)
-let g:WhichKeyDesc_rc = "<leader>rc Change Signature"
-nmap <leader>rc <Action>(ChangeSignature)
-let g:WhichKeyDesc_ry = "<leader>ry Copy"
-nmap <leader>ry <Action>(CopyElement)
-let g:WhichKeyDesc_re = "<leader>re Extract Method"
-nmap <leader>re <Action>(ExtractMethod)
-let g:WhichKeyDesc_ri = "<leader>ri Inline"
-nmap <leader>ri <Action>(Inline)
-
-let g:WhichKeyDesc_rm = "<leader>rm Move"
-nmap <leader>rm <Action>(Move)
-let g:WhichKeyDesc_rt = "<leader>rt Refactor this"
-nmap <leader>rt <Action>(Refactorings.QuickListPopupAction)
-let g:WhichKeyDesc_rd = "<leader>rd Safe Delete"
-nmap <leader>rd <Action>(SafeDelete)
-
-let g:WhichKeyDesc_f = "<leader>f Search/Replace"
-let g:WhichKeyDesc_ff = "<leader>ff Find File"
-nmap <leader>ff <Action>(GotoFile)
-let g:WhichKeyDesc_fa = "<leader>fa Find Action"
-nmap <leader>fa <Action>(GotoAction)
