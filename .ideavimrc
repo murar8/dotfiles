@@ -38,7 +38,8 @@ set which-key
 
 let g:argtextobj_pairs="(:),{:},<:>,[:]" " https://incrementalelm.com/editor-config/
 let g:WhichKey_ShowVimActions = "true"
-
+let g:WhichKey_SortOrder = "by_key_prefix_first"
+let g:WhichKey_DefaultDelay = 400
 
 """ Mappings
 
@@ -77,21 +78,34 @@ nmap ]] <Action>(GotoNextElementUnderCaretUsage)
 nmap [s <Action>(PrevSplitter)
 nmap ]s <Action>(NextSplitter)
 
-nmap <s-l> <Action>(NextTab)
-nmap <s-h> <Action>(PreviousTab)
-
-nmap <s-k> <Action>(ShowHoverInfo)
-nmap <s-n> <Action>(ShowErrorDescription)
-
 nmap <c-w> <Action>(EditorSelectWord)
 xmap <c-w> <Action>(EditorSelectWord)
 nmap <c-s-w> <Action>(EditorUnSelectWord)
 xmap <c-s-w> <Action>(EditorUnSelectWord)
 
-let g:WhichKeyDesc_leader = "<leader><leader> Easymotion"
-let g:WhichKeyDesc_t = "<leader>t Toggle NERDTree"
-let g:WhichKeyDesc_q = "<leader>q Hide all tool windows"
-let g:WhichKeyDesc_backspace = "<leader><Retroceso> Close Editor"
+let g:WhichKeyDesc_leader_leader = "<leader><leader> Easymotion"
+let g:WhichKeyDesc_leader_bs = "<leader><Retroceso> Close Editor"
+let g:WhichKeyDesc_leader_t = "<leader>t Toggle NERDTree"
+let g:WhichKeyDesc_leader_q = "<leader>q Toggle tool windows"
+let g:WhichKeyDesc_leader_f = "<leader>f Reformat Code"
+let g:WhichKeyDesc_leader_h = "<leader>h Type Hierarchy"
+let g:WhichKeyDesc_leader_c = "<leader>c Call Hierarchy"
+nmap <leader><bs> <Action>(CloseEditor)
 nmap <leader>t :NERDTreeToggle<cr>
 nmap <leader>q <Action>(HideAllWindows)
-nmap <leader><bs> <Action>(CloseEditor)
+nmap <leader>f <Action>(ReformatCode)
+nmap <leader>h <Action>(TypeHierarchy)
+nmap <leader>c <Action>(CallHierarchy)
+
+nmap gb <Action>(ShowUsages)
+nmap gB <Action>(FindUsagesInFile)
+nmap gd <Action>(GotoDeclaration)
+nmap gy <Action>(GotoTypeDeclaration)
+nmap gl <Action>(GotoImplementation)
+nmap gs <Action>(GotoSuperMethod)
+
+nmap K <Action>(ShowHoverInfo)
+nmap N <Action>(ShowErrorDescription)
+
+nmap L <Action>(NextTab)
+nmap H <Action>(PreviousTab)
