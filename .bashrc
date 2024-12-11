@@ -33,6 +33,14 @@ export HISTSIZE=1000000     # Expand the in memory history size.
 
 ### Aliases
 
+copy() {
+    xclip -sel clip "$@"
+}
+
+paste() {
+    xclip -o -sel clip "$@"
+}
+
 la() {
     ls -Alhg --color=auto "$@"
 }
@@ -68,13 +76,9 @@ if command -v terraform &>/dev/null; then
     complete -C "$(which terraform)" terraform
 fi
 
-if command -v aws_completer &>/dev/null; then
-    complete -C "$(which aws_completer)" aws
-fi
-
-if command -v doctl &>/dev/null; then
-    source <(doctl completion bash)
-fi
+# if command -v doctl &>/dev/null; then
+#     source <(doctl completion bash)
+# fi
 
 if command -v kubectl &>/dev/null; then
     source <(kubectl completion bash)
@@ -101,13 +105,13 @@ if command -v deno &>/dev/null; then
     source <(deno completions bash)
 fi
 
-if command -v scala-cli &>/dev/null; then
-    _scala-cli_completions() {
-        local IFS=$'\n'
-        eval "$(scala-cli complete bash-v1 "$((COMP_CWORD + 1))" "${COMP_WORDS[@]}")"
-    }
-    complete -F _scala-cli_completions scala-cli
+if command -v helm &>/dev/null; then
+    source <(helm completion bash)
 fi
+
+# if command -v poetry &>/dev/null; then
+#     source <(poetry completions bash)
+# fi
 
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     source /usr/share/bash-completion/bash_completion
@@ -118,15 +122,6 @@ if [ -f /usr/share/bash-completion/completions/git ]; then
     __git_complete dot __git_main
 fi
 
-if [ -f /etc/bash_completion.d/fzf ]; then
-    source /etc/bash_completion.d/fzf
-fi
-if [ -f /usr/share/fzf/shell/key-bindings.bash ]; then
-    source /usr/share/fzf/shell/key-bindings.bash
-fi
-if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
-    source /usr/share/doc/fzf/examples/key-bindings.bash
-fi
 if command -v fzf &>/dev/null && fzf --bash &>/dev/null; then
     eval "$(fzf --bash)"
 fi
