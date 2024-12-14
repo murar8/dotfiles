@@ -28,8 +28,13 @@ set -o noclobber # Disallow existing files to be overwritten by redirection of s
 # ignoreboth => Avoid saving consecutive identical commands, and commands that start with a space.
 export HISTCONTROL=erasedups:ignoreboth
 
-export HISTFILESIZE=1000000 # Expand the on disk history size.
-export HISTSIZE=1000000     # Expand the in memory history size.
+# Eternal bash history.
+# ---------------------
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTTIMEFORMAT="[%F %T] "
 
 ### Aliases
 
