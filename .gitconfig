@@ -1,9 +1,19 @@
 [init]
-	defaultBranch = main
+defaultBranch = main
 
 [rerere]
-	enabled = true
+enabled = true
 
 [user]
-	email = lnzmrr@gmail.com
-	name = Lorenzo Murarotto
+email = lnzmrr@gmail.com
+name = Lorenzo Murarotto
+
+[difftool "vscode"]
+cmd = code --wait --diff $LOCAL $REMOTE
+
+[difftool "nvimdiff"]
+cmd = nvim -d $LOCAL $REMOTE
+
+[difftool "vimdiff"]
+cmd = vim -d $LOCAL $REMOTE
+
