@@ -82,85 +82,33 @@ fi
 
 ### Completions
 
-if command -v terraform &>/dev/null; then
-    complete -C "$(which terraform)" terraform
+if [ -f "$HOME/.completions.bash" ]; then
+    source "$HOME/.completions.bash"
 fi
 
-# if command -v doctl &>/dev/null; then
-#     source <(doctl completion bash)
-# fi
+### IntelliJ
 
-if command -v kubectl &>/dev/null; then
-    source <(kubectl completion bash)
-fi
-
-if command -v devpod &>/dev/null; then
-    source <(devpod completion bash)
-fi
-
-if command -v minikube &>/dev/null; then
-    source <(minikube completion bash)
-fi
-
-if command -v rustup &>/dev/null; then
-    source <(rustup completions bash)
-    source <(rustup completions bash cargo)
-fi
-
-if command -v goldwarden &>/dev/null; then
-    source <(goldwarden completion bash)
-fi
-
-if command -v deno &>/dev/null; then
-    source <(deno completions bash)
-fi
-
-if command -v helm &>/dev/null; then
-    source <(helm completion bash)
-fi
-
-# if command -v poetry &>/dev/null; then
-#     source <(poetry completions bash)
-# fi
-
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-    source /usr/share/bash-completion/bash_completion
-fi
-
-if [ -f /usr/share/bash-completion/completions/git ]; then
-    source /usr/share/bash-completion/completions/git
-    __git_complete dot __git_main
-fi
-
-if command -v fzf &>/dev/null && fzf --bash &>/dev/null; then
-    eval "$(fzf --bash)"
-fi
-
-if command -v register-python-argcomplete &>/dev/null && command -v pipx &>/dev/null; then
-    eval "$(register-python-argcomplete pipx)"
+INTELLIJ_IDE=$(basename "$GIO_LAUNCHED_DESKTOP_FILE" .desktop | sed -n 's/jetbrains-\([^-]\+\)-.\+/\1/p')
+if [ -n "$INTELLIJ_IDE" ]; then
+    function ij() {
+        $INTELLIJ_IDE "$@"
+    }
 fi
 
 ### Editor
-INTELLIJ_IDE=$(basename "$GIO_LAUNCHED_DESKTOP_FILE" .desktop | sed -n 's/jetbrains-\([^-]\+\)-.\+/\1/p')
 
-if [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
-    EDITOR="$INTELLIJ_IDE --wait"
-    GIT_EXTERNAL_DIFF="$INTELLIJ_IDE diff"
-elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
-    EDITOR="$(which code) --wait"
-    GIT_EXTERNAL_DIFF="$(which code) --diff"
-elif command -v nvim &>/dev/null; then
-    EDITOR="$(which nvim)"
-    GIT_EXTERNAL_DIFF="$(which nvim) --diff"
-elif command -v vim &>/dev/null; then
-    EDITOR="$(which vim)"
-    GIT_EXTERNAL_DIFF="$(which vim) --diff"
-fi
-
-VISUAL=$EDITOR
 export VISUAL
 export EDITOR
-export GIT_EXTERNAL_DIFF
+VISUAL=$EDITOR
+if [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
+    EDITOR="$INTELLIJ_IDE --wait"
+elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
+    EDITOR="$(which code) --wait"
+elif command -v nvim &>/dev/null; then
+    EDITOR="$(which nvim)"
+elif command -v vim &>/dev/null; then
+    EDITOR="$(which vim)"
+fi
 
 ### Prompt
 
@@ -204,11 +152,13 @@ PROMPT_DIRTRIM=1 # Trim the working directory to the last directory name.
 
 ### Environment
 
+if command -v fzf &>/dev/null && fzf --bash &>/dev/null; then
+    eval "$(fzf --bash)"
+fi
+
 if command -v direnv &>/dev/null; then
     eval "$(direnv hook bash)"
 fi
-
-# NVM
 
 if [ -f "$HOME"/.nvm/nvm.sh ] && [ -f "$HOME"/.nvm/bash_completion ]; then
     export NVM_DIR="$HOME/.nvm"
@@ -217,13 +167,11 @@ if [ -f "$HOME"/.nvm/nvm.sh ] && [ -f "$HOME"/.nvm/bash_completion ]; then
 fi
 
 # rustup
-
 if [ -f "$HOME"/.cargo/env ]; then
     . "$HOME"/.cargo/env
 fi
 
 ### Local configuration
-
 if [ -f "$HOME"/.local.bashrc ]; then
     source "$HOME"/.local.bashrc
 fi
