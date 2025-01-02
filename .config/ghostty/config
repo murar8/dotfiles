@@ -1,0 +1,6 @@
+theme = GruvboxDarkHard
+font-family = FiraCode Nerd Font Mono
+mouse-hide-while-typing = true
+window-padding-balance = true
+window-decoration = false
+
