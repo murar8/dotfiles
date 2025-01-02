@@ -11,6 +11,11 @@ if [ -f /etc/bashrc ]; then
     source /etc/bashrc
 fi
 
+# Ghostty shell integration for Bash. This should be at the top of your bashrc!
+if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+    builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+fi
+
 ### Options
 
 shopt -s checkwinsize # Check the window size after each command and update the values of LINES and COLUMNS.
@@ -136,17 +141,26 @@ if command -v register-python-argcomplete &>/dev/null && command -v pipx &>/dev/
 fi
 
 ### Editor
+INTELLIJ_IDE=$(basename "$GIO_LAUNCHED_DESKTOP_FILE" .desktop | sed -n 's/jetbrains-\([^-]\+\)-.\+/\1/p')
 
-if command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
+if [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
+    EDITOR="$INTELLIJ_IDE --wait"
+    GIT_EXTERNAL_DIFF="$INTELLIJ_IDE diff"
+elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
     EDITOR="$(which code) --wait"
+    GIT_EXTERNAL_DIFF="$(which code) --diff"
 elif command -v nvim &>/dev/null; then
     EDITOR="$(which nvim)"
+    GIT_EXTERNAL_DIFF="$(which nvim) --diff"
 elif command -v vim &>/dev/null; then
     EDITOR="$(which vim)"
+    GIT_EXTERNAL_DIFF="$(which vim) --diff"
 fi
+
 VISUAL=$EDITOR
 export VISUAL
 export EDITOR
+export GIT_EXTERNAL_DIFF
 
 ### Prompt
 
