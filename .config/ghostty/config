@@ -1,7 +1,7 @@
 confirm-close-surface=false
 font-family=FiraCode Nerd Font Mono
 mouse-hide-while-typing=true
-theme=GruvboxDarkHard
+theme=GruvboxDark
 window-decoration=false
 window-height=1920
 window-padding-balance=true
