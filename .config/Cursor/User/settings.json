@@ -1,0 +1,79 @@
+{
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on"
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "JohnnyMorganz.stylua"
+  },
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.experimental.useTrueInlineView": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "diffEditor.maxComputationTime": 0,
+  "diffEditor.renderSideBySideInlineBreakpoint": 1500,
+  "dotfiles.installCommand": ".bootstrap",
+  "dotfiles.repository": "https://github.com/murar8/dotfiles",
+  "dotfiles.targetPath": "/tmp/dotfiles",
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSurroundingLines": 5,
+  "editor.fontFamily": "'Fira Code', monospace",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairsHorizontal": false,
+  "editor.minimap.autohide": true,
+  "editor.minimap.showSlider": "always",
+  "editor.minimap.size": "fill",
+  "editor.rulers": [80, 100, 120],
+  "editor.suggest.insertMode": "replace",
+  "explorer.incrementalNaming": "smart",
+  "explorer.sortOrder": "type",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "files.associations": {
+    "*.proto": "proto3",
+    ".env": "properties",
+    ".env.*": "properties",
+    ".helmignore": "ignore"
+  },
+  "files.watcherExclude": {
+    "**/.ammonite": true,
+    "**/.bloop": true,
+    "**/.metals": true
+  },
+  "git.autofetch": "all",
+  "git.confirmSync": false,
+  "git.ignoreMissingGitWarning": true,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.plusFeatures.enabled": false,
+  "merge-conflict.autoNavigateNextConflict.enabled": true,
+  "redhat.telemetry.enabled": true,
+  "redoclyOpenAPI.api.key": "sk_5emVozDNTBr2dlk5OZrgw7BPcKI=_G0xoX9QiAQ4HxgY7lR9klruX9bnTp3yLi79vulv9WGg=",
+  "redoclyOpenAPI.api.region": "us",
+  "rust-analyzer.inlayHints.chainingHints.enable": false,
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
+  "rust-analyzer.inlayHints.typeHints.enable": false,
+  "search.collapseResults": "auto",
+  "security.workspace.trust.enabled": false,
+  "shellformat.useEditorConfig": true,
+  "solidity.telemetry": true,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.mouseWheelScrollSensitivity": 0.5,
+  "terminal.integrated.smoothScrolling": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "window.newWindowDimensions": "maximized",
+  "workbench.colorTheme": "Gruvbox Dark Medium",
+  "workbench.commandPalette.preserveInput": true,
+  "workbench.editor.closeOnFileDelete": true,
+  "workbench.editor.scrollToSwitchTabs": true,
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.quickOpen.preserveInput": true
+}

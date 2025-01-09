@@ -1,0 +1,127 @@
+// vim:ft=jsonc
+[
+  {
+    "args": "<c-n>",
+    "command": "vscode-neovim.send",
+    "key": "ctrl+n",
+    "when": "neovim.init && editorFocus"
+  },
+  {
+    "args": "<c-s-l>",
+    "command": "vscode-neovim.send",
+    "key": "ctrl+shift+l",
+    "when": "neovim.init && editorFocus"
+  },
+
+  {
+    "key": "ctrl+/",
+    "command": "workbench.action.terminal.new",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.navigateLeft",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.navigateDown",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.navigateUp",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.navigateRight",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+
+  {
+    "key": "ctrl+up",
+    "command": "workbench.action.increaseViewHeight",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "ctrl+down",
+    "command": "workbench.action.decreaseViewHeight",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "ctrl+left",
+    "command": "workbench.action.decreaseViewWidth",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "ctrl+right",
+    "command": "workbench.action.increaseViewWidth",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+
+  {
+    "key": "alt+j",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "neovim.init && editorFocus"
+  },
+  {
+    "key": "alt+k",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "neovim.init && editorFocus"
+  },
+
+  {
+    "key": "shift+h",
+    "command": "workbench.action.previousEditor",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "shift+l",
+    "command": "workbench.action.nextEditor",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "[ b",
+    "command": "workbench.action.previousEditor",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "] b",
+    "command": "workbench.action.nextEditor",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+
+  {
+    "key": "] d",
+    "command": "editor.action.marker.next",
+    "when": "neovim.init && editorFocus && neovim.mode == normal"
+  },
+  {
+    "key": "[ d",
+    "command": "editor.action.marker.next",
+    "when": "neovim.init && editorFocus && neovim.mode == normal"
+  },
+  {
+    "key": "[ b",
+    "command": "workbench.action.previousEditor",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "] b",
+    "command": "workbench.action.nextEditor",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+
+  {
+    "key": "[ shift+b",
+    "command": "workbench.action.moveEditorLeftInGroup",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  },
+  {
+    "key": "] shift+b",
+    "command": "workbench.action.moveEditorRightInGroup",
+    "when": "(neovim.init && editorFocus && neovim.mode == normal) || !inputFocus"
+  }
+]
