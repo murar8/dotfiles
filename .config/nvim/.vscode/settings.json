@@ -1,4 +1,5 @@
 {
   "git.untrackedChanges": "hidden",
-  "Lua.diagnostics.globals": ["vim", "LazyVim"]
+  "Lua.diagnostics.globals": ["vim", "LazyVim"],
+  "stylua.targetReleaseVersion": "latest"
 }

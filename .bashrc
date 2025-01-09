@@ -74,6 +74,10 @@ dotup() {
     dot push origin main
 }
 
+cursor() {
+    exec "$(find "$HOME/.appimage" -name 'cursor-*.AppImage' -print | sort | tail -n1)" --no-sandbox "$@"
+}
+
 if command -v lazygit &>/dev/null; then
     lazydot() {
         GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit
@@ -97,9 +101,6 @@ fi
 
 ### Editor
 
-export VISUAL
-export EDITOR
-VISUAL=$EDITOR
 if [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
     EDITOR="$INTELLIJ_IDE --wait"
 elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
@@ -109,6 +110,10 @@ elif command -v nvim &>/dev/null; then
 elif command -v vim &>/dev/null; then
     EDITOR="$(which vim)"
 fi
+
+VISUAL=$EDITOR
+export VISUAL
+export EDITOR
 
 ### Prompt
 
