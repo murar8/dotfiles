@@ -74,10 +74,6 @@ dotup() {
     dot push origin main
 }
 
-cursor() {
-    exec "$(find "$HOME/.appimage" -name 'cursor-*.AppImage' -print | sort | tail -n1)" --no-sandbox "$@"
-}
-
 if command -v lazygit &>/dev/null; then
     lazydot() {
         GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit
@@ -90,11 +86,20 @@ if [ -f "$HOME/.completions.bash" ]; then
     source "$HOME/.completions.bash"
 fi
 
+# Cursor
+
+CURSOR_APPIMAGE=$(find "$HOME/.appimage" -name 'cursor-*.AppImage' -print | sort | tail -n1)
+if [ -n "$CURSOR_APPIMAGE" ]; then
+    cursor() {
+        exec "$CURSOR_APPIMAGE" --no-sandbox "$@"
+    }
+fi
+
 ### IntelliJ
 
 INTELLIJ_IDE=$(basename "$GIO_LAUNCHED_DESKTOP_FILE" .desktop | sed -n 's/jetbrains-\([^-]\+\)-.\+/\1/p')
 if [ -n "$INTELLIJ_IDE" ]; then
-    function ij() {
+    ij() {
         $INTELLIJ_IDE "$@"
     }
 fi
@@ -103,8 +108,10 @@ fi
 
 if [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
     EDITOR="$INTELLIJ_IDE --wait"
+elif [ -n "$CURSOR_TRACE_ID" ] && [ "$TERM_PROGRAM" = 'vscode' ]; then
+    EDITOR="$CURSOR_APPIMAGE --no-sandbox --wait"
 elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
-    EDITOR="$(which code) --wait"
+    EDITOR="code --wait"
 elif command -v nvim &>/dev/null; then
     EDITOR="$(which nvim)"
 elif command -v vim &>/dev/null; then
