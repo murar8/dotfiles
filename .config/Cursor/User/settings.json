@@ -1,3 +1,4 @@
+// vim:ft=jsonc
 {
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
@@ -36,7 +37,7 @@
   "explorer.incrementalNaming": "smart",
   "explorer.sortOrder": "type",
   "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
+    "vscodevim.vim": 1
   },
   "files.associations": {
     "*.proto": "proto3",
@@ -68,6 +69,42 @@
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.mouseWheelScrollSensitivity": 0.5,
   "terminal.integrated.smoothScrolling": true,
+  "vim.enableNeovim": true,
+  "vim.gdefault": true,
+  "editor.linkedEditing": false,
+  "vim.handleKeys": {
+    "<C-p>": false
+  },
+  "vim.highlightedyank.enable": true,
+  "vim.hlsearch": true,
+  "vim.leader": "<Space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<CR>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["<leader>", "<bs>"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    }
+  ],
+  "vim.overrideCopy": true,
+  "vim.useSystemClipboard": true,
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    },
+    {
+      "before": ["<leader>", "<bs>"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    }
+  ],
+  "vim.visualstar": true,
   "vsicons.dontShowNewVersionMessage": true,
   "window.newWindowDimensions": "maximized",
   "workbench.colorTheme": "Gruvbox Dark Medium",
