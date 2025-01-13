@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
+vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged", "BufEnter" }, {
 	pattern = { "*" },
 	callback = function()
 		local blacklist = { ".dotfiles", ".cache", ".local" }

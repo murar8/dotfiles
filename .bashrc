@@ -91,7 +91,7 @@ fi
 CURSOR_APPIMAGE=$(find "$HOME/.appimage" -name 'cursor-*.AppImage' -print | sort | tail -n1)
 if [ -n "$CURSOR_APPIMAGE" ]; then
     cursor() {
-        exec "$CURSOR_APPIMAGE" --no-sandbox "$@"
+        "$CURSOR_APPIMAGE" --no-sandbox "$@"
     }
 fi
 

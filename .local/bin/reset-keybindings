@@ -38,9 +38,10 @@ gsettings set org.gnome.desktop.wm.keybindings close "['<Alt>F4','<Super>q']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys email "['<Super>e']"
 
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/']"
-dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/binding "'<Super>e'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/binding "'<Super>u'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/command "'slack'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/name "'Slack'"
 
