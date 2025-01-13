@@ -1,5 +1,8 @@
 // vim:ft=jsonc
 {
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
@@ -29,6 +32,7 @@
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": "active",
   "editor.guides.bracketPairsHorizontal": false,
+  "editor.linkedEditing": false, // for vim multiple cursors
   "editor.minimap.autohide": true,
   "editor.minimap.showSlider": "always",
   "editor.minimap.size": "fill",
@@ -65,13 +69,13 @@
   "search.collapseResults": "auto",
   "security.workspace.trust.enabled": false,
   "shellformat.useEditorConfig": true,
-  "solidity.telemetry": true,
+  "solidity.telemetry": false,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.mouseWheelScrollSensitivity": 0.5,
   "terminal.integrated.smoothScrolling": true,
+  "vim.easymotion": true,
   "vim.enableNeovim": true,
   "vim.gdefault": true,
-  "editor.linkedEditing": false,
   "vim.handleKeys": {
     "<C-p>": false
   },
@@ -83,9 +87,30 @@
       "before": ["<CR>"],
       "commands": [":nohl"]
     },
+    // common
     {
       "before": ["<leader>", "<bs>"],
       "commands": ["workbench.action.closeActiveEditor"]
+    },
+    {
+      "before": ["<s-h>"],
+      "commands": ["workbench.action.previousEditor"]
+    },
+    {
+      "before": ["<s-l>"],
+      "commands": ["workbench.action.nextEditor"]
+    },
+    {
+      "before": ["<s-k>"],
+      "commands": ["editor.action.showHover"]
+    },
+    {
+      "before": ["[", "e"],
+      "commands": ["editor.action.marker.prev"]
+    },
+    {
+      "before": ["]", "e"],
+      "commands": ["editor.action.marker.next"]
     }
   ],
   "vim.overrideCopy": true,
@@ -99,9 +124,30 @@
       "before": ["<"],
       "commands": ["editor.action.outdentLines"]
     },
+    // common
     {
       "before": ["<leader>", "<bs>"],
       "commands": ["workbench.action.closeActiveEditor"]
+    },
+    {
+      "before": ["<s-h>"],
+      "commands": ["workbench.action.previousEditor"]
+    },
+    {
+      "before": ["<s-l>"],
+      "commands": ["workbench.action.nextEditor"]
+    },
+    {
+      "before": ["<s-k>"],
+      "commands": ["editor.action.showHover"]
+    },
+    {
+      "before": ["[", "e"],
+      "commands": ["editor.action.marker.prev"]
+    },
+    {
+      "before": ["]", "e"],
+      "commands": ["editor.action.marker.next"]
     }
   ],
   "vim.visualstar": true,
@@ -112,5 +158,7 @@
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.quickOpen.preserveInput": true
+  "workbench.quickOpen.preserveInput": true,
+  "cursor.chat.terminalShowHoverHint": false,
+  "cursor.cpp.enablePartialAccepts": true
 }
