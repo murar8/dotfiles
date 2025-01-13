@@ -88,11 +88,13 @@ fi
 
 # Cursor
 
-CURSOR_APPIMAGE=$(find "$HOME/.appimage" -name 'cursor-*.AppImage' -print | sort | tail -n1)
-if [ -n "$CURSOR_APPIMAGE" ]; then
-    cursor() {
-        "$CURSOR_APPIMAGE" --no-sandbox "$@"
-    }
+if [ -d "$HOME/.appimage" ]; then
+    CURSOR_APPIMAGE=$(find "$HOME/.appimage" -name 'cursor-*.AppImage' -print | sort | tail -n1)
+    if [ -n "$CURSOR_APPIMAGE" ]; then
+        cursor() {
+            "$CURSOR_APPIMAGE" --no-sandbox "$@"
+        }
+    fi
 fi
 
 ### IntelliJ
