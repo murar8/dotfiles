@@ -1,8 +1,5 @@
 // vim:ft=jsonc
 {
-  "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
@@ -17,6 +14,20 @@
   "[lua]": {
     "editor.defaultFormatter": "JohnnyMorganz.stylua"
   },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "cursor.chat.terminalShowHoverHint": false,
+  "dev.containers.defaultExtensionsIfInstalledLocally": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "GitHub.vscode-pull-request-github",
+    "eamodio.gitlens",
+    "ms-vsliveshare.vsliveshare",
+    "visualstudioexptteam.intellicode-api-usage-examples",
+    "visualstudioexptteam.vscodeintellicode",
+    "yoavbls.pretty-ts-errors"
+  ],
   "diffEditor.experimental.showMoves": true,
   "diffEditor.experimental.useTrueInlineView": true,
   "diffEditor.ignoreTrimWhitespace": true,
@@ -158,7 +169,5 @@
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.quickOpen.preserveInput": true,
-  "cursor.chat.terminalShowHoverHint": false,
-  "cursor.cpp.enablePartialAccepts": true
+  "workbench.quickOpen.preserveInput": true
 }

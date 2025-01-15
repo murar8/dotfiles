@@ -155,8 +155,8 @@ prompt() {
     PS1="${cyan}\u${blue}@\h ${purple}\w"
     if [[ -n $git_branch ]]; then PS1+=" ${green}${git_branch}"; fi
     if [[ $git_dirty -gt 0 ]]; then PS1+="${yellow}[${git_dirty}]"; fi
-    if [[ $direnv_allowed == 'true' ]]; then PS1+=" ${green}[direnv]"; fi
-    if [[ $direnv_allowed == 'false' ]]; then PS1+=" ${red}[direnv]"; fi
+    if [[ $direnv_allowed == 'true' ]]; then PS1+=" ${green}🔒"; fi
+    if [[ $direnv_allowed == 'false' ]]; then PS1+=" ${red}🔒"; fi
     if [[ exit_code -eq 0 ]]; then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
     PS1+=" ${clear}"
 }
