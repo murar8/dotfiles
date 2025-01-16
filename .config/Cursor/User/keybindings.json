@@ -5,6 +5,11 @@
     "command": "terminal.focus"
   },
 
+  {
+    "key": "ctrl+s",
+    "command": "saveAll"
+  },
+
   // VSCode attempt to emulate https://github.com/terryma/vim-multiple-cursors
   // https://github.com/VSCodeVim/Vim/issues/3588#issuecomment-1139373669
 
