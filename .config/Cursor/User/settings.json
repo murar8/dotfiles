@@ -3,8 +3,11 @@
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "vscode.json-language-features",
     "editor.wordWrap": "on"
   },
   "[jsonc]": {
@@ -18,16 +21,35 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "cursor.chat.terminalShowHoverHint": false,
-  "dev.containers.defaultExtensionsIfInstalledLocally": [
-    "GitHub.copilot",
-    "GitHub.copilot-chat",
-    "GitHub.vscode-pull-request-github",
+  "cursor.cmdk.useThemedDiffBackground": true,
+  "cursor.composer.collapsePaneInputBoxPills": true,
+  "cursor.composer.renderPillsInsteadOfBlocks": true,
+  "cursor.diffs.useCharacterLevelDiffs": true,
+  "dev.containers.defaultExtensions": [
     "eamodio.gitlens",
+    "aaron-bond.better-comments",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
+    "mechatroner.rainbow-csv",
+    "mikestead.dotenv",
     "ms-vsliveshare.vsliveshare",
-    "visualstudioexptteam.intellicode-api-usage-examples",
-    "visualstudioexptteam.vscodeintellicode",
+    "redhat.vscode-yaml",
+    "tamasfe.even-better-toml",
+    "timonwong.shellcheck",
+    "usernamehw.errorlens",
+    "xabikos.javascriptsnippets",
     "yoavbls.pretty-ts-errors"
   ],
+  "dev.containers.defaultFeatures": {
+    "ghcr.io/devcontainers-extra/features/act:1": {},
+    "ghcr.io/devcontainers-extra/features/direnv:1": {},
+    "ghcr.io/devcontainers-extra/features/fd:1": {},
+    "ghcr.io/devcontainers-extra/features/fzf:1": {},
+    "ghcr.io/devcontainers-extra/features/ripgrep:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {}
+  },
   "diffEditor.experimental.showMoves": true,
   "diffEditor.experimental.useTrueInlineView": true,
   "diffEditor.ignoreTrimWhitespace": true,
@@ -68,6 +90,7 @@
   "git.autofetch": "all",
   "git.confirmSync": false,
   "git.ignoreMissingGitWarning": true,
+  "gitlens.ai.model": "openai:gpt-4o",
   "gitlens.codeLens.enabled": false,
   "gitlens.plusFeatures.enabled": false,
   "merge-conflict.autoNavigateNextConflict.enabled": true,
@@ -169,5 +192,8 @@
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.quickOpen.preserveInput": true
+  "workbench.quickOpen.preserveInput": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
