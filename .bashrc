@@ -86,17 +86,6 @@ if [ -f "$HOME/.completions.bash" ]; then
     source "$HOME/.completions.bash"
 fi
 
-# Cursor
-
-if [ -d "$HOME/.appimage" ]; then
-    CURSOR_APPIMAGE=$(find "$HOME/.appimage" -name 'cursor-*.AppImage' -print | sort | tail -n1)
-    if [ -n "$CURSOR_APPIMAGE" ]; then
-        cursor() {
-            "$CURSOR_APPIMAGE" --no-sandbox "$@"
-        }
-    fi
-fi
-
 ### IntelliJ
 
 INTELLIJ_IDE=$(basename "$GIO_LAUNCHED_DESKTOP_FILE" .desktop | sed -n 's/jetbrains-\([^-]\+\)-.\+/\1/p')
@@ -110,8 +99,8 @@ fi
 
 if [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
     EDITOR="$INTELLIJ_IDE --wait"
-elif [ -n "$CURSOR_TRACE_ID" ] && [ "$TERM_PROGRAM" = 'vscode' ]; then
-    EDITOR="$CURSOR_APPIMAGE --no-sandbox --wait"
+elif command -v cursor &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
+    EDITOR="cursor --wait"
 elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
     EDITOR="code --wait"
 elif command -v nvim &>/dev/null; then
