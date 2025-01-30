@@ -25,14 +25,14 @@ for i in {1..9}; do
   gsettings set org.gnome.shell.keybindings open-new-window-application-"$i" "@as []" # disable Super+Ctrl+1-9
 done
 
-gsettings set org.gnome.desktop.wm.keybindings maximize "@as []"                           # disable Super+Up
-gsettings set org.gnome.desktop.wm.keybindings minimize "['<Super>c']"                     # disable Super+h
-gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Alt>F5']"                    # disable Super+Down
-gsettings set org.gnome.mutter.keybindings toggle-tiled-left "@as []"                      # disable Super+Left
-gsettings set org.gnome.mutter.keybindings toggle-tiled-right "@as []"                     # disable Super+Right
-gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "['<Super>r']"        # disable Super+Escape
-gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super>Escape']" # disable Super+l
-gsettings set org.gnome.shell.keybindings toggle-message-tray "['<Super>m']"               # disable Super+v
+gsettings set org.gnome.desktop.wm.keybindings maximize "['<Super>period']"           # disable Super+Up
+gsettings set org.gnome.desktop.wm.keybindings minimize "['<Super>comma']"            # disable Super+h
+gsettings set org.gnome.desktop.wm.keybindings unmaximize "@as []"                    # disable Super+Down
+gsettings set org.gnome.mutter.keybindings toggle-tiled-left "@as []"                 # disable Super+Left
+gsettings set org.gnome.mutter.keybindings toggle-tiled-right "@as []"                # disable Super+Right
+gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "@as []"         # disable Super+Escape
+gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super>o']" # disable Super+l
+gsettings set org.gnome.shell.keybindings toggle-message-tray "['<Super>v']"          # disable Super+v
 
 gsettings set org.gnome.desktop.wm.keybindings close "['<Alt>F4','<Super>q']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
@@ -41,7 +41,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys email "['<Super>e']"
 
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/']"
-dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/binding "'<Super>u'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/binding "'<Super>r'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/command "'slack'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/name "'Slack'"
 
