@@ -1,18 +1,51 @@
-[init]
-defaultBranch = main
-
-[rerere]
-enabled = true
-
 [user]
-email = lnzmrr@gmail.com
-name = Lorenzo Murarotto
+        email = lnzmrr@gmail.com
+        name = Lorenzo Murarotto
 
 [difftool "vscode"]
-cmd = code --wait --diff $LOCAL $REMOTE
-
+        cmd = code --wait --diff $LOCAL $REMOTE
 [difftool "nvimdiff"]
-cmd = nvim -d $LOCAL $REMOTE
-
+        cmd = nvim -d $LOCAL $REMOTE
 [difftool "vimdiff"]
-cmd = vim -d $LOCAL $REMOTE
+        cmd = vim -d $LOCAL $REMOTE
+
+# https://blog.gitbutler.com/how-git-core-devs-configure-git
+
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
+[init]
+        defaultBranch = main
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+
+[rerere]
+        enabled = true
+        autoupdate = true
+[rebase]
+        updateRefs = true
+
+# https://dandavison.github.io/delta/get-started.html
+
+[core]
+        pager = delta
+[interactive]
+        diffFilter = delta --color-only
+[delta]
+        navigate = true    # use n and N to move between diff sections
+[merge]
+        conflictstyle = zdiff3
