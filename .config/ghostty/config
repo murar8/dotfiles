@@ -1,11 +1,11 @@
 #vim: ft=ini
 confirm-close-surface=false
 font-family=FiraCode Nerd Font Mono
+keybind = ctrl+shift+j=unbind
 mouse-hide-while-typing=true
+shell-integration-features = no-cursor
 theme=GruvboxDark
 window-decoration=false
-window-height=1920
+window-inherit-working-directory=true
 window-padding-balance=true
-window-width=1080
-
-keybind = ctrl+shift+j=unbind
+maximize=true
