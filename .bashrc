@@ -11,11 +11,6 @@ if [ -f /etc/bashrc ]; then
     source /etc/bashrc
 fi
 
-# Ghostty shell integration for Bash. This should be at the top of your bashrc!
-if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
-    builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
-fi
-
 ### Options
 
 shopt -s checkwinsize # Check the window size after each command and update the values of LINES and COLUMNS.
@@ -26,6 +21,8 @@ shopt -s dotglob      # Include filenames beginning with a dot in the results of
 shopt -s nullglob     # When a glob expands to nothing, make it an empty string.
 
 set -o noclobber # Disallow existing files to be overwritten by redirection of shell output.
+
+set -o vi # Use vi key bindings in the shell.
 
 ### History
 
@@ -99,9 +96,7 @@ fi
 
 if [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
     EDITOR="$INTELLIJ_IDE --wait"
-elif command -v cursor &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
-    EDITOR="cursor --wait"
-elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ]; then
+elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ] && [ -z "$CURSOR_TRACE_ID" ]; then
     EDITOR="code --wait"
 elif command -v nvim &>/dev/null; then
     EDITOR="$(which nvim)"
@@ -178,3 +173,9 @@ fi
 if [ -f "$HOME"/.local.bashrc ]; then
     source "$HOME"/.local.bashrc
 fi
+
+# add CloudyPad CLI PATH
+export PATH=$PATH:/home/lmurarotto/.cloudypad/bin
+
+# add Pulumi to the PATH
+export PATH=$PATH:/home/lmurarotto/.pulumi/bin
