@@ -5,7 +5,7 @@ gsettings set org.gnome.desktop.datetime automatic-timezone "true"
 gsettings set org.gnome.desktop.wm.preferences num-workspaces "10"
 gsettings set org.gnome.mutter dynamic-workspaces "false"
 gsettings set org.gnome.mutter edge-tiling "false"
-gsettings set org.gnome.mutter workspaces-only-on-primary "false"
+gsettings set org.gnome.mutter workspaces-only-on-primary "true"
 
 gsettings reset-recursively org.gnome.desktop.wm.keybindings
 gsettings reset-recursively org.gnome.mutter.keybindings
@@ -40,14 +40,20 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t'
 gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
 # gsettings set org.gnome.settings-daemon.plugins.media-keys email "['<Super>e']"
 
+gsettings set org.gnome.desktop.wm.keybindings switch-applications "@as []"
+
 dconf reset -f /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/
-dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/']"
+
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "[ \
+  '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/', \
+  '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/' \
+]"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/binding "'<Super>r'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/command "'flatpak run com.slack.Slack'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/name "'Slack'"
-dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/']"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/binding "'<Super>e'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/command "'flatpak run dev.zed.Zed'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/name "'Editor'"
 
 dconf write /org/gnome/shell/extensions/tiling-assistant/activate-layout0 "@as []"
 dconf write /org/gnome/shell/extensions/tiling-assistant/activate-layout1 "@as []"
