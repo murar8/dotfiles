@@ -173,9 +173,3 @@ fi
 if [ -f "$HOME"/.local.bashrc ]; then
     source "$HOME"/.local.bashrc
 fi
-
-# add CloudyPad CLI PATH
-export PATH=$PATH:/home/lmurarotto/.cloudypad/bin
-
-# add Pulumi to the PATH
-export PATH=$PATH:/home/lmurarotto/.pulumi/bin
