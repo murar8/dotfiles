@@ -1,0 +1,18 @@
+[
+  {
+    "context": "Editor && edit_prediction",
+    "bindings": { "alt-p": "editor::AcceptEditPrediction" } // default alt-l
+  },
+  {
+    "context": "Editor && edit_prediction_conflict",
+    "bindings": { "alt-p": "editor::AcceptEditPrediction" } // default alt-l
+  },
+  {
+    "context": "GitCommit > Editor",
+    "bindings": { "alt-p": "git::GenerateCommitMessage" } // default alt-l
+  },
+  {
+    "context": "GitPanel > Editor",
+    "bindings": { "alt-p": "git::GenerateCommitMessage" } // default alt-l
+  }
+]
