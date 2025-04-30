@@ -1,0 +1,32 @@
+{
+  "load_direnv": "shell_hook",
+  "edit_predictions": { "mode": "subtle" },
+  "indent_guides": { "enabled": true, "coloring": "indent_aware" },
+  "format_on_save": "prettier",
+  "vim_mode": true,
+  "vim": { "use_smartcase_find": true },
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "ui_font_family": "FontAwesome",
+  "buffer_font_family": "FiraCode Nerd Font",
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Dark"
+  },
+  "features": { "edit_prediction_provider": "zed" },
+  "assistant": {
+    "version": "2",
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-latest"
+    }
+  },
+  "terminal": {
+    "font_family": "FiraCode Nerd Font",
+    "env": {
+      "EDITOR": "zed --wait",
+      "VISUAL": "zed --wait"
+    }
+  }
+}
