@@ -33,9 +33,6 @@
         pruneTags = true
         all = true
 
-[rerere]
-        enabled = true
-        autoupdate = true
 [rebase]
         updateRefs = true
 
