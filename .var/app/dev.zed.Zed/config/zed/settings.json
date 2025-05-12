@@ -1,32 +1,62 @@
 {
-  "load_direnv": "shell_hook",
-  "edit_predictions": { "mode": "subtle" },
-  "indent_guides": { "enabled": true, "coloring": "indent_aware" },
-  "format_on_save": "prettier",
+  // Editor Behavior
   "vim_mode": true,
   "vim": { "use_smartcase_find": true },
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
-  "ui_font_family": "FontAwesome",
+  "edit_predictions": { "mode": "eager" },
+  "load_direnv": "shell_hook",
+  "restore_on_startup": "last_workspace",
+
+  "format_on_save": {
+    "external": {
+      "command": "npx",
+      "arguments": [
+        "prettier",
+        "--ignore-unknown",
+        "--stdin-filepath",
+        "{buffer_path}"
+      ]
+    }
+  },
+
+  // UI & Visual Settings
+  "ui_font_size": 15,
+  "buffer_font_size": 15,
+  "ui_font_family": "FiraCode Nerd Font",
   "buffer_font_family": "FiraCode Nerd Font",
+  "indent_guides": { "enabled": true, "coloring": "indent_aware" },
   "theme": {
     "mode": "system",
     "light": "Gruvbox Light",
     "dark": "Gruvbox Dark"
   },
-  "features": { "edit_prediction_provider": "zed" },
-  "assistant": {
-    "version": "2",
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
-    }
-  },
+
+  // Terminal Configuration
   "terminal": {
     "font_family": "FiraCode Nerd Font",
     "env": {
       "EDITOR": "zed --wait",
       "VISUAL": "zed --wait"
+    }
+  },
+
+  // Panel Configuration
+  "notification_panel": { "dock": "left" },
+  "chat_panel": { "dock": "left" },
+
+  // AI & Integration Features
+  "features": { "edit_prediction_provider": "zed" },
+  "agent": {
+    "default_profile": "write",
+    "always_allow_tool_actions": true,
+    "inline_assistant_model": {
+      "provider": "anthropic",
+      "model": "claude-3-7-sonnet-latest"
+    },
+    "version": "2",
+    "dock": "left",
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-thinking-latest"
     }
   }
 }
