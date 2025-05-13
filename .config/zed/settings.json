@@ -6,15 +6,19 @@
   "load_direnv": "shell_hook",
   "restore_on_startup": "last_workspace",
 
-  "format_on_save": {
-    "external": {
-      "command": "npx",
-      "arguments": [
-        "prettier",
-        "--ignore-unknown",
-        "--stdin-filepath",
-        "{buffer_path}"
-      ]
+  "languages": {
+    "TypeScript": {
+      "format_on_save": {
+        "external": {
+          "command": "npx",
+          "arguments": [
+            "prettier",
+            "--ignore-unknown",
+            "--stdin-filepath",
+            "{buffer_path}"
+          ]
+        }
+      }
     }
   },
 
