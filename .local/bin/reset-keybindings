@@ -13,12 +13,14 @@ gsettings reset-recursively org.gnome.mutter.wayland.keybindings
 gsettings reset-recursively org.gnome.settings-daemon.plugins.media-keys
 gsettings reset-recursively org.gnome.shell.keybindings
 
-gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
-for i in {1..10}; do
-  gsettings set org.gnome.shell.extensions.dash-to-dock app-hotkey-"$i" "@as []"
-  gsettings set org.gnome.shell.extensions.dash-to-dock app-shift-hotkey-"$i" "@as []"
-  gsettings set org.gnome.shell.extensions.dash-to-dock app-ctrl-hotkey-"$i" "@as []"
-done
+if gnome-extensions list | grep -q "dash-to-dock"; then
+  gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
+  for i in {1..10}; do
+    gsettings set org.gnome.shell.extensions.dash-to-dock app-hotkey-"$i" "@as []"
+    gsettings set org.gnome.shell.extensions.dash-to-dock app-shift-hotkey-"$i" "@as []"
+    gsettings set org.gnome.shell.extensions.dash-to-dock app-ctrl-hotkey-"$i" "@as []"
+  done
+fi
 
 for i in {1..9}; do
   gsettings set org.gnome.shell.keybindings switch-to-application-"$i" "@as []"       # disable Super+1-9
@@ -36,7 +38,7 @@ gsettings set org.gnome.shell.keybindings toggle-message-tray "@as []"          
 
 gsettings set org.gnome.desktop.wm.keybindings close "['<Alt>F4','<Super>q']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
-gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t']" || true
 gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
 # gsettings set org.gnome.settings-daemon.plugins.media-keys email "['<Super>e']"
 
