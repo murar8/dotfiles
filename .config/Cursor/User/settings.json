@@ -1,1 +1,269 @@
-/home/lmurarotto/.config/Code/User/settings.json
+// vim:ft=jsonc
+{
+  "[dockerfile]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on"
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "JohnnyMorganz.stylua"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cursor.composer.collapsePaneInputBoxPills": true,
+  "cursor.composer.shouldAllowCustomModes": true,
+  "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "cursor.cpp.disabledLanguages": ["search-result"],
+  "cursor.cpp.enablePartialAccepts": true,
+  "cursor.diffs.useCharacterLevelDiffs": true,
+  "cursor.terminal.usePreviewBox": true,
+  "dev.containers.defaultExtensions": [
+    "eamodio.gitlens",
+    "aaron-bond.better-comments",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
+    "mechatroner.rainbow-csv",
+    "mikestead.dotenv",
+    "ms-vsliveshare.vsliveshare",
+    "redhat.vscode-yaml",
+    "tamasfe.even-better-toml",
+    "timonwong.shellcheck",
+    "usernamehw.errorlens",
+    "xabikos.javascriptsnippets",
+    "yoavbls.pretty-ts-errors"
+  ],
+  "dev.containers.defaultFeatures": {
+    "ghcr.io/devcontainers-extra/features/act:1": {},
+    "ghcr.io/devcontainers-extra/features/direnv:1": {},
+    "ghcr.io/devcontainers-extra/features/fd:1": {},
+    "ghcr.io/devcontainers-extra/features/fzf:1": {},
+    "ghcr.io/devcontainers-extra/features/ripgrep:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {}
+  },
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.experimental.useTrueInlineView": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.maxComputationTime": 0,
+  "diffEditor.renderSideBySideInlineBreakpoint": 1500,
+  "dotfiles.installCommand": ".bootstrap",
+  "dotfiles.repository": "https://github.com/murar8/dotfiles",
+  "dotfiles.targetPath": "/tmp/dotfiles",
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSurroundingLines": 5,
+  "editor.fontFamily": "'Fira Code', monospace",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairsHorizontal": false,
+  "editor.linkedEditing": false, // for vim multiple cursors
+  "editor.minimap.autohide": true,
+  "editor.minimap.showSlider": "always",
+  "editor.minimap.size": "fill",
+  "editor.rulers": [80, 100, 120],
+  "editor.suggest.insertMode": "replace",
+  "editor.wordWrap": "off",
+  "explorer.incrementalNaming": "smart",
+  "explorer.sortOrder": "type",
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+  "files.associations": {
+    "*.proto": "proto3",
+    ".env": "properties",
+    ".env.*": "properties",
+    ".helmignore": "ignore"
+  },
+  "files.watcherExclude": {
+    "**/.ammonite": true,
+    "**/.bloop": true,
+    "**/.metals": true
+  },
+  "git.autofetch": "all",
+  "git.confirmSync": false,
+  "git.ignoreMissingGitWarning": true,
+  "githubPullRequests.fileListLayout": "tree",
+  "gitlens.codeLens.enabled": false,
+  "gitlens.keymap": "none",
+  "gitlens.plusFeatures.enabled": false,
+  "idf.espIdfPath": "/home/lmurarotto/.esp-idf/v5.4.1/esp-idf",
+  "idf.gitPath": "git",
+  "idf.hasWalkthroughBeenShown": true,
+  "idf.pythonInstallPath": "/usr/bin/python3",
+  "idf.showOnboardingOnInit": false,
+  "idf.toolsPath": "/home/lmurarotto/.espressif",
+  "lldb.suppressUpdateNotifications": true,
+  "makefile.configureOnOpen": true,
+  "merge-conflict.autoNavigateNextConflict.enabled": true,
+  "redhat.telemetry.enabled": true,
+  "rust-analyzer.inlayHints.chainingHints.enable": false,
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
+  "rust-analyzer.inlayHints.typeHints.enable": false,
+  "search.collapseResults": "alwaysExpand",
+  "security.workspace.trust.enabled": false,
+  "shellformat.useEditorConfig": true,
+  "snyk.advanced.cliPath": "/home/lmurarotto/.local/share/snyk/vscode-cli/snyk-linux",
+  "snyk.folderConfigs": [
+    {
+      "baseBranch": "main",
+      "folderPath": "/home/lmurarotto/Documents/Personal/dwc-keeper-idf",
+      "localBranches": ["main"]
+    }
+  ],
+  "snyk.trustedFolders": [
+    "/home/lmurarotto/Documents/Koda-Health/Koda-web",
+    "/home/lmurarotto/Documents/Personal/mongodb-queue",
+    "/home/lmurarotto/Downloads/boot",
+    "/home/lmurarotto/Documents/world-of-v/wov-marketplace-frontend",
+    "/home/lmurarotto/Documents/world-of-v/wov-marketplace-backend",
+    "/home/lmurarotto/Documents/Personal/mongomq",
+    "/home/lmurarotto/Downloads/OpenCore-1.0.3-DEBUG",
+    "/home/lmurarotto/Downloads/OpenCore-1.0.3-DEBUG",
+    "/home/lmurarotto/.local/share/gnome-shell/extensions/junk-notification-cleaner@murar8.github.com",
+    "/home/lmurarotto/Downloads/hackintosh/ryzen-hackintosh",
+    "/home/lmurarotto/Downloads/p2p-fix",
+    "/home/lmurarotto/Downloads/p2p-fix",
+    "/home/lmurarotto/Downloads/cloud-rig",
+    "/home/lmurarotto/Documents/Personal/local-jwks-server",
+    "/home/lmurarotto/Documents/Personal/junk-notification-cleaner",
+    "/home/lmurarotto/Downloads/vm-host-modules",
+    "/home/lmurarotto/Downloads/vm-host-modules",
+    "/home/lmurarotto/Downloads/vmware-host-modules",
+    "/home/lmurarotto/Downloads/old/vm-host-modules",
+    "/home/lmurarotto/Documents/Personal/cloud-rig",
+    "/home/lmurarotto/Downloads/cloudypad",
+    "/home/lmurarotto/Documents/Personal/bwmap",
+    "/home/lmurarotto/Documents/Personal/bw-tidy",
+    "/home/lmurarotto/Downloads/dwc-meter",
+    "/home/lmurarotto/Downloads/dwc-keeper-idf"
+  ],
+  "snyk.yesWelcomeNotification": false,
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.action.focusActiveEditorGroup",
+    "workbench.action.closeOtherEditors",
+    "workbench.action.closeAllEditors",
+    "workbench.action.closeEditorsToTheLeft",
+    "workbench.action.closeEditorsToTheRight",
+    "workbench.action.toggleSidebarVisibility",
+    "composer.newAgentChat",
+    "composer.startComposerPrompt",
+    "workbench.action.openEditorAtIndex1",
+    "workbench.action.openEditorAtIndex2",
+    "workbench.action.openEditorAtIndex3",
+    "workbench.action.openEditorAtIndex4",
+    "workbench.action.openEditorAtIndex5",
+    "workbench.action.openEditorAtIndex6",
+    "workbench.action.openEditorAtIndex7",
+    "workbench.action.openEditorAtIndex8",
+    "workbench.action.openEditorAtIndex9",
+    "workbench.action.openEditorAtIndex"
+  ],
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.mouseWheelScrollSensitivity": 0.5,
+  "terminal.integrated.persistentSessionReviveProcess": "never",
+  "terminal.integrated.smoothScrolling": true,
+  "vim.easymotion": true,
+  "vim.enableNeovim": true,
+  "vim.gdefault": true,
+  "vim.handleKeys": {
+    "<C-k>": false,
+    "<C-p>": false
+  },
+  "vim.highlightedyank.enable": true,
+  "vim.hlsearch": true,
+  "vim.leader": "<Space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<s-k>"],
+      "commands": ["editor.action.showHover"]
+    },
+    {
+      "before": ["u"],
+      "commands": ["undo"]
+    },
+    {
+      "before": ["<C-r>"],
+      "commands": ["redo"]
+    },
+    {
+      "before": ["<CR>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["[", "e"],
+      "commands": ["editor.action.marker.prev"]
+    },
+    {
+      "before": ["]", "e"],
+      "commands": ["editor.action.marker.next"]
+    },
+    {
+      "before": ["[", "c"],
+      "commands": ["workbench.action.editor.previousChange"]
+    },
+    {
+      "before": ["]", "c"],
+      "commands": ["workbench.action.editor.nextChange"]
+    },
+    {
+      "before": ["[", "["],
+      "commands": ["goToPreviousReference"]
+    },
+    {
+      "before": ["]", "]"],
+      "commands": ["goToNextReference"]
+    }
+  ],
+  "vim.overrideCopy": true,
+  "vim.targets.enable": true,
+  "vim.useSystemClipboard": true,
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<s-k>"],
+      "commands": ["editor.action.showHover"]
+    },
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    }
+  ],
+  "vim.visualstar": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "window.menuBarVisibility": "hidden",
+  "window.newWindowDimensions": "maximized",
+  "window.titleBarStyle": "custom",
+  "workbench.activityBar.orientation": "vertical",
+  "workbench.colorTheme": "Gruvbox Dark Hard",
+  "workbench.commandPalette.preserveInput": true,
+  "workbench.editor.closeOnFileDelete": true,
+  "workbench.editor.scrollToSwitchTabs": true,
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.quickOpen.preserveInput": true
+}
