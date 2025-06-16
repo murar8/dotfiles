@@ -1,7 +1,7 @@
 return {
 	"m4xshen/hardtime.nvim",
 	dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-	event = { "BufRead" },
+	event = {},
 	keys = {
 		{ "<leader>Te", "<cmd>Hardtime enable<cr>", desc = "Enable Hardtime" },
 		{ "<leader>Td", "<cmd>Hardtime disable<cr>", desc = "Disable Hardtime" },
