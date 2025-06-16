@@ -1,1 +1,27 @@
-/home/lmurarotto/.config/Code/User/snippets/snippets.code-snippets
+{
+  "Console Debug": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "cdb",
+    "body": "console.log('${1:object}:', ${1:object})"
+  },
+  "Console Log": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "clo",
+    "body": "console.log(${1:object})"
+  },
+  "Console Warn": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "cwa",
+    "body": "console.warn(${1:object})"
+  },
+  "Console Error": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "cer",
+    "body": "console.error(${1:object})"
+  },
+  "Unimplemented": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "unp",
+    "body": "throw new Error('Unimplemented!')"
+  },
+}
