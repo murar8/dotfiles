@@ -112,11 +112,11 @@ export EDITOR
 
 ### Prompt
 
-yellow='\[\033[33m\]'
+# yellow='\[\033[33m\]'
 blue='\[\033[34m\]'
 clear='\[\033[0m\]'
 cyan='\[\033[36m\]'
-green='\[\033[32m\]'
+# green='\[\033[32m\]'
 purple='\[\033[35m\]'
 red='\[\033[31m\]'
 white='\[\033[37m\]'
@@ -126,23 +126,23 @@ prompt() {
 
     history -a # Append the current session history to the content of the history file.
 
-    local git_branch
-    local git_dirty
-    local direnv_allowed
-
+    local git_ps1
     if command -v git &>/dev/null; then
-        git_branch=$(git symbolic-ref --short HEAD 2>/dev/null | sed 's/\(.\{16\}\).*\(.\{16\}\)/\1...\2/')
-        git_dirty=$(git status --porcelain 2>/dev/null | wc -l)
+        export GIT_PS1_SHOWUPSTREAM="auto"
+        export GIT_PS1_SHOWDIRTYSTATE=true
+        export GIT_PS1_SHOWCOLORHINTS=true
+        export GIT_PS1_SHOWUNTRACKEDFILES=true
+        git_ps1=$(__git_ps1)
     fi
+
     if command -v direnv &>/dev/null; then
         direnv_allowed=$(direnv status | grep -oP 'Found RC allowed \K\w+')
     fi
 
     PS1="${cyan}\u${blue}@\h ${purple}\w"
-    if [[ -n $git_branch ]]; then PS1+=" ${green}${git_branch}"; fi
-    if [[ $git_dirty -gt 0 ]]; then PS1+="${yellow}[${git_dirty}]"; fi
-    if [[ $direnv_allowed == 'true' ]]; then PS1+=" ${green}🔒"; fi
-    if [[ $direnv_allowed == 'false' ]]; then PS1+=" ${red}🔒"; fi
+    if [[ -n $git_ps1 ]]; then PS1+="${clear}${git_ps1}"; fi
+    if [[ $direnv_allowed == 'true' ]]; then PS1+=" 🔓"; fi
+    if [[ $direnv_allowed == 'false' ]]; then PS1+=" 🔐"; fi
     if [[ exit_code -eq 0 ]]; then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
     PS1+=" ${clear}"
 }

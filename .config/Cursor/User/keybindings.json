@@ -127,6 +127,7 @@
     "key": "alt+n",
     "command": "composer.startComposerPrompt"
   },
+  // for claude code
   {
     "key": "shift+enter",
     "command": "workbench.action.terminal.sendSequence",
