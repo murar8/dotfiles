@@ -2,9 +2,8 @@
   // Editor Behavior
   "vim_mode": true,
   "vim": { "use_smartcase_find": true },
-  "edit_predictions": { "mode": "eager" },
   "load_direnv": "shell_hook",
-  "restore_on_startup": "last_workspace",
+  "restore_on_startup": "none",
 
   "languages": {
     "TypeScript": {
@@ -34,6 +33,8 @@
     "dark": "Gruvbox Dark"
   },
 
+  "edit_predictions": { "mode": "eager" },
+
   // Terminal Configuration
   "terminal": {
     "font_family": "FiraCode Nerd Font",
@@ -48,19 +49,19 @@
   "chat_panel": { "dock": "left" },
 
   // AI & Integration Features
-  "features": { "edit_prediction_provider": "zed" },
+  "features": { "edit_prediction_provider": "supermaven" },
   "agent": {
     "default_profile": "write",
     "always_allow_tool_actions": true,
     "inline_assistant_model": {
-      "provider": "anthropic",
-      "model": "claude-3-7-sonnet-latest"
+      "provider": "copilot_chat",
+      "model": "gpt-4.1"
     },
     "version": "2",
     "dock": "left",
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-thinking-latest"
+      "provider": "copilot_chat",
+      "model": "o3-mini"
     }
   }
 }
