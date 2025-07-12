@@ -1,7 +1,7 @@
 // vim:ft=jsonc
 {
   "[dockerfile]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": null
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -347,5 +347,6 @@
   "terminal.integrated.hideOnStartup": "whenEmpty",
   "workbench.editor.enablePreviewFromCodeNavigation": true,
   "window.restoreWindows": "none",
-  "window.customTitleBarVisibility": "auto"
+  "window.customTitleBarVisibility": "auto",
+  "window.confirmBeforeClose": "always"
 }
