@@ -91,10 +91,10 @@
     "vscodevim.vim": 1
   },
   "files.associations": {
-    "*.proto": "proto3",
     ".env": "properties",
     ".env.*": "properties",
-    ".helmignore": "ignore"
+    ".helmignore": "ignore",
+    "*.proto": "proto3"
   },
   "files.watcherExclude": {
     "**/.ammonite": true,
@@ -127,8 +127,8 @@
   "snyk.advanced.cliPath": "/home/lmurarotto/.local/share/snyk/vscode-cli/snyk-linux",
   "snyk.folderConfigs": [
     {
-      "folderPath": "/home/lmurarotto/Documents/Koda-Health/Koda-web",
       "baseBranch": "master",
+      "folderPath": "/home/lmurarotto/Documents/Koda-Health/Koda-web",
       "localBranches": [
         "KODA-4524",
         "KODA-4525",
@@ -261,6 +261,7 @@
     "workbench.action.openEditorAtIndex"
   ],
   "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.hideOnStartup": "whenEmpty",
   "terminal.integrated.mouseWheelScrollSensitivity": 0.5,
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "terminal.integrated.smoothScrolling": true,
@@ -314,6 +315,20 @@
     {
       "before": ["]", "]"],
       "commands": ["goToNextReference"]
+    },
+    {
+      "before": ["<space>"],
+      "commands": ["vspacecode.space"]
+    },
+    {
+      "before": [","],
+      "commands": [
+        "vspacecode.space",
+        {
+          "args": "m",
+          "command": "whichkey.triggerKey"
+        }
+      ]
     }
   ],
   "vim.overrideCopy": true,
@@ -331,22 +346,35 @@
     {
       "before": ["<"],
       "commands": ["editor.action.outdentLines"]
+    },
+    {
+      "before": ["<space>"],
+      "commands": ["vspacecode.space"]
+    },
+    {
+      "before": [","],
+      "commands": [
+        "vspacecode.space",
+        {
+          "args": "m",
+          "command": "whichkey.triggerKey"
+        }
+      ]
     }
   ],
   "vim.visualstar": true,
   "vsicons.dontShowNewVersionMessage": true,
+  "window.confirmBeforeClose": "always",
+  "window.customTitleBarVisibility": "auto",
   "window.menuBarVisibility": "hidden",
   "window.newWindowDimensions": "maximized",
+  "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
   "workbench.colorTheme": "Gruvbox Dark Hard",
   "workbench.commandPalette.preserveInput": true,
   "workbench.editor.closeOnFileDelete": true,
+  "workbench.editor.enablePreviewFromCodeNavigation": true,
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.quickOpen.preserveInput": true,
-  "terminal.integrated.hideOnStartup": "whenEmpty",
-  "workbench.editor.enablePreviewFromCodeNavigation": true,
-  "window.restoreWindows": "none",
-  "window.customTitleBarVisibility": "auto",
-  "window.confirmBeforeClose": "always"
+  "workbench.quickOpen.preserveInput": true
 }
