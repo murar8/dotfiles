@@ -26,18 +26,41 @@
     "command": "editor.action.selectHighlights",
     "when": "vim.active && editorFocus && vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualBlock' && !inDebugRepl"
   },
+
   // https://stackoverflow.com/a/59690963
   {
     "key": "escape",
     "command": "workbench.action.focusActiveEditorGroup",
     "when": "!editorTextFocus && !terminalFocus"
   },
+
   // allow ctrl+w in terminal
   {
     "key": "ctrl+w",
     "command": "-workbench.action.terminal.killEditor",
     "when": "terminalEditorFocus && terminalFocus && terminalHasBeenCreated || terminalEditorFocus && terminalFocus && terminalProcessSupported"
   },
+
+  // save all on c-s
+  {
+    "key": "ctrl+s",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.files.save",
+        "workbench.action.files.saveFiles"
+      ]
+    }
+  },
+
+  // claude code
+  {
+    "key": "shift+enter",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "\\\r\n" },
+    "when": "terminalFocus"
+  },
+
   // editor management
   {
     "key": "ctrl+k q",
@@ -69,17 +92,7 @@
     "key": "ctrl+k r",
     "command": "-workbench.action.files.revealActiveFileInWindows"
   },
-  // save all on c-s
-  {
-    "key": "ctrl+s",
-    "command": "runCommands",
-    "args": {
-      "commands": [
-        "workbench.action.files.save",
-        "workbench.action.files.saveFiles"
-      ]
-    }
-  },
+
   // sidebar
   {
     "key": "ctrl+b",
@@ -89,11 +102,13 @@
     "key": "ctrl+alt+y",
     "command": "workbench.action.toggleSidebarVisibility"
   },
+
   // panel
   {
     "key": "ctrl+alt+m",
     "command": "workbench.action.toggleMaximizedPanel"
   },
+
   // inline chat
   {
     "key": "ctrl+shift+k",
@@ -105,6 +120,7 @@
     "command": "aipopup.action.modal.generate",
     "when": "editorFocus && !composerBarIsVisible && !inlineChatFocused"
   },
+
   // new chat
   {
     "key": "ctrl+l",
@@ -118,6 +134,7 @@
     "key": "ctrl+alt+n",
     "command": "composer.newAgentChat"
   },
+
   // toggle chat
   {
     "key": "ctrl+i",
@@ -127,13 +144,7 @@
     "key": "alt+n",
     "command": "composer.startComposerPrompt"
   },
-  // for claude code
-  {
-    "key": "shift+enter",
-    "command": "workbench.action.terminal.sendSequence",
-    "args": { "text": "\\\r\n" },
-    "when": "terminalFocus"
-  },
+
   // switch terminal tabs
   {
     "key": "ctrl+shift+]",
