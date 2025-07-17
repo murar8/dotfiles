@@ -88,7 +88,8 @@
   "explorer.incrementalNaming": "smart",
   "explorer.sortOrder": "foldersNestsFiles",
   "extensions.experimental.affinity": {
-    "vscodevim.vim": 1
+    "vscodevim.vim": 1,
+    "asvetliakov.vscode-neovim": 1
   },
   "files.associations": {
     ".env": "properties",
@@ -127,8 +128,8 @@
   "snyk.advanced.cliPath": "/home/lmurarotto/.local/share/snyk/vscode-cli/snyk-linux",
   "snyk.folderConfigs": [
     {
-      "folderPath": "/home/lmurarotto/Documents/Koda-Health/Koda-web",
       "baseBranch": "master",
+      "folderPath": "/home/lmurarotto/Documents/Koda-Health/Koda-web",
       "localBranches": [
         "KODA-4524",
         "KODA-4525",
@@ -315,20 +316,6 @@
     {
       "before": ["]", "]"],
       "commands": ["goToNextReference"]
-    },
-    {
-      "before": ["<space>"],
-      "commands": ["vspacecode.space"]
-    },
-    {
-      "before": [","],
-      "commands": [
-        "vspacecode.space",
-        {
-          "args": "m",
-          "command": "whichkey.triggerKey"
-        }
-      ]
     }
   ],
   "vim.overrideCopy": true,
@@ -346,20 +333,6 @@
     {
       "before": ["<"],
       "commands": ["editor.action.outdentLines"]
-    },
-    {
-      "before": ["<space>"],
-      "commands": ["vspacecode.space"]
-    },
-    {
-      "before": [","],
-      "commands": [
-        "vspacecode.space",
-        {
-          "args": "m",
-          "command": "whichkey.triggerKey"
-        }
-      ]
     }
   ],
   "vim.visualstar": true,
