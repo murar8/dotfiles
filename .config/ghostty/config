@@ -10,3 +10,5 @@ window-inherit-working-directory=true
 window-padding-balance=true
 maximize=true
 keybind = shift+enter=text:\n
+clipboard-read = allow
+clipboard-write = allow
