@@ -128,8 +128,8 @@
   "snyk.advanced.cliPath": "/home/lmurarotto/.local/share/snyk/vscode-cli/snyk-linux",
   "snyk.folderConfigs": [
     {
-      "baseBranch": "master",
       "folderPath": "/home/lmurarotto/Documents/Koda-Health/Koda-web",
+      "baseBranch": "master",
       "localBranches": [
         "KODA-4524",
         "KODA-4525",
