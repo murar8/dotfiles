@@ -1,6 +1,7 @@
 return {
 	{
 		"mrcjkb/rustaceanvim",
+		optional = true,
 		opts = {
 			server = {
 				settings = {
@@ -16,4 +17,3 @@ return {
 		},
 	},
 }
-
