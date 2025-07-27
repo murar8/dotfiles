@@ -1,4 +1,15 @@
 {
+  // Miscellaneous Settings
+  "ssh_connections": [
+    {
+      "host": "android",
+      "projects": [
+        { "paths": ["/data/data/com.termux/files"] },
+        { "paths": ["/data/data/com.termux/files/home"] }
+      ]
+    }
+  ],
+
   // Editor Behavior
   "vim_mode": true,
   "vim": { "use_smartcase_find": true },
@@ -50,18 +61,5 @@
 
   // AI & Integration Features
   "features": { "edit_prediction_provider": "supermaven" },
-  "agent": {
-    "default_profile": "write",
-    "always_allow_tool_actions": true,
-    "inline_assistant_model": {
-      "provider": "copilot_chat",
-      "model": "o3-mini"
-    },
-    "version": "2",
-    "dock": "left",
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "o3-mini"
-    }
-  }
+  "agent": { "enabled": false }
 }
