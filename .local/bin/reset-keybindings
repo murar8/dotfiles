@@ -14,18 +14,21 @@ gsettings reset-recursively org.gnome.settings-daemon.plugins.media-keys
 gsettings reset-recursively org.gnome.shell.keybindings
 
 if gnome-extensions list | grep -q "dash-to-dock"; then
-  gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
-  for i in {1..10}; do
-    gsettings set org.gnome.shell.extensions.dash-to-dock app-hotkey-"$i" "@as []"
-    gsettings set org.gnome.shell.extensions.dash-to-dock app-shift-hotkey-"$i" "@as []"
-    gsettings set org.gnome.shell.extensions.dash-to-dock app-ctrl-hotkey-"$i" "@as []"
-  done
+    gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
+    for i in {1..10}; do
+        gsettings set org.gnome.shell.extensions.dash-to-dock app-hotkey-"$i" "@as []"
+        gsettings set org.gnome.shell.extensions.dash-to-dock app-shift-hotkey-"$i" "@as []"
+        gsettings set org.gnome.shell.extensions.dash-to-dock app-ctrl-hotkey-"$i" "@as []"
+    done
 fi
 
 for i in {1..9}; do
-  gsettings set org.gnome.shell.keybindings switch-to-application-"$i" "@as []"       # disable Super+1-9
-  gsettings set org.gnome.shell.keybindings open-new-window-application-"$i" "@as []" # disable Super+Ctrl+1-9
+    gsettings set org.gnome.shell.keybindings switch-to-application-"$i" "@as []"       # disable Super+1-9
+    gsettings set org.gnome.shell.keybindings open-new-window-application-"$i" "@as []" # disable Super+Ctrl+1-9
 done
+
+gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Super>Above_Tab']" # disable '<Alt>Above_Tab'
+gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "['<Shift><Super>Above_Tab']" # disable '<Shift><Alt>Above_Tab'
 
 gsettings set org.gnome.desktop.wm.keybindings maximize "['<Super>period']"           # disable Super+Up
 gsettings set org.gnome.desktop.wm.keybindings minimize "['<Super>comma']"            # disable Super+h
@@ -54,7 +57,7 @@ dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/sla
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/command "'flatpak run com.slack.Slack'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/name "'Slack'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/binding "'<Super>e'"
-dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/command "'.appimage/cursor.appimage --no-sandbox'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/command "'zed'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/name "'Editor'"
 
 dconf write /org/gnome/shell/extensions/tiling-assistant/activate-layout0 "@as []"

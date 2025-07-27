@@ -1,0 +1,14 @@
+theme = "gruvbox"
+
+[editor]
+line-number = "relative"
+completion-replace = true
+rulers = [80,100,120]
+color-modes	= true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+
