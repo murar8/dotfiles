@@ -33,7 +33,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cursor.composer.collapsePaneInputBoxPills": true,
-  "cursor.composer.shouldAllowCustomModes": true,
   "cursor.cpp.disabledLanguages": ["search-result"],
   "cursor.cpp.enablePartialAccepts": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
@@ -88,8 +87,8 @@
   "explorer.incrementalNaming": "smart",
   "explorer.sortOrder": "foldersNestsFiles",
   "extensions.experimental.affinity": {
-    "vscodevim.vim": 1,
-    "asvetliakov.vscode-neovim": 1
+    "asvetliakov.vscode-neovim": 1,
+    "vscodevim.vim": 1
   },
   "files.associations": {
     ".env": "properties",
@@ -128,8 +127,8 @@
   "snyk.advanced.cliPath": "/home/lmurarotto/.local/share/snyk/vscode-cli/snyk-linux",
   "snyk.folderConfigs": [
     {
-      "folderPath": "/home/lmurarotto/Documents/Koda-Health/Koda-web",
       "baseBranch": "master",
+      "folderPath": "/home/lmurarotto/Documents/Koda-Health/Koda-web",
       "localBranches": [
         "KODA-4524",
         "KODA-4525",
