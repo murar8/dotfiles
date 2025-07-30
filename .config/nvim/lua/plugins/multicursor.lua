@@ -7,7 +7,12 @@ return {
 			optional = true,
 			opts = {
 				spec = {
-					{ "<leader>m", "multicursor" },
+					{ "<leader>m", group = "multicursor", icon = "󰓾" },
+					{ "<leader>ma", desc = "Align cursors", icon = "󰮗" },
+					{ "<leader>ms", desc = "Search & add cursors", icon = "" },
+					{ "<leader>mr", desc = "Restore cursors", icon = "󰁯" },
+					{ "<leader>mm", desc = "Match by regex", icon = "󰑑", mode = "x" },
+					{ "gl", desc = "Add cursor on motion", icon = "󰓾", mode = "n" },
 				},
 			},
 		},
@@ -16,10 +21,29 @@ return {
 		local mc = require("multicursor-nvim")
 		mc.setup()
 
+		vim.keymap.set("x", "I", mc.insertVisual)
+		vim.keymap.set("x", "A", mc.appendVisual)
+
+		vim.keymap.set("n", "gl", mc.addCursorOperator)
+
 		vim.keymap.set({ "n" }, "<leader>ma", mc.alignCursors, { desc = "Align cursors" })
 		vim.keymap.set({ "n" }, "<leader>ms", mc.searchAllAddCursors, { desc = "Search all add cursors" })
 		vim.keymap.set({ "n" }, "<leader>mr", mc.restoreCursors, { desc = "Restore cursors" })
 		vim.keymap.set({ "x" }, "<leader>mm", mc.matchCursors, { desc = "Match cursors within selection by Regex" })
+
+		vim.keymap.set({ "n" }, "<c-s-j>", function()
+			mc.lineAddCursor(1)
+		end)
+		vim.keymap.set({ "n" }, "<c-s-k>", function()
+			mc.lineAddCursor(-1)
+		end)
+
+		vim.keymap.set({ "n" }, "<c-s-a-j>", function()
+			mc.lineSkipCursor(1)
+		end)
+		vim.keymap.set({ "n" }, "<c-s-a-k>", function()
+			mc.lineSkipCursor(-1)
+		end)
 
 		vim.keymap.set({ "n", "x" }, "<c-a-n>", function()
 			if mc.cursorsEnabled() then
@@ -27,31 +51,29 @@ return {
 			else
 				mc.enableCursors()
 			end
-		end)
-
+		end, { desc = "Add cursor to previous match or enable cursors" })
 		vim.keymap.set({ "n", "x" }, "<c-n>", function()
 			if mc.cursorsEnabled() then
 				mc.matchAddCursor(1)
 			else
 				mc.enableCursors()
 			end
-		end)
+		end, { desc = "Add cursor to next match or enable cursors" })
 
 		vim.keymap.set({ "n", "x" }, "<c-a-m>", function(fallback)
 			if mc.cursorsEnabled() then
-				mc.matchSkipCursor(1)
+				mc.matchSkipCursor(-1)
 			else
 				fallback()
 			end
-		end)
-
+		end, { desc = "Skip cursor to previous match" })
 		vim.keymap.set({ "n", "x" }, "<c-m>", function(fallback)
 			if mc.cursorsEnabled() then
 				mc.matchSkipCursor(1)
 			else
 				fallback()
 			end
-		end)
+		end, { desc = "Skip cursor to next match" })
 
 		-- Add and remove cursors with control + left click.
 		vim.keymap.set("n", "<c-leftmouse>", mc.handleMouse)
@@ -59,6 +81,9 @@ return {
 		vim.keymap.set("n", "<c-leftrelease>", mc.handleMouseRelease)
 
 		mc.addKeymapLayer(function(layerSet)
+			layerSet({ "n", "x" }, "<c-s-h>", mc.prevCursor)
+			layerSet({ "n", "x" }, "<c-s-l>", mc.nextCursor)
+
 			layerSet("n", "<esc>", function(fallback)
 				if not mc.cursorsEnabled() then
 					fallback()
