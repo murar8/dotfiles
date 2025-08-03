@@ -87,8 +87,7 @@
   "explorer.incrementalNaming": "smart",
   "explorer.sortOrder": "foldersNestsFiles",
   "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1,
-    "vscodevim.vim": 1
+    "asvetliakov.vscode-neovim": 1
   },
   "files.associations": {
     ".env": "properties",
@@ -265,76 +264,6 @@
   "terminal.integrated.mouseWheelScrollSensitivity": 0.5,
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "terminal.integrated.smoothScrolling": true,
-  "vim.easymotion": true,
-  "vim.enableNeovim": true,
-  "vim.gdefault": true,
-  "vim.handleKeys": {
-    "<C-k>": false,
-    "<C-p>": false
-  },
-  "vim.highlightedyank.enable": true,
-  "vim.hlsearch": true,
-  "vim.leader": "<Space>",
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["<s-k>"],
-      "commands": ["editor.action.showHover"]
-    },
-    {
-      "before": ["u"],
-      "commands": ["undo"]
-    },
-    {
-      "before": ["<C-r>"],
-      "commands": ["redo"]
-    },
-    {
-      "before": ["<CR>"],
-      "commands": [":nohl"]
-    },
-    {
-      "before": ["[", "e"],
-      "commands": ["editor.action.marker.prev"]
-    },
-    {
-      "before": ["]", "e"],
-      "commands": ["editor.action.marker.next"]
-    },
-    {
-      "before": ["[", "c"],
-      "commands": ["workbench.action.editor.previousChange"]
-    },
-    {
-      "before": ["]", "c"],
-      "commands": ["workbench.action.editor.nextChange"]
-    },
-    {
-      "before": ["[", "["],
-      "commands": ["goToPreviousReference"]
-    },
-    {
-      "before": ["]", "]"],
-      "commands": ["goToNextReference"]
-    }
-  ],
-  "vim.overrideCopy": true,
-  "vim.targets.enable": true,
-  "vim.useSystemClipboard": true,
-  "vim.visualModeKeyBindingsNonRecursive": [
-    {
-      "before": ["<s-k>"],
-      "commands": ["editor.action.showHover"]
-    },
-    {
-      "before": [">"],
-      "commands": ["editor.action.indentLines"]
-    },
-    {
-      "before": ["<"],
-      "commands": ["editor.action.outdentLines"]
-    }
-  ],
-  "vim.visualstar": true,
   "vsicons.dontShowNewVersionMessage": true,
   "window.confirmBeforeClose": "always",
   "window.customTitleBarVisibility": "auto",

@@ -1,32 +1,5 @@
 // vim:ft=jsonc
 [
-  // VSCode attempt to emulate https://github.com/terryma/vim-multiple-cursors
-  // https://github.com/VSCodeVim/Vim/issues/3588#issuecomment-1139373669
-  // Use built in VSCode pattern matcher for entire word search (ctrl + n)
-  {
-    "key": "ctrl+n",
-    "command": "editor.action.addSelectionToNextFindMatch",
-    "when": "vim.active && editorFocus && vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualBlock' && !inDebugRepl"
-  },
-  // Skip current match (ctrl + x)
-  {
-    "key": "ctrl+x",
-    "command": "editor.action.moveSelectionToNextFindMatch",
-    "when": "vim.active && editorFocus && vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualBlock' && !inDebugRepl"
-  },
-  // Go back to previous match (ctrl + p)
-  {
-    "key": "ctrl+p",
-    "command": "editor.action.moveSelectionToPreviousFindMatch",
-    "when": "vim.active && editorFocus && vim.mode == 'Visual' || vim.mode == 'VisualBlock' && !inDebugRepl"
-  },
-  // Select all matches (ctrl + a). This is effectively the same as (ctrl + shift + l)
-  {
-    "key": "ctrl+a",
-    "command": "editor.action.selectHighlights",
-    "when": "vim.active && editorFocus && vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualBlock' && !inDebugRepl"
-  },
-
   // https://stackoverflow.com/a/59690963
   {
     "key": "escape",
@@ -165,7 +138,19 @@
     "key": "ctrl+shift+alt+]",
     "command": "workbench.action.terminal.focusPreviousPane",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  }
+  },
 
-  // ...
+  //
+  {
+    "command": "vscode-neovim.send",
+    "key": "ctrl+n",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<c-n>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "ctrl+m",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<c-m>"
+  }
 ]
