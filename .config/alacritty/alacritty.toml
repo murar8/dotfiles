@@ -58,3 +58,4 @@ bindings = [
 
 [env]
 BAT_THEME = "TwoDark"
+COMPOSE_MENU = "false"
