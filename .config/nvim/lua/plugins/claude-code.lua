@@ -15,11 +15,11 @@ return {
 				keys = {
 					claude_hide = {
 						toggle_key,
-						mode = "t",
-						desc = "Hide",
 						function(self)
 							self:hide()
 						end,
+						mode = "t",
+						desc = "Hide",
 					},
 				},
 			},
