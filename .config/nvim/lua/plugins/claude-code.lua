@@ -32,7 +32,7 @@ return {
 		{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
 		{ "<leader>ac", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
 		{ "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-		{ "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+		{ toggle_key, "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
 		{
 			"<leader>as",
 			"<cmd>ClaudeCodeTreeAdd<cr>",
