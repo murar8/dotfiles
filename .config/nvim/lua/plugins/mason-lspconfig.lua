@@ -22,8 +22,10 @@ return {
 				if opts.servers[server] then
 					if type(cmd) == "string" then
 						opts.servers[server].enabled = vim.fn.executable(cmd) == 1
+						Snacks.notify.warn("server " .. server .. " is disabled since " .. cmd .. " was not found.")
 					else
 						opts.servers[server].enabled = cmd
+						Snacks.notify.warn("server " .. server .. " is disabled.")
 					end
 				end
 			end
