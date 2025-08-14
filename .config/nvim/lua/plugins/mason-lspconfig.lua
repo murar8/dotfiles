@@ -9,12 +9,7 @@ return {
 			local is_arm64 = arch == "aarch64"
 			local server_commands = {
 				gopls = "go",
-				pyright = "python3",
-				rust_analyzer = "cargo",
-				tsserver = "npm",
 				clangd = not is_arm64,
-				dockerls = "docker",
-				bashls = "bash",
 			}
 
 			opts.servers = opts.servers or {}
