@@ -15,11 +15,11 @@ return {
 			opts.servers = opts.servers or {}
 			for server, cmd in pairs(server_commands) do
 				if opts.servers[server] then
-					if type(cmd) == "string" then
-						opts.servers[server].enabled = vim.fn.executable(cmd) == 1
+					if type(cmd) == "string" and vim.fn.executable(cmd) == 0 then
+						opts.servers[server].enabled = false
 						Snacks.notify.warn("server " .. server .. " is disabled since " .. cmd .. " was not found.")
-					else
-						opts.servers[server].enabled = cmd
+					elseif cmd == false then
+						opts.servers[server].enabled = false
 						Snacks.notify.warn("server " .. server .. " is disabled.")
 					end
 				end
