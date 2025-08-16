@@ -3,6 +3,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		optional = true,
+		dependencies = { "folke/snacks.nvim" },
 		---@class opts lspconfig.options
 		opts = function(_, opts)
 			local arch = vim.trim(vim.fn.system("uname -m"))
@@ -16,11 +17,11 @@ return {
 			for server, cmd in pairs(server_commands) do
 				if opts.servers[server] then
 					if type(cmd) == "string" and vim.fn.executable(cmd) == 0 then
-						opts.servers[server].enabled = false
-						Snacks.notify.warn("server " .. server .. " is disabled since " .. cmd .. " was not found.")
+						opts.servers[server].mason = false
+						Snacks.notify.info("server installation for " .. server .. " is disabled since " .. cmd .. " was not found.")
 					elseif cmd == false then
-						opts.servers[server].enabled = false
-						Snacks.notify.warn("server " .. server .. " is disabled.")
+						opts.servers[server].mason = false
+						Snacks.notify.info("server installation for " .. server .. " is disabled.")
 					end
 				end
 			end
