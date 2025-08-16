@@ -27,7 +27,7 @@ for i in {1..9}; do
     gsettings set org.gnome.shell.keybindings open-new-window-application-"$i" "@as []" # disable Super+Ctrl+1-9
 done
 
-gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Super>Above_Tab']" # disable '<Alt>Above_Tab'
+gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Super>Above_Tab']"                 # disable '<Alt>Above_Tab'
 gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "['<Shift><Super>Above_Tab']" # disable '<Shift><Alt>Above_Tab'
 
 gsettings set org.gnome.desktop.wm.keybindings maximize "['<Super>period']"           # disable Super+Up
