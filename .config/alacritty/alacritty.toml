@@ -40,6 +40,9 @@ hide_when_typing = true
 [selection]
 save_to_clipboard = true
 
+[terminal]
+osc52 = "CopyPaste"
+
 [window]
 dynamic_padding = true
 decorations = "none"
