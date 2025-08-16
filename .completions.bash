@@ -42,6 +42,10 @@ if [ -f /usr/share/bash-completion/completions/git ]; then
     __git_complete dot __git_main
 fi
 
+if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+    source /usr/share/git-core/contrib/completion/git-prompt.sh
+fi
+
 if command -v register-python-argcomplete &>/dev/null && command -v pipx &>/dev/null; then
     eval "$(register-python-argcomplete pipx)"
 fi
