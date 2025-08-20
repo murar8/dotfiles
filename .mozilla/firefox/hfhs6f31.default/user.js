@@ -12,11 +12,11 @@
  * "Ad meliora"                                                             *
  * version: 140                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
-****************************************************************************/
+ ****************************************************************************/
 
 /****************************************************************************
  * SECTION: FASTFOX                                                         *
-****************************************************************************/
+ ****************************************************************************/
 /** GENERAL ***/
 user_pref("content.notify.interval", 100000);
 
@@ -60,7 +60,7 @@ user_pref("layout.css.grid-template-masonry-value.enabled", true);
 
 /****************************************************************************
  * SECTION: SECUREFOX                                                       *
-****************************************************************************/
+ ****************************************************************************/
 /** TRACKING PROTECTION ***/
 user_pref("browser.contentblocking.category", "strict");
 user_pref("browser.download.start_downloads_in_tmp_dir", true);
@@ -155,15 +155,21 @@ user_pref("browser.tabs.crashReporting.sendReport", false);
 
 /****************************************************************************
  * SECTION: PESKYFOX                                                        *
-****************************************************************************/
+ ****************************************************************************/
 /** MOZILLA UI ***/
 user_pref("browser.privatebrowsing.vpnpromourl", "");
 user_pref("extensions.getAddons.showPane", false);
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 user_pref("browser.discovery.enabled", false);
 user_pref("browser.shell.checkDefaultBrowser", false);
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
+user_pref(
+  "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons",
+  false,
+);
+user_pref(
+  "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features",
+  false,
+);
 user_pref("browser.preferences.moreFromMozilla", false);
 user_pref("browser.aboutConfig.showWarning", false);
 user_pref("browser.aboutwelcome.enabled", false);
@@ -224,7 +230,10 @@ user_pref("extensions.formautofill.addresses.enabled", false);
 user_pref("extensions.formautofill.creditCards.enabled", false);
 // PREF: set DoH provider
 // Hagezi Light + TIF
-user_pref("network.trr.uri", "https://dns.dnswarden.com/00000000000000000000048");
+user_pref(
+  "network.trr.uri",
+  "https://dns.dnswarden.com/00000000000000000000048",
+);
 // PREF: disable the Firefox View tour from popping up
 user_pref("browser.firefox-view.feature-tour", '{"screen":"","complete":true}');
 
@@ -253,13 +262,3 @@ user_pref("mousewheel.default.delta_multiplier_y", 200); // 250-400; adjust this
 /****************************************************************************
  * END: BETTERFOX                                                           *
  ****************************************************************************/
- 
- 
- 
- 
- 
- 
- 
- 
- 
-****************************************************************************/
