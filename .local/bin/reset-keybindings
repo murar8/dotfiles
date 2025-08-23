@@ -14,11 +14,11 @@ gsettings reset-recursively org.gnome.settings-daemon.plugins.media-keys
 gsettings reset-recursively org.gnome.shell.keybindings
 
 if gnome-extensions list | grep -q "dash-to-dock"; then
-    gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
+    dconf write /org/gnome/shell/extensions/dash-to-dock/hot-keys false
     for i in {1..10}; do
-        gsettings set org.gnome.shell.extensions.dash-to-dock app-hotkey-"$i" "@as []"
-        gsettings set org.gnome.shell.extensions.dash-to-dock app-shift-hotkey-"$i" "@as []"
-        gsettings set org.gnome.shell.extensions.dash-to-dock app-ctrl-hotkey-"$i" "@as []"
+        dconf write /org/gnome/shell/extensions/dash-to-dock/app-hotkey-"$i" "@as []"
+        dconf write /org/gnome/shell/extensions/dash-to-dock/app-shift-hotkey-"$i" "@as []"
+        dconf write /org/gnome/shell/extensions/dash-to-dock/app-ctrl-hotkey-"$i" "@as []"
     done
 fi
 
@@ -41,7 +41,6 @@ gsettings set org.gnome.shell.keybindings toggle-message-tray "@as []"          
 
 gsettings set org.gnome.desktop.wm.keybindings close "['<Alt>F4','<Super>q']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
-gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t']" || true
 gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
 # gsettings set org.gnome.settings-daemon.plugins.media-keys email "['<Super>e']"
 
@@ -51,7 +50,8 @@ dconf reset -f /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/
 
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "[ \
   '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/', \
-  '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/' \
+  '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/', \
+  '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/' \
 ]"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/binding "'<Super>r'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/command "'flatpak run com.slack.Slack'"
@@ -59,6 +59,9 @@ dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/sla
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/binding "'<Super>e'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/command "'zed'"
 dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/name "'Editor'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/binding "'<Super>t'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/command "'x-terminal-emulator'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/name "'Terminal'"
 
 dconf write /org/gnome/shell/extensions/tiling-assistant/activate-layout0 "@as []"
 dconf write /org/gnome/shell/extensions/tiling-assistant/activate-layout1 "@as []"
