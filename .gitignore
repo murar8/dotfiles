@@ -2,3 +2,4 @@
 !.dotfiles/hooks
 .dotfiles/hooks/*
 !.dotfiles/hooks/pre-commit
+!.dotfiles/hooks/post-merge
