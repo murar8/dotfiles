@@ -1,8 +1,0 @@
-#!/bin/sh
-
-if command -v dconf >/dev/null 2>&1; then
-  if [ -f ~/.local/share/gnome-shell/extensions/extension-settings.dconf ]; then
-    echo "Loading extension settings"
-    dconf load /org/gnome/shell/extensions/ <~/.local/share/gnome-shell/extensions/extension-settings.dconf
-  fi
-fi
