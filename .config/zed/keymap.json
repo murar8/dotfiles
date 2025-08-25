@@ -1,18 +1,5 @@
 [
   {
-    "context": "Editor && (edit_prediction || edit_prediction_conflict)",
-    "bindings": {
-      "alt-n": "editor::AcceptEditPrediction", // default alt-l
-      "alt-;": "editor::AcceptPartialEditPrediction" // default alt-right
-    }
-  },
-  {
-    "context": "(GitCommit || GitPanel) > Editor",
-    "bindings": {
-      "alt-n": "git::GenerateCommitMessage" // default alt-l
-    }
-  },
-  {
     "context": "Editor",
     "bindings": {
       "ctrl-s": "workspace::SaveAll" // default workspace::Save
