@@ -29,6 +29,19 @@
           ]
         }
       }
+    },
+    "JavaScript": {
+      "format_on_save": {
+        "external": {
+          "command": "npx",
+          "arguments": [
+            "prettier",
+            "--ignore-unknown",
+            "--stdin-filepath",
+            "{buffer_path}"
+          ]
+        }
+      }
     }
   },
 
@@ -49,6 +62,8 @@
   // Terminal Configuration
   "terminal": {
     "font_family": "FiraCode Nerd Font",
+    "font_size": 15,
+    "line_height": "standard",
     "env": {
       "EDITOR": "zed --wait",
       "VISUAL": "zed --wait"
