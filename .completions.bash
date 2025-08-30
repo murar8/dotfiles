@@ -33,6 +33,10 @@ if command -v helm &>/dev/null; then
     source <(helm completion bash)
 fi
 
+if command -v doctl &>/dev/null; then
+    source <(mongocli completion bash)
+fi
+
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     source /usr/share/bash-completion/bash_completion
 fi

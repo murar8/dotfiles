@@ -2,7 +2,14 @@
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-s": "workspace::SaveAll" // default workspace::Save
+      "ctrl-s": "workspace::SaveAll", // default workspace::Save
+      "ctrl-/": "workspace::NewCenterTerminal"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-/": "workspace::NewCenterTerminal"
     }
   }
 ]
