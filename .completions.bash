@@ -33,7 +33,7 @@ if command -v helm &>/dev/null; then
     source <(helm completion bash)
 fi
 
-if command -v doctl &>/dev/null; then
+if command -v mongocli &>/dev/null; then
     source <(mongocli completion bash)
 fi
 
