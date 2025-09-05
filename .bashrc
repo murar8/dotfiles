@@ -96,7 +96,7 @@ fi
 
 if [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
     EDITOR="$INTELLIJ_IDE --wait"
-elif [ "$ZED_TERM" = 'true' ]; then
+elif [ "$ZED_TERM" = 'true' ] || command -v zed &>/dev/null; then
     EDITOR="$(which zed) --wait"
 elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ] && [ -z "$CURSOR_TRACE_ID" ]; then
     EDITOR="$(which code) --wait"
