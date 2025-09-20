@@ -42,6 +42,31 @@
           ]
         }
       }
+    },
+    "Shell Script": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "shfmt"
+        }
+      }
+    },
+    "Python": {
+      "language_servers": ["pyright", "pylsp", "ruff"],
+      "format_on_save": "on",
+      "formatter": [
+        {
+          "language_server": {
+            "name": "ruff"
+          }
+        },
+        {
+          "code_actions": {
+            "source.fixAll.ruff": true,
+            "source.organizeImports.ruff": true
+          }
+        }
+      ]
     }
   },
 
@@ -78,6 +103,7 @@
   // AI & Integration Features
   "features": { "edit_prediction_provider": "supermaven" },
   "agent": {
+    "enabled": false,
     "dock": "left"
   }
 }
