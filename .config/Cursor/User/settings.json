@@ -277,5 +277,6 @@
   "workbench.editor.enablePreviewFromCodeNavigation": true,
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.quickOpen.preserveInput": true
+  "workbench.quickOpen.preserveInput": true,
+  "window.commandCenter": true
 }

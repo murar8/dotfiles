@@ -18,5 +18,17 @@
       "q": "vim::MiniQuotes",
       "b": "vim::MiniBrackets"
     }
+  },
+  {
+    "context": "Editor && !agent_diff",
+    "bindings": {
+      "ctrl-alt-y": "workspace::CloseAllDocks" // default git::ToggleStaged
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-t": null
+    }
   }
 ]
