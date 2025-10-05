@@ -152,5 +152,9 @@
     "key": "ctrl+m",
     "when": "editorTextFocus && neovim.mode != insert",
     "args": "<c-m>"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "composerMode.agent"
   }
 ]
