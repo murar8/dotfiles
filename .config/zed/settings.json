@@ -100,6 +100,8 @@
   "ui_font_size": 15,
   "buffer_font_size": 15,
   "ui_font_family": "FiraCode Nerd Font",
+  "tabs": { "file_icons": true, "git_status": true, "show_diagnostics": "all" },
+  "max_tabs": 4,
   "buffer_font_family": "FiraCode Nerd Font",
   "buffer_font_features": { "calt": true },
   "indent_guides": { "enabled": true, "coloring": "indent_aware" },
@@ -122,14 +124,9 @@
     }
   },
 
-  // Panel Configuration
-  "notification_panel": { "dock": "left" },
-  "chat_panel": { "dock": "left" },
-
   // AI & Integration Features
   "features": { "edit_prediction_provider": "supermaven" },
   "agent": {
-    "enabled": false,
-    "dock": "left"
+    "enabled": false
   }
 }

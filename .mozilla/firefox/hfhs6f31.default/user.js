@@ -224,41 +224,25 @@ user_pref("layout.word_select.eat_space_to_next_word", false);
 // visit https://github.com/yokoffing/Betterfox/wiki/Optional-Hardening
 // Enter your personal overrides below this line:
 
-// PREF: restore search engine suggestions
-user_pref("browser.search.suggest.enabled", true);
-// PREF: enable container tabs
-user_pref("privacy.userContext.enabled", true);
-// PREF: disable login manager
+user_pref("browser.contentblocking.category", "standard");
+
 user_pref("signon.rememberSignons", false);
-// PREF: disable address and credit card manager
+user_pref("signon.formlessCapture.enabled", false);
 user_pref("extensions.formautofill.addresses.enabled", false);
 user_pref("extensions.formautofill.creditCards.enabled", false);
-// PREF: set DoH provider
-// Hagezi Light + TIF
-user_pref(
-  "network.trr.uri",
-  "https://dns.dnswarden.com/00000000000000000000048",
-);
-// PREF: disable the Firefox View tour from popping up
-user_pref("browser.firefox-view.feature-tour", '{"screen":"","complete":true}');
 
 user_pref("sidebar.animation.enabled", false); // disable sidebar animations
+// PREF: restore search engine suggestions
+user_pref("browser.search.suggest.enabled", true);
 
-// disable cookie banners
-// probably deprecated
-user_pref("cookiebanners.service.mode", 1);
-user_pref("cookiebanners.service.mode.privateBrowsing", 1);
+// PREF: enable container tabs
+user_pref("privacy.userContext.enabled", true);
 
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
  ****************************************************************************/
 // visit https://github.com/yokoffing/Betterfox/blob/main/Smoothfox.js
 // Enter your scrolling overrides below this line:
-
-/****************************************************************************************
- * OPTION: SMOOTH SCROLLING                                                            *
- ****************************************************************************************/
-// recommended for 90hz+ displays
 
 /****************************************************************************
  * END: BETTERFOX                                                           *
