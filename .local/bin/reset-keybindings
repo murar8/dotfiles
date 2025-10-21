@@ -110,7 +110,7 @@ dconf write /org/gnome/shell/extensions/clipboard-indicator/prev-entry "['<Super
 dconf write /org/gnome/shell/extensions/clipboard-indicator/preview-size "60"
 dconf write /org/gnome/shell/extensions/clipboard-indicator/private-mode-binding "@as []"
 dconf write /org/gnome/shell/extensions/clipboard-indicator/strip-text "true"
-dconf write /org/gnome/shell/extensions/clipboard-indicator/toggle-menu "@as []"
+dconf write /org/gnome/shell/extensions/clipboard-indicator/toggle-menu "['<Super><Alt>v']"
 dconf write /org/gnome/shell/extensions/focus-changer/focus-down "['<Super>Down','<Super>j']"
 dconf write /org/gnome/shell/extensions/focus-changer/focus-left "['<Super>Left','<Super>h']"
 dconf write /org/gnome/shell/extensions/focus-changer/focus-right "['<Super>Right','<Super>l']"
