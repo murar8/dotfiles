@@ -127,6 +127,6 @@
   // AI & Integration Features
   "features": { "edit_prediction_provider": "supermaven" },
   "agent": {
-    "enabled": false
+    "dock": "left"
   }
 }

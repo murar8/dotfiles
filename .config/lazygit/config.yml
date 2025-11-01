@@ -1,2 +1,5 @@
 os:
   editPreset: "zed"
+keybinding:
+  universal:
+    createPatchOptionsMenu: "<c-l>"
