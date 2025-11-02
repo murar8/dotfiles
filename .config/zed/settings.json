@@ -1,21 +1,33 @@
 {
-  // Miscellaneous Settings
-  "ssh_connections": [
-    {
-      "host": "android",
-      "projects": [
-        { "paths": ["/data/data/com.termux/files"] },
-        { "paths": ["/data/data/com.termux/files/home"] }
-      ]
-    }
-  ],
-
-  // Editor Behavior
+  // Core Editor Settings
   "vim_mode": true,
   "vim": { "use_smartcase_find": true },
-  "load_direnv": "shell_hook",
   "restore_on_startup": "none",
+  "load_direnv": "shell_hook",
 
+  // Appearance
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Dark"
+  },
+  "ui_font_size": 15,
+  "ui_font_family": "FiraCode Nerd Font",
+  "buffer_font_size": 15,
+  "buffer_font_family": "FiraCode Nerd Font",
+  "buffer_font_features": { "calt": true },
+  "indent_guides": { "enabled": true, "coloring": "indent_aware" },
+  "tabs": { "file_icons": true, "git_status": true, "show_diagnostics": "all" },
+  "max_tabs": 4,
+
+  // AI Features
+  "edit_predictions": { "mode": "eager" },
+  "features": { "edit_prediction_provider": "supermaven" },
+  "agent": {
+    "dock": "left"
+  },
+
+  // Language Formatting
   "languages": {
     "JSON": {
       "format_on_save": {
@@ -96,24 +108,7 @@
     }
   },
 
-  // UI & Visual Settings
-  "ui_font_size": 15,
-  "buffer_font_size": 15,
-  "ui_font_family": "FiraCode Nerd Font",
-  "tabs": { "file_icons": true, "git_status": true, "show_diagnostics": "all" },
-  "max_tabs": 4,
-  "buffer_font_family": "FiraCode Nerd Font",
-  "buffer_font_features": { "calt": true },
-  "indent_guides": { "enabled": true, "coloring": "indent_aware" },
-  "theme": {
-    "mode": "system",
-    "light": "Gruvbox Light",
-    "dark": "Gruvbox Dark"
-  },
-
-  "edit_predictions": { "mode": "eager" },
-
-  // Terminal Configuration
+  // Terminal
   "terminal": {
     "font_family": "FiraCode Nerd Font",
     "font_size": 15,
@@ -124,9 +119,14 @@
     }
   },
 
-  // AI & Integration Features
-  "features": { "edit_prediction_provider": "supermaven" },
-  "agent": {
-    "dock": "left"
-  }
+  // SSH Connections
+  "ssh_connections": [
+    {
+      "host": "android",
+      "projects": [
+        { "paths": ["/data/data/com.termux/files"] },
+        { "paths": ["/data/data/com.termux/files/home"] }
+      ]
+    }
+  ]
 }
