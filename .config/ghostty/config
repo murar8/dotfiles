@@ -4,7 +4,7 @@ font-family=FiraCode Nerd Font Mono
 keybind = ctrl+shift+j=unbind
 mouse-hide-while-typing=true
 shell-integration-features = no-cursor
-theme=GruvboxDark
+theme=Gruvbox Material
 window-decoration=false
 window-inherit-working-directory=true
 window-padding-balance=true

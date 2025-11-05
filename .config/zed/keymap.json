@@ -1,14 +1,16 @@
 [
   {
-    "context": "Editor",
+    "context": "Workspace",
     "bindings": {
-      "ctrl-s": "workspace::SaveAll", // default workspace::Save
-      "ctrl-/": "workspace::NewCenterTerminal"
+      "ctrl-/": "workspace::NewCenterTerminal",
+      "alt-g": ["task::Spawn", { "task_name": "lazygit" }],
+      "alt-c": ["task::Spawn", { "task_name": "claude" }]
     }
   },
   {
-    "context": "Workspace",
+    "context": "Editor",
     "bindings": {
+      "ctrl-s": "workspace::SaveAll", // default workspace::Save
       "ctrl-/": "workspace::NewCenterTerminal"
     }
   },
