@@ -1,36 +1,56 @@
 [
+  // Global
+  {
+    "bindings": {
+      "ctrl-/": "workspace::NewCenterTerminal",
+      "ctrl-`": "workspace::NewCenterTerminal",
+      "ctrl-~": "workspace::NewCenterTerminal"
+    }
+  },
+
+  // Workspace
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-/": "workspace::NewCenterTerminal",
-      "alt-g": ["task::Spawn", { "task_name": "lazygit" }],
-      "alt-c": ["task::Spawn", { "task_name": "claude" }]
+      "ctrl-?": ["task::Spawn", { "task_name": "Claude" }], // default agent::ToggleFocus
+      "ctrl-shift-g": ["task::Spawn", { "task_name": "Lazygit" }] // default git_panel::ToggleFocus
     }
   },
+
+  // Editor
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-s": "workspace::SaveAll", // default workspace::Save
-      "ctrl-/": "workspace::NewCenterTerminal"
-    }
-  },
-  {
-    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
-    "bindings": {
-      "q": "vim::MiniQuotes",
-      "b": "vim::MiniBrackets"
+      "ctrl-s": "workspace::SaveAll" // default workspace::Save
     }
   },
   {
     "context": "Editor && !agent_diff",
     "bindings": {
+      // same as Workspace behavior
       "ctrl-alt-y": "workspace::CloseAllDocks" // default git::ToggleStaged
     }
   },
+
+  // Terminal
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-t": null
+      "ctrl-t": null // default project_symbols::Toggle
+    }
+  },
+
+  // Vim
+  {
+    // https://zed.dev/docs/vim#example-configuration
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "bindings": {
+      // Traditional Vim behavior
+      "q": "vim::AnyQuotes",
+      "b": "vim::AnyBrackets",
+      // mini.ai plugin behavior
+      "Q": "vim::MiniQuotes",
+      "B": "vim::MiniBrackets"
     }
   }
 ]

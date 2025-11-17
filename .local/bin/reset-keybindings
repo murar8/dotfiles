@@ -59,6 +59,9 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature "u
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super>o']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys volume-down "['<Super>F11']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys volume-mute "['<Super>F12']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys volume-up "['<Super>F10']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/ binding '<Super>e'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/ command 'zed'
