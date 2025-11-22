@@ -18,7 +18,7 @@
   "buffer_font_features": { "calt": true },
   "indent_guides": { "enabled": true, "coloring": "indent_aware" },
   "tabs": { "file_icons": true, "git_status": true, "show_diagnostics": "all" },
-  "max_tabs": 4,
+  "max_tabs": 8,
 
   // AI Features
   "edit_predictions": { "mode": "eager" },
