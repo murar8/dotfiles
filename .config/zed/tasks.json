@@ -1,0 +1,37 @@
+// Project tasks configuration. See https://zed.dev/docs/tasks for documentation.
+[
+  {
+    "label": "Lazygit",
+    "command": "lazygit",
+    "hide": "always",
+    "reveal_target": "center",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Claude",
+    "command": "claude",
+    "hide": "always",
+    "reveal_target": "center",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Claude [resume]",
+    "command": "claude",
+    "args": ["--resume"],
+    "hide": "always",
+    "reveal_target": "center",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": true
+  },
+  {
+    "label": "Claude [continue]",
+    "command": "claude",
+    "args": ["--continue"],
+    "hide": "always",
+    "reveal_target": "center",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": true
+  }
+]
