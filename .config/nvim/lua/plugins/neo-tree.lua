@@ -23,6 +23,7 @@ return {
 				handler = function()
 					vim.schedule(function()
 						local state = require("neo-tree.sources.manager").get_state("filesystem")
+						---@cast state neotree.StateWithTree
 						if not require("neo-tree.sources.common.preview").is_active() then
 							state.config = state.config or {}
 							state.commands.toggle_preview(state)
