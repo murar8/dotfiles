@@ -94,14 +94,14 @@ fi
 
 ### Editor
 
-if [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
+if command -v nvim &>/dev/null; then
+    EDITOR="$(which nvim)"
+elif [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
     EDITOR="$INTELLIJ_IDE --wait"
 elif [ "$ZED_TERM" = 'true' ] || command -v zed &>/dev/null; then
     EDITOR="$(which zed) --wait"
 elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ] && [ -z "$CURSOR_TRACE_ID" ]; then
     EDITOR="$(which code) --wait"
-elif command -v nvim &>/dev/null; then
-    EDITOR="$(which nvim)"
 elif command -v vim &>/dev/null; then
     EDITOR="$(which vim)"
 fi
