@@ -23,8 +23,18 @@ return {
 				handler = function()
 					vim.schedule(function()
 						local state = require("neo-tree.sources.manager").get_state("filesystem")
-						---@cast state neotree.StateWithTree
+
+						-- Only enable preview if a real file is open
+						local has_file = vim.iter(vim.api.nvim_list_bufs()):any(function(buf)
+							local name = vim.api.nvim_buf_get_name(buf)
+							return vim.bo[buf].buftype == "" and vim.fn.filereadable(name) == 1
+						end)
+						if not has_file then
+							return
+						end
+
 						if not require("neo-tree.sources.common.preview").is_active() then
+							---@cast state neotree.StateWithTree
 							state.config = state.config or {}
 							state.commands.toggle_preview(state)
 						end
