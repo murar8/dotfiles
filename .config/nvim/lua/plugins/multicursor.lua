@@ -9,11 +9,22 @@ return {
 			opts = {
 				spec = {
 					{ "<leader>m", group = "multicursor", icon = "󰓾" },
-					{ "<leader>ma", desc = "Align cursors", icon = "󰮗" },
-					{ "<leader>ms", desc = "Add cursors by search", icon = " " },
-					{ "<leader>mr", desc = "Restore cursors", icon = "󰁯" },
-					{ "<leader>mm", desc = "Match by regex", icon = "󰑑" },
-					{ "gl", desc = "Add cursor on motion", icon = "󰓾" },
+					{ "<leader>m", group = "multicursor", icon = "󰓾", mode = "x" },
+					{ "<leader>ma", icon = "󰡎" },
+					{ "<leader>mc", icon = "󰆑" },
+					{ "<leader>mc", icon = "󰆑", mode = "x" },
+					{ "<leader>md", icon = "󰒡" },
+					{ "<leader>md", icon = "󰒡", mode = "x" },
+					{ "<leader>mo", icon = "󰁨" },
+					{ "<leader>mo", icon = "󰁨", mode = "x" },
+					{ "<leader>mt", icon = "󰓡", mode = "x" },
+					{ "<leader>mT", icon = "󰓢", mode = "x" },
+					{ "<leader>m/", icon = "󰱽" },
+					{ "<leader>mn", icon = "󰐊" },
+					{ "<leader>mN", icon = "󰐋" },
+					{ "<leader>ms", icon = "󰒭" },
+					{ "<leader>mS", icon = "󰒮" },
+					{ "<leader>gv", icon = "󰁯" },
 				},
 			},
 		},
@@ -22,76 +33,86 @@ return {
 		local mc = require("multicursor-nvim")
 		mc.setup()
 
-		vim.keymap.set("x", "I", mc.insertVisual)
-		vim.keymap.set("x", "A", mc.appendVisual)
+		vim.keymap.set({ "n", "x" }, "<C-n>", function()
+			mc.matchAddCursor(1)
+		end, { desc = "Add cursor next match" })
+		vim.keymap.set({ "n", "x" }, "<C-p>", function()
+			mc.matchAddCursor(-1)
+		end, { desc = "Add cursor prev match" })
 
-		vim.keymap.set("n", "gl", mc.addCursorOperator)
+		vim.keymap.set({ "n", "x" }, "<C-M-n>", function()
+			mc.matchSkipCursor(1)
+		end, { desc = "Skip next match" })
+		vim.keymap.set({ "n", "x" }, "<C-M-p>", function()
+			mc.matchSkipCursor(-1)
+		end, { desc = "Skip prev match" })
 
-		vim.keymap.set({ "n" }, "<leader>ma", mc.alignCursors, {})
-		vim.keymap.set({ "n" }, "<leader>ms", mc.searchAllAddCursors, {})
-		vim.keymap.set({ "n" }, "<leader>mr", mc.restoreCursors, {})
-		vim.keymap.set({ "x" }, "<leader>mm", mc.matchCursors, {})
+		vim.keymap.set({ "n", "x" }, "<C-M-a>", function()
+			mc.matchAllAddCursors()
+		end, { desc = "Add all matches" })
 
-		vim.keymap.set({ "n" }, "<c-s-j>", function()
+		vim.keymap.set({ "n", "x" }, "<C-M-j>", function()
 			mc.lineAddCursor(1)
-		end)
-		vim.keymap.set({ "n" }, "<c-s-k>", function()
+		end, { desc = "Add cursor below" })
+		vim.keymap.set({ "n", "x" }, "<C-M-k>", function()
 			mc.lineAddCursor(-1)
-		end)
+		end, { desc = "Add cursor above" })
 
-		vim.keymap.set({ "n" }, "<c-s-a-j>", function()
-			mc.lineSkipCursor(1)
-		end)
-		vim.keymap.set({ "n" }, "<c-s-a-k>", function()
-			mc.lineSkipCursor(-1)
-		end)
-
-		vim.keymap.set({ "n", "x" }, "<c-a-n>", function()
-			if mc.cursorsEnabled() then
-				mc.matchAddCursor(-1)
-			else
-				mc.enableCursors()
-			end
-		end)
-		vim.keymap.set({ "n", "x" }, "<c-n>", function()
-			if mc.cursorsEnabled() then
-				mc.matchAddCursor(1)
-			else
-				mc.enableCursors()
-			end
-		end)
-
-		vim.keymap.set({ "n", "x" }, "<c-a-m>", function(fallback)
-			if mc.cursorsEnabled() then
-				mc.matchSkipCursor(-1)
-			else
-				fallback()
-			end
-		end)
-		vim.keymap.set({ "n", "x" }, "<c-m>", function(fallback)
-			if mc.cursorsEnabled() then
-				mc.matchSkipCursor(1)
-			else
-				fallback()
-			end
-		end)
-
-		-- Add and remove cursors with control + left click.
 		vim.keymap.set("n", "<c-leftmouse>", mc.handleMouse)
 		vim.keymap.set("n", "<c-leftdrag>", mc.handleMouseDrag)
 		vim.keymap.set("n", "<c-leftrelease>", mc.handleMouseRelease)
 
-		mc.addKeymapLayer(function(layerSet)
-			layerSet({ "n", "x" }, "<c-s-h>", mc.prevCursor)
-			layerSet({ "n", "x" }, "<c-s-l>", mc.nextCursor)
+		vim.keymap.set("x", "S", mc.splitCursors, { desc = "Split by regex" })
+		vim.keymap.set("x", "M", mc.matchCursors, { desc = "Match by regex" })
+		vim.keymap.set("x", "I", mc.insertVisual, { desc = "Insert each line" })
+		vim.keymap.set("x", "A", mc.appendVisual, { desc = "Append each line" })
 
-			layerSet("n", "<esc>", function(fallback)
-				if not mc.cursorsEnabled() then
-					fallback()
-				else
-					mc.clearCursors()
-				end
-			end)
+		-- Works already
+		-- vim.keymap.set({ "n", "x" }, "g<c-a>", mc.sequenceIncrement, { desc = "Increment sequence" })
+		-- vim.keymap.set({ "n", "x" }, "g<c-x>", mc.sequenceDecrement, { desc = "Decrement sequence" })
+
+		vim.keymap.set("n", "gm", mc.addCursorOperator, { desc = "Add cursor operator" })
+
+		vim.keymap.set("n", "<leader>gv", mc.restoreCursors, { desc = "Restore cursors" })
+
+		vim.keymap.set("n", "<leader>ma", mc.alignCursors, { desc = "Align cursors" })
+
+		vim.keymap.set({ "n", "x" }, "<leader>mc", mc.duplicateCursors, { desc = "Clone cursors" })
+
+		vim.keymap.set({ "n", "x" }, "<leader>md", function()
+			mc.diagnosticMatchCursors({ severity = vim.diagnostic.severity.ERROR })
+		end, { desc = "Cursors on diagnostics" })
+
+		vim.keymap.set({ "n", "x" }, "<leader>mo", mc.operator, { desc = "Match operator" })
+
+		vim.keymap.set("x", "<leader>mt", function()
+			mc.transposeCursors(1)
+		end, { desc = "Transpose forward" })
+		vim.keymap.set("x", "<leader>mT", function()
+			mc.transposeCursors(-1)
+		end, { desc = "Transpose backward" })
+
+		vim.keymap.set("n", "<leader>m/", mc.searchAllAddCursors, { desc = "All search results" })
+
+		vim.keymap.set("n", "<leader>mn", function()
+			mc.searchAddCursor(1)
+		end, { desc = "Add cursor next search" })
+		vim.keymap.set("n", "<leader>mN", function()
+			mc.searchAddCursor(-1)
+		end, { desc = "Add cursor prev search" })
+
+		vim.keymap.set("n", "<leader>ms", function()
+			mc.searchSkipCursor(1)
+		end, { desc = "Skip next search" })
+		vim.keymap.set("n", "<leader>mS", function()
+			mc.searchSkipCursor(-1)
+		end, { desc = "Skip prev search" })
+
+		mc.addKeymapLayer(function(layerSet)
+			layerSet({ "n", "x" }, "<Esc>", mc.clearCursors, { desc = "Clear cursors" })
+			layerSet({ "n", "x" }, "]c", mc.nextCursor, { desc = "Next cursor" })
+			layerSet({ "n", "x" }, "[c", mc.prevCursor, { desc = "Prev cursor" })
+			layerSet({ "n", "x" }, "dc", mc.deleteCursor, { desc = "Delete cursor" })
 		end)
 	end,
 }
