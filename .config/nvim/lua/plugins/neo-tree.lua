@@ -2,7 +2,7 @@ return {
 	"nvim-neo-tree/neo-tree.nvim",
 	optional = true,
 	opts = {
-		close_if_last_window = true,
+		close_if_last_window = false,
 		filesystem = {
 			filtered_items = {
 				visible = true,
@@ -21,24 +21,17 @@ return {
 			{
 				event = "after_render",
 				handler = function()
-					vim.schedule(function()
-						local state = require("neo-tree.sources.manager").get_state("filesystem")
-
-						-- Only enable preview if a real file is open
-						local has_file = vim.iter(vim.api.nvim_list_bufs()):any(function(buf)
-							local name = vim.api.nvim_buf_get_name(buf)
-							return vim.bo[buf].buftype == "" and vim.fn.filereadable(name) == 1
-						end)
-						if not has_file then
+					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+						if vim.bo[buf].buflisted and vim.bo[buf].filetype ~= "dashboard" then
+							local state = require("neo-tree.sources.manager").get_state("filesystem")
+							if not require("neo-tree.sources.common.preview").is_active() then
+								state.config = state.config or {}
+								---@cast state neotree.StateWithTree
+								state.commands.toggle_preview(state)
+							end
 							return
 						end
-
-						if not require("neo-tree.sources.common.preview").is_active() then
-							---@cast state neotree.StateWithTree
-							state.config = state.config or {}
-							state.commands.toggle_preview(state)
-						end
-					end)
+					end
 				end,
 			},
 		},
