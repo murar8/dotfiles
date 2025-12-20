@@ -2,6 +2,9 @@
         email = lnzmrr@gmail.com
         name = Lorenzo Murarotto
 
+[status]
+	showUntrackedFiles = no
+
 [difftool "vscode"]
         cmd = code --wait --diff $LOCAL $REMOTE
 [difftool "nvimdiff"]
