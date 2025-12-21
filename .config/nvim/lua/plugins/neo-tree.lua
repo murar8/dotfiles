@@ -36,4 +36,13 @@ return {
 			},
 		},
 	},
+	-- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/147
+	config = function(_, opts)
+		local baredot_ok, baredot = pcall(require, "baredot")
+		if baredot_ok and baredot.is_enabled() then
+			opts.filesystem.filtered_items.hide_gitignored = false
+			vim.api.nvim_echo({ { "Baredot: hide_gitignored disabled" } }, true, {})
+		end
+		require("neo-tree").setup(opts)
+	end,
 }
