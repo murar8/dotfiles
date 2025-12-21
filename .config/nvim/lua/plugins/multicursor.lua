@@ -40,21 +40,21 @@ return {
 			mc.matchAddCursor(-1)
 		end, { desc = "Add cursor prev match" })
 
-		vim.keymap.set({ "n", "x" }, "<C-M-n>", function()
+		vim.keymap.set({ "n", "x" }, "<C-A-n>", function()
 			mc.matchSkipCursor(1)
 		end, { desc = "Skip next match" })
-		vim.keymap.set({ "n", "x" }, "<C-M-p>", function()
+		vim.keymap.set({ "n", "x" }, "<C-A-p>", function()
 			mc.matchSkipCursor(-1)
 		end, { desc = "Skip prev match" })
 
-		vim.keymap.set({ "n", "x" }, "<C-M-a>", function()
+		vim.keymap.set({ "n", "x" }, "<C-A-a>", function()
 			mc.matchAllAddCursors()
 		end, { desc = "Add all matches" })
 
-		vim.keymap.set({ "n", "x" }, "<C-M-j>", function()
+		vim.keymap.set({ "n", "x" }, "<C-A-j>", function()
 			mc.lineAddCursor(1)
 		end, { desc = "Add cursor below" })
-		vim.keymap.set({ "n", "x" }, "<C-M-k>", function()
+		vim.keymap.set({ "n", "x" }, "<C-A-k>", function()
 			mc.lineAddCursor(-1)
 		end, { desc = "Add cursor above" })
 
