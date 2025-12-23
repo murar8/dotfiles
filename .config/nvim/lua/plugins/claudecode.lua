@@ -25,5 +25,6 @@ return {
 	},
 	keys = {
 		{ toggle_key, "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+		{ toggle_key, "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
 	},
 }
