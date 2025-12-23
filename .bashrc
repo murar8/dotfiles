@@ -83,27 +83,16 @@ if [ -f "$HOME/.completions.bash" ]; then
     source "$HOME/.completions.bash"
 fi
 
-### IntelliJ
-
-INTELLIJ_IDE=$(basename "$GIO_LAUNCHED_DESKTOP_FILE" .desktop | sed -n 's/jetbrains-\([^-]\+\)-.\+/\1/p')
-if [ -n "$INTELLIJ_IDE" ]; then
-    ij() {
-        $INTELLIJ_IDE "$@"
-    }
-fi
-
 ### Editor
 
 if command -v nvim &>/dev/null; then
-    EDITOR="$(which nvim)"
-elif [ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' ]; then
-    EDITOR="$INTELLIJ_IDE --wait"
+    EDITOR="nvim"
 elif [ "$ZED_TERM" = 'true' ] || command -v zed &>/dev/null; then
-    EDITOR="$(which zed) --wait"
+    EDITOR="zed --wait"
 elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ] && [ -z "$CURSOR_TRACE_ID" ]; then
-    EDITOR="$(which code) --wait"
+    EDITOR="code --wait"
 elif command -v vim &>/dev/null; then
-    EDITOR="$(which vim)"
+    EDITOR="vim"
 fi
 
 VISUAL=$EDITOR
