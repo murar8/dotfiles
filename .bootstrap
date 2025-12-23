@@ -1,14 +1,13 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-set errexit  # Exit on error.
-set nounset  # Error on undeclared variables.
-set pipefail # Error if any command in a pipe fails.
+set -o errexit  # Exit on error.
+set -o nounset  # Error on undeclared variables.
+set -o pipefail # Error if any command in a pipe fails.
 
 REPO_DIR="$HOME/.dotfiles"
 
 dot() {
-    # shellcheck disable=SC2068
-    git --git-dir="$REPO_DIR" -C "$HOME" --work-tree="$HOME" $@
+    git --git-dir="$REPO_DIR" -C "$HOME" --work-tree="$HOME" "$@"
 }
 
 if [ -d "$REPO_DIR" ]; then
@@ -21,19 +20,15 @@ if ! command -v git >/dev/null; then
     exit 1
 fi
 
-USE_SSH=true
+REPO_URL=https://github.com/murar8/dotfiles.git
 if ! command -v ssh >/dev/null; then
     echo "Warning: could not locate ssh in your path, falling back to HTTPS."
     echo
-    USE_SSH=false
-fi
-if ! ssh-add -l >/dev/null 2>&1; then
-    echo "Warning: could not find any SSH keys in your ssh-agent, falling back to HTTPS."
+elif ! ssh-add -l >/dev/null 2>&1; then
+    echo "Warning: no usable SSH keys available, falling back to HTTPS."
     echo
-    USE_SSH=false
-fi
-
-if $USE_SSH; then
+else
+    REPO_URL=git@github.com:murar8/dotfiles.git
     # This is to avoid ssh prompting for confirmation when cloning.
     if [ ! -f "$HOME"/.ssh/known_hosts ]; then
         echo "Creating $HOME/.ssh/known_hosts..."
@@ -44,34 +39,19 @@ if $USE_SSH; then
     fi
     if ! ssh-keygen -F github.com >/dev/null; then
         echo "Adding github.com to known hosts..."
-        ssh-keyscan -t rsa github.com >>"$HOME"/.ssh/known_hosts
+        ssh-keyscan github.com >>"$HOME"/.ssh/known_hosts
         echo
     fi
 fi
 
-if $USE_SSH; then
-    REPO_URL=git@github.com:murar8/dotfiles.git
-else
-    REPO_URL=https://github.com/murar8/dotfiles.git
-fi
-
-if [ -d "$SCRIPT_DIR/.git" ]; then
-    echo "Non bare repository detected in $SCRIPT_DIR, copying from local..."
-    git clone --bare "$SCRIPT_DIR" "$REPO_DIR"
-    echo
-    echo "Removing $SCRIPT_DIR..."
-    rm -rf "$SCRIPT_DIR"
-    echo
-else
-    git clone --bare "$REPO_URL" "$REPO_DIR"
-    echo
-fi
+git clone --bare "$REPO_URL" "$REPO_DIR"
+echo
 
 if [ -n "$(dot status --porcelain)" ]; then
     stash_name="bootstrap-$(date +%s)"
     user=$(whoami)
     echo "Stashing conflicts in $stash_name..."
-    dot -c user.name="$user" -c user.email="$user"@localhost stash save "$stash_name"
+    dot -c user.name="$user" -c user.email="$user"@localhost stash push -m "$stash_name"
     echo
 fi
 
