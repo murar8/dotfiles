@@ -5,3 +5,4 @@
 !.dotfiles/hooks/post-merge
 *.local.md
 *.local.json
+*.spl
