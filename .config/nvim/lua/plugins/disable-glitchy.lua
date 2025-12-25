@@ -11,4 +11,8 @@ return {
 	-- mini.animate: snippets malfunction, cursor position bugs,
 	-- hover exits early when scrolling, neo-tree flicker on load
 	{ "nvim-mini/mini.animate", enabled = false },
+
+	-- trouble.nvim: v3 rewrite "broken and unusable" (#588),
+	-- snacks.nvim incompatibility (#618), invalid buffer id crashes (#556)
+	{ "folke/trouble.nvim", enabled = false },
 }
