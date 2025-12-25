@@ -58,6 +58,13 @@ return {
 			mc.lineAddCursor(-1)
 		end, { desc = "Add cursor above" })
 
+		vim.keymap.set({ "n", "x" }, "<C-A-S-j>", function()
+			mc.lineSkipCursor(1)
+		end, { desc = "Skip cursor below" })
+		vim.keymap.set({ "n", "x" }, "<C-A-S-k>", function()
+			mc.lineSkipCursor(-1)
+		end, { desc = "Skip cursor above" })
+
 		vim.keymap.set("n", "<c-leftmouse>", mc.handleMouse)
 		vim.keymap.set("n", "<c-leftdrag>", mc.handleMouseDrag)
 		vim.keymap.set("n", "<c-leftrelease>", mc.handleMouseRelease)
@@ -67,9 +74,8 @@ return {
 		vim.keymap.set("x", "I", mc.insertVisual, { desc = "Insert each line" })
 		vim.keymap.set("x", "A", mc.appendVisual, { desc = "Append each line" })
 
-		-- Works already
-		-- vim.keymap.set({ "n", "x" }, "g<c-a>", mc.sequenceIncrement, { desc = "Increment sequence" })
-		-- vim.keymap.set({ "n", "x" }, "g<c-x>", mc.sequenceDecrement, { desc = "Decrement sequence" })
+		vim.keymap.set({ "n", "x" }, "g<c-a>", mc.sequenceIncrement, { desc = "Increment sequence" })
+		vim.keymap.set({ "n", "x" }, "g<c-x>", mc.sequenceDecrement, { desc = "Decrement sequence" })
 
 		vim.keymap.set("n", "gm", mc.addCursorOperator, { desc = "Add cursor operator" })
 
@@ -107,6 +113,19 @@ return {
 		vim.keymap.set("n", "<leader>mS", function()
 			mc.searchSkipCursor(-1)
 		end, { desc = "Skip prev search" })
+
+		vim.keymap.set({ "n", "x" }, "]x", function()
+			mc.diagnosticAddCursor(1)
+		end, { desc = "Add cursor next diagnostic" })
+		vim.keymap.set({ "n", "x" }, "[x", function()
+			mc.diagnosticAddCursor(-1)
+		end, { desc = "Add cursor prev diagnostic" })
+		vim.keymap.set({ "n", "x" }, "]X", function()
+			mc.diagnosticSkipCursor(1)
+		end, { desc = "Skip next diagnostic" })
+		vim.keymap.set({ "n", "x" }, "[X", function()
+			mc.diagnosticSkipCursor(-1)
+		end, { desc = "Skip prev diagnostic" })
 
 		mc.addKeymapLayer(function(layerSet)
 			layerSet({ "n", "x" }, "<Esc>", mc.clearCursors, { desc = "Clear cursors" })
