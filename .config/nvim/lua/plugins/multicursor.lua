@@ -13,8 +13,10 @@ return {
 					{ "<leader>ma", icon = "󰡎" },
 					{ "<leader>mc", icon = "󰆑" },
 					{ "<leader>mc", icon = "󰆑", mode = "x" },
-					{ "<leader>md", icon = "󰒡" },
-					{ "<leader>md", icon = "󰒡", mode = "x" },
+					{ "<leader>me", icon = "󰅚" },
+					{ "<leader>me", icon = "󰅚", mode = "x" },
+					{ "<leader>mw", icon = "󰀪" },
+					{ "<leader>mw", icon = "󰀪", mode = "x" },
 					{ "<leader>mo", icon = "󰁨" },
 					{ "<leader>mo", icon = "󰁨", mode = "x" },
 					{ "<leader>mt", icon = "󰓡", mode = "x" },
@@ -85,9 +87,12 @@ return {
 
 		vim.keymap.set({ "n", "x" }, "<leader>mc", mc.duplicateCursors, { desc = "Clone cursors" })
 
-		vim.keymap.set({ "n", "x" }, "<leader>md", function()
+		vim.keymap.set({ "n", "x" }, "<leader>me", function()
 			mc.diagnosticMatchCursors({ severity = vim.diagnostic.severity.ERROR })
-		end, { desc = "Cursors on diagnostics" })
+		end, { desc = "Cursors on errors" })
+		vim.keymap.set({ "n", "x" }, "<leader>mw", function()
+			mc.diagnosticMatchCursors({ severity = vim.diagnostic.severity.WARN })
+		end, { desc = "Cursors on warnings" })
 
 		vim.keymap.set({ "n", "x" }, "<leader>mo", mc.operator, { desc = "Match operator" })
 
