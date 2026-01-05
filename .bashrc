@@ -61,14 +61,24 @@ dot() {
 }
 
 dotup() {
-    if [ "$#" -ne 1 ]; then
+    if [ "$#" -eq 1 ]; then
+        dot add -u
+        dot commit -m "$1"
+        dot push origin main
+    else
         echo "Expected a commit message."
         return 1
     fi
 
-    dot add -u
-    dot commit -m "$1"
-    dot push origin main
+}
+
+lazy() {
+    if [ "$#" -eq 1 ]; then
+        nvim --headless "+Lazy! $1" +qa
+    else
+        echo "Expected a commit message."
+        return 1
+    fi
 }
 
 if command -v lazygit &>/dev/null; then
