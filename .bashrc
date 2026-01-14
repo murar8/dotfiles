@@ -96,18 +96,18 @@ fi
 ### Editor
 
 if command -v nvim &>/dev/null; then
-    EDITOR="nvim"
+    EDITOR="$(command -v nvim)"
 elif [ "$ZED_TERM" = 'true' ] || command -v zed &>/dev/null; then
-    EDITOR="zed --wait"
+    EDITOR="$(command -v zed) --wait"
 elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ] && [ -z "$CURSOR_TRACE_ID" ]; then
-    EDITOR="code --wait"
+    EDITOR="$(command -v code) --wait"
 elif command -v vim &>/dev/null; then
-    EDITOR="vim"
+    EDITOR="$(command -v vim)"
 fi
 
 VISUAL=$EDITOR
-export VISUAL
-export EDITOR
+SUDO_EDITOR=$EDITOR
+export VISUAL EDITOR SUDO_EDITOR
 
 ### Prompt
 
