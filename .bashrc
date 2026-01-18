@@ -72,7 +72,7 @@ dotup() {
 
 }
 
-lazy() {
+lz() {
     if [ "$#" -eq 1 ]; then
         nvim --headless "+Lazy! $1" +qa
     else
