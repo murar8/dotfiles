@@ -126,7 +126,7 @@ prompt() {
     history -a # Append the current session history to the content of the history file.
 
     local git_ps1
-    if command -v git &>/dev/null; then
+    if command -v __git_ps1 &>/dev/null; then
         export GIT_PS1_SHOWUPSTREAM="auto"
         export GIT_PS1_SHOWDIRTYSTATE=true
         export GIT_PS1_SHOWCOLORHINTS=true
