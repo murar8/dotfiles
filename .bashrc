@@ -76,7 +76,7 @@ lz() {
     if [ "$#" -eq 1 ]; then
         nvim --headless "+Lazy! $1" +qa
     else
-        echo "Expected a commit message."
+        echo "Expected a Lazy command."
         return 1
     fi
 }
