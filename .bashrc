@@ -165,6 +165,10 @@ if [ -f "$HOME"/.nvm/nvm.sh ] && [ -f "$HOME"/.nvm/bash_completion ]; then
     . "$NVM_DIR/bash_completion"
 fi
 
+if command -v fnm &>/dev/null; then
+    eval "$(fnm env --use-on-cd --shell bash)"
+fi
+
 # rustup
 if [ -f "$HOME"/.cargo/env ]; then
     . "$HOME"/.cargo/env
