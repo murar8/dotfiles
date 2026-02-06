@@ -7,9 +7,12 @@ fi
 
 ### System configuration
 
-if [ -f /etc/bashrc ]; then
-    source /etc/bashrc
-fi
+for f in /etc/bashrc /etc/bash.bashrc; do
+    if [ -f "$f" ]; then
+        source "$f"
+        break
+    fi
+done
 
 ### Options
 
@@ -172,6 +175,17 @@ fi
 # rustup
 if [ -f "$HOME"/.cargo/env ]; then
     . "$HOME"/.cargo/env
+fi
+
+if command -v delta &>/dev/null; then
+    export GIT_PAGER=delta
+    export GIT_CONFIG_COUNT=3
+    export GIT_CONFIG_KEY_0=interactive.diffFilter
+    export GIT_CONFIG_VALUE_0='delta --color-only'
+    export GIT_CONFIG_KEY_1=delta.navigate
+    export GIT_CONFIG_VALUE_1=true
+    export GIT_CONFIG_KEY_2=merge.conflictStyle
+    export GIT_CONFIG_VALUE_2=zdiff3
 fi
 
 ### Local configuration
