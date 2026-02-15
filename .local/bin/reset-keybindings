@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 gsettings reset-recursively org.gnome.desktop.wm.keybindings
 gsettings reset-recursively org.gnome.mutter.keybindings
 gsettings reset-recursively org.gnome.mutter.wayland.keybindings
@@ -64,7 +66,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys volume-mute "['<Super
 gsettings set org.gnome.settings-daemon.plugins.media-keys volume-up "['<Super>F10']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/ binding '<Super>e'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/ command 'nvim'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/ command "x-terminal-emulator -e ${EDITOR:-sensible-editor}"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/editor/ name 'editor'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/ binding '<Super>r'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/slack/ command 'slack'
@@ -73,8 +75,9 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/ command 'x-terminal-emulator'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/ name 'terminal'
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action "'suspend'"
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout "1800"
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "'nothing'"
-gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop', 'com.mattjakeman.ExtensionManager.desktop', 'org.gnome.Software.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Settings.desktop']"
+gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'com.mitchellh.ghostty.desktop', 'org.gnome.Nautilus.desktop', 'com.mattjakeman.ExtensionManager.desktop', 'org.gnome.Software.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Settings.desktop']"
 gsettings set org.gnome.shell.keybindings open-new-window-application-1 "@as []"
 gsettings set org.gnome.shell.keybindings open-new-window-application-2 "@as []"
 gsettings set org.gnome.shell.keybindings open-new-window-application-3 "@as []"
@@ -97,6 +100,7 @@ gsettings set org.gnome.shell.keybindings switch-to-application-8 "@as []"
 gsettings set org.gnome.shell.keybindings switch-to-application-9 "@as []"
 gsettings set org.gnome.shell.keybindings toggle-message-tray "@as []"
 gsettings set org.gtk.gtk4.Settings.FileChooser show-hidden "true"
+gsettings set org.gtk.Settings.FileChooser show-hidden "true"
 
 dconf reset -f /org/gnome/shell/extensions/clipboard-indicator/
 dconf reset -f /org/gnome/shell/extensions/space-bar/shortcuts/
