@@ -18,10 +18,14 @@ return {
 				if opts.servers[server] then
 					if type(cmd) == "string" and vim.fn.executable(cmd) == 0 then
 						opts.servers[server].mason = false
-						Snacks.notify.info("server installation for " .. server .. " is disabled since " .. cmd .. " was not found.")
+						vim.schedule(function()
+							Snacks.notify.info("server installation for " .. server .. " is disabled since " .. cmd .. " was not found.")
+						end)
 					elseif cmd == false then
 						opts.servers[server].mason = false
-						Snacks.notify.info("server installation for " .. server .. " is disabled.")
+						vim.schedule(function()
+							Snacks.notify.info("server installation for " .. server .. " is disabled.")
+						end)
 					end
 				end
 			end

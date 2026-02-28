@@ -1,15 +1,49 @@
 {
-  // Core Editor Settings
+  "git": {
+    "disable_git": false,
+  },
+  "git_panel": {
+    "tree_view": true,
+    "button": false,
+  },
+  "project_panel": {
+    "bold_folder_labels": true,
+    "hide_root": true,
+  },
+  "preview_tabs": {
+    "enable_preview_multibuffer_from_code_navigation": true,
+    "enable_keep_preview_on_code_navigation": true,
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_icon": true,
+  },
+  "close_on_file_delete": true,
+  "file_finder": {
+    "modal_max_width": "medium",
+  },
+  "seed_search_query_from_cursor": "selection",
+  "search": {
+    "include_ignored": false,
+  },
+  "use_smartcase_search": true,
+  "current_line_highlight": "gutter",
+  "restore_on_startup": "empty_tab",
+  "session": {
+    "trust_all_worktrees": true,
+  },
   "vim_mode": true,
   "vim": { "use_smartcase_find": true },
-  "restore_on_startup": "none",
   "load_direnv": "shell_hook",
+  "which_key": {
+    "delay_ms": 200,
+    "enabled": true,
+  },
 
-  // Appearance
   "theme": {
     "mode": "system",
     "light": "Gruvbox Light",
-    "dark": "Gruvbox Dark"
+    "dark": "Gruvbox Dark",
   },
   "ui_font_size": 15,
   "ui_font_family": "FiraCode Nerd Font",
@@ -19,112 +53,109 @@
   "indent_guides": { "enabled": true, "coloring": "indent_aware" },
   "tabs": { "file_icons": true, "git_status": true, "show_diagnostics": "all" },
   "max_tabs": 8,
-
-  // AI Features
-  "edit_predictions": { "mode": "eager" },
-  "features": { "edit_prediction_provider": "supermaven" },
+  "edit_predictions": { "provider": "supermaven", "mode": "eager" },
   "agent": { "enabled": false },
-
-  // Language Formatting
   "languages": {
     "JSON": {
-      "format_on_save": {
+      "formatter": {
         "external": {
           "command": "npx",
           "arguments": [
             "prettier",
             "--ignore-unknown",
             "--stdin-filepath",
-            "{buffer_path}"
-          ]
-        }
-      }
+            "{buffer_path}",
+          ],
+        },
+      },
+      "format_on_save": "on",
     },
     "TSX": {
-      "format_on_save": {
+      "formatter": {
         "external": {
           "command": "npx",
           "arguments": [
             "prettier",
             "--ignore-unknown",
             "--stdin-filepath",
-            "{buffer_path}"
-          ]
-        }
-      }
+            "{buffer_path}",
+          ],
+        },
+      },
+      "format_on_save": "on",
     },
     "TypeScript": {
-      "format_on_save": {
+      "formatter": {
         "external": {
           "command": "npx",
           "arguments": [
             "prettier",
             "--ignore-unknown",
             "--stdin-filepath",
-            "{buffer_path}"
-          ]
-        }
-      }
+            "{buffer_path}",
+          ],
+        },
+      },
+      "format_on_save": "on",
     },
     "JavaScript": {
-      "format_on_save": {
+      "formatter": {
         "external": {
           "command": "npx",
           "arguments": [
             "prettier",
             "--ignore-unknown",
             "--stdin-filepath",
-            "{buffer_path}"
-          ]
-        }
-      }
+            "{buffer_path}",
+          ],
+        },
+      },
+      "format_on_save": "on",
     },
     "Shell Script": {
       "format_on_save": "on",
       "formatter": {
         "external": {
-          "command": "shfmt"
-        }
-      }
+          "command": "shfmt",
+        },
+      },
     },
     "Python": {
       "language_servers": ["pyright", "pylsp", "ruff"],
       "format_on_save": "on",
       "formatter": [
         {
-          "language_server": {
-            "name": "ruff"
-          }
+          "language_server": { "name": "ruff" },
         },
         {
-          "code_actions": {
-            "source.fixAll.ruff": true,
-            "source.organizeImports.ruff": true
-          }
-        }
-      ]
-    }
+          "code_action": "source.fixAll.ruff",
+        },
+        {
+          "code_action": "source.organizeImports.ruff",
+        },
+      ],
+    },
   },
 
-  // Terminal
   "terminal": {
+    "toolbar": {},
+    "keep_selection_on_copy": false,
     "font_family": "FiraCode Nerd Font",
     "font_size": 15,
     "line_height": "standard",
     "env": {
       "EDITOR": "zed --wait",
-      "VISUAL": "zed --wait"
-    }
+      "VISUAL": "zed --wait",
+    },
   },
 
-  // SSH Connections
   "ssh_connections": [
     {
       "host": "android",
       "projects": [
         { "paths": ["/data/data/com.termux/files"] },
-        { "paths": ["/data/data/com.termux/files/home"] }
-      ]
-    }
-  ]
+        { "paths": ["/data/data/com.termux/files/home"] },
+      ],
+    },
+  ],
 }
