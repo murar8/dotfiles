@@ -19,6 +19,8 @@
 !.local/
 !.local/bin/
 !.local/bin/reset-keybindings
+!.ssh/
+!.ssh/config
 
 .pre-commit-config.yaml
 
