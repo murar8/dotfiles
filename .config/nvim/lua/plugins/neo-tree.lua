@@ -1,6 +1,7 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	optional = true,
+	---@type neotree.Config
 	opts = {
 		close_if_last_window = false,
 		filesystem = {
@@ -21,14 +22,15 @@ return {
 			{
 				event = "after_render",
 				handler = function()
+					if require("neo-tree.sources.common.preview").is_active() then
+						return
+					end
 					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 						if vim.bo[buf].buflisted and vim.bo[buf].filetype ~= "dashboard" then
 							local state = require("neo-tree.sources.manager").get_state("filesystem")
-							if not require("neo-tree.sources.common.preview").is_active() then
-								state.config = state.config or {}
-								---@cast state neotree.StateWithTree
-								state.commands.toggle_preview(state)
-							end
+							state.config = state.config or {}
+							---@cast state neotree.StateWithTree
+							state.commands.toggle_preview(state)
 							return
 						end
 					end
@@ -41,7 +43,7 @@ return {
 		local baredot_ok, baredot = pcall(require, "baredot")
 		if baredot_ok and baredot.is_enabled() then
 			opts.filesystem.filtered_items.hide_gitignored = false
-			vim.api.nvim_echo({ { "Baredot: hide_gitignored disabled" } }, true, {})
+			Snacks.notify.info("Baredot: hide_gitignored disabled")
 		end
 		require("neo-tree").setup(opts)
 	end,

@@ -11,6 +11,7 @@ return {
 	{
 		"stevearc/conform.nvim",
 		optional = true,
+		---@type conform.setupOpts
 		opts = {
 			formatters_by_ft = {
 				proto = { "clang_format" },
