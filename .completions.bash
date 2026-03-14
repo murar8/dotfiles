@@ -1,5 +1,9 @@
 # vim: filetype=sh
 
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+    source /usr/share/bash-completion/bash_completion
+fi
+
 if command -v terraform &>/dev/null; then
     complete -C "$(which terraform)" terraform
 fi
@@ -39,10 +43,6 @@ fi
 
 if command -v fnm &>/dev/null; then
     source <(fnm completions --shell bash)
-fi
-
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-    source /usr/share/bash-completion/bash_completion
 fi
 
 if [ -f /usr/share/bash-completion/completions/git ]; then
