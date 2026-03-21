@@ -30,8 +30,6 @@ return {
 					end
 				end
 			end
-
-			return opts
 		end,
 	},
 }
