@@ -24,24 +24,11 @@ REPO_URL=https://github.com/murar8/dotfiles.git
 if ! command -v ssh >/dev/null; then
     echo "Warning: could not locate ssh in your path, falling back to HTTPS."
     echo
-elif ! ssh -o BatchMode=yes -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
+elif ! ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
     echo "Warning: SSH authentication to GitHub failed, falling back to HTTPS."
     echo
 else
     REPO_URL=git@github.com:murar8/dotfiles.git
-    # This is to avoid ssh prompting for confirmation when cloning.
-    if [ ! -f "$HOME"/.ssh/known_hosts ]; then
-        echo "Creating $HOME/.ssh/known_hosts..."
-        mkdir -p "$HOME"/.ssh
-        touch "$HOME"/.ssh/known_hosts
-        chmod 600 "$HOME"/.ssh/known_hosts
-        echo
-    fi
-    if ! ssh-keygen -F github.com >/dev/null; then
-        echo "Adding github.com to known hosts..."
-        ssh-keyscan github.com >>"$HOME"/.ssh/known_hosts
-        echo
-    fi
 fi
 
 git clone --bare "$REPO_URL" "$REPO_DIR"
