@@ -43,13 +43,13 @@ export HISTTIMEFORMAT="[%F %T] "
 
 ### Aliases
 
-copy() {
-    xclip -sel clip "$@"
-}
-
-paste() {
-    xclip -o -sel clip "$@"
-}
+if command -v wl-copy &>/dev/null; then
+    copy() { wl-copy "$@"; }
+    paste() { wl-paste "$@"; }
+elif command -v xclip &>/dev/null; then
+    copy() { xclip -sel clip "$@"; }
+    paste() { xclip -o -sel clip "$@"; }
+fi
 
 la() {
     ls -Alhg --color=auto "$@"

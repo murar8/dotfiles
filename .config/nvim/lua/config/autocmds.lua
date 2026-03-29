@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 vim.api.nvim_create_autocmd("TermClose", {
 	callback = function(ev)
 		vim.schedule(function()
-			if vim.api.nvim_buf_is_valid(ev.buf) then
+			if vim.api.nvim_buf_is_valid(ev.buf) and vim.fn.buflisted(ev.buf) == 1 then
 				vim.api.nvim_buf_delete(ev.buf, { force = true })
 			end
 		end)
