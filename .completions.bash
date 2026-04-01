@@ -45,14 +45,20 @@ if command -v fnm &>/dev/null; then
     source <(fnm completions --shell bash)
 fi
 
-if [ -f /usr/share/bash-completion/completions/git ]; then
-    source /usr/share/bash-completion/completions/git
-    __git_complete dot __git_main
-fi
+for f in /usr/share/bash-completion/completions/git /run/current-system/sw/share/bash-completion/completions/git; do
+    if [ -f "$f" ]; then
+        source "$f"
+        __git_complete dot __git_main
+        break
+    fi
+done
 
-if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
-    source /usr/share/git-core/contrib/completion/git-prompt.sh
-fi
+for f in /usr/share/git-core/contrib/completion/git-prompt.sh /run/current-system/sw/share/bash-completion/completions/git-prompt.sh; do
+    if [ -f "$f" ]; then
+        source "$f"
+        break
+    fi
+done
 
 if command -v register-python-argcomplete &>/dev/null && command -v pipx &>/dev/null; then
     eval "$(register-python-argcomplete pipx)"
