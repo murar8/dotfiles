@@ -55,6 +55,7 @@ local spec = {
 	{ import = "lazyvim.plugins" },
 
 	{ import = "lazyvim.plugins.extras.coding.mini-comment" },
+	{ import = "lazyvim.plugins.extras.editor.neo-tree" },
 	{ import = "lazyvim.plugins.extras.coding.mini-surround" },
 	{ import = "lazyvim.plugins.extras.lang.git" },
 	{ import = "lazyvim.plugins.extras.lang.toml" },
