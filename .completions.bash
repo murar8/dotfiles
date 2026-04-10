@@ -64,10 +64,6 @@ if command -v register-python-argcomplete &>/dev/null && command -v pipx &>/dev/
     eval "$(register-python-argcomplete pipx)"
 fi
 
-if [ -f "$HOME/.bash_completions/ir.sh" ]; then
-    source "$HOME/.bash_completions/ir.sh"
-fi
-
 # if command -v poetry &>/dev/null; then
 #     source <(poetry completions bash)
 # fi

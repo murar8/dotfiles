@@ -66,6 +66,8 @@ dot() {
 dotup() {
     if [ "$#" -eq 1 ]; then
         dot add -u
+        mapfile -t dirs < <(dot ls-files | xargs -r dirname | sort -u | grep -xv '\.')
+        if [ ${#dirs[@]} -gt 0 ]; then dot add -- "${dirs[@]}"; fi
         dot commit -m "$1"
         dot push origin main
     else

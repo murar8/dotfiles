@@ -13,12 +13,6 @@
 !.claude/
 !.claude/settings.json
 !.dotfiles/
-!.dotfiles/hooks/
-!.dotfiles/hooks/pre-commit
-!.dotfiles/hooks/post-merge
-!.local/
-!.local/bin/
-!.local/bin/reset-keybindings
 !.ssh/
 !.ssh/config
 
