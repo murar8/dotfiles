@@ -35,6 +35,7 @@ git clone --bare "$REPO_URL" "$REPO_DIR"
 echo
 
 dot config status.showUntrackedFiles no
+dot config bash.showUntrackedFiles false
 dot config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
 dot config branch.main.remote origin
 dot config branch.main.merge refs/heads/main
