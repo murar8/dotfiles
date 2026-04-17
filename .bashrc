@@ -86,6 +86,12 @@ lz() {
     fi
 }
 
+if command -v claude &>/dev/null; then
+    alias cl='claude'
+    alias clc='claude --continue'
+    alias clr='claude --resume'
+fi
+
 if command -v lazygit &>/dev/null; then
     lazydot() {
         GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit
