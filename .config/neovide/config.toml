@@ -3,5 +3,5 @@ frame = "none"
 maximized = true
 
 [font]
-normal = "Fira Code"
+normal = "FiraCode Nerd Font"
 size = 12.0

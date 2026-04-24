@@ -77,6 +77,19 @@ dotup() {
 
 }
 
+seal() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: seal <output-path>" >&2
+        return 1
+    fi
+    local name
+    name=$(basename "$1" .cred)
+    local secret
+    read -rsp "Secret for $name: " secret && echo
+    printf '%s' "$secret" | sudo systemd-creds encrypt --name="$name" --with-key=tpm2 --tpm2-pcrs=7 - "$1"
+    unset secret
+}
+
 lz() {
     if [ "$#" -eq 1 ]; then
         nvim --headless "+Lazy! $1" +qa
