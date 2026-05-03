@@ -2,7 +2,6 @@ return {
 	{ "folke/tokyonight.nvim", enabled = false },
 	{ "catppuccin/nvim", enabled = false },
 	{
-
 		"f4z3r/gruvbox-material.nvim",
 		name = "gruvbox-material",
 		lazy = false,

@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 	callback = function()
-		if vim.opt.buftype:get() == "terminal" then
-			vim.cmd(":startinsert")
+		if vim.bo.buftype == "terminal" then
+			vim.cmd.startinsert()
 		end
 	end,
 })
@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 vim.api.nvim_create_autocmd("TermClose", {
 	callback = function(ev)
 		vim.schedule(function()
-			if vim.api.nvim_buf_is_valid(ev.buf) and vim.fn.buflisted(ev.buf) == 1 then
+			if vim.api.nvim_buf_is_valid(ev.buf) and vim.bo[ev.buf].buflisted then
 				vim.api.nvim_buf_delete(ev.buf, { force = true })
 			end
 		end)

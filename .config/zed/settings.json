@@ -1,4 +1,18 @@
 {
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o",
+      "enable_thinking": false
+    },
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
   "disable_ai": false,
   "collaboration_panel": {
     "button": false,
@@ -66,11 +80,8 @@
   },
   "max_tabs": 8,
   "edit_predictions": {
-    "provider": "copilot",
+    "provider": "zed",
     "mode": "eager",
-  },
-  "agent": {
-    "enabled": false,
   },
   "format_on_save": "on",
   "languages": {

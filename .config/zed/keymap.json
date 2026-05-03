@@ -5,7 +5,7 @@
     "bindings": {
       "ctrl-/": "workspace::NewCenterTerminal",
       "ctrl-`": null, // default terminal_panel::Toggle — avoid dock terminal
-      "ctrl-?": ["task::Spawn", { "task_name": "Claude" }], // default agent::ToggleFocus
+      // "ctrl-?": ["task::Spawn", { "task_name": "Claude" }], // default agent::ToggleFocus
       "ctrl-shift-g": ["task::Spawn", { "task_name": "Lazygit" }], // default git_panel::ToggleFocus
       "ctrl-s": "workspace::SaveAll", // default workspace::Save
     },
