@@ -1,43 +1,30 @@
 [
-  // Global
-  {
-    "bindings": {
-      "ctrl-/": "workspace::NewCenterTerminal",
-      "ctrl-`": "workspace::NewCenterTerminal",
-      "ctrl-~": "workspace::NewCenterTerminal"
-    }
-  },
-
   // Workspace
   {
     "context": "Workspace",
     "bindings": {
+      "ctrl-/": "workspace::NewCenterTerminal",
+      "ctrl-`": null, // default terminal_panel::Toggle — avoid dock terminal
       "ctrl-?": ["task::Spawn", { "task_name": "Claude" }], // default agent::ToggleFocus
-      "ctrl-shift-g": ["task::Spawn", { "task_name": "Lazygit" }] // default git_panel::ToggleFocus
-    }
+      "ctrl-shift-g": ["task::Spawn", { "task_name": "Lazygit" }], // default git_panel::ToggleFocus
+      "ctrl-s": "workspace::SaveAll", // default workspace::Save
+    },
   },
 
   // Editor
   {
-    "context": "Editor",
-    "bindings": {
-      "ctrl-s": "workspace::SaveAll" // default workspace::Save
-    }
-  },
-  {
     "context": "Editor && !agent_diff",
     "bindings": {
-      // same as Workspace behavior
-      "ctrl-alt-y": "workspace::CloseAllDocks" // default git::ToggleStaged
-    }
+      "ctrl-alt-y": "workspace::ToggleAllDocks", // default git::ToggleStaged; matches Workspace
+    },
   },
 
   // Terminal
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-t": null // default project_symbols::Toggle
-    }
+      "ctrl-t": null, // default project_symbols::Toggle
+    },
   },
 
   // Vim
@@ -46,11 +33,22 @@
     "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
     "bindings": {
       // Traditional Vim behavior
-      "q": "vim::AnyQuotes",
-      "b": "vim::AnyBrackets",
+      "q": "vim::AnyQuotes", // default vim::MiniQuotes
+      "b": "vim::AnyBrackets", // default vim::Parentheses
       // mini.ai plugin behavior
       "Q": "vim::MiniQuotes",
-      "B": "vim::MiniBrackets"
-    }
-  }
+      "B": "vim::MiniBrackets",
+    },
+  },
+  // In VimScript, this would look like this:
+  // set whichwrap+=<,>,[,],h,l
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "left": "vim::WrappingLeft", // default vim::Left
+      "right": "vim::WrappingRight", // default vim::Right
+      "h": "vim::WrappingLeft", // default vim::Left
+      "l": "vim::WrappingRight", // default vim::Right
+    },
+  },
 ]
