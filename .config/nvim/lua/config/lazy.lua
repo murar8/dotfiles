@@ -26,7 +26,6 @@ local has_ansible = is_cmd("ansible") or is_cmd("ansible-playbook")
 local conditional_extras = {
 	{ "lazyvim.plugins.extras.ai.claudecode", is_cmd("claude") },
 	{ "lazyvim.plugins.extras.ai.copilot-native", vim.fn.has("nvim-0.12") == 1 and is_cmd("node") },
-	{ "lazyvim.plugins.extras.editor.fzf", is_cmd("fzf") },
 	{ "lazyvim.plugins.extras.formatting.prettier", is_cmd("node") },
 	{ "lazyvim.plugins.extras.lang.ansible", has_ansible and is_cmd("node") },
 	{ "lazyvim.plugins.extras.lang.clangd", has_cc and is_cmd("unzip") },
@@ -38,7 +37,6 @@ local conditional_extras = {
 	{ "lazyvim.plugins.extras.lang.prisma", is_cmd("node") },
 	{ "lazyvim.plugins.extras.lang.python", is_cmd("python3") and is_cmd("node") },
 	{ "lazyvim.plugins.extras.lang.rust", is_cmd("cargo") },
-	{ "lazyvim.plugins.extras.lang.sql", is_cmd("python3") },
 	{ "lazyvim.plugins.extras.lang.svelte", is_cmd("node") },
 	{ "lazyvim.plugins.extras.lang.tailwind", is_cmd("node") },
 	{ "lazyvim.plugins.extras.lang.terraform", is_cmd("terraform") and is_cmd("node") },
@@ -55,7 +53,6 @@ local spec = {
 	{ import = "lazyvim.plugins" },
 
 	{ import = "lazyvim.plugins.extras.coding.mini-comment" },
-	{ import = "lazyvim.plugins.extras.editor.neo-tree" },
 	{ import = "lazyvim.plugins.extras.coding.mini-surround" },
 	{ import = "lazyvim.plugins.extras.lang.git" },
 	{ import = "lazyvim.plugins.extras.lang.toml" },
