@@ -24,7 +24,8 @@ REPO_URL=https://github.com/murar8/dotfiles.git
 if ! command -v ssh >/dev/null; then
     echo "Warning: could not locate ssh in your path, falling back to HTTPS."
     echo
-elif ! ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
+elif ssh_output=$(ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1 || true); \
+    ! grep -q "successfully authenticated" <<<"$ssh_output"; then
     echo "Warning: SSH authentication to GitHub failed, falling back to HTTPS."
     echo
 else
