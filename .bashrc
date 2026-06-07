@@ -78,16 +78,16 @@ dotup() {
 }
 
 seal() {
-    if [ "$#" -ne 1 ]; then
-        echo "Usage: seal <output-path>" >&2
-        return 1
-    fi
-    local name
-    name=$(basename "$1" .cred)
-    local secret
+    local path=${1:?Usage: seal <output-path>}
+    local name secret
+    name=$(basename "$path" .cred)
     read -rsp "Secret for $name: " secret && echo
-    printf '%s' "$secret" | sudo systemd-creds encrypt --name="$name" --with-key=tpm2 --tpm2-pcrs=7 - "$1"
-    unset secret
+    printf '%s' "$secret" | sudo systemd-creds encrypt --name="$name" --with-key=tpm2 --tpm2-pcrs=7 - "$path"
+}
+
+unseal() {
+    local path=${1:?Usage: unseal <output-path>}
+    sudo systemd-creds decrypt --name="$(basename "$path" .cred)" "$path"
 }
 
 lz() {
