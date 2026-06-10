@@ -6,6 +6,8 @@ return {
 		return {
 			picker = {
 				sources = {
+					files = { hidden = true },
+					grep = { hidden = true },
 					explorer = {
 						layout = { preview = "main" },
 						jump = { close = true },
