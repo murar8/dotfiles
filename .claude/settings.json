@@ -30,24 +30,28 @@
       "allowAllUnixSockets": true
     },
     "filesystem": {
-      "allowWrite": [
-        "~/.cache/yarn",
-        "~/.cache/Cypress",
-        "~/.cache/ms-playwright",
-        "~/.npm"
-      ],
       "denyWrite": [
         "~"
       ],
       "denyRead": [
         "~"
       ],
-      "allowRead": [
-        "~/.cache/yarn",
+      "allowWrite": [
         "~/.cache/Cypress",
         "~/.cache/ms-playwright",
+        "~/.cache/nix",
+        "~/.cache/yarn",
+        "~/.npm"
+      ],
+      "allowRead": [
+        ".",
+        "~/.cache/Cypress",
+        "~/.cache/ms-playwright",
+        "~/.cache/nix",
+        "~/.cache/yarn",
         "~/.npm",
         "/nix/store",
+        "~/.config/nix",
         "~/.git/config",
         "~/.gitconfig",
         "~/.ssh/id_ed25519.pub"
