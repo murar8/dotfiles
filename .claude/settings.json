@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "worktree": {
+    "baseRef": "head"
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {},
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "network": {
+      "allowedDomains": [],
+      "allowAllUnixSockets": true
+    },
+    "filesystem": {
+      "allowWrite": [
+        "~/.cache/yarn",
+        "~/.cache/Cypress",
+        "~/.cache/ms-playwright",
+        "~/.npm"
+      ],
+      "denyWrite": [
+        "~"
+      ],
+      "denyRead": [
+        "~"
+      ],
+      "allowRead": [
+        "~/.cache/yarn",
+        "~/.cache/Cypress",
+        "~/.cache/ms-playwright",
+        "~/.npm",
+        "/nix/store",
+        "~/.git/config",
+        "~/.gitconfig",
+        "~/.ssh/id_ed25519.pub"
+      ]
+    },
+    "excludedCommands": [
+      "gh"
+    ]
+  },
+  "effortLevel": "low",
+  "autoMemoryEnabled": false,
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "auto",
+  "editorMode": "vim",
+  "verbose": true,
+  "autoCompactEnabled": true,
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": false,
+  "agentPushNotifEnabled": false,
+  "voiceEnabled": true,
+  "model": "claude-fable-5[1m]"
+}

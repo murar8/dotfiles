@@ -12,6 +12,7 @@
 !.config/**
 !.claude/
 !.claude/settings.json
+!.claude/CLAUDE.md
 !.dotfiles/
 !.ssh/
 !.ssh/config
