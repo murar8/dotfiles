@@ -22,55 +22,14 @@
     "clangd-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {},
-  "sandbox": {
-    "enabled": true,
-    "failIfUnavailable": true,
-    "network": {
-      "allowedDomains": [],
-      "allowAllUnixSockets": true
-    },
-    "filesystem": {
-      "denyWrite": [
-        "~"
-      ],
-      "denyRead": [
-        "~"
-      ],
-      "allowWrite": [
-        "~/.cache/Cypress",
-        "~/.cache/ms-playwright",
-        "~/.cache/nix",
-        "~/.cache/yarn",
-        "~/.npm"
-      ],
-      "allowRead": [
-        ".",
-        "~/.cache/Cypress",
-        "~/.cache/ms-playwright",
-        "~/.cache/nix",
-        "~/.cache/yarn",
-        "~/.npm",
-        "/nix/store",
-        "~/.config/nix",
-        "~/.git/config",
-        "~/.gitconfig",
-        "~/.ssh/id_ed25519.pub"
-      ]
-    },
-    "excludedCommands": [
-      "gh"
-    ]
-  },
-  "effortLevel": "low",
+  "tui": "fullscreen",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
   "editorMode": "vim",
-  "verbose": true,
   "autoCompactEnabled": true,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
-  "voiceEnabled": true,
-  "model": "claude-fable-5[1m]"
+  "voiceEnabled": false
 }
