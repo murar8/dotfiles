@@ -22,9 +22,38 @@
     "clangd-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {},
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "network": {
+      "allowedDomains": []
+    },
+    "filesystem": {
+      "allowWrite": [
+        "~/.cache/Cypress",
+        "~/.cache/ms-playwright",
+        "~/.cache/nix",
+        "~/.cache/yarn",
+        "~/.npm"
+      ],
+      "denyWrite": ["~"],
+      "denyRead": ["~"],
+      "allowRead": [
+        "~/.cache/Cypress",
+        "~/.cache/ms-playwright",
+        "~/.cache/nix",
+        "~/.cache/yarn",
+        "~/.npm",
+        "/nix/store",
+        "~/.config/nix",
+        "~/.git/config",
+        "~/.gitconfig",
+        "~/.ssh/id_ed25519.pub"
+      ]
+    }
+  },
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
-  "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
   "editorMode": "vim",
   "autoCompactEnabled": true,
