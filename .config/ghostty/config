@@ -1,13 +1,14 @@
 #vim: ft=ini
 confirm-close-surface=false
 font-family=FiraCode Nerd Font Mono
-keybind = ctrl+shift+j=unbind
+keybind=ctrl+shift+j=unbind
 mouse-hide-while-typing=true
-shell-integration-features = no-cursor,ssh-terminfo,ssh-env
+shell-integration-features=no-cursor,ssh-terminfo,ssh-env
 theme=Gruvbox Dark Hard
 window-decoration=false
 window-padding-balance=true
 maximize=true
-keybind = shift+enter=text:\n
-clipboard-read = allow
-clipboard-write = allow
+keybind=shift+enter=text:\n
+clipboard-read=allow
+clipboard-write=allow
+gtk-single-instance=false

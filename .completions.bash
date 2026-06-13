@@ -45,6 +45,10 @@ if command -v fnm &>/dev/null; then
     source <(fnm completions --shell bash)
 fi
 
+if command -v nono &>/dev/null; then
+    source <(nono completion bash)
+fi
+
 for f in /usr/share/bash-completion/completions/git /run/current-system/sw/share/bash-completion/completions/git; do
     if [ -f "$f" ]; then
         source "$f"
@@ -63,11 +67,3 @@ done
 if command -v register-python-argcomplete &>/dev/null && command -v pipx &>/dev/null; then
     eval "$(register-python-argcomplete pipx)"
 fi
-
-# if command -v poetry &>/dev/null; then
-#     source <(poetry completions bash)
-# fi
-
-# if command -v doctl &>/dev/null; then
-#     source <(doctl completion bash)
-# fi
