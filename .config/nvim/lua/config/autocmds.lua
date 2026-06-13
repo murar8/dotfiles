@@ -9,11 +9,12 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 -- Auto-close terminal buffer when process exits
 -- https://github.com/neovim/neovim/issues/14986#issuecomment-902705190
 vim.api.nvim_create_autocmd("TermClose", {
-	callback = function(ev)
-		vim.schedule(function()
-			if vim.api.nvim_buf_is_valid(ev.buf) and vim.bo[ev.buf].buflisted then
-				vim.api.nvim_buf_delete(ev.buf, { force = true })
-			end
-		end)
+	callback = function()
+		-- Dismiss the hit-enter prompt nvim raises on a non-zero exit.
+		-- https://github.com/neovim/neovim/issues/14986#issuecomment-902845083
+		if vim.v.event.status ~= 0 then
+			vim.api.nvim_input("<CR>")
+			vim.api.nvim_input("<CR>")
+		end
 	end,
 })
