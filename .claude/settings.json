@@ -29,27 +29,24 @@
       "allowedDomains": []
     },
     "filesystem": {
-      "allowWrite": [
-        "~/.cache/Cypress",
-        "~/.cache/ms-playwright",
-        "~/.cache/nix",
-        "~/.cache/yarn",
-        "~/.npm"
+      "denyWrite": [
+        "~"
       ],
-      "denyWrite": ["~"],
-      "denyRead": ["~"],
+      "denyRead": [
+        "~"
+      ],
       "allowRead": [
-        "~/.cache/Cypress",
-        "~/.cache/ms-playwright",
-        "~/.cache/nix",
-        "~/.cache/yarn",
-        "~/.npm",
-        "/nix/store",
-        "~/.config/nix",
+        "~/.gitconfig",
         "~/.git/config",
-        "~/.gitconfig"
+        "~/.git/ignore",
+        "~/.config/git",
+        "~/.bashrc",
+        "~/.inputrc"
       ]
-    }
+    },
+    "excludedCommands": [
+      "git commit *"
+    ]
   },
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
@@ -59,5 +56,6 @@
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
-  "voiceEnabled": false
+  "voiceEnabled": false,
+  "effortLevel": "low"
 }
