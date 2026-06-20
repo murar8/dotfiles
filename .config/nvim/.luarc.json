@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime.version": "LuaJIT",
+  "workspace.checkThirdParty": false,
+  "diagnostics.disable": ["param-type-mismatch", "undefined-field"],
+  "workspace.library": [
+    "/run/current-system/sw/share/nvim/runtime",
+    "/run/current-system/sw/share/nvim/runtime/lua",
+    "/home/murar8/.local/share/nvim/site/pack/core/opt"
+  ]
+}
