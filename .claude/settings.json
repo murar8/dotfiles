@@ -48,6 +48,7 @@
       "git commit *"
     ]
   },
+  "effortLevel": "low",
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
   "theme": "auto",
@@ -56,6 +57,5 @@
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
-  "voiceEnabled": false,
-  "effortLevel": "low"
+  "voiceEnabled": false
 }
