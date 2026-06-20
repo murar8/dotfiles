@@ -11,6 +11,7 @@ vim.opt.showmode = true -- Show mode in the command line (no statusline plugin)
 vim.opt.laststatus = 3 -- Single global statusline
 vim.opt.list = true -- Show invisible characters
 vim.opt.conceallevel = 2 -- Hide markup except on the cursor line
+vim.opt.completeopt = "menuone,noselect,popup,fuzzy" -- Completion menu without auto-select/insert, fuzzy matching
 
 -- Editing / indentation
 vim.opt.expandtab = true -- Use spaces instead of tabs

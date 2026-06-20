@@ -6,29 +6,28 @@ vim.pack.add({
 local ok, baredot = pcall(require, "baredot")
 local explorer_watch = not (ok and baredot.is_enabled())
 
-require("snacks").setup(
-    {
-        explorer = { enabled = true },
-        terminal = {
-            win = {
-                position = "float",
+require("snacks").setup({
+    explorer = { enabled = true },
+    terminal = {
+        win = {
+            position = "float",
+        },
+    },
+    picker = {
+        ui_select = true, -- route vim.ui.select through the picker
+        sources = {
+            files = { hidden = true },
+            grep = { hidden = true },
+            explorer = {
+                layout = { preview = "main" },
+                jump = { close = true },
+                hidden = true,
+                ignored = true,
+                watch = explorer_watch,
             },
         },
-        picker = {
-            ui_select = true, -- route vim.ui.select through the picker
-            sources = {
-                files = { hidden = true },
-                grep = { hidden = true },
-                explorer = {
-                    layout = { preview = "main" },
-                    jump = { close = true },
-                    hidden = true,
-                    ignored = true,
-                    watch = explorer_watch,
-                },
-            },
-        },
-    })
+    },
+})
 
 -- Files & buffers
 require("which-key").add({ "<leader>f", group = "find/file" })

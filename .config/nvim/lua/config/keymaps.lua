@@ -37,6 +37,13 @@ vim.keymap.set("i", ";", ";<c-g>u")
 -- Save file
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
+-- LSP completion menu: <C-n>/<C-p> to cycle (native), <CR> to confirm,
+-- <C-Space> to trigger. <Tab> is left to Supermaven for accepting AI ghost text.
+vim.keymap.set("i", "<CR>", function()
+    return vim.fn.pumvisible() == 1 and "<C-y>" or "<CR>"
+end, { expr = true, desc = "Confirm completion / newline" })
+vim.keymap.set("i", "<C-Space>", "<C-x><C-o>", { desc = "Trigger completion" })
+
 -- Buffer navigation
 require("which-key").add({ "<leader>b", group = "buffer" })
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
