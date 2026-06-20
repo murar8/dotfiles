@@ -7,6 +7,7 @@ local ok, baredot = pcall(require, "baredot")
 local explorer_watch = not (ok and baredot.is_enabled())
 
 require("snacks").setup({
+    explorer = { enabled = true },
     picker = {
         sources = {
             files = { hidden = true },
@@ -20,14 +21,13 @@ require("snacks").setup({
             },
         },
     },
-    explorer = { enabled = true },
 })
 
 -- Files & buffers
 require("which-key").add({ "<leader>f", group = "find/file" })
 vim.keymap.set("n", "<leader><space>", function()
-    Snacks.picker.files()
-end, { desc = "Find files" })
+    Snacks.picker.smart()
+end, { desc = "Smart find files" })
 vim.keymap.set("n", "<leader>,", function()
     Snacks.picker.buffers()
 end, { desc = "Buffers" })
@@ -49,9 +49,6 @@ end, { desc = "Find files (git)" })
 vim.keymap.set("n", "<leader>fr", function()
     Snacks.picker.recent()
 end, { desc = "Recent files" })
-vim.keymap.set("n", "<leader>fc", function()
-    Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
-end, { desc = "Find config file" })
 
 -- Search
 require("which-key").add({ "<leader>s", group = "search" })
@@ -140,17 +137,9 @@ require("which-key").add({ "<leader>g", group = "git" })
 vim.keymap.set("n", "<leader>gb", function()
     Snacks.picker.git_log_line()
 end, { desc = "Git blame line" })
-vim.keymap.set({ "n", "x" }, "<leader>gB", function()
+vim.keymap.set({ "n", "x" }, "<leader>go", function()
     Snacks.gitbrowse()
 end, { desc = "Git browse (open)" })
-vim.keymap.set({ "n", "x" }, "<leader>gY", function()
-    Snacks.gitbrowse({
-        open = function(url)
-            vim.fn.setreg("+", url)
-        end,
-        notify = false,
-    })
-end, { desc = "Git browse (copy)" })
 if vim.fn.executable("lazygit") == 1 then
     vim.keymap.set("n", "<leader>gg", function()
         Snacks.lazygit()
