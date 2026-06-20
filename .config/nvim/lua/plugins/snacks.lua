@@ -9,6 +9,7 @@ local explorer_watch = not (ok and baredot.is_enabled())
 require("snacks").setup({
     explorer = { enabled = true },
     picker = {
+        ui_select = true, -- route vim.ui.select through the picker
         sources = {
             files = { hidden = true },
             grep = { hidden = true },
