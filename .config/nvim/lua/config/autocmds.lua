@@ -8,14 +8,17 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
     end,
 })
 
--- Auto-delete the terminal buffer when its process exits
--- https://github.com/neovim/neovim/issues/14986#issuecomment-902705190
-vim.api.nvim_create_autocmd("TermClose", {
+
+-- Auto-close the terminal buffer when its process exits
+vim.api.nvim_create_autocmd('TermClose', {
+    desc = 'Dismiss hit-enter prompt on terminal exit',
     group = vim.api.nvim_create_augroup("config_term_close", { clear = true }),
-    callback = function(event)
-        vim.schedule(function()
-            pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
-        end)
+    callback = function()
+        -- nvim raises a hit-enter prompt on non-zero exit; dismiss it.
+        if vim.v.event.status ~= 0 then
+            vim.api.nvim_input('<CR>')
+            vim.api.nvim_input('<CR>')
+        end
     end,
 })
 
