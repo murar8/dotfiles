@@ -3,37 +3,31 @@ vim.pack.add({
     { src = "https://github.com/dundalek/lazy-lsp.nvim" },
 })
 
--- Teach lua_ls about the Neovim runtime and the `vim` global
-vim.lsp.config("lua_ls", {
-    settings = {
-        Lua = {
-            diagnostics = { globals = { "vim" } },
-        },
-    },
-})
-
 require("lazy-lsp").setup({
     use_vim_lsp_config = true, -- Neovim 0.11+ vim.lsp.config API
 })
 
--- Add only the binds Neovim 0.11 defaults don't already provide.
--- Defaults: K, grr, gri, grt, grn, gra, gO, [d/]d, <C-w>d, <C-]>/<C-t>.
+-- References stay on the default `grr` (keeping the `gr*` prefix intact).
+-- `gd`/`gI` intentionally override the built-in local-declaration / insert
+-- motions.
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("config_lsp_attach", { clear = true }),
     callback = function(event)
-        local function map(keys, fn, desc, mode)
-            vim.keymap.set(mode or "n", keys, fn, { buffer = event.buf, desc = "LSP: " .. desc })
-        end
-
-        map("gd", function()
+        vim.keymap.set("n", "gd", function()
             Snacks.picker.lsp_definitions()
-        end, "Goto definition")
-        map("gD", vim.lsp.buf.declaration, "Goto declaration")
-        map("<leader>sS", function()
+        end, { buffer = event.buf, desc = "LSP: Goto definition" })
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = event.buf, desc = "LSP: Goto declaration" })
+        vim.keymap.set("n", "gI", function()
+            Snacks.picker.lsp_implementations()
+        end, { buffer = event.buf, desc = "LSP: Goto implementation" })
+        vim.keymap.set("n", "gy", function()
+            Snacks.picker.lsp_type_definitions()
+        end, { buffer = event.buf, desc = "LSP: Goto type definition" })
+        vim.keymap.set("n", "<leader>ss", function()
+            Snacks.picker.lsp_symbols()
+        end, { buffer = event.buf, desc = "LSP: Document symbols" })
+        vim.keymap.set("n", "<leader>sS", function()
             Snacks.picker.lsp_workspace_symbols()
-        end, "Workspace symbols")
-        map("<leader>cf", function()
-            vim.lsp.buf.format({ async = true })
-        end, "Format", { "n", "x" })
+        end, { buffer = event.buf, desc = "LSP: Workspace symbols" })
     end,
 })
