@@ -12,6 +12,6 @@ require("conform").setup({
     },
 })
 
-vim.keymap.set({ "n", "x" }, "<leader>cf", function()
+vim.keymap.set({ "n", "x" }, "<leader>c", function()
     require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format" })

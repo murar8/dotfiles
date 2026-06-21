@@ -46,6 +46,8 @@ vim.keymap.set("i", "<C-Space>", "<C-x><C-o>", { desc = "Trigger completion" })
 
 -- Buffer navigation
 require("which-key").add({ "<leader>b", group = "buffer" })
+vim.keymap.set("n", "<A-.>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<A-,>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
 vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete buffer" })

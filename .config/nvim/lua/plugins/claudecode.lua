@@ -18,3 +18,12 @@ vim.keymap.set("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Add curr
 vim.keymap.set("v", "<leader>as", "<cmd>ClaudeCodeSend<cr>", { desc = "Send to Claude" })
 vim.keymap.set("n", "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Accept diff" })
 vim.keymap.set("n", "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Deny diff" })
+
+-- Add the file/tree under the cursor from explorer & picker buffers
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("config_claudecode_tree_add", { clear = true }),
+    pattern = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw", "snacks_picker_list" },
+    callback = function(event)
+        vim.keymap.set("n", "<leader>as", "<cmd>ClaudeCodeTreeAdd<cr>", { buffer = event.buf, desc = "Add file" })
+    end,
+})
