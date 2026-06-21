@@ -34,8 +34,8 @@ vim.keymap.set("i", ",", ",<c-g>u")
 vim.keymap.set("i", ".", ".<c-g>u")
 vim.keymap.set("i", ";", ";<c-g>u")
 
--- Save file
-vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+-- Save all files
+vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save all files" })
 
 -- LSP completion menu: <C-n>/<C-p> to cycle (native), <CR> to confirm,
 -- <C-Space> to trigger. <Tab> is left to Supermaven for accepting AI ghost text.
@@ -55,21 +55,19 @@ vim.keymap.set("n", "<leader><BS>", "<cmd>bdelete<cr>", { desc = "Delete buffer"
 vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New file" })
 
 -- Diagnostics
-require("which-key").add({ "<leader>c", group = "code" })
-local diagnostic_goto = function(next, severity)
-    return function()
-        vim.diagnostic.jump({
-            count = (next and 1 or -1) * vim.v.count1,
-            severity = severity and vim.diagnostic.severity[severity] or nil,
-            float = true,
-        })
-    end
-end
-vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
-vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next diagnostic" })
-vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev diagnostic" })
-vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next error" })
-vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev error" })
-vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next warning" })
-vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev warning" })
-
+-- ]d/[d (any) and ]D/[D (first/last) are 0.12 defaults; the float pops up on
+-- jump via vim.diagnostic.config({ jump = { float = true } }). Severity-filtered
+-- jumps below have no native equivalent.
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+vim.keymap.set("n", "]e", function()
+    vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Next error" })
+vim.keymap.set("n", "[e", function()
+    vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Previous error" })
+vim.keymap.set("n", "]w", function()
+    vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN })
+end, { desc = "Next warning" })
+vim.keymap.set("n", "[w", function()
+    vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN })
+end, { desc = "Previous warning" })

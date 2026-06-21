@@ -26,6 +26,9 @@ vim.opt.ignorecase = true -- Case-insensitive search...
 vim.opt.smartcase = true -- ...unless the query has capitals
 vim.opt.inccommand = "nosplit" -- Inline live preview of :substitute
 
+-- Diagnostics
+vim.diagnostic.config({ jump = { float = true } }) -- Show the float when jumping with ]d/[d
+
 -- Splits
 vim.opt.splitbelow = true -- New horizontal splits go below
 vim.opt.splitright = true -- New vertical splits go right
