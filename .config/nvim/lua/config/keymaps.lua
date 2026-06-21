@@ -46,22 +46,13 @@ vim.keymap.set("i", "<C-Space>", "<C-x><C-o>", { desc = "Trigger completion" })
 
 -- Buffer navigation
 require("which-key").add({ "<leader>b", group = "buffer" })
-vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
 vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 vim.keymap.set("n", "<leader>bo", "<cmd>%bdelete|edit#|bdelete#<cr>", { desc = "Delete other buffers" })
 vim.keymap.set("n", "<leader>bD", "<cmd>bdelete!<cr>", { desc = "Delete buffer (force)" })
 vim.keymap.set("n", "<leader><BS>", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
-
--- Window splits
-require("which-key").add({ "<leader>w", group = "window" })
-vim.keymap.set("n", "<leader>-", "<C-w>s", { desc = "Split window below", remap = true })
-vim.keymap.set("n", "<leader>|", "<C-w>v", { desc = "Split window right", remap = true })
-vim.keymap.set("n", "<leader>wd", "<C-w>c", { desc = "Delete window", remap = true })
+vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New file" })
 
 -- Diagnostics
 require("which-key").add({ "<leader>c", group = "code" })
@@ -82,6 +73,3 @@ vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev error"
 vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next warning" })
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev warning" })
 
--- Quickfix and location lists
-vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Prev quickfix" })
-vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
