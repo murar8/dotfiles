@@ -48,19 +48,15 @@ vim.keymap.set("i", "<C-Space>", "<C-x><C-o>", { desc = "Trigger completion" })
 require("which-key").add({ "<leader>b", group = "buffer" })
 vim.keymap.set("n", "<A-.>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<A-,>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
-vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
-vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
-vim.keymap.set("n", "<leader>bo", "<cmd>%bdelete|edit#|bdelete#<cr>", { desc = "Delete other buffers" })
-vim.keymap.set("n", "<leader>bD", "<cmd>bdelete!<cr>", { desc = "Delete buffer (force)" })
 vim.keymap.set("n", "<leader><BS>", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
-vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New file" })
+vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
+vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New file" })
+vim.keymap.set("n", "<leader>bo", "<cmd>%bdelete|edit#|bdelete#<cr>", { desc = "Delete other buffers" })
+vim.keymap.set("n", "<leader>ba", "<cmd>%bdelete<cr>", { desc = "Delete all buffers" })
 
 -- Diagnostics
--- ]d/[d (any) and ]D/[D (first/last) are 0.12 defaults; the float pops up on
--- jump via vim.diagnostic.config({ jump = { float = true } }). Severity-filtered
--- jumps below have no native equivalent.
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+
 vim.keymap.set("n", "]e", function()
     vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
 end, { desc = "Next error" })

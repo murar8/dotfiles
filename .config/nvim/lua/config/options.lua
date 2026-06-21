@@ -26,9 +26,6 @@ vim.opt.ignorecase = true -- Case-insensitive search...
 vim.opt.smartcase = true -- ...unless the query has capitals
 vim.opt.inccommand = "nosplit" -- Inline live preview of :substitute
 
--- Diagnostics
-vim.diagnostic.config({ jump = { float = true } }) -- Show the float when jumping with ]d/[d
-
 -- Splits
 vim.opt.splitbelow = true -- New horizontal splits go below
 vim.opt.splitright = true -- New vertical splits go right
@@ -45,3 +42,6 @@ vim.opt.undofile = true -- Persistent undo
 vim.opt.timeoutlen = 300 -- Faster mapped-sequence timeout
 vim.opt.updatetime = 200 -- Idle ms before CursorHold / swap write
 vim.opt.spelllang = { "en" } -- Dictionary language for :set spell
+
+-- Diagnostics
+vim.diagnostic.config({ jump = { float = true } }) -- Show the float when jumping with ]d/[d
