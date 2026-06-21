@@ -1,14 +1,14 @@
--- Scroll by 1/3 of the window height
--- https://stackoverflow.com/a/16574923
--- https://github.com/alxndr/dotfiles/blob/main/nvim/lua/mappings.lua
-vim.keymap.set("n", "<C-d>", [[(winheight(0)/3).'<C-d>']], { expr = true, desc = "Scroll down 1/3 window" })
-vim.keymap.set("n", "<C-u>", [[(winheight(0)/3).'<C-u>']], { expr = true, desc = "Scroll up 1/3 window" })
-
 -- Move focus between windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+
+-- Resize windows
+vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Clear search highlight
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
