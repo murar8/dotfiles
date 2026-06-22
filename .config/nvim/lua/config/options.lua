@@ -42,6 +42,7 @@ vim.opt.undofile = true -- Persistent undo
 vim.opt.timeoutlen = 300 -- Faster mapped-sequence timeout
 vim.opt.updatetime = 200 -- Idle ms before CursorHold / swap write
 vim.opt.spelllang = { "en" } -- Dictionary language for :set spell
+vim.opt.exrc = true -- Load project-local .nvim.lua/.nvimrc/.exrc (trust-prompted)
 
 -- Diagnostics
 vim.diagnostic.config({ jump = { float = true } }) -- Show the float when jumping with ]d/[d
