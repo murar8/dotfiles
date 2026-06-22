@@ -17,22 +17,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
         if client and client:supports_method("textDocument/completion") then
             vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
         end
-
-        vim.keymap.set("n", "gd", function()
-            Snacks.picker.lsp_definitions()
-        end, { buffer = event.buf, desc = "LSP: Go to definition" })
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = event.buf, desc = "LSP: Go to declaration" })
-        vim.keymap.set("n", "gI", function()
-            Snacks.picker.lsp_implementations()
-        end, { buffer = event.buf, desc = "LSP: Go to implementation" })
-        vim.keymap.set("n", "gy", function()
-            Snacks.picker.lsp_type_definitions()
-        end, { buffer = event.buf, desc = "LSP: Go to type definition" })
-        vim.keymap.set("n", "<leader>ss", function()
-            Snacks.picker.lsp_symbols()
-        end, { buffer = event.buf, desc = "LSP: Document symbols" })
-        vim.keymap.set("n", "<leader>sS", function()
-            Snacks.picker.lsp_workspace_symbols()
-        end, { buffer = event.buf, desc = "LSP: Workspace symbols" })
     end,
 })
