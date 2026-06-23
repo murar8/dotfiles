@@ -1,0 +1,11 @@
+# Auth tokens - do not commit
+auth.json
+
+# Session logs
+sessions/
+
+# Local NVim config
+.nvim.lua
+
+# Dependencies
+agent/extensions/node_modules/

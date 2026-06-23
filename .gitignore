@@ -1,21 +1,23 @@
 *
-!.gitignore
 !.bashrc
 !.bootstrap
+!.claude/
+!.claude/CLAUDE.md
+!.claude/settings.json
 !.completions.bash
-!.gitconfig
-!.ideavimrc
-!.inputrc
-!.shellcheckrc
-!.tmux.conf
 !.config/
 !.config/**
-!.claude/
-!.claude/settings.json
-!.claude/CLAUDE.md
 !.dotfiles/
+!.gitconfig
+!.gitignore
+!.ideavimrc
+!.inputrc
+!.pi/
+!.pi/**
+!.shellcheckrc
 !.ssh/
 !.ssh/config
+!.tmux.conf
 
 .pre-commit-config.yaml
 
