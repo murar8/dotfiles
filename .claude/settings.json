@@ -48,13 +48,12 @@
       "git commit *"
     ]
   },
-  "effortLevel": "low",
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
   "theme": "auto",
   "editorMode": "vim",
   "autoCompactEnabled": true,
-  "remoteControlAtStartup": true,
+  "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
   "voiceEnabled": false

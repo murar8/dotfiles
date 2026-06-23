@@ -51,6 +51,23 @@ vim.keymap.set("n", "<A-,>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New file" })
 
+-- Yank to system clipboard
+require("which-key").add({ "<leader>y", group = "yank" })
+vim.keymap.set("n", "<leader>yp", function()
+    local path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", path)
+    vim.notify("Yanked: " .. path, vim.log.levels.INFO)
+end, { desc = "Yank file path" })
+vim.keymap.set({ "n", "x" }, "<leader>yl", function()
+    local path = vim.fn.expand("%:p")
+    local start = vim.fn.line(".")
+    local end_ = vim.fn.line("v")
+    if start > end_ then start, end_ = end_, start end
+    local ref = start == end_ and ("%s:%d"):format(path, start) or ("%s:%d-%d"):format(path, start, end_)
+    vim.fn.setreg("+", ref)
+    vim.notify("Yanked: " .. ref, vim.log.levels.INFO)
+end, { desc = "Yank file:line(s)" })
+
 -- Diagnostics
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 
