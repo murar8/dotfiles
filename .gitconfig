@@ -7,6 +7,8 @@
         gpgsign = true
 [gpg]
         format = ssh
+[gpg "ssh"]
+        allowedSignersFile = ~/.config/git/allowed_signers
 
 [difftool "vscode"]
         cmd = code --wait --diff $LOCAL $REMOTE
