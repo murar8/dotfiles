@@ -4,6 +4,9 @@
     "commit": "",
     "pr": ""
   },
+  "permissions": {
+    "disableAutoMode": "disable"
+  },
   "worktree": {
     "baseRef": "head"
   },
@@ -26,28 +29,25 @@
   "sandbox": {
     "enabled": true,
     "failIfUnavailable": true,
+    "autoAllowBashIfSandboxed": true,
     "network": {
       "allowedDomains": []
     },
+    "excludedCommands": ["git commit"],
     "filesystem": {
-      "denyWrite": [
-        "~"
-      ],
-      "denyRead": [
-        "~"
-      ],
+      "denyWrite": ["~"],
+      "denyRead": ["~"],
       "allowRead": [
         "~/.gitconfig",
         "~/.git/config",
         "~/.git/ignore",
         "~/.config/git",
         "~/.bashrc",
-        "~/.inputrc"
+        "~/.inputrc",
+        "~/.gitignore",
+        "~/.shellcheckrc"
       ]
-    },
-    "excludedCommands": [
-      "git commit *"
-    ]
+    }
   },
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
