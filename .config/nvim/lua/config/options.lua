@@ -11,7 +11,10 @@ vim.opt.showmode = true -- Show mode in the command line (no statusline plugin)
 vim.opt.laststatus = 3 -- Single global statusline
 vim.opt.list = true -- Show invisible characters
 vim.opt.conceallevel = 2 -- Hide markup except on the cursor line
-vim.opt.completeopt = "menuone,noselect,popup,fuzzy" -- Completion menu without auto-select/insert, fuzzy matching
+-- Completion (native, no plugin) -- see :help ins-autocompletion (Nvim 0.12+)
+vim.opt.completeopt = "menuone,noselect,popup,fuzzy" -- menu even for 1 match, no auto-select, doc popup, fuzzy match
+vim.opt.autocomplete = true -- auto-show the menu as you type, merging all 'complete' sources
+vim.opt.complete = "o,.,w,b"
 
 -- Editing / indentation
 vim.opt.expandtab = true -- Use spaces instead of tabs

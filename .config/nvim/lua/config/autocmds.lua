@@ -21,6 +21,17 @@ vim.api.nvim_create_autocmd("TermClose", {
     end,
 })
 
+-- Disable 'autocomplete' (config/options.lua) in prompt inputs so the menu
+-- doesn't pop over picker/ui.input text (e.g. Snacks grep on <leader>sg).
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = vim.api.nvim_create_augroup("config_no_autocomplete_prompt", { clear = true }),
+    callback = function(event)
+        if vim.bo[event.buf].buftype == "prompt" then
+            vim.bo[event.buf].autocomplete = false
+        end
+    end,
+})
+
 -- Highlight text on yank
 -- https://github.com/LazyVim/LazyVim/blob/459a4c3b1059671e766a46c7cc223827dc67e3d0/lua/lazyvim/config/autocmds.lua#L18-L27
 vim.api.nvim_create_autocmd("TextYankPost", {

@@ -37,8 +37,9 @@ vim.keymap.set("i", ";", ";<c-g>u")
 -- Save all files
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save all files" })
 
--- LSP completion menu: <C-n>/<C-p> to cycle (native), <CR> to confirm,
--- <C-Space> to trigger. <Tab> is left to Supermaven for accepting AI ghost text.
+-- Completion menu (auto-shown via 'autocomplete'): <C-n>/<C-p> cycle, <CR>
+-- confirms (<C-y>), <C-e> dismisses, <C-Space> forces an LSP trigger. <Tab> is
+-- left to Supermaven for accepting AI ghost text.
 vim.keymap.set("i", "<CR>", function()
     return vim.fn.pumvisible() == 1 and "<C-y>" or "<CR>"
 end, { expr = true, desc = "Confirm completion / newline" })
