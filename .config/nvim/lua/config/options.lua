@@ -11,10 +11,12 @@ vim.opt.showmode = true -- Show mode in the command line (no statusline plugin)
 vim.opt.laststatus = 3 -- Single global statusline
 vim.opt.list = true -- Show invisible characters
 vim.opt.conceallevel = 2 -- Hide markup except on the cursor line
--- Completion (native, no plugin) -- see :help ins-autocompletion (Nvim 0.12+)
+-- Completion (native, no plugin) -- see :help ins-completion (Nvim 0.12+).
+-- On-demand: trigger with <C-Space> (vim.lsp.completion.get); the LSP also
+-- autotriggers on its triggerCharacters (see plugins/lazy-lsp.lua). 'complete'
+-- is left at its default -- it only feeds <C-n>/<C-p>-initiated completion,
+-- which we don't use (they only cycle the already-open menu).
 vim.opt.completeopt = "menuone,noselect,popup,fuzzy" -- menu even for 1 match, no auto-select, doc popup, fuzzy match
-vim.opt.autocomplete = true -- auto-show the menu as you type, merging all 'complete' sources
-vim.opt.complete = "o,.,w,b"
 
 -- Editing / indentation
 vim.opt.expandtab = true -- Use spaces instead of tabs

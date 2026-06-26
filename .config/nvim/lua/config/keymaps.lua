@@ -37,13 +37,17 @@ vim.keymap.set("i", ";", ";<c-g>u")
 -- Save all files
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save all files" })
 
--- Completion menu (auto-shown via 'autocomplete'): <C-n>/<C-p> cycle, <CR>
--- confirms (<C-y>), <C-e> dismisses, <C-Space> forces an LSP trigger. <Tab> is
--- left to Supermaven for accepting AI ghost text.
+-- Completion menu (on-demand via <C-Space>, plus LSP autotrigger on
+-- triggerCharacters): <C-n>/<C-p> cycle, <C-y> accepts, <C-e> dismisses. <CR>
+-- routes to <C-y> when an item is selected (which fires CompleteDone -> LSP
+-- snippet/import expansion) -- but only then, so it stays a plain newline
+-- otherwise. Navigating with <C-n> lands in compl-state 1 where the built-in
+-- <CR> would newline instead of accept, hence the explicit map. Snippet jumps
+-- and AI-accept live on <Tab>/<S-Tab> (see plugins/supermaven.lua).
 vim.keymap.set("i", "<CR>", function()
-    return vim.fn.pumvisible() == 1 and "<C-y>" or "<CR>"
-end, { expr = true, desc = "Confirm completion / newline" })
-vim.keymap.set("i", "<C-Space>", "<C-x><C-o>", { desc = "Trigger completion" })
+    return vim.fn.complete_info({ "selected" }).selected ~= -1 and "<C-y>" or "<CR>"
+end, { expr = true, desc = "Accept selected completion / newline" })
+vim.keymap.set("i", "<C-Space>", vim.lsp.completion.get, { desc = "Trigger completion" })
 
 -- Buffer navigation
 require("which-key").add({ "<leader>b", group = "buffer" })

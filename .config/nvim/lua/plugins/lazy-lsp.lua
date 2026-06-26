@@ -3,11 +3,22 @@ vim.pack.add({
     { src = "https://github.com/dundalek/lazy-lsp.nvim" },
 })
 
+-- Advertise snippet support so servers send LSP snippet bodies (e.g. a function
+-- completion with ${1:arg} placeholders) instead of plain text. vim.lsp.completion
+-- (enabled on attach below) then expands them on confirm with <C-y>/<CR>; jump
+-- between placeholders with the built-in <Tab>/<S-Tab> snippet maps (see
+-- plugins/supermaven.lua for how <Tab> layers AI-accept behind the default).
+-- The partial table merges into the default capabilities of every server.
+vim.lsp.config("*", {
+    capabilities = {
+        textDocument = { completion = { completionItem = { snippetSupport = true } } },
+    },
+})
+
 -- LSP keymaps live in snacks.lua (they use Snacks pickers). This autocmd only
--- enables built-in completion on attach. `autotrigger` complements
--- 'autocomplete' (see config/options.lua): 'autocomplete' fires on keyword
--- chars, while autotrigger fires on the server's triggerCharacters (`.`, `::`,
--- `->`), which 'autocomplete' alone won't catch.
+-- enables built-in completion on attach. `autotrigger` auto-shows the menu on
+-- the server's triggerCharacters (`.`, `::`, `->`); all other completions are
+-- on-demand via <C-Space> (see config/keymaps.lua, config/options.lua).
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("config_lsp_attach", { clear = true }),
     callback = function(event)
