@@ -28,27 +28,34 @@
   "extraKnownMarketplaces": {},
   "sandbox": {
     "enabled": true,
-    "failIfUnavailable": true,
     "autoAllowBashIfSandboxed": true,
     "network": {
       "allowedDomains": []
     },
-    "excludedCommands": ["git commit"],
     "filesystem": {
-      "denyWrite": ["~"],
-      "denyRead": ["~"],
+      "denyWrite": [
+        "~"
+      ],
+      "denyRead": [
+        "~"
+      ],
       "allowRead": [
-        "~/.gitconfig",
+        "/nix/store",
+        "~/.bashrc",
+        "~/.config/git",
         "~/.git/config",
         "~/.git/ignore",
-        "~/.config/git",
-        "~/.bashrc",
-        "~/.inputrc",
+        "~/.gitconfig",
         "~/.gitignore",
+        "~/.inputrc",
         "~/.shellcheckrc"
       ]
-    }
+    },
+    "excludedCommands": [
+      "git commit"
+    ]
   },
+  "effortLevel": "low",
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
   "theme": "auto",
@@ -57,5 +64,6 @@
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
-  "voiceEnabled": false
+  "voiceEnabled": false,
+  "skipDangerousModePermissionPrompt": true
 }
