@@ -52,18 +52,21 @@
       ]
     },
     "excludedCommands": [
-      "git commit"
+      "git commit *",
+      "gh *",
+      "podman *",
+      "docker *"
     ]
   },
   "effortLevel": "low",
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
+  "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
   "editorMode": "vim",
   "autoCompactEnabled": true,
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
-  "voiceEnabled": false,
-  "skipDangerousModePermissionPrompt": true
+  "voiceEnabled": false
 }
