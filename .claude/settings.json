@@ -6,7 +6,10 @@
     "sessionUrl": false
   },
   "permissions": {
-    "disableAutoMode": "disable"
+    "disableAutoMode": "disable",
+    "allow": [],
+    "deny": [],
+    "ask": []
   },
   "worktree": {
     "baseRef": "head"
@@ -30,13 +33,21 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
-    "excludedCommands": ["git commit *", "gh *", "podman *", "docker *"],
     "network": {
-      "allowedDomains": []
+      "allowedDomains": [
+        "api.github.com",
+        "uploads.github.com",
+        "codeload.github.com",
+        "objects.githubusercontent.com"
+      ]
     },
     "filesystem": {
-      "denyWrite": ["~"],
-      "denyRead": ["~"],
+      "denyWrite": [
+        "~"
+      ],
+      "denyRead": [
+        "~"
+      ],
       "allowRead": [
         "/nix/store",
         "~/.bashrc",
@@ -48,7 +59,13 @@
         "~/.inputrc",
         "~/.shellcheckrc"
       ]
-    }
+    },
+    "excludedCommands": [
+      "git commit *",
+      "gh *",
+      "podman *",
+      "docker *"
+    ]
   },
   "effortLevel": "low",
   "tui": "fullscreen",
@@ -60,5 +77,6 @@
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
-  "voiceEnabled": false
+  "voiceEnabled": false,
+  "model": "claude-fable-5[1m]"
 }
