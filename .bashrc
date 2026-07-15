@@ -82,7 +82,7 @@ seal() {
     local name secret
     name=$(basename "$path" .cred)
     read -rsp "Secret for $name: " secret && echo
-    printf '%s' "$secret" | sudo systemd-creds encrypt --name="$name" --with-key=tpm2 --tpm2-pcrs=7 - "$path"
+    printf '%s' "$secret" | sudo systemd-creds encrypt --name="$name" --with-key=host - "$path"
 }
 
 unseal() {
@@ -158,14 +158,18 @@ prompt() {
         git_ps1=$(__git_ps1)
     fi
 
-    if command -v direnv &>/dev/null; then
-        direnv_allowed=$(direnv status | grep -oP 'Found RC allowed \K\w+')
+    local direnv_allowed
+    if command -v direnv &>/dev/null && [[ $(direnv status) =~ Found\ RC\ allowed\ ([[:alnum:]]+) ]]; then
+        direnv_allowed=${BASH_REMATCH[1]}
     fi
 
     PS1="${cyan}\u${blue}@\h ${purple}\w"
     if [[ -n $git_ps1 ]]; then PS1+="${clear}${git_ps1}"; fi
-    if [[ $direnv_allowed == 'true' ]]; then PS1+=" 🔓"; fi
-    if [[ $direnv_allowed == 'false' ]]; then PS1+=" 🔐"; fi
+    # direnv >= 2.28 reports a numeric code (0=allowed, 1=not allowed, 2=denied),
+    # older versions reported true/false.
+    if [[ $direnv_allowed == @(0|true) ]]; then PS1+=" 🔓"; fi
+    if [[ $direnv_allowed == @(1|false) ]]; then PS1+=" 🔐"; fi
+    if [[ $direnv_allowed == 2 ]]; then PS1+=" ⛔"; fi
     if [[ exit_code -eq 0 ]]; then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
     PS1+=" ${clear}"
 }
