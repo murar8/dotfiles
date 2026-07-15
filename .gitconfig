@@ -20,27 +20,36 @@
 # https://blog.gitbutler.com/how-git-core-devs-configure-git
 
 [column]
-        ui = auto
+        ui = auto ; multi-column lists (branch/tag/status), terminal only
 [branch]
-        sort = -committerdate
+        sort = -committerdate ; git branch lists most-recently-committed first
 [tag]
-        sort = version:refname
-        gpgsign = true
+        sort = version:refname ; sort tags as versions (v0.5.101 before v0.5.1000)
+        gpgsign = true ; GPG-sign annotated tags
 [init]
-        defaultBranch = main
+        defaultBranch = main ; name for the initial branch in new repos (silences hint)
 [diff]
-        algorithm = histogram
-        colorMoved = plain
-        mnemonicPrefix = true
-        renames = true
+        algorithm = histogram ; smarter diffs than default myers, esp. moved code
+        colorMoved = plain ; color moved lines distinctly from add/remove
+        mnemonicPrefix = true ; diff headers use i/ w/ c/ instead of a/ b/
+        renames = true ; detect renames (show as rename, not delete+add)
 [push]
-        default = simple
-        autoSetupRemote = true
-        followTags = true
+        default = simple ; push current branch to same-named upstream (default since 2.0)
+        autoSetupRemote = true ; auto-create upstream on first push (no --set-upstream)
+        followTags = true ; push reachable annotated tags along with commits
 [fetch]
-        prune = true
-        pruneTags = true
-        all = true
+        prune = true ; delete local origin/* refs when branch is gone upstream
+        pruneTags = true ; also prune local tags deleted on the remote
+        all = true ; git fetch pulls from all remotes, not just one
 
+# --- Why the hell not ---
+[help]
+        autocorrect = prompt ; suggest & confirm on mistyped subcommands
 [rebase]
-        updateRefs = true
+        autoSquash = true ; auto-arrange --fixup/--squash commits in interactive rebase
+        updateRefs = true ; move stacked branch refs along during a rebase
+
+# --- Matter of taste ---
+[pull]
+        rebase = true ; git pull rebases local commits instead of merging
+

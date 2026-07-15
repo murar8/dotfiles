@@ -6,10 +6,10 @@
     "sessionUrl": false
   },
   "permissions": {
-    "disableAutoMode": "disable",
     "allow": [],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "disableAutoMode": "disable"
   },
   "worktree": {
     "baseRef": "head"
@@ -77,6 +77,5 @@
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
-  "voiceEnabled": false,
-  "model": "claude-fable-5[1m]"
+  "voiceEnabled": false
 }

@@ -44,11 +44,11 @@ export HISTTIMEFORMAT="[%F %T] "
 ### Aliases
 
 if command -v wl-copy &>/dev/null; then
-    copy() { wl-copy "$@"; }
-    paste() { wl-paste "$@"; }
+    cbcopy() { wl-copy "$@"; }
+    cbpaste() { wl-paste "$@"; }
 elif command -v xclip &>/dev/null; then
-    copy() { xclip -sel clip "$@"; }
-    paste() { xclip -o -sel clip "$@"; }
+    cbcopy() { xclip -sel clip "$@"; }
+    cbpaste() { xclip -o -sel clip "$@"; }
 fi
 
 la() {
@@ -170,7 +170,7 @@ prompt() {
     if [[ $direnv_allowed == @(0|true) ]]; then PS1+=" 🔓"; fi
     if [[ $direnv_allowed == @(1|false) ]]; then PS1+=" 🔐"; fi
     if [[ $direnv_allowed == 2 ]]; then PS1+=" ⛔"; fi
-    if [[ exit_code -eq 0 ]]; then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
+    if (( exit_code == 0 )); then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
     PS1+=" ${clear}"
 }
 

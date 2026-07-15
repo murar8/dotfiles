@@ -5,7 +5,7 @@ if [ -f /usr/share/bash-completion/bash_completion ]; then
 fi
 
 if command -v terraform &>/dev/null; then
-    complete -C "$(which terraform)" terraform
+    complete -C "$(command -v terraform)" terraform
 fi
 
 if command -v kubectl &>/dev/null; then
