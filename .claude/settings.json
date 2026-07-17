@@ -8,7 +8,12 @@
   "permissions": {
     "allow": [],
     "deny": [],
-    "ask": [],
+    "ask": [
+      "Bash(git commit *)",
+      "Bash(gh *)",
+      "Bash(podman *)",
+      "Bash(docker *)"
+    ],
     "disableAutoMode": "disable"
   },
   "worktree": {
