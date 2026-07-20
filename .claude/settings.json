@@ -5,6 +5,7 @@
     "pr": "",
     "sessionUrl": false
   },
+  "allowManagedPermissionRulesOnly": true,
   "permissions": {
     "allow": [],
     "deny": [],
@@ -47,12 +48,8 @@
       ]
     },
     "filesystem": {
-      "denyWrite": [
-        "~"
-      ],
-      "denyRead": [
-        "~"
-      ],
+      "denyWrite": ["~"],
+      "denyRead": ["~"],
       "allowRead": [
         "/nix/store",
         "~/.bashrc",
@@ -65,12 +62,7 @@
         "~/.shellcheckrc"
       ]
     },
-    "excludedCommands": [
-      "git commit *",
-      "gh *",
-      "podman *",
-      "docker *"
-    ]
+    "excludedCommands": ["git commit *", "gh *", "podman *", "docker *"]
   },
   "effortLevel": "low",
   "tui": "fullscreen",
@@ -82,5 +74,6 @@
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
-  "voiceEnabled": false
+  "voiceEnabled": false,
+  "model": "claude-fable-5[1m]"
 }

@@ -49,7 +49,3 @@
         autoSquash = true ; auto-arrange --fixup/--squash commits in interactive rebase
         updateRefs = true ; move stacked branch refs along during a rebase
 
-# --- Matter of taste ---
-[pull]
-        rebase = true ; git pull rebases local commits instead of merging
-
