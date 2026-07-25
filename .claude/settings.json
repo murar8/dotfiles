@@ -22,7 +22,6 @@
     ],
     "disableAutoMode": "disable"
   },
-  "model": "claude-fable-5[1m]",
   "worktree": {
     "baseRef": "head"
   },
@@ -48,12 +47,21 @@
     "network": {
       "allowedDomains": [
         "api.github.com",
-        "uploads.github.com",
         "codeload.github.com",
-        "objects.githubusercontent.com"
+        "objects.githubusercontent.com",
+        "raw.githubusercontent.com",
+        "registry.npmjs.org",
+        "registry.yarnpkg.com",
+        "uploads.github.com",
+        "crates.io",
+        "index.crates.io",
+        "static.crates.io"
       ]
     },
     "filesystem": {
+      "allowWrite": [
+        "/tmp/claude-1000"
+      ],
       "denyWrite": [
         "~"
       ],
@@ -62,6 +70,7 @@
       ],
       "allowRead": [
         "/nix/store",
+        "/tmp/claude-1000",
         "~/.bashrc",
         "~/.config/git",
         "~/.git/config",
