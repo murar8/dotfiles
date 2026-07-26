@@ -55,7 +55,8 @@
         "uploads.github.com",
         "crates.io",
         "index.crates.io",
-        "static.crates.io"
+        "static.crates.io",
+        "channels.nixos.org"
       ]
     },
     "filesystem": {
@@ -94,7 +95,6 @@
       "ykman *"
     ]
   },
-  "effortLevel": "low",
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
@@ -104,5 +104,6 @@
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
-  "voiceEnabled": false
+  "voiceEnabled": false,
+  "effortLevel": "low"
 }
