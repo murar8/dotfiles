@@ -52,3 +52,11 @@ vim.opt.exrc = true -- Load project-local .nvim.lua/.nvimrc/.exrc (trust-prompte
 
 -- Diagnostics
 vim.diagnostic.config({ jump = { float = true } }) -- Show the float when jumping with ]d/[d
+
+-- Messages / cmdline (:help ui2)
+-- Experimental redesign of the core message + cmdline presentation layer,
+-- intended to replace the legacy one. Notably, the |hit-enter| prompt is never
+-- triggered: messages longer than 'cmdheight' are collapsed with a `[+x]` spill
+-- indicator instead, expanded with `g<` (or ENTER right after a `:` command).
+-- Defaults are unchanged; messages go to the cmdline.
+require("vim._core.ui2").enable({ enable = true })

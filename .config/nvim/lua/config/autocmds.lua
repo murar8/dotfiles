@@ -8,16 +8,25 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
     end,
 })
 
--- Auto-close the terminal buffer when its process exits
+-- Close a terminal buffer even when its process failed. Snacks' own `auto_close`
+-- deliberately leaves a non-zero exit open (it notifies "Terminal exited with
+-- code N" and returns early), so only the failure case is handled here. Wiping
+-- the buffer lets Snacks' own BufWipeout handler tear the float down and drop
+-- its bookkeeping, rather than closing the window behind its back.
+--
+-- Deferred: the buffer is still in use while TermClose is executing.
 vim.api.nvim_create_autocmd("TermClose", {
-    desc = "Dismiss hit-enter prompt on terminal exit",
+    desc = "Close terminal buffers whose process exited non-zero",
     group = vim.api.nvim_create_augroup("config_term_close", { clear = true }),
-    callback = function()
-        -- nvim raises a hit-enter prompt on non-zero exit; dismiss it.
-        if vim.v.event.status ~= 0 then
-            vim.api.nvim_input("<CR>")
-            vim.api.nvim_input("<CR>")
+    callback = function(event)
+        if vim.v.event.status == 0 then
+            return
         end
+        vim.schedule(function()
+            if vim.api.nvim_buf_is_valid(event.buf) then
+                vim.api.nvim_buf_delete(event.buf, { force = true })
+            end
+        end)
     end,
 })
 
