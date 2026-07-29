@@ -43,6 +43,13 @@ vim.opt.smoothscroll = true -- Smooth scrolling through wrapped/long lines
 -- Behavior
 vim.opt.mouse = "a" -- Enable mouse in all modes
 vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard
+-- Over SSH there is no local clipboard tool to talk to, so force the bundled
+-- OSC 52 provider: the terminal emulator relays the yank to the local
+-- clipboard. Nvim only auto-detects OSC 52 when 'clipboard' is unset (see
+-- :help clipboard-osc52), hence the explicit override.
+if vim.env.SSH_TTY or vim.env.SSH_CONNECTION then
+  vim.g.clipboard = "osc52"
+end
 vim.opt.confirm = true -- Ask to save instead of erroring on :q
 vim.opt.undofile = true -- Persistent undo
 vim.opt.timeoutlen = 300 -- Faster mapped-sequence timeout
