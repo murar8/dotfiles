@@ -11,6 +11,7 @@ vim.opt.showmode = true -- Show mode in the command line (no statusline plugin)
 vim.opt.laststatus = 3 -- Single global statusline
 vim.opt.list = true -- Show invisible characters
 vim.opt.conceallevel = 2 -- Hide markup except on the cursor line
+vim.opt.foldlevelstart = 99 -- Start with all folds open (treesitter foldexpr: see plugins/treesitter.lua)
 -- Completion (native, no plugin) -- see :help ins-completion (Nvim 0.12+).
 -- On-demand: trigger with <C-Space> (vim.lsp.completion.get); the LSP also
 -- autotriggers on its triggerCharacters (see plugins/lazy-lsp.lua). 'complete'

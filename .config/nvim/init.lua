@@ -8,6 +8,7 @@ require("config.keymaps")
 require("config.autocmds")
 
 require("plugins.gruvbox")
+require("plugins.treesitter")
 require("plugins.baredot")
 require("plugins.mini-icons")
 require("plugins.snacks")
