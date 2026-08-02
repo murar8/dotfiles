@@ -25,15 +25,18 @@ local function yank_ref(style, absolute, whole_file)
     end
 
     local ref = s.prefix .. path
+    local visual = vim.fn.mode():match("[vV\22]") ~= nil
     if not whole_file then
         -- Only read the visual anchor when actually in visual mode; in normal
         -- mode `line("v")` may return a stale mark from a previous selection.
         local cur = vim.fn.line(".")
-        local anchor = vim.fn.mode():match("[vV\22]") and vim.fn.line("v") or cur
+        local anchor = visual and vim.fn.line("v") or cur
         local first, last = math.min(cur, anchor), math.max(cur, anchor)
         ref = ref .. s.line .. first
         if last > first then ref = ref .. s.to .. last end
     end
+
+    if visual then vim.cmd.normal({ "\27", bang = true }) end
 
     vim.fn.setreg("+", ref)
     vim.notify("Yanked: " .. ref, vim.log.levels.INFO)
