@@ -33,6 +33,7 @@ require("conform").setup({
     formatters_by_ft = {
         lua = { "stylua" },
         sh = { "shfmt" },
+        nix = { "nixfmt" },
         -- prettier for all filetypes it supports (matches LazyVim's list).
         css = { "prettier" },
         graphql = { "prettier" },
@@ -54,6 +55,7 @@ require("conform").setup({
     formatters = {
         stylua = nix_formatter("stylua", "stylua"),
         shfmt = nix_formatter("shfmt", "shfmt"),
+        nixfmt = nix_formatter("nixfmt", "nixfmt"),
         prettier = nix_formatter("prettier", "prettier"),
     },
     format_on_save = {
