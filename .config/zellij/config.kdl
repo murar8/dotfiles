@@ -163,7 +163,7 @@ on_force_close "quit"
 // otherwise this will error if such a session exists.
 // Default: <RANDOM>
 //
-// session_name "My singleton session"
+session_name "main"
 
 // When `session_name` is provided, attaches to that session
 // if it is already running or creates it otherwise.
