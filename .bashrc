@@ -43,14 +43,6 @@ export HISTTIMEFORMAT="[%F %T] "
 
 ### Aliases
 
-if command -v wl-copy &>/dev/null; then
-    cbcopy() { wl-copy "$@"; }
-    cbpaste() { wl-paste "$@"; }
-elif command -v xclip &>/dev/null; then
-    cbcopy() { xclip -sel clip "$@"; }
-    cbpaste() { xclip -o -sel clip "$@"; }
-fi
-
 la() {
     ls -Alhg --color=auto "$@"
 }
@@ -74,7 +66,6 @@ dotup() {
         echo "Expected a commit message."
         return 1
     fi
-
 }
 
 seal() {
