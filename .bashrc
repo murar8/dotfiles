@@ -204,6 +204,16 @@ if command -v delta &>/dev/null; then
     export GIT_CONFIG_VALUE_2=zdiff3
 fi
 
+### Multiplexer
+
+# On remote (SSH) sessions attach to a persistent zellij session so work
+# survives disconnects.
+if [ -n "$SSH_CONNECTION$SSH_TTY$SSH_CLIENT" ] && command -v zellij &>/dev/null; then
+    export ZELLIJ_AUTO_ATTACH=true
+    export ZELLIJ_AUTO_EXIT=true
+    eval "$(zellij setup --generate-auto-start bash)"
+fi
+
 ### Local configuration
 if [ -f "$HOME"/.local.bashrc ]; then
     source "$HOME"/.local.bashrc
