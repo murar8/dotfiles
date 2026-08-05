@@ -11,7 +11,7 @@ keybinds clear-defaults=false {
         bind "Alt k" { MoveFocus "Up"; }
         bind "Alt i" { MoveTab "Left"; }
         bind "Alt o" { MoveTab "Right"; }
-        bind "Alt c" { NewTab; }
+        bind "Ctrl Alt t" { NewTab; }
     }
 }
 
