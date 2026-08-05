@@ -209,7 +209,7 @@ fi
 # On remote (SSH) sessions attach to a persistent zellij session so work
 # survives disconnects.
 if [ -n "$SSH_CONNECTION$SSH_TTY$SSH_CLIENT" ] && command -v zellij &>/dev/null; then
-    export ZELLIJ_AUTO_ATTACH=true
+    # No ZELLIJ_AUTO_ATTACH: `attach -c` ignores `session_name`.
     export ZELLIJ_AUTO_EXIT=true
     eval "$(zellij setup --generate-auto-start bash)"
 fi
