@@ -1,4 +1,18 @@
 keybinds clear-defaults=false {
+    // Mirror the default `shared_except "locked"` navigation into locked mode
+    // (the default mode). Anything bound here is taken from programs running
+    // inside panes; nvim's move-line was moved to Ctrl+Alt j/k to make room.
+    // The Alt Left/Right aliases are omitted: readline binds those escape
+    // codes (\e[1;3D, \e[1;3C) to word motions.
+    locked {
+        bind "Alt h" { MoveFocusOrTab "Left"; }
+        bind "Alt l" { MoveFocusOrTab "Right"; }
+        bind "Alt j" { MoveFocus "Down"; }
+        bind "Alt k" { MoveFocus "Up"; }
+        bind "Alt i" { MoveTab "Left"; }
+        bind "Alt o" { MoveTab "Right"; }
+        bind "Alt c" { NewTab; }
+    }
 }
 
 // Plugin aliases - can be used to change the implementation of Zellij
