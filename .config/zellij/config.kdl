@@ -17,29 +17,12 @@ keybinds clear-defaults=false {
 
 // Plugin aliases - can be used to change the implementation of Zellij
 // changing these requires a restart to take effect
-plugins {
-    about location="zellij:about"
-    compact-bar location="zellij:compact-bar"
-    configuration location="zellij:configuration"
-    filepicker location="zellij:strider" {
-        cwd "/"
-    }
-    plugin-manager location="zellij:plugin-manager"
-    session-manager location="zellij:session-manager"
-    status-bar location="zellij:status-bar"
-    strider location="zellij:strider"
-    tab-bar location="zellij:tab-bar"
-    welcome-screen location="zellij:session-manager" {
-        welcome_screen false
-    }
-}
+plugins {}
 
 // Plugins to load in the background when a new session starts
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
-load_plugins {
-    zellij:link
-}
+load_plugins {}
 
 web_client {
     font "FiraCode Nerd Font"
@@ -134,7 +117,7 @@ default_mode "locked"
 //   - detach (Default)
 //   - quit
 //
-// on_force_close "quit"
+on_force_close "quit"
 
 // Configure the scroll back buffer size
 // This is the number of lines zellij stores for each pane in the scroll back
@@ -238,6 +221,7 @@ attach_to_session true
 // Default: true (if the host terminal supports it)
 //
 // support_kitty_keyboard_protocol false
+
 // Whether to make sure a local web server is running when a new Zellij session starts.
 // This web server will allow creating new sessions and attaching to existing ones that have
 // opted in to being shared in the browser.
@@ -254,6 +238,7 @@ attach_to_session true
 // Default: false
 //
 // web_server false
+
 // Whether to allow sessions started in the terminal to be shared through a local web server, assuming one is
 // running (see the `web_server` option for more details).
 // (Requires restart)
@@ -268,6 +253,7 @@ attach_to_session true
 // Default: "off"
 //
 // web_sharing "off"
+
 // A path to a certificate file to be used when setting up the web client to serve the
 // connection over HTTPs
 //
@@ -276,6 +262,7 @@ attach_to_session true
 // connection over HTTPs
 //
 // web_server_key "/path/to/key.pem"
+
 /// Whether to enforce https connections to the web server when it is bound to localhost
 /// (127.0.0.0/8)
 ///
@@ -298,7 +285,7 @@ show_startup_tips false
 // Whether to show release notes on first version run
 // Default: true
 //
-// show_release_notes false
+show_release_notes false
 
 // Whether to enable mouse hover effects and pane grouping functionality
 // default is true
