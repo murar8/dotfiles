@@ -1,9 +1,10 @@
 {
   "$schema": "../profile.schema.json",
+  "extends": "default",
   "meta": {
     "name": "koda",
     "version": "0.4.0",
-    "description": "Koda Health work overlay. Composed onto a base profile via --extends; grants the Koda-Health tree and the JS toolchain caches its installs write to.",
+    "description": "Koda Health work overlay granting the Koda-Health tree and the JS toolchain caches its installs write to.",
     "author": "murar8"
   },
   "filesystem": {

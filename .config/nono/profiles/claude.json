@@ -4,7 +4,7 @@
   "meta": {
     "name": "claude",
     "version": "0.4.0",
-    "description": "Local override of the registry claude profile. Captures Claude Code OAuth tokens as phantoms. Host-generic grants live in the shadowed default profile, which this inherits via nolabs-ai/claude.",
+    "description": "Local override of the registry claude profile that captures Claude Code OAuth tokens as phantoms.",
     "author": "murar8"
   },
   "groups": {

@@ -1,9 +1,10 @@
 {
   "$schema": "../profile.schema.json",
+  "extends": "default",
   "meta": {
     "name": "nix",
     "version": "0.2.0",
-    "description": "Nix toolchain overlay. Composed onto a base profile via --extends; grants the daemon socket (every build and store query goes through it), the client's own caches/state, the treefmt cache that nix fmt writes, and the substituter hosts this machine configures. /nix/store stays read-only — the daemon owns writes.",
+    "description": "Nix toolchain overlay granting the daemon socket, the client's caches and state, the treefmt cache, and this machine's substituters, leaving /nix/store read-only.",
     "author": "murar8"
   },
   "groups": {

@@ -3,7 +3,7 @@
   "meta": {
     "name": "default",
     "version": "0.1.0",
-    "description": "Shadows the built-in default profile. Re-declares the built-in's security groups verbatim, then adds this host's read-only grants (nix store, editor configs, dotfiles, toolchain rc files, ssh signing pubkey). Every agent profile inherits this via its own extends chain.",
+    "description": "Shadows the built-in default profile, adding nix_runtime and this host's read-only grants (editor configs, dotfiles, toolchain rc files, ssh signing pubkey) that every other profile inherits.",
     "author": "murar8"
   },
   "security": {
@@ -20,13 +20,13 @@
       "system_write_linux",
       "user_tools",
       "dangerous_commands",
-      "dangerous_commands_linux"
+      "dangerous_commands_linux",
+      "nix_runtime"
     ]
   },
   "filesystem": {
     "allow": ["/tmp/nono-$UID"],
     "read": [
-      "/nix/store",
       "$HOME/.bootstrap",
       "$HOME/.dotfiles",
       "$HOME/.config/alacritty",
