@@ -2,9 +2,9 @@
   "$schema": "../profile.schema.json",
   "extends": "nolabs-ai/pi",
   "meta": {
-    "name": "pi-local",
+    "name": "pi",
     "version": "1.0.0",
-    "description": "Local override of the registry pi profile. Adds OpenRouter credential injection: the API key stays supervisor-side; the sandbox only ever sees a phantom. Mirrors opencode-local, and reuses the same 'openrouter' keystore account.",
+    "description": "Local override of the registry pi profile. Adds OpenRouter credential injection: the API key stays supervisor-side; the sandbox only ever sees a phantom. Mirrors opencode, and reuses the same 'openrouter' keystore account.",
     "author": "murar8"
   },
   "filesystem": {

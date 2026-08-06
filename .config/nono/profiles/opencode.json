@@ -2,7 +2,7 @@
   "$schema": "../profile.schema.json",
   "extends": "nolabs-ai/opencode",
   "meta": {
-    "name": "opencode-local",
+    "name": "opencode",
     "version": "1.0.0",
     "description": "Local override of the registry opencode profile. Adds OpenRouter credential injection: the API key stays supervisor-side; the sandbox only ever sees a phantom.",
     "author": "murar8"
