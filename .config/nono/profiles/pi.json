@@ -4,7 +4,7 @@
   "meta": {
     "name": "pi",
     "version": "1.0.0",
-    "description": "Local override of the registry pi profile, mirroring opencode's supervisor-side OpenRouter injection and reusing the same 'openrouter' keystore account.",
+    "description": "pi, reusing opencode's supervisor-side OpenRouter injection and 'openrouter' keystore account.",
     "author": "murar8"
   },
   "filesystem": {

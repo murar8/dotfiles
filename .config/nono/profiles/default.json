@@ -2,8 +2,8 @@
   "$schema": "../profile.schema.json",
   "meta": {
     "name": "default",
-    "version": "0.1.0",
-    "description": "Shadows the built-in default profile, adding nix_runtime and this host's read-only grants (editor configs, dotfiles, toolchain rc files, ssh signing pubkey) that every other profile inherits.",
+    "version": "0.2.0",
+    "description": "Host baseline every profile inherits: nix_runtime, read-only editor/dotfile configs, temp and device writes.",
     "author": "murar8"
   },
   "security": {
@@ -11,17 +11,17 @@
   },
   "groups": {
     "include": [
-      "deny_credentials",
-      "deny_keychains_linux",
-      "deny_browser_data_linux",
-      "deny_shell_history",
-      "deny_shell_configs",
-      "system_read_linux_core",
-      "system_write_linux",
-      "user_tools",
       "dangerous_commands",
       "dangerous_commands_linux",
-      "nix_runtime"
+      "deny_browser_data_linux",
+      "deny_credentials",
+      "deny_keychains_linux",
+      "deny_shell_configs",
+      "deny_shell_history",
+      "nix_runtime",
+      "system_read_linux_core",
+      "system_write_linux",
+      "user_tools"
     ]
   },
   "filesystem": {

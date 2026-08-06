@@ -4,7 +4,7 @@
   "meta": {
     "name": "nix",
     "version": "0.2.0",
-    "description": "Nix toolchain overlay granting the daemon socket, the client's caches and state, the treefmt cache, and this machine's substituters, leaving /nix/store read-only.",
+    "description": "Nix daemon socket, client caches/state, and this host's substituters; /nix/store stays read-only.",
     "author": "murar8"
   },
   "groups": {

@@ -4,7 +4,7 @@
   "meta": {
     "name": "dotfiles",
     "version": "0.1.0",
-    "description": "Work on the ~/.dotfiles repo, whose worktree is $HOME, so every tracked subtree that needs committing must be granted read here.",
+    "description": "The ~/.dotfiles repo, whose worktree is $HOME, so tracked subtrees need read here.",
     "author": "murar8"
   },
   "filesystem": {

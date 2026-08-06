@@ -4,7 +4,7 @@
   "meta": {
     "name": "commit",
     "version": "0.3.0",
-    "description": "Signs commits and tags via the ssh-agent socket and lets pre-commit reuse its hook envs, without granting the private key.",
+    "description": "Commit/tag signing via the ssh-agent socket and pre-commit hook envs, without the private key.",
     "author": "murar8"
   },
   "filesystem": {

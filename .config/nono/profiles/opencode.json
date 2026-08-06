@@ -4,7 +4,7 @@
   "meta": {
     "name": "opencode",
     "version": "1.0.0",
-    "description": "Local override of the registry opencode profile that injects the OpenRouter key supervisor-side, so the sandbox only ever sees a phantom.",
+    "description": "opencode, with the OpenRouter key injected supervisor-side so the sandbox sees only a phantom.",
     "author": "murar8"
   },
   "network": {
