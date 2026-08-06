@@ -24,6 +24,7 @@
     ]
   },
   "filesystem": {
+    "allow": ["/tmp/nono-$UID"],
     "read": [
       "/nix/store",
       "$HOME/.bootstrap",
@@ -67,6 +68,11 @@
       "$HOME/.ssh/config",
       "$HOME/.ssh/id_ed25519.pub"
     ]
+  },
+  "environment": {
+    "set_vars": {
+      "TMPDIR": "/tmp/nono-1000"
+    }
   },
   "linux": {
     "af_unix_mediation": "pathname"

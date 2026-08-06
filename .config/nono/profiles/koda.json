@@ -15,14 +15,12 @@
       "$HOME/.npm",
       "$HOME/.cache/node-gyp",
       "$HOME/.cache/ms-playwright",
-      "/dev/shm",
-      "/tmp/koda"
+      "/dev/shm"
     ]
   },
   "environment": {
     "set_vars": {
-      "TMPDIR": "/tmp/koda",
-      "GH_CONFIG_DIR": "/tmp/koda/gh"
+      "GH_CONFIG_DIR": "$TMPDIR/gh"
     }
   },
   "network": {
