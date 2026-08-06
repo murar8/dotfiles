@@ -15,6 +15,9 @@
       "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
     }
   },
+  "network": {
+    "allow_domain": ["mcp-proxy.anthropic.com"]
+  },
   "credential_providers": {
     "claude_code": {
       "type": "oauth_capture",
@@ -36,7 +39,10 @@
           "request_nonce_fields": ["refresh_token"]
         }
       ],
-      "api_hosts": ["https://api.anthropic.com"],
+      "api_hosts": [
+        "https://api.anthropic.com",
+        "https://mcp-proxy.anthropic.com"
+      ],
       "credential_store": {
         "type": "file_json",
         "path": "$HOME/.claude/.credentials.json",

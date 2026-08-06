@@ -6,20 +6,6 @@
     "sessionUrl": false
   },
   "permissions": {
-    "allow": [],
-    "deny": [],
-    "ask": [
-      "Bash(aws *)",
-      "Bash(docker *)",
-      "Bash(gh *)",
-      "Bash(git commit *)",
-      "Bash(nix *)",
-      "Bash(podman *)",
-      "Bash(sbx *)",
-      "Bash(ssh *)",
-      "Bash(systemctl *)",
-      "Bash(ykman *)"
-    ],
     "disableAutoMode": "disable"
   },
   "worktree": {
@@ -38,63 +24,10 @@
     "pyright-lsp@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
     "clangd-lsp@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true
+    "playwright@claude-plugins-official": true,
+    "nono@nolabs-ai": true
   },
   "extraKnownMarketplaces": {},
-  "sandbox": {
-    "enabled": true,
-    "autoAllowBashIfSandboxed": true,
-    "network": {
-      "allowedDomains": [
-        "api.github.com",
-        "codeload.github.com",
-        "objects.githubusercontent.com",
-        "raw.githubusercontent.com",
-        "registry.npmjs.org",
-        "registry.yarnpkg.com",
-        "uploads.github.com",
-        "crates.io",
-        "index.crates.io",
-        "static.crates.io",
-        "channels.nixos.org"
-      ]
-    },
-    "filesystem": {
-      "allowWrite": [
-        "/tmp/claude-1000"
-      ],
-      "denyWrite": [
-        "~"
-      ],
-      "denyRead": [
-        "~"
-      ],
-      "allowRead": [
-        "/nix/store",
-        "/tmp/claude-1000",
-        "~/.bashrc",
-        "~/.config/git",
-        "~/.git/config",
-        "~/.git/ignore",
-        "~/.gitconfig",
-        "~/.gitignore",
-        "~/.inputrc",
-        "~/.shellcheckrc"
-      ]
-    },
-    "excludedCommands": [
-      "aws *",
-      "docker *",
-      "gh *",
-      "git commit *",
-      "nix *",
-      "podman *",
-      "sbx *",
-      "ssh *",
-      "systemctl *",
-      "ykman *"
-    ]
-  },
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
