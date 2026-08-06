@@ -40,12 +40,14 @@
       "$HOME/.config/opencode",
       "$HOME/.config/zed",
       "$HOME/.config/zellij",
-      "$HOME/.config/yarn"
+      "$HOME/.config/yarn",
+      "$HOME/.config/nono"
     ],
     "read_file": [
       "$HOME/.bashrc",
       "$HOME/.completions.bash",
       "$HOME/.gitconfig",
+      "$HOME/.gitignore",
       "$HOME/.ideavimrc",
       "$HOME/.inputrc",
       "$HOME/.shellcheckrc",

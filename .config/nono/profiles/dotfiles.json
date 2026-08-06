@@ -8,7 +8,6 @@
     "author": "murar8"
   },
   "filesystem": {
-    "allow": ["$HOME/.dotfiles"],
-    "read": ["$HOME/.config/nono"]
+    "allow": ["$HOME/.dotfiles"]
   }
 }
