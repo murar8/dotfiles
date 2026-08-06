@@ -1,0 +1,13 @@
+{
+  "$schema": "../profile.schema.json",
+  "extends": "commit",
+  "meta": {
+    "name": "dotfiles",
+    "version": "0.1.0",
+    "description": "Work on the ~/.dotfiles repo. Extends commit so the resulting commits can be signed.",
+    "author": "murar8"
+  },
+  "filesystem": {
+    "allow": ["$HOME/.dotfiles"]
+  }
+}

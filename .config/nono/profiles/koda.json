@@ -1,0 +1,46 @@
+{
+  "$schema": "../profile.schema.json",
+  "meta": {
+    "name": "koda",
+    "version": "0.4.0",
+    "description": "Koda Health work overlay. Composed onto a base profile via --extends; grants the Koda-Health tree and the JS toolchain caches its installs write to.",
+    "author": "murar8"
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/Documents/Koda-Health",
+      "$HOME/.cache/node",
+      "$HOME/.cache/yarn",
+      "$HOME/.yarn",
+      "$HOME/.npm",
+      "$HOME/.cache/node-gyp",
+      "/tmp/koda"
+    ]
+  },
+  "environment": {
+    "set_vars": {
+      "TMPDIR": "/tmp/koda",
+      "GH_CONFIG_DIR": "/tmp/koda/gh",
+      "DOPPLER_CONFIG_DIR": "/tmp/koda/doppler"
+    }
+  },
+  "network": {
+    "credentials": ["github", "doppler"],
+    "custom_credentials": {
+      "github": {
+        "upstream": "https://api.github.com",
+        "credential_key": "github_koda_token",
+        "env_var": "GH_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      },
+      "doppler": {
+        "upstream": "https://api.doppler.com",
+        "credential_key": "doppler_koda_token",
+        "env_var": "DOPPLER_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      }
+    }
+  }
+}

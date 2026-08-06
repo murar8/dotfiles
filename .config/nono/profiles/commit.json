@@ -1,0 +1,12 @@
+{
+  "$schema": "../profile.schema.json",
+  "meta": {
+    "name": "commit",
+    "version": "0.2.0",
+    "description": "Lets git sign commits and tags via the ssh-agent. Composed onto a base profile with --extends. Grants the agent socket only — the private key stays denied by group:deny_credentials; the public key and allowed_signers are read-only grants in the base profile.",
+    "author": "murar8"
+  },
+  "filesystem": {
+    "unix_socket": ["$XDG_RUNTIME_DIR/gcr/ssh"]
+  }
+}

@@ -1,0 +1,7 @@
+# registry-managed pack cache
+/packages/
+/pack-update-hints.json
+
+# unpromoted drafts and local agent state
+/profile-drafts/
+/.claude/

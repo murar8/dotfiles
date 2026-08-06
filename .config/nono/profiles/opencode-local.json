@@ -1,0 +1,24 @@
+{
+  "$schema": "../profile.schema.json",
+  "extends": "nolabs-ai/opencode",
+  "meta": {
+    "name": "opencode-local",
+    "version": "1.0.0",
+    "description": "Local override of the registry opencode profile. Adds OpenRouter credential injection: the API key stays supervisor-side; the sandbox only ever sees a phantom.",
+    "author": "murar8"
+  },
+  "network": {
+    "credentials": [
+      "openrouter"
+    ],
+    "custom_credentials": {
+      "openrouter": {
+        "upstream": "https://openrouter.ai/api/v1",
+        "credential_key": "openrouter",
+        "env_var": "OPENROUTER_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      }
+    }
+  }
+}
