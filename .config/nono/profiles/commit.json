@@ -2,11 +2,12 @@
   "$schema": "../profile.schema.json",
   "meta": {
     "name": "commit",
-    "version": "0.2.0",
-    "description": "Lets git sign commits and tags via the ssh-agent. Composed onto a base profile with --extends. Grants the agent socket only — the private key stays denied by group:deny_credentials; the public key and allowed_signers are read-only grants in the base profile.",
+    "version": "0.3.0",
+    "description": "Lets git sign commits and tags via the ssh-agent, and lets pre-commit build and reuse its hook envs. Composed onto a base profile with --extends. Grants the agent socket only — the private key stays denied by group:deny_credentials; the public key and allowed_signers are read-only grants in the base profile. No network grants: hook envs must already be cached, so first-time hook installs need to happen outside the sandbox. The treefmt cache lives in the nix profile — extend both when a hook shells out to nix fmt.",
     "author": "murar8"
   },
   "filesystem": {
+    "allow": ["$HOME/.cache/pre-commit"],
     "unix_socket": ["$XDG_RUNTIME_DIR/gcr/ssh"]
   }
 }
