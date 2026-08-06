@@ -14,30 +14,25 @@
       "$HOME/.yarn",
       "$HOME/.npm",
       "$HOME/.cache/node-gyp",
+      "$HOME/.cache/ms-playwright",
+      "/dev/shm",
       "/tmp/koda"
     ]
   },
   "environment": {
     "set_vars": {
       "TMPDIR": "/tmp/koda",
-      "GH_CONFIG_DIR": "/tmp/koda/gh",
-      "DOPPLER_CONFIG_DIR": "/tmp/koda/doppler"
+      "GH_CONFIG_DIR": "/tmp/koda/gh"
     }
   },
   "network": {
-    "credentials": ["github", "doppler"],
+    "open_port": [3000, 3001, 3050, 5173, 8025, 8080],
+    "credentials": ["github"],
     "custom_credentials": {
       "github": {
         "upstream": "https://api.github.com",
         "credential_key": "github_koda_token",
         "env_var": "GH_TOKEN",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      },
-      "doppler": {
-        "upstream": "https://api.doppler.com",
-        "credential_key": "doppler_koda_token",
-        "env_var": "DOPPLER_TOKEN",
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
       }

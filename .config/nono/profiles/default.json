@@ -57,6 +57,10 @@
       "/etc/group"
     ],
     "unix_socket": ["/run/nscd/socket"],
+    "suppress_save_prompt": [
+      "/run/dbus/system_bus_socket",
+      "$XDG_RUNTIME_DIR/bus"
+    ],
     "bypass_protection": [
       "$HOME/.bashrc",
       "$HOME/.completions.bash",
