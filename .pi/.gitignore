@@ -1,0 +1,5 @@
+# pi agent local state — ignore everything except tracked config
+agent/auth.json
+agent/sessions/
+agent/npm/
+agent/models-store.json

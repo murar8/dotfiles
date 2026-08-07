@@ -1,0 +1,20 @@
+{
+  "lastChangelogVersion": "0.83.0",
+  "theme": "dark",
+  "enableInstallTelemetry": false,
+  "hideThinkingBlock": false,
+  "defaultThinkingLevel": "minimal",
+
+  "terminal": { "showTerminalProgress": true },
+
+  "packages": [{ "source": "/home/murar8/.config/nono/packages/nolabs-ai/pi" }],
+
+  "defaultProvider": "openrouter",
+
+  "defaultModel": "qwen/qwen3.8-max",
+  "enabledModels": [
+    "openrouter/qwen/qwen3.8-max",
+    "openrouter/deepseek/deepseek-v4-flash",
+    "openrouter/deepseek/deepseek-v4-pro"
+  ]
+}
