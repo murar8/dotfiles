@@ -30,6 +30,8 @@
       "aws-sts",
       "aws-cloudformation",
       "aws-ssm",
+      "aws-monitoring",
+      "aws-sns",
       "aws-logs",
       "aws-secretsmanager",
       "aws-s3",
@@ -54,6 +56,14 @@
       "aws-ssm": {
         "upstream": "https://ssm.us-east-1.amazonaws.com",
         "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "ssm" }
+      },
+      "aws-monitoring": {
+        "upstream": "https://monitoring.us-east-1.amazonaws.com",
+        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "monitoring" }
+      },
+      "aws-sns": {
+        "upstream": "https://sns.us-east-1.amazonaws.com",
+        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "sns" }
       },
       "aws-logs": {
         "upstream": "https://logs.us-east-1.amazonaws.com",

@@ -15,9 +15,7 @@
       "$HOME/.yarn",
       "$HOME/.npm",
       "$HOME/.cache/node-gyp",
-      "$HOME/.cache/ms-playwright",
-      "$HOME/.cache/uv",
-      "/dev/shm"
+      "$HOME/.cache/uv"
     ]
   },
   "environment": {
@@ -26,7 +24,6 @@
     }
   },
   "network": {
-    "open_port": [3000, 3001, 3050, 5173, 8025, 8080],
     "credentials": ["github"],
     "custom_credentials": {
       "github": {
