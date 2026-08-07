@@ -20,7 +20,12 @@
   },
   "environment": {
     "set_vars": {
-      "GH_CONFIG_DIR": "$TMPDIR/gh"
+      "GH_CONFIG_DIR": "$TMPDIR/gh",
+      // koda-backend/globalSetup.ts starts one mongod for the whole vitest run.
+      // --nounixsocket: it otherwise binds /tmp/mongodb-<port>.sock, and covering
+      // that needs write on /tmp, which Landlock only grants recursively.
+      "KODA_TEST_MONGOD_ARGS": "--nounixsocket",
+      "KODA_TEST_MONGOD_PORT": "47017"
     }
   },
   "network": {
@@ -36,6 +41,7 @@
     },
     // Local stack, main checkout only: mailpit smtp/http, the SPAs, backend,
     // moto, node inspector, mongo. Worktrees offset these and are not covered.
-    "open_port": [1025, 3000, 3001, 3002, 3050, 5173, 8025, 8080, 9000, 9001, 9229, 27017]
+    // 47017: the vitest in-memory mongod (see KODA_TEST_MONGOD_PORT above).
+    "open_port": [1025, 3000, 3001, 3002, 3050, 5173, 8025, 8080, 9000, 9001, 9229, 27017, 47017]
   }
 }

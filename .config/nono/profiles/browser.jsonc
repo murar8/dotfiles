@@ -1,9 +1,9 @@
 {
   "$schema": "../profile.schema.json",
-  "extends": "koda",
+  "extends": "default",
   "meta": {
-    "name": "koda-playwright",
-    "version": "0.2.0",
+    "name": "browser",
+    "version": "0.1.0",
     "description": "Browser-driving sessions: Chromium's runtime sockets, plus a headed Wayland surface.",
     "author": "murar8"
   },

@@ -7,9 +7,6 @@
     "description": "Nix daemon socket, client caches/state, and this host's substituters; /nix/store stays read-only.",
     "author": "murar8"
   },
-  "groups": {
-    "include": ["nix_runtime"]
-  },
   "filesystem": {
     "allow": [
       "$HOME/.cache/nix",

@@ -1,26 +1,16 @@
 {
   "$schema": "../profile.schema.json",
-  "extends": "nolabs-ai/pi",
+  "extends": ["nolabs-ai/pi", "openrouter"],
   "meta": {
     "name": "pi",
     "version": "1.0.0",
-    "description": "pi, reusing opencode's supervisor-side OpenRouter injection and 'openrouter' keystore account.",
+    "description": "pi, plus the jiti scratch dir and pi.dev egress.",
     "author": "murar8"
   },
   "filesystem": {
     "allow": ["/tmp/jiti"]
   },
   "network": {
-    "allow_domain": ["pi.dev"],
-    "credentials": ["openrouter"],
-    "custom_credentials": {
-      "openrouter": {
-        "upstream": "https://openrouter.ai/api/v1",
-        "credential_key": "openrouter",
-        "env_var": "OPENROUTER_API_KEY",
-        "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      }
-    }
+    "allow_domain": ["pi.dev"]
   }
 }
