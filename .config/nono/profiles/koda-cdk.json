@@ -1,0 +1,80 @@
+{
+  "$schema": "../profile.schema.json",
+  "extends": "koda",
+  "meta": {
+    "name": "koda-cdk",
+    "version": "0.1.0",
+    "description": "CDK synth/diff/deploy: proxy-signed AWS via koda-dev, brokered Doppler token, uv + cdk caches.",
+    "author": "murar8"
+  },
+  "filesystem": {
+    "allow": ["$HOME/.cdk"]
+  },
+  "environment": {
+    "deny_vars": ["AWS_PROFILE"],
+    "set_vars": {
+      "DOPPLER_CONFIG_DIR": "/tmp/nono-$UID/doppler",
+      "AWS_ACCESS_KEY_ID": "nono-brokered",
+      "AWS_SECRET_ACCESS_KEY": "nono-brokered"
+    }
+  },
+  "credential_capture": {
+    "doppler_token": {
+      "command": ["doppler", "configure", "get", "token", "--plain", "--scope", "/"],
+      "cache_ttl_secs": 3600
+    }
+  },
+  "network": {
+    "credentials": [
+      "doppler",
+      "aws-sts",
+      "aws-cloudformation",
+      "aws-ssm",
+      "aws-logs",
+      "aws-secretsmanager",
+      "aws-s3",
+      "aws-s3-cdk-assets"
+    ],
+    "custom_credentials": {
+      "doppler": {
+        "upstream": "https://api.doppler.com",
+        "credential_key": "cmd://doppler_token",
+        "env_var": "DOPPLER_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}"
+      },
+      "aws-sts": {
+        "upstream": "https://sts.us-east-1.amazonaws.com",
+        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "sts" }
+      },
+      "aws-cloudformation": {
+        "upstream": "https://cloudformation.us-east-1.amazonaws.com",
+        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "cloudformation" }
+      },
+      "aws-ssm": {
+        "upstream": "https://ssm.us-east-1.amazonaws.com",
+        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "ssm" }
+      },
+      "aws-logs": {
+        "upstream": "https://logs.us-east-1.amazonaws.com",
+        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "logs" }
+      },
+      "aws-secretsmanager": {
+        "upstream": "https://secretsmanager.us-east-1.amazonaws.com",
+        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "secretsmanager" }
+      },
+      "aws-s3": {
+        "upstream": "https://s3.us-east-1.amazonaws.com",
+        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "s3" },
+        "endpoint_rules": [
+          { "method": "GET", "path": "/**" },
+          { "method": "HEAD", "path": "/**" }
+        ]
+      },
+      "aws-s3-cdk-assets": {
+        "upstream": "https://cdk-hnb659fds-assets-160009618678-us-east-1.s3.us-east-1.amazonaws.com",
+        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "s3" }
+      }
+    }
+  }
+}

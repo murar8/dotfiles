@@ -16,6 +16,7 @@
       "$HOME/.npm",
       "$HOME/.cache/node-gyp",
       "$HOME/.cache/ms-playwright",
+      "$HOME/.cache/uv",
       "/dev/shm"
     ]
   },
@@ -30,7 +31,7 @@
     "custom_credentials": {
       "github": {
         "upstream": "https://api.github.com",
-        "credential_key": "github_koda_token",
+        "credential_key": "github_koda",
         "env_var": "GH_TOKEN",
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
