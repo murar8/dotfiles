@@ -24,10 +24,10 @@
     "pyright-lsp@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
     "clangd-lsp@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true,
     "nono@nolabs-ai": true
   },
   "extraKnownMarketplaces": {},
+  "effortLevel": "low",
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
@@ -37,6 +37,5 @@
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": false,
   "agentPushNotifEnabled": false,
-  "voiceEnabled": false,
-  "effortLevel": "low"
+  "voiceEnabled": false
 }
