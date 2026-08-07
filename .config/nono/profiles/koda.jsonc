@@ -3,7 +3,7 @@
   "extends": "default",
   "meta": {
     "name": "koda",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "description": "Koda Health tree plus the JS toolchain caches its installs write to.",
     "author": "murar8"
   },
@@ -33,6 +33,9 @@
         "inject_header": "Authorization",
         "credential_format": "Bearer {}"
       }
-    }
+    },
+    // Local stack, main checkout only: mailpit smtp/http, the SPAs, backend,
+    // moto, node inspector, mongo. Worktrees offset these and are not covered.
+    "open_port": [1025, 3000, 3001, 3002, 3050, 5173, 8025, 8080, 9000, 9001, 9229, 27017]
   }
 }
