@@ -2,7 +2,7 @@
   "$schema": "../profile.schema.json",
   "meta": {
     "name": "default",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Host baseline every profile inherits: nix_runtime, read-only editor/dotfile configs, temp and device writes.",
     "author": "murar8"
   },
@@ -44,6 +44,8 @@
       ".ruff_cache",
       ".eslintcache",
       "cdk.out",
+      ".terraform",
+      ".esphome",
       "test-results",
       "playwright-report",
       // Git's own object store and index; reflog is the recovery path here.
