@@ -2,12 +2,54 @@
   "$schema": "../profile.schema.json",
   "meta": {
     "name": "default",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Host baseline every profile inherits: nix_runtime, read-only editor/dotfile configs, temp and device writes.",
     "author": "murar8"
   },
   "security": {
     "signal_mode": "isolated"
+  },
+  "rollback": {
+    // Patterns with a slash match as a substring of the full path; without one
+    // they must equal a whole path component.
+    "exclude_patterns": [
+      // Scratch, caches, toolchain state.
+      "/tmp/",
+      "/.cache/",
+      "/.local/state/nix",
+      "/.local/share/nix",
+      "/.npm/",
+      "/.yarn/",
+      "/.cdk/",
+      "google-chrome-for-testing",
+      "/dev/shm",
+      // Agent and dotfile trees: these carry their own history.
+      "/.dotfiles",
+      "/.claude",
+      "/.pi",
+      "/.opencode",
+      "/.local/share/opencode",
+      "/.local/share/opentui",
+      "/.local/state/opencode",
+      // In-tree build and test artifacts. Bare generic names (`dist`, `build`,
+      // `out`, `coverage`) stay out — they collide with real source dirs.
+      ".direnv",
+      ".turbo",
+      ".vite",
+      ".parcel-cache",
+      ".venv",
+      ".tox",
+      ".pytest_cache",
+      ".mypy_cache",
+      ".ruff_cache",
+      ".eslintcache",
+      "cdk.out",
+      "test-results",
+      "playwright-report",
+      // Git's own object store and index; reflog is the recovery path here.
+      ".git"
+    ],
+    "exclude_globs": ["*.tsbuildinfo", "*.pyc", "*.log"]
   },
   "groups": {
     "include": [
