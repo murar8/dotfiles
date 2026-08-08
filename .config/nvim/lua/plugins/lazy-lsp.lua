@@ -66,7 +66,6 @@ require("lazy-lsp").setup({
     configs = {
         ts_ls = { cmd = { "typescript-language-server", "--stdio" } },
         eslint = { cmd = { "vscode-eslint-language-server", "--stdio" } },
-        jsonls = { cmd = { "vscode-json-language-server", "--stdio" } },
         html = { cmd = { "vscode-html-language-server", "--stdio" } },
         cssls = { cmd = { "vscode-css-language-server", "--stdio" } },
         yamlls = { cmd = { "yaml-language-server", "--stdio" } },
@@ -74,5 +73,13 @@ require("lazy-lsp").setup({
         ruby_lsp = { cmd = { "ruby-lsp" } },
         csharp_ls = { cmd = { "csharp-ls" } },
         jdtls = { cmd = { "jdtls", "-data", vim.fn.stdpath("cache") .. "/jdtls" } },
+        -- The server's trailing-comma fallback is `languageId == "jsonc" ?
+        -- "warning" : "error"`, so .jsonc still warns (code 519) even though
+        -- prettier emits them there. This applies to the whole client, so
+        -- .json stops flagging them too.
+        jsonls = {
+            cmd = { "vscode-json-language-server", "--stdio" },
+            settings = { json = { validate = { trailingCommas = "ignore" } } },
+        },
     },
 })
