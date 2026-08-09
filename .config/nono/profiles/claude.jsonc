@@ -5,18 +5,18 @@
     "name": "claude",
     "version": "0.4.0",
     "description": "Claude Code, with OAuth tokens captured as phantoms.",
-    "author": "murar8"
+    "author": "murar8",
   },
   "groups": {
-    "exclude": ["vscode_linux"]
+    "exclude": ["vscode_linux"],
   },
   "environment": {
     "set_vars": {
-      "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
-    }
+      "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    },
   },
   "network": {
-    "allow_domain": ["mcp-proxy.anthropic.com"]
+    "allow_domain": ["mcp-proxy.anthropic.com"],
   },
   "credential_providers": {
     "claude_code": {
@@ -28,40 +28,40 @@
           "response_fields": [
             {
               "path": "access_token",
-              "kind": "opaque"
+              "kind": "opaque",
             },
             {
               "path": "refresh_token",
-              "kind": "opaque"
-            }
+              "kind": "opaque",
+            },
           ],
           "request_body": "auto",
-          "request_nonce_fields": ["refresh_token"]
-        }
+          "request_nonce_fields": ["refresh_token"],
+        },
       ],
       "api_hosts": [
         "https://api.anthropic.com",
-        "https://mcp-proxy.anthropic.com"
+        "https://mcp-proxy.anthropic.com",
       ],
       "credential_store": {
         "type": "file_json",
         "path": "$HOME/.claude/.credentials.json",
         "phantom_fields": [
           "claudeAiOauth.accessToken",
-          "claudeAiOauth.refreshToken"
-        ]
+          "claudeAiOauth.refreshToken",
+        ],
       },
       "helpers": {
         "status": ["claude", "auth", "status", "--json"],
         "login": ["claude", "auth", "login"],
-        "logout": ["claude", "auth", "logout"]
-      }
-    }
+        "logout": ["claude", "auth", "logout"],
+      },
+    },
   },
   "credential_routes": [
     {
       "name": "claude_code_oauth",
-      "provider": "claude_code"
-    }
-  ]
+      "provider": "claude_code",
+    },
+  ],
 }

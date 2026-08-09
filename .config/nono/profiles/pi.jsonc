@@ -5,12 +5,12 @@
     "name": "pi",
     "version": "1.0.0",
     "description": "pi, plus the jiti scratch dir and pi.dev egress.",
-    "author": "murar8"
+    "author": "murar8",
   },
   "filesystem": {
-    "allow": ["/tmp/jiti"]
+    "allow": ["/tmp/jiti"],
   },
   "network": {
-    "allow_domain": ["pi.dev"]
-  }
+    "allow_domain": ["pi.dev"],
+  },
 }

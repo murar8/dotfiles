@@ -7,24 +7,24 @@
       "ctrl-`": null, // default terminal_panel::Toggle — avoid dock terminal
       // "ctrl-?": ["task::Spawn", { "task_name": "Claude" }], // default agent::ToggleFocus
       "ctrl-shift-g": ["task::Spawn", { "task_name": "Lazygit" }], // default git_panel::ToggleFocus
-      "ctrl-s": "workspace::SaveAll", // default workspace::Save
-    },
+      "ctrl-s": "workspace::SaveAll" // default workspace::Save
+    }
   },
 
   // Editor
   {
     "context": "Editor && !agent_diff",
     "bindings": {
-      "ctrl-alt-y": "workspace::ToggleAllDocks", // default git::ToggleStaged; matches Workspace
-    },
+      "ctrl-alt-y": "workspace::ToggleAllDocks" // default git::ToggleStaged; matches Workspace
+    }
   },
 
   // Terminal
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-t": null, // default project_symbols::Toggle
-    },
+      "ctrl-t": null // default project_symbols::Toggle
+    }
   },
 
   // Vim
@@ -37,8 +37,8 @@
       "b": "vim::AnyBrackets", // default vim::Parentheses
       // mini.ai plugin behavior
       "Q": "vim::MiniQuotes",
-      "B": "vim::MiniBrackets",
-    },
+      "B": "vim::MiniBrackets"
+    }
   },
   // In VimScript, this would look like this:
   // set whichwrap+=<,>,[,],h,l
@@ -48,7 +48,7 @@
       "left": "vim::WrappingLeft", // default vim::Left
       "right": "vim::WrappingRight", // default vim::Right
       "h": "vim::WrappingLeft", // default vim::Left
-      "l": "vim::WrappingRight", // default vim::Right
-    },
-  },
+      "l": "vim::WrappingRight" // default vim::Right
+    }
+  }
 ]

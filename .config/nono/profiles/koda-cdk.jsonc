@@ -5,17 +5,17 @@
     "name": "koda-cdk",
     "version": "0.1.0",
     "description": "CDK synth/diff/deploy: proxy-signed AWS via koda-dev, plus the cdk cache.",
-    "author": "murar8"
+    "author": "murar8",
   },
   "filesystem": {
-    "allow": ["$HOME/.cdk"]
+    "allow": ["$HOME/.cdk"],
   },
   "environment": {
     "deny_vars": ["AWS_PROFILE"],
     "set_vars": {
       "AWS_ACCESS_KEY_ID": "nono-brokered",
-      "AWS_SECRET_ACCESS_KEY": "nono-brokered"
-    }
+      "AWS_SECRET_ACCESS_KEY": "nono-brokered",
+    },
   },
   "network": {
     "credentials": [
@@ -27,49 +27,85 @@
       "aws-logs",
       "aws-secretsmanager",
       "aws-s3",
-      "aws-s3-cdk-assets"
+      "aws-s3-cdk-assets",
     ],
     "custom_credentials": {
       "aws-sts": {
         "upstream": "https://sts.us-east-1.amazonaws.com",
-        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "sts" }
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "sts",
+        },
       },
       "aws-cloudformation": {
         "upstream": "https://cloudformation.us-east-1.amazonaws.com",
-        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "cloudformation" }
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "cloudformation",
+        },
       },
       "aws-ssm": {
         "upstream": "https://ssm.us-east-1.amazonaws.com",
-        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "ssm" }
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "ssm",
+        },
       },
       "aws-monitoring": {
         "upstream": "https://monitoring.us-east-1.amazonaws.com",
-        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "monitoring" }
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "monitoring",
+        },
       },
       "aws-sns": {
         "upstream": "https://sns.us-east-1.amazonaws.com",
-        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "sns" }
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "sns",
+        },
       },
       "aws-logs": {
         "upstream": "https://logs.us-east-1.amazonaws.com",
-        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "logs" }
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "logs",
+        },
       },
       "aws-secretsmanager": {
         "upstream": "https://secretsmanager.us-east-1.amazonaws.com",
-        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "secretsmanager" }
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "secretsmanager",
+        },
       },
       "aws-s3": {
         "upstream": "https://s3.us-east-1.amazonaws.com",
-        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "s3" },
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "s3",
+        },
         "endpoint_rules": [
           { "method": "GET", "path": "/**" },
-          { "method": "HEAD", "path": "/**" }
-        ]
+          { "method": "HEAD", "path": "/**" },
+        ],
       },
       "aws-s3-cdk-assets": {
         "upstream": "https://cdk-hnb659fds-assets-160009618678-us-east-1.s3.us-east-1.amazonaws.com",
-        "aws_auth": { "profile": "koda-dev", "region": "us-east-1", "service": "s3" }
-      }
-    }
-  }
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "s3",
+        },
+      },
+    },
+  },
 }

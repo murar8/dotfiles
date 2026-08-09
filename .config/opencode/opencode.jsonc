@@ -15,6 +15,6 @@
     "lsp": "allow",
     "skill": "ask",
     "external_directory": "ask",
-    "doom_loop": "ask"
-  }
+    "doom_loop": "ask",
+  },
 }

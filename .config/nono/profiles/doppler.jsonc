@@ -5,18 +5,26 @@
     "name": "doppler",
     "version": "0.1.0",
     "description": "Doppler token brokered supervisor-side from the local CLI; the sandbox sees only a phantom.",
-    "author": "murar8"
+    "author": "murar8",
   },
   "environment": {
     "set_vars": {
-      "DOPPLER_CONFIG_DIR": "/tmp/nono-$UID/doppler"
-    }
+      "DOPPLER_CONFIG_DIR": "/tmp/nono-$UID/doppler",
+    },
   },
   "credential_capture": {
     "doppler_token": {
-      "command": ["doppler", "configure", "get", "token", "--plain", "--scope", "/"],
-      "cache_ttl_secs": 3600
-    }
+      "command": [
+        "doppler",
+        "configure",
+        "get",
+        "token",
+        "--plain",
+        "--scope",
+        "/",
+      ],
+      "cache_ttl_secs": 3600,
+    },
   },
   "network": {
     "credentials": ["doppler"],
@@ -26,8 +34,8 @@
         "credential_key": "cmd://doppler_token",
         "env_var": "DOPPLER_TOKEN",
         "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      }
-    }
-  }
+        "credential_format": "Bearer {}",
+      },
+    },
+  },
 }

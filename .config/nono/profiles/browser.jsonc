@@ -5,18 +5,18 @@
     "name": "browser",
     "version": "0.1.0",
     "description": "Browser-driving sessions: Chromium's runtime sockets, plus a headed Wayland surface.",
-    "author": "murar8"
+    "author": "murar8",
   },
   "allow_gpu": true,
   "filesystem": {
     "allow": ["$HOME/.config/google-chrome-for-testing", "/dev/shm"],
     "unix_socket_subtree_bind": ["/tmp/nono-$UID"],
-    "unix_socket": ["$XDG_RUNTIME_DIR/wayland-0"]
+    "unix_socket": ["$XDG_RUNTIME_DIR/wayland-0"],
   },
   "environment": {
     "deny_vars": ["DISPLAY"],
     "set_vars": {
-      "GSETTINGS_BACKEND": "memory"
-    }
-  }
+      "GSETTINGS_BACKEND": "memory",
+    },
+  },
 }

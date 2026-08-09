@@ -5,9 +5,9 @@
     "name": "dotfiles",
     "version": "0.1.0",
     "description": "The ~/.dotfiles repo, whose worktree is $HOME, so tracked subtrees need read here.",
-    "author": "murar8"
+    "author": "murar8",
   },
   "filesystem": {
-    "allow": ["$HOME/.dotfiles"]
-  }
+    "allow": ["$HOME/.dotfiles"],
+  },
 }

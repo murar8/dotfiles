@@ -4,10 +4,10 @@
     "name": "default",
     "version": "0.3.1",
     "description": "Host baseline every profile inherits: nix_runtime, read-only editor/dotfile configs, temp and device writes.",
-    "author": "murar8"
+    "author": "murar8",
   },
   "security": {
-    "signal_mode": "isolated"
+    "signal_mode": "isolated",
   },
   "rollback": {
     // Patterns with a slash match as a substring of the full path; without one
@@ -49,9 +49,9 @@
       "test-results",
       "playwright-report",
       // Git's own object store and index; reflog is the recovery path here.
-      ".git"
+      ".git",
     ],
-    "exclude_globs": ["*.tsbuildinfo", "*.pyc", "*.log"]
+    "exclude_globs": ["*.tsbuildinfo", "*.pyc", "*.log"],
   },
   "groups": {
     "include": [
@@ -65,8 +65,8 @@
       "nix_runtime",
       "system_read_linux_core",
       "system_write_linux",
-      "user_tools"
-    ]
+      "user_tools",
+    ],
   },
   "filesystem": {
     "allow": ["/tmp/nono-$UID"],
@@ -85,7 +85,7 @@
       "$HOME/.config/zed",
       "$HOME/.config/zellij",
       "$HOME/.config/yarn",
-      "$HOME/.config/nono"
+      "$HOME/.config/nono",
     ],
     "read_file": [
       "$HOME/.bashrc",
@@ -101,32 +101,32 @@
       "$HOME/.ssh/id_ed25519.pub",
       "$HOME/.config/git/allowed_signers",
       "/etc/passwd",
-      "/etc/group"
+      "/etc/group",
     ],
     "unix_socket": ["/run/nscd/socket"],
     "suppress_save_prompt": [
       "/run/dbus/system_bus_socket",
-      "$XDG_RUNTIME_DIR/bus"
+      "$XDG_RUNTIME_DIR/bus",
     ],
     "bypass_protection": [
       "$HOME/.bashrc",
       "$HOME/.completions.bash",
       "$HOME/.ssh/config",
-      "$HOME/.ssh/id_ed25519.pub"
-    ]
+      "$HOME/.ssh/id_ed25519.pub",
+    ],
   },
   "environment": {
     "set_vars": {
-      "TMPDIR": "/tmp/nono-1000"
-    }
+      "TMPDIR": "/tmp/nono-1000",
+    },
   },
   "linux": {
-    "af_unix_mediation": "pathname"
+    "af_unix_mediation": "pathname",
   },
   "network": {
     "network_profile": "developer",
     "tls_intercept": {
-      "ca_env_vars": ["NODE_EXTRA_CA_CERTS"]
-    }
-  }
+      "ca_env_vars": ["NODE_EXTRA_CA_CERTS"],
+    },
+  },
 }

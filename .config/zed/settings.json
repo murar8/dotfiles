@@ -15,55 +15,55 @@
   },
   "disable_ai": false,
   "collaboration_panel": {
-    "button": false,
+    "button": false
   },
   "colorize_brackets": true,
   "current_line_highlight": "gutter",
   "icon_theme": "Zed (Default)",
   "git_panel": {
     "button": false,
-    "tree_view": true,
+    "tree_view": true
   },
   "project_panel": {
     "dock": "left",
     "git_status_indicator": true,
     "diagnostic_badges": true,
     "bold_folder_labels": true,
-    "hide_root": true,
+    "hide_root": true
   },
   "preview_tabs": {
     "enable_preview_multibuffer_from_code_navigation": true,
-    "enable_keep_preview_on_code_navigation": true,
+    "enable_keep_preview_on_code_navigation": true
   },
   "title_bar": {
-    "show_branch_status_icon": true,
+    "show_branch_status_icon": true
   },
   "close_on_file_delete": true,
   "file_finder": {
-    "modal_max_width": "medium",
+    "modal_max_width": "medium"
   },
   "seed_search_query_from_cursor": "selection",
   "use_smartcase_search": true,
   "restore_on_startup": "launchpad",
   "session": {
-    "trust_all_worktrees": true,
+    "trust_all_worktrees": true
   },
   "vim_mode": true,
   "vim": {
     "gdefault": true,
     "use_smartcase_find": true,
-    "toggle_relative_line_numbers": true,
+    "toggle_relative_line_numbers": true
   },
   "load_direnv": "shell_hook",
   "which_key": {
     "delay_ms": 200,
-    "enabled": true,
+    "enabled": true
   },
 
   "theme": {
     "mode": "system",
     "light": "Gruvbox Light",
-    "dark": "Gruvbox Dark",
+    "dark": "Gruvbox Dark"
   },
   "ui_font_size": 15,
   "ui_font_family": "FiraCode Nerd Font",
@@ -71,17 +71,17 @@
   "buffer_font_family": "FiraCode Nerd Font",
   "indent_guides": {
     "enabled": true,
-    "coloring": "indent_aware",
+    "coloring": "indent_aware"
   },
   "tabs": {
     "file_icons": true,
     "git_status": true,
-    "show_diagnostics": "all",
+    "show_diagnostics": "all"
   },
   "max_tabs": 8,
   "edit_predictions": {
     "provider": "zed",
-    "mode": "eager",
+    "mode": "eager"
   },
   "format_on_save": "on",
   "languages": {
@@ -93,10 +93,10 @@
             "prettier",
             "--ignore-unknown",
             "--stdin-filepath",
-            "{buffer_path}",
-          ],
-        },
-      },
+            "{buffer_path}"
+          ]
+        }
+      }
     },
     "TSX": {
       "formatter": {
@@ -106,10 +106,10 @@
             "prettier",
             "--ignore-unknown",
             "--stdin-filepath",
-            "{buffer_path}",
-          ],
-        },
-      },
+            "{buffer_path}"
+          ]
+        }
+      }
     },
     "TypeScript": {
       "formatter": {
@@ -119,10 +119,10 @@
             "prettier",
             "--ignore-unknown",
             "--stdin-filepath",
-            "{buffer_path}",
-          ],
-        },
-      },
+            "{buffer_path}"
+          ]
+        }
+      }
     },
     "JavaScript": {
       "formatter": {
@@ -132,36 +132,36 @@
             "prettier",
             "--ignore-unknown",
             "--stdin-filepath",
-            "{buffer_path}",
-          ],
-        },
-      },
+            "{buffer_path}"
+          ]
+        }
+      }
     },
     "Shell Script": {
       "formatter": {
         "external": {
-          "command": "shfmt",
-        },
-      },
+          "command": "shfmt"
+        }
+      }
     },
     "Python": {
       "language_servers": ["pyright", "pylsp", "ruff"],
       "formatter": {
         "language_server": {
-          "name": "ruff",
-        },
+          "name": "ruff"
+        }
       },
       "code_actions_on_format": {
         "source.fixAll.ruff": true,
-        "source.organizeImports.ruff": true,
-      },
-    },
+        "source.organizeImports.ruff": true
+      }
+    }
   },
 
   "terminal": {
     "button": false,
     "toolbar": {
-      "breadcrumbs": false,
+      "breadcrumbs": false
     },
     "show_count_badge": true,
     "keep_selection_on_copy": false,
@@ -169,7 +169,7 @@
     "font_size": 15,
     "env": {
       "EDITOR": "zed --wait",
-      "VISUAL": "zed --wait",
-    },
-  },
+      "VISUAL": "zed --wait"
+    }
+  }
 }

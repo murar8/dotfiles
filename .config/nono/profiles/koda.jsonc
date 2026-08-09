@@ -5,7 +5,7 @@
     "name": "koda",
     "version": "0.5.0",
     "description": "Koda Health tree plus the JS toolchain caches its installs write to.",
-    "author": "murar8"
+    "author": "murar8",
   },
   "filesystem": {
     "allow": [
@@ -15,8 +15,8 @@
       "$HOME/.yarn",
       "$HOME/.npm",
       "$HOME/.cache/node-gyp",
-      "$HOME/.cache/uv"
-    ]
+      "$HOME/.cache/uv",
+    ],
   },
   "environment": {
     "set_vars": {
@@ -25,8 +25,8 @@
       // --nounixsocket: it otherwise binds /tmp/mongodb-<port>.sock, and covering
       // that needs write on /tmp, which Landlock only grants recursively.
       "KODA_TEST_MONGOD_ARGS": "--nounixsocket",
-      "KODA_TEST_MONGOD_PORT": "47017"
-    }
+      "KODA_TEST_MONGOD_PORT": "47017",
+    },
   },
   "network": {
     "credentials": ["github"],
@@ -36,12 +36,15 @@
         "credential_key": "github_koda",
         "env_var": "GH_TOKEN",
         "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      }
+        "credential_format": "Bearer {}",
+      },
     },
     // Local stack, main checkout only: mailpit smtp/http, the SPAs, backend,
     // moto, node inspector, mongo. Worktrees offset these and are not covered.
     // 47017: the vitest in-memory mongod (see KODA_TEST_MONGOD_PORT above).
-    "open_port": [1025, 3000, 3001, 3002, 3050, 5173, 8025, 8080, 9000, 9001, 9229, 27017, 47017]
-  }
+    "open_port": [
+      1025, 3000, 3001, 3002, 3050, 5173, 8025, 8080, 9000, 9001, 9229, 27017,
+      47017,
+    ],
+  },
 }

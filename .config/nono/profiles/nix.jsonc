@@ -5,16 +5,16 @@
     "name": "nix",
     "version": "0.2.0",
     "description": "Nix daemon socket, client caches/state, and this host's substituters; /nix/store stays read-only.",
-    "author": "murar8"
+    "author": "murar8",
   },
   "filesystem": {
     "allow": [
       "$HOME/.cache/nix",
       "$HOME/.cache/treefmt",
       "$HOME/.local/state/nix",
-      "$HOME/.local/share/nix"
+      "$HOME/.local/share/nix",
     ],
-    "unix_socket": ["/nix/var/nix/daemon-socket/socket"]
+    "unix_socket": ["/nix/var/nix/daemon-socket/socket"],
   },
   "network": {
     "allow_domain": [
@@ -24,7 +24,7 @@
       "nix-community.cachix.org",
       "cache.numtide.com",
       "microvm.cachix.org",
-      "fenix.cachix.org"
-    ]
-  }
+      "fenix.cachix.org",
+    ],
+  },
 }

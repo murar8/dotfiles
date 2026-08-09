@@ -5,7 +5,7 @@
     "name": "openrouter",
     "version": "0.1.0",
     "description": "OpenRouter key injected supervisor-side; the sandbox sees only a phantom.",
-    "author": "murar8"
+    "author": "murar8",
   },
   "network": {
     "credentials": ["openrouter"],
@@ -15,8 +15,8 @@
         "credential_key": "openrouter",
         "env_var": "OPENROUTER_API_KEY",
         "inject_header": "Authorization",
-        "credential_format": "Bearer {}"
-      }
-    }
-  }
+        "credential_format": "Bearer {}",
+      },
+    },
+  },
 }
