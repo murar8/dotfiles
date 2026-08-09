@@ -1,0 +1,32 @@
+# Single source of truth for indentation: nvim reads this natively (setting
+# expandtab/shiftwidth, which conform then passes to shfmt as -i) and the CLI
+# formatters read it directly. Values match each tool's own default, so a file
+# formatted from the editor and from the shell comes out the same.
+#
+# No `root = true`: at $HOME that would halt the upward search for every file
+# below it. Indent stays out of [*] for the same reason -- an unlisted type
+# (Makefile, Go) must keep its own convention rather than inherit one here.
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Two trailing spaces are a hard line break.
+[*.md]
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2
+
+[{.bashrc,*.sh,*.bash}]
+indent_style = tab
+indent_size = 4
+
+[*.{json,jsonc,yml,yaml,nix,toml}]
+indent_style = space
+indent_size = 2
+
+[*.{lua,kdl}]
+indent_style = space
+indent_size = 4
