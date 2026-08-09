@@ -90,10 +90,55 @@ lz() {
 	fi
 }
 
-if command -v claude &>/dev/null; then
-	alias cl='claude'
-	alias clc='claude --continue'
-	alias clr='claude --resume'
+if command -v nono &>/dev/null; then
+	# Run an agent under nono: args before `--` are nono's, the rest are the
+	# agent's. Each agent's profile is named after its binary; entrypoints are
+	# `n` plus the binary's first two letters, suffixed c/r for continue/resume.
+	#   ncl --extends koda --allow ~/scratch -- -p 'fix tests'
+	_agent_run() {
+		local agent=$1 agent_flag=$2
+		shift 2
+
+		local nono_args=()
+		while [ "$#" -gt 0 ]; do
+			if [ "$1" = '--' ]; then
+				shift
+				break
+			else
+				nono_args+=("$1")
+				shift
+			fi
+		done
+
+		# ${x:+"$x"} expands to nothing when unset, so no empty arg reaches pi.
+		nono run --profile "$agent" "${nono_args[@]}" -- \
+			"$agent" ${agent_flag:+"$agent_flag"} "$@"
+	}
+
+	if command -v claude &>/dev/null; then
+		ncl() { _agent_run claude --dangerously-skip-permissions "$@"; }
+		ncc() { ncl "$@" -- --continue; }
+		ncr() { ncl "$@" -- --resume; }
+	fi
+
+	# pi has no permission system; its tools always run.
+	if command -v pi &>/dev/null; then
+		npi() { _agent_run pi '' "$@"; }
+		npc() { npi "$@" -- --continue; }
+		npr() { npi "$@" -- --resume; }
+	fi
+
+	# opencode has no --resume; its equivalent is --session <id>.
+	if command -v opencode &>/dev/null; then
+		nop() { _agent_run opencode --auto "$@"; }
+		noc() { nop "$@" -- --continue; }
+	fi
+else
+	if command -v claude &>/dev/null; then
+		alias cl='claude'
+		alias clc='claude --continue'
+		alias clr='claude --resume'
+	fi
 fi
 
 if command -v lazygit &>/dev/null; then
