@@ -2,7 +2,7 @@
   "$schema": "../profile.schema.json",
   "meta": {
     "name": "default",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "description": "Host baseline every profile inherits: nix_runtime, read-only editor/dotfile configs, temp and device writes.",
     "author": "murar8",
   },
@@ -139,7 +139,7 @@
   },
   "environment": {
     "set_vars": {
-      "TMPDIR": "/tmp/nono-1000",
+      "TMPDIR": "/tmp/nono-$UID",
     },
   },
   "linux": {
