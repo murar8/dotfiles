@@ -2,16 +2,16 @@
 
 # If not running interactively don't do anything.
 if [[ $- != *i* ]]; then
-    return
+	return
 fi
 
 ### System configuration
 
 for f in /etc/bashrc /etc/bash.bashrc; do
-    if [ -f "$f" ]; then
-        source "$f"
-        break
-    fi
+	if [ -f "$f" ]; then
+		source "$f"
+		break
+	fi
 done
 
 ### Options
@@ -44,80 +44,80 @@ export HISTTIMEFORMAT="[%F %T] "
 ### Aliases
 
 la() {
-    ls -Alhg --color=auto "$@"
+	ls -Alhg --color=auto "$@"
 }
 
 clob() {
-    set +o noclobber
+	set +o noclobber
 }
 
 dot() {
-    git --git-dir="$HOME"/.dotfiles --work-tree="$HOME" "$@"
+	git --git-dir="$HOME"/.dotfiles --work-tree="$HOME" "$@"
 }
 
 dotup() {
-    if [ "$#" -eq 1 ]; then
-        dot add -u
-        mapfile -t dirs < <(dot ls-files | xargs -r dirname | sort -u | grep -xv '\.')
-        if [ ${#dirs[@]} -gt 0 ]; then dot add -- "${dirs[@]}"; fi
-        dot commit -m "$1"
-        dot push origin main
-    else
-        echo "Expected a commit message."
-        return 1
-    fi
+	if [ "$#" -eq 1 ]; then
+		dot add -u
+		mapfile -t dirs < <(dot ls-files | xargs -r dirname | sort -u | grep -xv '\.')
+		if [ ${#dirs[@]} -gt 0 ]; then dot add -- "${dirs[@]}"; fi
+		dot commit -m "$1"
+		dot push origin main
+	else
+		echo "Expected a commit message."
+		return 1
+	fi
 }
 
 seal() {
-    local path=${1:?Usage: seal <output-path>}
-    local name secret
-    name=$(basename "$path" .cred)
-    read -rsp "Secret for $name: " secret && echo
-    printf '%s' "$secret" | sudo systemd-creds encrypt --name="$name" --with-key=host - "$path"
+	local path=${1:?Usage: seal <output-path>}
+	local name secret
+	name=$(basename "$path" .cred)
+	read -rsp "Secret for $name: " secret && echo
+	printf '%s' "$secret" | sudo systemd-creds encrypt --name="$name" --with-key=host - "$path"
 }
 
 unseal() {
-    local path=${1:?Usage: unseal <output-path>}
-    sudo systemd-creds decrypt --name="$(basename "$path" .cred)" "$path"
+	local path=${1:?Usage: unseal <output-path>}
+	sudo systemd-creds decrypt --name="$(basename "$path" .cred)" "$path"
 }
 
 lz() {
-    if [ "$#" -eq 1 ]; then
-        nvim --headless "+Lazy! $1" +qa
-    else
-        echo "Expected a Lazy command."
-        return 1
-    fi
+	if [ "$#" -eq 1 ]; then
+		nvim --headless "+Lazy! $1" +qa
+	else
+		echo "Expected a Lazy command."
+		return 1
+	fi
 }
 
 if command -v claude &>/dev/null; then
-    alias cl='claude'
-    alias clc='claude --continue'
-    alias clr='claude --resume'
+	alias cl='claude'
+	alias clc='claude --continue'
+	alias clr='claude --resume'
 fi
 
 if command -v lazygit &>/dev/null; then
-    lazydot() {
-        GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit
-    }
+	lazydot() {
+		GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lazygit
+	}
 fi
 
 ### Completions
 
 if [ -f "$HOME/.completions.bash" ]; then
-    source "$HOME/.completions.bash"
+	source "$HOME/.completions.bash"
 fi
 
 ### Editor
 
 if command -v nvim &>/dev/null; then
-    EDITOR="$(command -v nvim)"
+	EDITOR="$(command -v nvim)"
 elif [ "$ZED_TERM" = 'true' ] || command -v zed &>/dev/null; then
-    EDITOR="$(command -v zed) --wait"
+	EDITOR="$(command -v zed) --wait"
 elif command -v code &>/dev/null && [ "$TERM_PROGRAM" = 'vscode' ] && [ -z "$CURSOR_TRACE_ID" ]; then
-    EDITOR="$(command -v code) --wait"
+	EDITOR="$(command -v code) --wait"
 elif command -v vim &>/dev/null; then
-    EDITOR="$(command -v vim)"
+	EDITOR="$(command -v vim)"
 fi
 
 VISUAL=$EDITOR
@@ -136,33 +136,33 @@ red='\[\033[31m\]'
 white='\[\033[37m\]'
 
 prompt() {
-    local exit_code="$?"
+	local exit_code="$?"
 
-    history -a # Append the current session history to the content of the history file.
+	history -a # Append the current session history to the content of the history file.
 
-    local git_ps1
-    if command -v __git_ps1 &>/dev/null; then
-        export GIT_PS1_SHOWUPSTREAM="auto"
-        export GIT_PS1_SHOWDIRTYSTATE=true
-        export GIT_PS1_SHOWCOLORHINTS=true
-        export GIT_PS1_SHOWUNTRACKEDFILES=true
-        git_ps1=$(__git_ps1)
-    fi
+	local git_ps1
+	if command -v __git_ps1 &>/dev/null; then
+		export GIT_PS1_SHOWUPSTREAM="auto"
+		export GIT_PS1_SHOWDIRTYSTATE=true
+		export GIT_PS1_SHOWCOLORHINTS=true
+		export GIT_PS1_SHOWUNTRACKEDFILES=true
+		git_ps1=$(__git_ps1)
+	fi
 
-    local direnv_allowed
-    if command -v direnv &>/dev/null && [[ $(direnv status) =~ Found\ RC\ allowed\ ([[:alnum:]]+) ]]; then
-        direnv_allowed=${BASH_REMATCH[1]}
-    fi
+	local direnv_allowed
+	if command -v direnv &>/dev/null && [[ $(direnv status) =~ Found\ RC\ allowed\ ([[:alnum:]]+) ]]; then
+		direnv_allowed=${BASH_REMATCH[1]}
+	fi
 
-    PS1="${cyan}\u${blue}@\h ${purple}\w"
-    if [[ -n $git_ps1 ]]; then PS1+="${clear}${git_ps1}"; fi
-    # direnv >= 2.28 reports a numeric code (0=allowed, 1=not allowed, 2=denied),
-    # older versions reported true/false.
-    if [[ $direnv_allowed == @(0|true) ]]; then PS1+=" 🔓"; fi
-    if [[ $direnv_allowed == @(1|false) ]]; then PS1+=" 🔐"; fi
-    if [[ $direnv_allowed == 2 ]]; then PS1+=" ⛔"; fi
-    if (( exit_code == 0 )); then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
-    PS1+=" ${clear}"
+	PS1="${cyan}\u${blue}@\h ${purple}\w"
+	if [[ -n $git_ps1 ]]; then PS1+="${clear}${git_ps1}"; fi
+	# direnv >= 2.28 reports a numeric code (0=allowed, 1=not allowed, 2=denied),
+	# older versions reported true/false.
+	if [[ $direnv_allowed == @(0|true) ]]; then PS1+=" 🔓"; fi
+	if [[ $direnv_allowed == @(1|false) ]]; then PS1+=" 🔐"; fi
+	if [[ $direnv_allowed == 2 ]]; then PS1+=" ⛔"; fi
+	if ((exit_code == 0)); then PS1+=" ${white}\$"; else PS1+=" ${red}!"; fi
+	PS1+=" ${clear}"
 }
 
 PROMPT_COMMAND=('prompt')
@@ -171,37 +171,37 @@ PROMPT_DIRTRIM=1 # Trim the working directory to the last directory name.
 ### Environment
 
 if command -v fzf &>/dev/null && fzf --bash &>/dev/null; then
-    eval "$(fzf --bash)"
+	eval "$(fzf --bash)"
 fi
 
 if command -v direnv &>/dev/null; then
-    eval "$(direnv hook bash)"
+	eval "$(direnv hook bash)"
 fi
 
 if [ -f "$HOME"/.nvm/nvm.sh ] && [ -f "$HOME"/.nvm/bash_completion ]; then
-    export NVM_DIR="$HOME/.nvm"
-    . "$NVM_DIR/nvm.sh"
-    . "$NVM_DIR/bash_completion"
+	export NVM_DIR="$HOME/.nvm"
+	. "$NVM_DIR/nvm.sh"
+	. "$NVM_DIR/bash_completion"
 fi
 
 if command -v fnm &>/dev/null; then
-    eval "$(fnm env --use-on-cd --shell bash)"
+	eval "$(fnm env --use-on-cd --shell bash)"
 fi
 
 # rustup
 if [ -f "$HOME"/.cargo/env ]; then
-    . "$HOME"/.cargo/env
+	. "$HOME"/.cargo/env
 fi
 
 if command -v delta &>/dev/null; then
-    export GIT_PAGER=delta
-    export GIT_CONFIG_COUNT=3
-    export GIT_CONFIG_KEY_0=interactive.diffFilter
-    export GIT_CONFIG_VALUE_0='delta --color-only'
-    export GIT_CONFIG_KEY_1=delta.navigate
-    export GIT_CONFIG_VALUE_1=true
-    export GIT_CONFIG_KEY_2=merge.conflictStyle
-    export GIT_CONFIG_VALUE_2=zdiff3
+	export GIT_PAGER=delta
+	export GIT_CONFIG_COUNT=3
+	export GIT_CONFIG_KEY_0=interactive.diffFilter
+	export GIT_CONFIG_VALUE_0='delta --color-only'
+	export GIT_CONFIG_KEY_1=delta.navigate
+	export GIT_CONFIG_VALUE_1=true
+	export GIT_CONFIG_KEY_2=merge.conflictStyle
+	export GIT_CONFIG_VALUE_2=zdiff3
 fi
 
 ### Multiplexer
@@ -209,12 +209,12 @@ fi
 # On remote (SSH) sessions attach to a persistent zellij session so work
 # survives disconnects.
 if [ -n "$SSH_CONNECTION$SSH_TTY$SSH_CLIENT" ] && command -v zellij &>/dev/null; then
-    # No ZELLIJ_AUTO_ATTACH: `attach -c` ignores `session_name`.
-    export ZELLIJ_AUTO_EXIT=true
-    eval "$(zellij setup --generate-auto-start bash)"
+	# No ZELLIJ_AUTO_ATTACH: `attach -c` ignores `session_name`.
+	export ZELLIJ_AUTO_EXIT=true
+	eval "$(zellij setup --generate-auto-start bash)"
 fi
 
 ### Local configuration
 if [ -f "$HOME"/.local.bashrc ]; then
-    source "$HOME"/.local.bashrc
+	source "$HOME"/.local.bashrc
 fi
