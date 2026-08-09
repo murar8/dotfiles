@@ -115,23 +115,10 @@ if command -v nono &>/dev/null; then
 			"$agent" ${agent_flag:+"$agent_flag"} "$@"
 	}
 
-	# Everything up to `--` is a `nono run` argument, so hand the line to
-	# nono's own completion (sourced from .completions.bash, which runs after
-	# this). Words past `--` belong to the agent and are left alone.
-	_agent_complete() {
-		if [[ " ${COMP_WORDS[*]:1:COMP_CWORD-1} " == *" -- "* ]]; then
-			return
-		fi
-		COMP_WORDS=(nono run "${COMP_WORDS[@]:1}")
-		((COMP_CWORD += 1))
-		_nono nono "$2" "$3"
-	}
-
 	if command -v claude &>/dev/null; then
 		ncl() { _agent_run claude --dangerously-skip-permissions "$@"; }
 		ncc() { ncl "$@" -- --continue; }
 		ncr() { ncl "$@" -- --resume; }
-		complete -F _agent_complete ncl ncc ncr
 	fi
 
 	# pi has no permission system; its tools always run.
@@ -139,14 +126,12 @@ if command -v nono &>/dev/null; then
 		npi() { _agent_run pi '' "$@"; }
 		npc() { npi "$@" -- --continue; }
 		npr() { npi "$@" -- --resume; }
-		complete -F _agent_complete npi npc npr
 	fi
 
 	# opencode has no --resume; its equivalent is --session <id>.
 	if command -v opencode &>/dev/null; then
 		nop() { _agent_run opencode --auto "$@"; }
 		noc() { nop "$@" -- --continue; }
-		complete -F _agent_complete nop noc
 	fi
 else
 	if command -v claude &>/dev/null; then

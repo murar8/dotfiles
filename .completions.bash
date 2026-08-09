@@ -47,6 +47,24 @@ fi
 
 if command -v nono &>/dev/null; then
 	source <(nono completion bash)
+
+	# The agent entrypoints in .bashrc take `nono run` arguments up to `--`,
+	# so rewrite the line and hand it to nono's own completion. Words past
+	# `--` belong to the agent and are left alone.
+	_agent_complete() {
+		if [[ " ${COMP_WORDS[*]:1:COMP_CWORD-1} " == *" -- "* ]]; then
+			return
+		fi
+		COMP_WORDS=(nono run "${COMP_WORDS[@]:1}")
+		((COMP_CWORD += 1))
+		_nono nono "$2" "$3"
+	}
+
+	for c in ncl ncc ncr npi npc npr nop noc; do
+		if declare -F "$c" >/dev/null; then
+			complete -F _agent_complete "$c"
+		fi
+	done
 fi
 
 for f in /usr/share/bash-completion/completions/git /run/current-system/sw/share/bash-completion/completions/git; do
