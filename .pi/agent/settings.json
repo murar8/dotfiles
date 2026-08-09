@@ -4,17 +4,19 @@
   "enableInstallTelemetry": false,
   "hideThinkingBlock": false,
   "defaultThinkingLevel": "minimal",
-
-  "terminal": { "showTerminalProgress": true },
-
-  "packages": [{ "source": "/home/murar8/.config/nono/packages/nolabs-ai/pi" }],
-
+  "terminal": {
+    "showTerminalProgress": true
+  },
   "defaultProvider": "openrouter",
-
   "defaultModel": "qwen/qwen3.8-max",
   "enabledModels": [
+    "openrouter/deepseek/deepseek-v4-pro",
     "openrouter/qwen/qwen3.8-max",
-    "openrouter/deepseek/deepseek-v4-flash",
-    "openrouter/deepseek/deepseek-v4-pro"
+    "openrouter/deepseek/deepseek-v4-flash"
+  ],
+  "packages": [
+    {
+      "source": "/home/murar8/.config/nono/packages/nolabs-ai/pi"
+    }
   ]
 }
