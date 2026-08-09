@@ -49,3 +49,16 @@
 	autoSquash = true ; auto-arrange --fixup/--squash commits in interactive rebase
 	updateRefs = true ; move stacked branch refs along during a rebase
 
+# --- delta ---
+# pager and diffFilter are run through a shell, so they guard themselves and
+# fall back cleanly on machines without delta. Quotes are required: the parser
+# would otherwise read the `;` as starting a comment.
+[merge]
+	conflictStyle = zdiff3 ; show the merge base too, not just the two sides
+[delta]
+	navigate = true ; n/N jump between files in the diff (inert without delta)
+[core]
+	pager = "if command -v delta >/dev/null; then delta; else less; fi"
+[interactive]
+	diffFilter = "if command -v delta >/dev/null; then delta --color-only; else cat; fi"
+
