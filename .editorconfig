@@ -13,30 +13,19 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-# Two trailing spaces are a hard line break.
-[*.md]
-trim_trailing_whitespace = false
-indent_style = space
-indent_size = 2
-
-# .bootstrap is an extensionless bash script.
-[{.bashrc,.bootstrap,*.sh,*.bash}]
+# .bootstrap is an extensionless bash script; git writes tabs in .gitconfig.
+[{.bashrc,.bootstrap,.gitconfig,*.sh,*.bash}]
 indent_style = tab
 indent_size = 4
 
-# git writes tab-indented entries itself.
-[.gitconfig]
-indent_style = tab
-indent_size = 4
-
-[.ssh/config]
-indent_style = space
-indent_size = 2
-
-[*.{json,jsonc,yml,yaml,nix,toml}]
+[{.ssh/config,*.json,*.jsonc,*.yml,*.yaml,*.nix,*.toml,*.md}]
 indent_style = space
 indent_size = 2
 
 [*.{lua,kdl}]
 indent_style = space
 indent_size = 4
+
+# Two trailing spaces are a hard line break.
+[*.md]
+trim_trailing_whitespace = false
