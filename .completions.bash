@@ -52,7 +52,14 @@ fi
 for f in /usr/share/bash-completion/completions/git /run/current-system/sw/share/bash-completion/completions/git; do
 	if [ -f "$f" ]; then
 		source "$f"
-		__git_complete dot __git_main
+		# git shells out to the subcommand to enumerate its flags, and $HOME
+		# is not a repository -- the dotfiles repo is bare at ~/.dotfiles.
+		# Without this, `dot commit --a<TAB>` returns nothing and only
+		# subcommand names complete.
+		_dot_main() {
+			GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME __git_main "$@"
+		}
+		__git_complete dot _dot_main
 		break
 	fi
 done
