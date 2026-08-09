@@ -19,9 +19,19 @@ trim_trailing_whitespace = false
 indent_style = space
 indent_size = 2
 
-[{.bashrc,*.sh,*.bash}]
+# .bootstrap is an extensionless bash script.
+[{.bashrc,.bootstrap,*.sh,*.bash}]
 indent_style = tab
 indent_size = 4
+
+# git writes tab-indented entries itself.
+[.gitconfig]
+indent_style = tab
+indent_size = 4
+
+[.ssh/config]
+indent_style = space
+indent_size = 2
 
 [*.{json,jsonc,yml,yaml,nix,toml}]
 indent_style = space
