@@ -7,29 +7,31 @@ set -o pipefail # Error if any command in a pipe fails.
 REPO_DIR="$HOME/.dotfiles"
 
 dot() {
-    git --git-dir="$REPO_DIR" --work-tree="$HOME" "$@"
+	git --git-dir="$REPO_DIR" --work-tree="$HOME" "$@"
 }
 
 if [ -d "$REPO_DIR" ]; then
-    echo "Looks like your environment is already bootstrapped."
-    exit 0
+	echo "Looks like your environment is already bootstrapped."
+	exit 0
 fi
 
 if ! command -v git >/dev/null; then
-    echo "Error: could not locate git in your path."
-    exit 1
+	echo "Error: could not locate git in your path."
+	exit 1
 fi
 
 REPO_URL=https://github.com/murar8/dotfiles.git
 if ! command -v ssh >/dev/null; then
-    echo "Warning: could not locate ssh in your path, falling back to HTTPS."
-    echo
-elif ssh_output=$(ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1 || true); \
-    ! grep -q "successfully authenticated" <<<"$ssh_output"; then
-    echo "Warning: SSH authentication to GitHub failed, falling back to HTTPS."
-    echo
+	echo "Warning: could not locate ssh in your path, falling back to HTTPS."
+	echo
+elif
+	ssh_output=$(ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1 || true)
+	! grep -q "successfully authenticated" <<<"$ssh_output"
+then
+	echo "Warning: SSH authentication to GitHub failed, falling back to HTTPS."
+	echo
 else
-    REPO_URL=git@github.com:murar8/dotfiles.git
+	REPO_URL=git@github.com:murar8/dotfiles.git
 fi
 
 git clone --bare "$REPO_URL" "$REPO_DIR"
@@ -42,11 +44,11 @@ dot config branch.main.remote origin
 dot config branch.main.merge refs/heads/main
 
 if [ -n "$(dot status --porcelain)" ]; then
-    stash_name="bootstrap-$(date +%s)"
-    user=$(whoami)
-    echo "Stashing conflicts in $stash_name..."
-    dot -c user.name="$user" -c user.email="$user"@localhost stash push -m "$stash_name"
-    echo
+	stash_name="bootstrap-$(date +%s)"
+	user=$(whoami)
+	echo "Stashing conflicts in $stash_name..."
+	dot -c user.name="$user" -c user.email="$user"@localhost stash push -m "$stash_name"
+	echo
 fi
 
 echo "All done! Restart your shell to apply changes."
