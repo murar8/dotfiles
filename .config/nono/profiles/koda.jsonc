@@ -3,7 +3,7 @@
   "extends": "default",
   "meta": {
     "name": "koda",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "description": "Koda Health tree plus the JS toolchain caches its installs write to.",
     "author": "murar8",
   },
@@ -16,6 +16,10 @@
       "$HOME/.npm",
       "$HOME/.cache/node-gyp",
       "$HOME/.cache/uv",
+      // scripts/docs-build-staged.sh (pre-commit) builds the docs site into this
+      // fixed path. Docusaurus scandirs its own out-dir, so the inherited
+      // write-only grant on /tmp is not enough — it needs read+write here.
+      "/tmp/docs-build-precommit",
     ],
   },
   "environment": {
