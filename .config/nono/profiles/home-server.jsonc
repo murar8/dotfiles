@@ -1,0 +1,25 @@
+{
+  "$schema": "../profile.schema.json",
+  "extends": ["nix"],
+  "meta": {
+    "name": "home-server",
+    "version": "0.1.0",
+    "description": "The home-server tree, with its own GitHub token brokered supervisor-side.",
+    "author": "murar8",
+  },
+  "filesystem": {
+    "allow": ["$HOME/Documents/Personal/home-server"],
+  },
+  "network": {
+    "credentials": ["github"],
+    "custom_credentials": {
+      "github": {
+        "upstream": "https://api.github.com",
+        "credential_key": "github_home_server",
+        "env_var": "GH_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}",
+      },
+    },
+  },
+}

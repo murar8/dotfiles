@@ -2,7 +2,7 @@
   "$schema": "../profile.schema.json",
   "meta": {
     "name": "default",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "description": "Host baseline every profile inherits: nix_runtime, read-only editor/dotfile configs, temp and device writes.",
     "author": "murar8",
   },
@@ -91,7 +91,8 @@
     ],
   },
   "filesystem": {
-    "allow": ["/tmp/nono-$UID"],
+    // Literal uid: $UID expands in set_vars but not in filesystem rules.
+    "allow": ["/tmp/nono-1000"],
     "read": [
       "$HOME/.bootstrap",
       "$HOME/.dotfiles",
@@ -140,6 +141,11 @@
   "environment": {
     "set_vars": {
       "TMPDIR": "/tmp/nono-$UID",
+      // ~/.config/gh holds the real host token and stays denied by
+      // deny_credentials; gh cannot even start without somewhere to write its
+      // state, so redirect it here. The token itself comes from GH_TOKEN, which
+      // only the profiles defining a github credential route supply.
+      "GH_CONFIG_DIR": "/tmp/nono-$UID/gh",
     },
   },
   "linux": {

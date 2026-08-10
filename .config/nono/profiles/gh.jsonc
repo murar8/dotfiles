@@ -1,0 +1,22 @@
+{
+  "$schema": "../profile.schema.json",
+  "extends": "default",
+  "meta": {
+    "name": "gh",
+    "version": "0.1.0",
+    "description": "GitHub read-only PAT injected supervisor-side; the sandbox sees only a phantom.",
+    "author": "murar8",
+  },
+  "network": {
+    "credentials": ["github"],
+    "custom_credentials": {
+      "github": {
+        "upstream": "https://api.github.com",
+        "credential_key": "github_public",
+        "env_var": "GH_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}",
+      },
+    },
+  },
+}
