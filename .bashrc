@@ -1,26 +1,13 @@
 #!/usr/bin/env bash
 
-# If not running interactively don't do anything.
 if [[ $- != *i* ]]; then
 	return
 fi
 
 ### System configuration
 
-# Source the first candidate that exists; `local f` keeps the loop variable out
-# of the interactive environment. Also used by .completions.bash.
-_source_first() {
-	local f
-	for f in "$@"; do
-		if [ -f "$f" ]; then
-			source "$f"
-			return 0
-		fi
-	done
-	return 1
-}
-
-_source_first /etc/bashrc /etc/bash.bashrc
+if [ -f /etc/bashrc ]; then source /etc/bashrc; fi
+if [ -f /etc/bash.bashrc ]; then source /etc/bash.bashrc; fi
 
 ### Options
 
@@ -38,18 +25,21 @@ set -o vi # Use vi key bindings in the shell.
 ### History
 
 # erasedups  => Remove all but the last identical command.
-# ignoreboth => Avoid saving consecutive identical commands, and commands that start with a space.
+# ignoreboth => Skip consecutive duplicates, and commands starting with a space.
 export HISTCONTROL=erasedups:ignoreboth
 
-# Eternal bash history.
-# ---------------------
-# Undocumented feature which sets the size to "unlimited".
+# Empty means unlimited: undocumented, see
 # http://stackoverflow.com/questions/9457233/unlimited-bash-history
 export HISTFILESIZE=
 export HISTSIZE=
 export HISTTIMEFORMAT="[%F %T] "
 
 ### Commands
+
+# openSUSE's /etc/bash.bashrc ships `alias la`, and aliases expand at parse
+# time: `la() {` becomes `ls -la() {`, a syntax error that aborts the rest of
+# this file. Not reproducible under `bash -n`, which does not expand aliases.
+if alias la &>/dev/null; then unalias la; fi
 
 la() {
 	ls -Alhg --color=auto "$@"
@@ -63,15 +53,13 @@ dot() {
 	git --git-dir="$HOME"/.dotfiles --work-tree="$HOME" "$@"
 }
 
-# Update nvim plugins. force skips the confirmation buffer, which needs a UI.
+# force skips the confirmation buffer, which needs a UI to accept.
 packupdate() {
 	nvim --headless '+lua vim.pack.update(nil, { force = true })' +qa
 }
 
 if command -v nono &>/dev/null; then
-	# Run an agent under nono: args before `--` are nono's, the rest are the
-	# agent's. Each agent's profile is named after its binary; entrypoints are
-	# `n` plus the binary's first two letters.
+	# Args before `--` are nono's, the rest the agent's:
 	#   ncl --extends koda --allow ~/scratch -- -p 'fix tests'
 	_agent_run() {
 		local agent=$1 agent_flag=$2
@@ -106,6 +94,8 @@ if command -v nono &>/dev/null; then
 		nop() { _agent_run opencode --auto "$@"; }
 	fi
 else
+	# No permission-skipping flags: unsandboxed, the agent's prompts are the
+	# only backstop left.
 	if command -v claude &>/dev/null; then
 		alias cl='claude'
 		alias clc='claude --continue'
@@ -138,8 +128,7 @@ fi
 
 ### Editor
 
-# Context first, then availability: a GUI editor only wins inside its own
-# terminal, so these must be tested before the always-installed fallbacks.
+# Context before availability: a GUI editor only wins inside its own terminal.
 if [ "$ZED_TERM" = 'true' ] && command -v zed &>/dev/null; then
 	EDITOR="$(command -v zed) --wait"
 elif [ "$TERM_PROGRAM" = 'vscode' ] && [ -z "$CURSOR_TRACE_ID" ] && command -v code &>/dev/null; then
@@ -150,8 +139,8 @@ elif command -v vim &>/dev/null; then
 	EDITOR="$(command -v vim)"
 fi
 
-# Guarded: exporting these empty is worse than leaving them unset, since
-# callers that test for presence rather than emptiness would exec "".
+# Exporting these empty is worse than leaving them unset: callers that test for
+# presence rather than emptiness would exec "".
 if [ -n "$EDITOR" ]; then
 	VISUAL=$EDITOR
 	SUDO_EDITOR=$EDITOR
@@ -160,8 +149,8 @@ fi
 
 ### Prompt
 
-# Read by git-prompt.sh as shell variables, hence no export. Grouped so one
-# directive covers all four; shellcheck can't see the reads across the source.
+# Read by git-prompt.sh, hence no export. Grouped so one directive covers all
+# four; shellcheck can't see the reads across the source.
 # shellcheck disable=SC2034
 {
 	GIT_PS1_SHOWUPSTREAM="auto"
@@ -190,8 +179,8 @@ prompt() {
 	local pre="${cyan}\u${blue}@\h ${purple}\w${clear}"
 
 	local post=""
-	# direnv >= 2.28 reports a numeric code (0=allowed, 1=not allowed, 2=denied),
-	# older versions reported true/false.
+	# direnv >= 2.28 reports 0=allowed, 1=not allowed, 2=denied; older
+	# versions reported true/false.
 	if [[ $direnv_allowed == @(0|true) ]]; then post+=" 🔓"; fi
 	if [[ $direnv_allowed == @(1|false) ]]; then post+=" 🔐"; fi
 	if [[ $direnv_allowed == 2 ]]; then post+=" ⛔"; fi
@@ -199,10 +188,9 @@ prompt() {
 	post+=" ${clear}"
 
 	if declare -F __git_ps1 >/dev/null; then
-		# Two-argument form: __git_ps1 assigns PS1 itself, emitting the branch
-		# name as a variable reference rather than inline. The `git_ps1=$(...)`
-		# form put the raw name in PS1, so a branch named `$(cmd)` ran cmd when
-		# the prompt was drawn.
+		# Two-argument form emits the branch name as a variable reference. The
+		# `$(__git_ps1)` form put it in PS1 raw, so a branch named `$(cmd)` ran
+		# cmd when the prompt was drawn.
 		__git_ps1 "$pre" "$post"
 	else
 		PS1="$pre$post"
@@ -231,23 +219,19 @@ if command -v fnm &>/dev/null; then
 	eval "$(fnm env --use-on-cd --shell bash)"
 fi
 
-# rustup
 if [ -f "$HOME"/.cargo/env ]; then
 	. "$HOME"/.cargo/env
 fi
 
 ### Prompt command
 
-# Registered last, and appended rather than assigned: hook generators above
-# install themselves by string-editing PROMPT_COMMAND, and their "am I already
-# here?" guards only recognise the scalar form. Converting it to an array any
-# earlier makes those guards miss and re-register (direnv does exactly this).
+# Last, and appended: the hook generators above edit PROMPT_COMMAND as a string
+# and their "already here?" guards don't recognise the array form, so
+# converting it earlier makes them re-register (direnv does exactly this).
 PROMPT_COMMAND+=('prompt')
 
 ### Multiplexer
 
-# On remote (SSH) sessions attach to a persistent zellij session so work
-# survives disconnects.
 if [ -n "$SSH_CONNECTION$SSH_TTY$SSH_CLIENT" ] && command -v zellij &>/dev/null; then
 	# No ZELLIJ_AUTO_ATTACH: `attach -c` ignores `session_name`.
 	export ZELLIJ_AUTO_EXIT=true
@@ -255,6 +239,7 @@ if [ -n "$SSH_CONNECTION$SSH_TTY$SSH_CLIENT" ] && command -v zellij &>/dev/null;
 fi
 
 ### Local configuration
+
 if [ -f "$HOME"/.local.bashrc ]; then
 	source "$HOME"/.local.bashrc
 fi
