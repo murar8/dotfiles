@@ -8,6 +8,8 @@ is the inventory.
 
 1. Every profile extends `default` — it is never implicit, and a missing base
    passes `validate` but fails at runtime (no `/nix/store`, nothing can exec).
+   It shadows the built-in `default` and replaces its group set, so a built-in
+   group you want (`homebrew_linux`, the macOS ones) must be added here.
    Check: `nono why --profile <name> --path ~/.gitconfig --op read`. Always pass
    `--profile`/`--extends`; without `--profile`, `why` reports on no profile at
    all (denies even `~/.gitconfig`), not on `default`.
