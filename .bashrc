@@ -201,7 +201,7 @@ PROMPT_DIRTRIM=1 # Trim the working directory to the last directory name.
 
 ### Environment
 
-if command -v fzf &>/dev/null && fzf --bash &>/dev/null; then
+if command -v fzf &>/dev/null; then
 	eval "$(fzf --bash)"
 fi
 
@@ -209,14 +209,14 @@ if command -v direnv &>/dev/null; then
 	eval "$(direnv hook bash)"
 fi
 
-if [ -f "$HOME"/.nvm/nvm.sh ] && [ -f "$HOME"/.nvm/bash_completion ]; then
+# One version manager only: both put a shim directory on PATH, and the loser's
+# `use` then silently resolves to the winner's node. fnm first, it is faster.
+if command -v fnm &>/dev/null; then
+	eval "$(fnm env --use-on-cd --shell bash)"
+elif [ -f "$HOME"/.nvm/nvm.sh ] && [ -f "$HOME"/.nvm/bash_completion ]; then
 	export NVM_DIR="$HOME/.nvm"
 	. "$NVM_DIR/nvm.sh"
 	. "$NVM_DIR/bash_completion"
-fi
-
-if command -v fnm &>/dev/null; then
-	eval "$(fnm env --use-on-cd --shell bash)"
 fi
 
 if [ -f "$HOME"/.cargo/env ]; then
