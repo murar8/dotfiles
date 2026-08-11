@@ -85,13 +85,9 @@ unseal() {
 	sudo systemd-creds decrypt --name="$(basename "$path" .cred)" "$path"
 }
 
-lz() {
-	if [ "$#" -eq 1 ]; then
-		nvim --headless "+Lazy! $1" +qa
-	else
-		echo "Expected a Lazy command." >&2
-		return 1
-	fi
+# Update nvim plugins. force skips the confirmation buffer, which needs a UI.
+packupdate() {
+	nvim --headless '+lua vim.pack.update(nil, { force = true })' +qa
 }
 
 if command -v nono &>/dev/null; then
