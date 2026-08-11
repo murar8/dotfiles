@@ -97,11 +97,11 @@ lz() {
 if command -v nono &>/dev/null; then
 	# Run an agent under nono: args before `--` are nono's, the rest are the
 	# agent's. Each agent's profile is named after its binary; entrypoints are
-	# `n` plus the binary's first two letters, suffixed c/r for continue/resume.
+	# `n` plus the binary's first two letters.
 	#   ncl --extends koda --allow ~/scratch -- -p 'fix tests'
 	_agent_run() {
-		local agent=$1 agent_flag=$2 session_flag=$3
-		shift 3
+		local agent=$1 agent_flag=$2
+		shift 2
 
 		local nono_args=()
 		while [ "$#" -gt 0 ]; do
@@ -115,36 +115,38 @@ if command -v nono &>/dev/null; then
 		done
 
 		# ${x:+"$x"} expands to nothing when unset, so no empty arg reaches pi.
-		# The session flag goes here rather than being appended by the c/r
-		# entrypoints: appending would place it after any `--` the caller wrote,
-		# where the agent no longer reads it as a flag.
 		nono run --profile "$agent" "${nono_args[@]}" -- \
-			"$agent" ${agent_flag:+"$agent_flag"} ${session_flag:+"$session_flag"} "$@"
+			"$agent" ${agent_flag:+"$agent_flag"} "$@"
 	}
 
 	if command -v claude &>/dev/null; then
-		ncl() { _agent_run claude --dangerously-skip-permissions '' "$@"; }
-		ncc() { _agent_run claude --dangerously-skip-permissions --continue "$@"; }
-		ncr() { _agent_run claude --dangerously-skip-permissions --resume "$@"; }
+		ncl() { _agent_run claude --dangerously-skip-permissions "$@"; }
 	fi
 
 	# pi has no permission system; its tools always run.
 	if command -v pi &>/dev/null; then
-		npi() { _agent_run pi '' '' "$@"; }
-		npc() { _agent_run pi '' --continue "$@"; }
-		npr() { _agent_run pi '' --resume "$@"; }
+		npi() { _agent_run pi '' "$@"; }
 	fi
 
-	# opencode has no --resume; its equivalent is --session <id>.
 	if command -v opencode &>/dev/null; then
-		nop() { _agent_run opencode --auto '' "$@"; }
-		noc() { _agent_run opencode --auto --continue "$@"; }
+		nop() { _agent_run opencode --auto "$@"; }
 	fi
 else
 	if command -v claude &>/dev/null; then
 		alias cl='claude'
 		alias clc='claude --continue'
 		alias clr='claude --resume'
+	fi
+
+	if command -v pi &>/dev/null; then
+		alias pic='pi --continue'
+		alias pir='pi --resume'
+	fi
+
+	# opencode has no --resume; its equivalent is --session <id>.
+	if command -v opencode &>/dev/null; then
+		alias op='opencode'
+		alias opc='opencode --continue'
 	fi
 fi
 

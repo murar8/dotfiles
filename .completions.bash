@@ -84,7 +84,7 @@ if command -v nono &>/dev/null; then
 	# Only the entrypoints .bashrc actually defined, with the same options nono
 	# registers itself with: `_nono` emits no COMPREPLY for path-valued flags and
 	# leans on `-o default` for the filename fallback.
-	for _c in ncl ncc ncr npi npc npr nop noc; do
+	for _c in ncl npi nop; do
 		if declare -F "$_c" >/dev/null; then
 			complete -o bashdefault -o default -o nosort -F _agent_complete "$_c"
 		fi
