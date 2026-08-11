@@ -63,28 +63,6 @@ dot() {
 	git --git-dir="$HOME"/.dotfiles --work-tree="$HOME" "$@"
 }
 
-seal() {
-	local path=${1:?Usage: seal <output-path>}
-	local name secret
-	name=$(basename "$path" .cred)
-	read -rsp "Secret for $name: " secret
-	local status=$?
-	echo
-
-	# Without this, EOF (Ctrl-D) or an empty line seals an empty credential.
-	if [ "$status" -ne 0 ] || [ -z "$secret" ]; then
-		echo "No secret given." >&2
-		return 1
-	fi
-
-	printf '%s' "$secret" | sudo systemd-creds encrypt --name="$name" --with-key=host - "$path"
-}
-
-unseal() {
-	local path=${1:?Usage: unseal <output-path>}
-	sudo systemd-creds decrypt --name="$(basename "$path" .cred)" "$path"
-}
-
 # Update nvim plugins. force skips the confirmation buffer, which needs a UI.
 packupdate() {
 	nvim --headless '+lua vim.pack.update(nil, { force = true })' +qa
