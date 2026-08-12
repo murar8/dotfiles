@@ -2,7 +2,7 @@
   "$schema": "../profile.schema.json",
   "meta": {
     "name": "default",
-    "version": "0.3.4",
+    "version": "0.3.5",
     "description": "Host baseline every profile inherits: nix_runtime, read-only editor/dotfile configs, temp and device writes.",
     "author": "murar8",
   },
@@ -109,6 +109,12 @@
       "$HOME/.config/zellij",
       "$HOME/.config/yarn",
       "$HOME/.config/nono",
+      // gh finds extensions only through its XDG data dir, which honours
+      // neither GH_CONFIG_DIR nor the TMPDIR redirect below; without this
+      // `gh <ext>` is not even a known command. Read-only on purpose — these
+      // are executables the host's own gh runs, so a writable grant would be an
+      // exec path out of the sandbox. Install extensions from the host.
+      "$HOME/.local/share/gh",
     ],
     "read_file": [
       "$HOME/.bashrc",
@@ -146,6 +152,10 @@
       // state, so redirect it here. The token itself comes from GH_TOKEN, which
       // only the profiles defining a github credential route supply.
       "GH_CONFIG_DIR": "/tmp/nono-$UID/gh",
+      // Both notifiers write timestamps to ~/.local/state/gh, which stays
+      // ungranted; disabling them keeps that off the denial list.
+      "GH_NO_UPDATE_NOTIFIER": "1",
+      "GH_NO_EXTENSION_UPDATE_NOTIFIER": "1",
     },
   },
   "linux": {
