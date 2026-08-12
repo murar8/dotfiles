@@ -9,6 +9,7 @@ require("config.autocmds")
 
 require("plugins.gruvbox")
 require("plugins.treesitter")
+require("plugins.treesitter-context")
 require("plugins.baredot")
 require("plugins.mini-icons")
 require("plugins.snacks")
