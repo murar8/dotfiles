@@ -81,6 +81,10 @@ if command -v nono &>/dev/null; then
 	source <(nono completion bash)
 fi
 
+if command -v matchlock &>/dev/null; then
+	source <(matchlock completion bash)
+fi
+
 ### Delegated to the tool
 
 if command -v terraform &>/dev/null; then
