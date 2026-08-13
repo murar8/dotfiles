@@ -42,12 +42,13 @@
         "credential_format": "Bearer {}",
       },
     },
-    // Local stack, main checkout only: mailpit smtp/http, the SPAs, backend,
-    // moto, node inspector, mongo. Worktrees offset these and are not covered.
-    // 47017: the vitest in-memory mongod (see KODA_TEST_MONGOD_PORT above).
-    "open_port": [
-      1025, 3000, 3001, 3002, 3050, 5173, 8025, 8080, 9000, 9001, 9229, 27017,
-      47017,
-    ],
+    // 47017: the vitest in-memory mongod the sandboxed test run spawns itself
+    // (see KODA_TEST_MONGOD_PORT above) — the only port a sandboxed workload
+    // binds. The local stack (SPAs, backend, mailpit, moto, mongo, mock EHR)
+    // runs outside this session (docker on the host, or its own nono session),
+    // so the agent needs neither bind nor connect on those ports. 9229
+    // (backend --inspect) stays out too: connect on it drives the V8 inspector
+    // = code exec in whatever host process binds it.
+    "open_port": [47017],
   },
 }

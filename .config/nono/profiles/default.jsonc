@@ -21,7 +21,6 @@
       "/.npm/",
       "/.yarn/",
       "/.cdk/",
-      "google-chrome-for-testing",
       "/dev/shm",
       // Agent and dotfile trees: these carry their own history.
       "/.dotfiles",
