@@ -8,6 +8,9 @@ local explorer_watch = not (ok and baredot.is_enabled())
 
 require("snacks").setup({
     explorer = { enabled = true },
+    -- LSP documentHighlight of the symbol under the cursor, which also powers
+    -- the ]v/[v reference jumps below. `notify_jump` echoes "1/3" on jump.
+    words = { enabled = true, notify_jump = true },
     terminal = {
         win = {
             position = "float",
@@ -78,6 +81,18 @@ end, { desc = "Git Current File History" })
 vim.keymap.set("n", "<leader>gl", function()
     Snacks.picker.git_log()
 end, { desc = "Git Log" })
+
+-- Jump between occurrences of the symbol under the cursor, `*`-style but
+-- scope-aware: the LSP resolves what the symbol refers to, so a shadowed local
+-- isn't confused with an unrelated same-named one. Current buffer only; `true`
+-- cycles past the last/first match like `*` wraps. `v` because `]r`/`[r` are
+-- the built-in rare-word spell motions.
+vim.keymap.set("n", "]v", function()
+    Snacks.words.jump(vim.v.count1, true)
+end, { desc = "Next reference" })
+vim.keymap.set("n", "[v", function()
+    Snacks.words.jump(-vim.v.count1, true)
+end, { desc = "Previous reference" })
 
 -- git pickers
 vim.keymap.set("n", "<leader>gd", function()
