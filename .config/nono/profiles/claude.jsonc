@@ -3,12 +3,23 @@
   "extends": "nolabs-ai/claude",
   "meta": {
     "name": "claude",
-    "version": "0.4.0",
-    "description": "Claude Code, with OAuth tokens captured as phantoms.",
+    "version": "0.5.0",
+    "description": "Claude Code, with OAuth tokens captured as phantoms and the background daemon's control socket.",
     "author": "murar8",
   },
   "groups": {
     "exclude": ["vscode_linux"],
+  },
+  "filesystem": {
+    // The bg daemon binds a unix socket here; /tmp is write-only from
+    // system_write_linux, which is not enough to listen or connect.
+    "allow": ["/tmp/cc-daemon-$UID"],
+    // default sets af_unix_mediation: pathname, so bind/connect need their own
+    // grant on top of the filesystem one. control.sock lives under a generated
+    // <hash>/ dir and is recreated per daemon start, so this needs the subtree
+    // form -- the exact-path grants resolve against a file that does not exist
+    // yet. _subtree_bind covers both directions: daemon binds, clients connect.
+    "unix_socket_subtree_bind": ["/tmp/cc-daemon-$UID"],
   },
   "environment": {
     "set_vars": {
