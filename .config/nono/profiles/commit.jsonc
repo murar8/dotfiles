@@ -3,12 +3,19 @@
   "extends": "default",
   "meta": {
     "name": "commit",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "Commit/tag signing via the ssh-agent socket and pre-commit hook envs, without the private key.",
     "author": "murar8",
   },
   "filesystem": {
     "allow": ["$HOME/.cache/pre-commit"],
     "unix_socket": ["$XDG_RUNTIME_DIR/gcr/ssh"],
+    // The host agent now binds under ~/.ssh/agent with a per-session random
+    // filename, so the grant has to be the directory: _dir is connect-only and
+    // non-recursive, which is all $SSH_AUTH_SOCK needs. ~/.ssh is denied
+    // wholesale by deny_credentials, hence the bypass -- it covers only this
+    // subdirectory, never the private keys next to it.
+    "unix_socket_dir": ["$HOME/.ssh/agent"],
+    "bypass_protection": ["$HOME/.ssh/agent"],
   },
 }
