@@ -1,0 +1,20 @@
+{
+  "$schema": "../profile.schema.json",
+  // The host profile decides what this tree is allowed to reach; this adds only what a
+  // *guest* fetches that a host-side session never does, because the host already has it
+  // checked out. Separate rather than widened in place: this profile is loaded by
+  // `nono-proxy@home-server` as a pure egress policy for a VM, where its filesystem grants
+  // and Landlock groups are inert — so anything added for the VM's sake would otherwise
+  // silently widen every `nono run --profile home-server` on the desktop too.
+  //
+  // The agent profiles come along so the CLIs the guest ships work without a login inside
+  // it: their tokens are injected on this side of the proxy, and the VM only ever sees a
+  // phantom.
+  "extends": ["claude", "opencode", "pi", "openrouter", "home-server"],
+  "meta": {
+    "name": "home-server-vm",
+    "version": "0.1.0",
+    "description": "Egress policy for the home-server sandbox VM: the host profile plus what a guest has to fetch for itself.",
+    "author": "murar8",
+  },
+}

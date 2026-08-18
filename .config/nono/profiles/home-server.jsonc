@@ -11,6 +11,13 @@
     "allow": ["$HOME/Documents/Personal/home-server"],
   },
   "network": {
+    "allow_domain": [
+      "static.perimeter81.com",
+      "dl.google.com",
+      "release-assets.githubusercontent.com",
+      "downloads.mongodb.com",
+      "downloads.slack-edge.com",
+    ],
     "credentials": ["github"],
     "custom_credentials": {
       "github": {

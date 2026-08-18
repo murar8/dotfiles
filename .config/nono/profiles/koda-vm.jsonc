@@ -1,0 +1,12 @@
+{
+  "$schema": "../profile.schema.json",
+  // See home-server-vm.jsonc — same split, same reasons: the host `koda` profile stays the
+  // policy for host-side sessions, and this is the one the VM's proxy loads.
+  "extends": ["claude", "opencode", "pi", "koda"],
+  "meta": {
+    "name": "koda-vm",
+    "version": "0.1.0",
+    "description": "Egress policy for the koda sandbox VM: the host profile plus the agent CLIs' credential routes.",
+    "author": "murar8",
+  },
+}

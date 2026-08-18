@@ -20,11 +20,14 @@
     "allow_domain": [
       "cache.nixos.org",
       "channels.nixos.org",
+      "tarballs.nixos.org",
       "nixos.org",
       "nix-community.cachix.org",
       "cache.numtide.com",
       "microvm.cachix.org",
       "fenix.cachix.org",
+      "api.flakehub.com",
+      "flake-archives.flakehub.com",
     ],
   },
 }
