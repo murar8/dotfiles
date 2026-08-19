@@ -1,0 +1,59 @@
+schemaVersion: "2"
+kind: mixin
+name: dotfiles
+
+permissions:
+  network:
+    allow:
+      - "raw.githubusercontent.com" # the .bootstrap script itself
+      # `git clone --bare https://github.com/murar8/dotfiles.git` inside it. The
+      # script prefers SSH, but ssh to github is blocked here, so it warns and
+      # falls back to HTTPS — this is the path that actually runs.
+      - "github.com"
+
+setup:
+  install:
+    # Settings come from the dotfiles repo (~/.claude/settings.json et al.),
+    # checked out into $HOME by the bootstrap script.
+    # Download-then-run: `curl | bash` masks a failed/blocked fetch (bash exits
+    # 0 on empty stdin), so a broken bootstrap would silently create the sandbox.
+    - command: curl -fsSL https://raw.githubusercontent.com/murar8/dotfiles/main/.bootstrap -o /tmp/bootstrap && bash /tmp/bootstrap
+      user: "1000"
+
+  files:
+    # A login shell reads ~/.bash_profile and NOT ~/.bashrc, and the dotfiles
+    # repo ships only the latter — so without this chain an interactive login
+    # shell gets none of the bootstrap environment. Declared as a file rather
+    # than an appending install step because the repo has no .bash_profile of
+    # its own to preserve: there is nothing to append to, only to write.
+    #
+    # This buys nothing for `bash -l -c '...'`. That shell is login but NOT
+    # interactive, and .bashrc returns at its `[[ $- != *i* ]]` guard before
+    # exporting anything — every PATH/nix export sits below it. Only an
+    # interactive login shell (a tty) gains from this.
+    - path: /home/agent/.bash_profile
+      mode: "0644"
+      content: |
+        [ -f ~/.bashrc ] && . ~/.bashrc
+
+    # Public key (not secret) for SSH-based git commit signing. The matching
+    # private key is never in the sandbox — signing uses the forwarded
+    # ssh-agent; git only needs this file as the configured user.signingkey.
+    - path: /home/agent/.ssh/id_ed25519.pub
+      mode: "0644"
+      content: |
+        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKCfqnufJrf3pZxXvFcqbB1vUhyc0EFuDBuUEO7Q0Luq lnzmrr@gmail.com
+
+    - path: /home/agent/.claude/.credentials.json
+      mode: "0600"
+      content: |
+        {
+          "claudeAiOauth": {
+            "accessToken": "__PLACEHOLDER__",
+            "refreshToken": "dummy",
+            "expiresAt": 9999999999999,
+            "scopes": ["user:file_upload", "user:inference", "user:mcp_servers", "user:profile", "user:sessions:claude_code"],
+            "subscriptionType": "team",
+            "rateLimitTier": "default_claude_max_5x"
+          }
+        }

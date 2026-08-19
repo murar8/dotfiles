@@ -1,0 +1,18 @@
+# Personal layer, kept outside the direct-mounted checkout so the agent can't
+# rewrite its own credential wiring untracked. Tracked by ~/.dotfiles.
+#   sbx env run .sbxenv.yaml ~/.config/sbx/local.sbxenv.yaml
+# Paths resolve relative to THIS file. Not under ~/.config/sandboxes/kits — that's
+# sbx state and `sbx reset` may clear it.
+kits:
+  - /home/murar8/.config/sbx/kits/dotfiles
+
+# Project-scoped PAT from the keyring instead of the global personal one. Needs
+# $DBUS_SESSION_BUS_ADDRESS or it resolves empty → MODE=none.
+secrets:
+  github:
+    command: secret-tool lookup service nono username github_koda
+
+bindings:
+  github:
+    apiKey:
+      domains: [api.github.com]
