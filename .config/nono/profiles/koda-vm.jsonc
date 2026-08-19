@@ -2,11 +2,21 @@
   "$schema": "../profile.schema.json",
   // See home-server-vm.jsonc — same split, same reasons: the host `koda` profile stays the
   // policy for host-side sessions, and this is the one the VM's proxy loads.
-  "extends": ["claude", "opencode", "pi", "koda"],
+  "extends": ["claude", "opencode", "pi", "nix", "koda"],
   "meta": {
     "name": "koda-vm",
     "version": "0.1.0",
     "description": "Egress policy for the koda sandbox VM: the host profile plus the agent CLIs' credential routes.",
     "author": "murar8",
+  },
+  "network": {
+    "allow_domain": [
+      "api.doppler.com",
+      "packages.doppler.com",
+      "dl-cdn.alpinelinux.org",
+      "registry-1.docker.io",
+      "auth.docker.io",
+      "production.cloudfront.docker.com",
+    ],
   },
 }

@@ -32,7 +32,13 @@
     },
   },
   "network": {
-    "allow_domain": ["cdn.sheetjs.com", "fastdl.mongodb.org"],
+    "allow_domain": [
+      "cdn.sheetjs.com",
+      "fastdl.mongodb.org",
+      "release-assets.githubusercontent.com",
+      "yarnpkg.com",
+      "classic.yarnpkg.com",
+    ],
     "credentials": ["github"],
     "custom_credentials": {
       "github": {
