@@ -28,7 +28,12 @@
       "aws-secretsmanager",
       "aws-s3",
       "aws-s3-cdk-assets",
+      "aws-ecr",
+      "aws-elasticbeanstalk",
     ],
+    // Docker layer push/pull authenticates with the ECR bearer token, not
+    // SigV4, so the registry host is plain egress.
+    "allow_domain": ["160009618678.dkr.ecr.us-east-1.amazonaws.com"],
     "custom_credentials": {
       "aws-sts": {
         "upstream": "https://sts.us-east-1.amazonaws.com",
@@ -97,6 +102,22 @@
           { "method": "GET", "path": "/**" },
           { "method": "HEAD", "path": "/**" },
         ],
+      },
+      "aws-ecr": {
+        "upstream": "https://api.ecr.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "ecr",
+        },
+      },
+      "aws-elasticbeanstalk": {
+        "upstream": "https://elasticbeanstalk.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "elasticbeanstalk",
+        },
       },
       "aws-s3-cdk-assets": {
         "upstream": "https://cdk-hnb659fds-assets-160009618678-us-east-1.s3.us-east-1.amazonaws.com",
