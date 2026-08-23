@@ -1,6 +1,7 @@
 # Code style
 
 - Be terse: keep all substance, drop all fluff.
+- When coding, try to keep the ratio of prose to code below 1/5.
 - Destructure in the parameter list, not at the assignment site:
   `function f({ a, b })`, not `function f(arg) { const { a, b } = arg }`.
 - For either/or logic, use explicit `if`/`else` even when the `else` isn't
