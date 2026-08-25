@@ -3,7 +3,7 @@
   "extends": ["koda", "doppler"],
   "meta": {
     "name": "koda-cdk",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "CDK synth/diff/deploy: proxy-signed AWS via koda-dev, plus the cdk cache.",
     "author": "murar8",
   },
@@ -11,10 +11,19 @@
     "allow": ["$HOME/.cdk"],
   },
   "environment": {
-    "deny_vars": ["AWS_PROFILE"],
+    // SESSION_TOKEN is the one that matters: the other two are overwritten by
+    // set_vars below, but a host SSO/assumed-role token would pass through.
+    "deny_vars": [
+      "AWS_ACCESS_KEY_ID",
+      "AWS_SECRET_ACCESS_KEY",
+      "AWS_SESSION_TOKEN",
+      "AWS_PROFILE",
+    ],
     "set_vars": {
       "AWS_ACCESS_KEY_ID": "nono-brokered",
       "AWS_SECRET_ACCESS_KEY": "nono-brokered",
+      // Only "true"/"1" count; any other value leaves telemetry on.
+      "CDK_DISABLE_CLI_TELEMETRY": "1",
     },
   },
   "network": {
@@ -30,10 +39,22 @@
       "aws-s3-cdk-assets",
       "aws-ecr",
       "aws-elasticbeanstalk",
+      "aws-s3-eb-assets",
+      "aws-iam",
+      "aws-elasticloadbalancing",
+      "aws-route53",
+      "aws-acm",
+      "aws-cloudtrail",
+      "aws-codepipeline",
+      "aws-amplify",
     ],
     // Docker layer push/pull authenticates with the ECR bearer token, not
     // SigV4, so the registry host is plain egress.
     "allow_domain": ["160009618678.dkr.ecr.us-east-1.amazonaws.com"],
+    // region/service are always explicit. Auto-detection resolves the service
+    // segment against a 15-name table (s3, sts, iam, sns, sqs, lambda, ses,
+    // execute-api, bedrock*) and *skips the route* on a miss, so most of these
+    // would silently stop signing.
     "custom_credentials": {
       "aws-sts": {
         "upstream": "https://sts.us-east-1.amazonaws.com",
@@ -98,10 +119,6 @@
           "region": "us-east-1",
           "service": "s3",
         },
-        "endpoint_rules": [
-          { "method": "GET", "path": "/**" },
-          { "method": "HEAD", "path": "/**" },
-        ],
       },
       "aws-ecr": {
         "upstream": "https://api.ecr.us-east-1.amazonaws.com",
@@ -125,6 +142,72 @@
           "profile": "koda-dev",
           "region": "us-east-1",
           "service": "s3",
+        },
+      },
+      // Virtual-hosted buckets are distinct hosts; aws-s3 does not cover them.
+      "aws-s3-eb-assets": {
+        "upstream": "https://elasticbeanstalk-us-east-1-160009618678.s3.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "s3",
+        },
+      },
+      // iam/route53 are global; SigV4 still signs them us-east-1.
+      "aws-iam": {
+        "upstream": "https://iam.amazonaws.com",
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "iam",
+        },
+      },
+      "aws-route53": {
+        "upstream": "https://route53.amazonaws.com",
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "route53",
+        },
+      },
+      "aws-elasticloadbalancing": {
+        "upstream": "https://elasticloadbalancing.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "elasticloadbalancing",
+        },
+      },
+      "aws-acm": {
+        "upstream": "https://acm.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "acm",
+        },
+      },
+      "aws-cloudtrail": {
+        "upstream": "https://cloudtrail.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "cloudtrail",
+        },
+      },
+      "aws-codepipeline": {
+        "upstream": "https://codepipeline.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "codepipeline",
+        },
+      },
+      "aws-amplify": {
+        "upstream": "https://amplify.us-east-1.amazonaws.com",
+        "aws_auth": {
+          "profile": "koda-dev",
+          "region": "us-east-1",
+          "service": "amplify",
         },
       },
     },

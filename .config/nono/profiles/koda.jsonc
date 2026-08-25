@@ -3,8 +3,8 @@
   "extends": "default",
   "meta": {
     "name": "koda",
-    "version": "0.5.2",
-    "description": "Koda Health tree plus the JS toolchain caches its installs write to.",
+    "version": "0.6.0",
+    "description": "Koda Health tree, the JS toolchain caches, and CI log/artifact egress.",
     "author": "murar8",
   },
   "filesystem": {
@@ -33,6 +33,10 @@
   },
   "network": {
     "allow_domain": [
+      // gh CI log/artifact redirects; GitHub rotates the blob account, so
+      // wildcard. Matches any Azure storage account, not just GitHub's.
+      "*.blob.core.windows.net",
+      "results-receiver.actions.githubusercontent.com",
       "cdn.sheetjs.com",
       "fastdl.mongodb.org",
       "release-assets.githubusercontent.com",

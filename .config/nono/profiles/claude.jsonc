@@ -27,6 +27,8 @@
     },
   },
   "network": {
+    // bridge.claudeusercontent.com stays out: it would carry remote MCP
+    // connectors, but also /v1/code/ and session file sync on the same host.
     "allow_domain": ["mcp-proxy.anthropic.com"],
   },
   "credential_providers": {
