@@ -1,18 +1,50 @@
-# Personal layer, kept outside the direct-mounted checkout so the agent can't
-# rewrite its own credential wiring untracked. Tracked by ~/.dotfiles.
-#   sbx env run .sbxenv.yaml ~/.config/sbx/local.sbxenv.yaml
-# Paths resolve relative to THIS file. Not under ~/.config/sandboxes/kits — that's
-# sbx state and `sbx reset` may clear it.
-kits:
-  - /home/murar8/.config/sbx/kits/dotfiles
+schemaVersion: '1'
 
-# Project-scoped PAT from the keyring instead of the global personal one. Needs
-# $DBUS_SESSION_BUS_ADDRESS or it resolves empty → MODE=none.
+# In-repo so contributors get it from a checkout — but the workspace is direct-mounted,
+# so an agent can rewrite the file governing its own next run. Move it to the parent dir
+# if that matters more than sharing it. `workspace:` defaults to this file's directory.
+name: claude-Koda-web # matches the existing sandbox, so env run attaches to it
+agent: claude
+
+kits:
+  - ./kits/koda-web
+  - ./kits/dotfiles
+
+# ONE token per service, never delivered into the container — the kit marks it
+# `proxyManaged` so the proxy swaps it in on the wire. Can't be four per-project tokens:
+# injection domains are unioned across kits and a twice-claimed domain is a hard error.
+# github is a project-scoped PAT from the keyring instead of the global personal one;
+# needs $DBUS_SESSION_BUS_ADDRESS or it resolves empty → MODE=none.
 secrets:
+  doppler:
+    command: doppler configure get token --plain
   github:
     command: secret-tool lookup service nono username github_koda
 
+# Approves what the kit's `credentials[].apiKey.inject` declares — both halves required.
 bindings:
+  doppler:
+    apiKey:
+      domains: [api.doppler.com]
   github:
     apiKey:
       domains: [api.github.com]
+
+# worktree-env.sh offset 0 (main checkout). A worktree offsets these.
+ports:
+  - sandbox: 3000 # koda-ui
+    host: 3000
+  - sandbox: 3050 # koda-ui legacy alias
+    host: 3050
+  - sandbox: 3001 # clinops-ui
+    host: 3001
+  - sandbox: 3002 # docs
+    host: 3002
+  - sandbox: 5173 # ehr-ui
+    host: 5173
+  - sandbox: 8080 # koda-backend
+    host: 8080
+  - sandbox: 8025 # mailpit
+    host: 8025
+  - sandbox: 27017 # mongo
+    host: 27017

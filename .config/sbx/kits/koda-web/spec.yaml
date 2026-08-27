@@ -1,0 +1,160 @@
+schemaVersion: "2"
+kind: mixin
+name: koda-web
+version: "0.1.0"
+displayName: Koda Web toolchain
+description: "Node 22, corepack-managed yarn and the Doppler CLI for the Koda Health monorepo, plus the egress its installs, tests and MCP servers need. Mirrors the host-side nono koda / koda-vm profiles."
+
+agentInstructions:
+  content: |
+    ## Tools
+
+    Node 22 + corepack yarn, the Doppler CLI, and a `playwright-sbx` MCP server
+    driving headless chromium. Defined in `kits/koda-web/spec.yaml`; the sandbox
+    itself (ports, secrets) in `.sbxenv.yaml`.
+
+    ## Limitations
+
+    - Egress is allowlisted — an unexpected network failure is usually policy.
+    - `$DOPPLER_TOKEN` is a placeholder and `doppler login` won't work; the proxy
+      injects the real token.
+
+permissions:
+  network:
+    allow:
+      - "**.kodahealthcare.com:443"
+      # Default policy 403s this, which breaks the mongodb MCP and every stack script.
+      - api.doppler.com:443
+      - cli.doppler.com:443 # install.sh
+      - packages.doppler.com:443 # the repo it pulls from
+      - deb.nodesource.com:443 # explicit: the default policy's bare `nodesource.com` misses it
+      - registry.npmjs.org:443 # corepack fetches yarn from here
+      - yarnpkg.com:443
+      - classic.yarnpkg.com:443
+      - fastdl.mongodb.org:443 # mongodb-memory-server's mongod binary
+      - cdn.sheetjs.com:443 # xlsx ships off its own CDN
+      - "staging.pa6pp.mongodb.net:27017" # staging Atlas (mongodb+srv)
+      # Default policy lists only the retired playwright.azureedge.net. amd64 gets a
+      # 302 to Google's Chrome-for-Testing bucket; arm64 comes from prss instead.
+      - cdn.playwright.dev:443
+      - storage.googleapis.com:443
+      - playwright.download.prss.microsoft.com:443
+      # Lets the clinops-ui softphone register its Device, silencing ~70 console errors per
+      # Compass screen — but only where it isn't stubbed (e2e sets VITE_TWILIO_SDK_STUB).
+      # A real call also needs UDP, which a domain allowlist cannot express.
+      - sdk.twilio.com:443
+      - voice-js.roaming.twilio.com:443
+      # apt-get refreshes EVERY configured source: Ubuntu serves amd64 from
+      # archive/security, arm64 from ports, and the *-docker templates pre-add Docker's.
+      - archive.ubuntu.com:80
+      - security.ubuntu.com:80
+      - ports.ubuntu.com:80
+      - download.docker.com:443
+
+environment:
+  variables:
+    # No TTY under the repo's PostToolUse hooks, so the download prompt would surface
+    # as a hook failure rather than a question.
+    COREPACK_ENABLE_DOWNLOAD_PROMPT: "0"
+
+    # Placeholder, NOT a credential: the CLI needs some local token to open a socket
+    # and the proxy replaces the header. Any non-empty value works.
+    DOPPLER_TOKEN: proxy-managed-placeholder
+
+# `inject:` is load-bearing: without it the daemon logs `skipping empty service auth
+# config` and resolves to SBX_CRED_<SERVICE>_MODE=none with nothing delivered.
+credentials:
+  - service: doppler
+    description: "Doppler token for kodaweb-backend / kodaweb-frontend / ehr-ui / clinops-ui (proxy-managed; real value stays on the host)"
+    required: true
+    apiKey:
+      name: DOPPLER_TOKEN
+      proxyManaged: true
+      inject:
+        - domain: api.doppler.com
+          header: Authorization
+          format: Bearer %s
+
+setup:
+  install:
+    - command: |
+        set -euo pipefail
+        curl --proto '=https' --tlsv1.2 -fsSL https://cli.doppler.com/install.sh | sh
+        doppler --version
+      user: "0"
+      description: "Install the Doppler CLI"
+
+    # MUST follow the Node install: `corepack enable` realpath()s each shim it replaces,
+    # so if /usr/bin/yarn{,pkg} still point into Ubuntu's /usr/share/nodejs/corepack after
+    # that package is removed, it dies ENOENT instead of overwriting them. Post-install
+    # they resolve into NodeSource's /usr/lib/node_modules/corepack, so it succeeds.
+    - command: |
+        set -euo pipefail
+        corepack enable
+        yarn --version
+      user: "0"
+      description: "Enable corepack shims (yarn version comes from packageManager)"
+
+    # qa-tools' better-sqlite3 has no prebuilt here, so yarn install falls back to
+    # node-gyp; the template ships make but no cc (`make: cc: No such file or directory`).
+    - command: |
+        set -euo pipefail
+        apt-get install -y --no-install-recommends build-essential python3 python-is-python3 libnss3-tools
+        cc --version
+        python3 --version
+        command -v certutil
+      user: "0"
+      description: "Install the C toolchain node-gyp needs, plus certutil for the CA trust step"
+
+    # Pinned because setup precedes node_modules. 1.61.1 is what both lockfiles resolve
+    # `^1.60.0` to; the floor is too low (1.60.0's distro table stops at ubuntu24.04).
+    # Split root/agent, not --with-deps, so browsers land in the agent's ~/.cache.
+    - command: npx --yes playwright@1.61.1 install-deps chromium
+      user: "0"
+      description: "Install the system libraries chromium needs"
+
+    # Browsers are keyed by revision, so a lockfile bump past this fails with
+    # "browser not found"; re-run `npx playwright install chromium` to repin.
+    - command: npx --yes playwright@1.61.1 install chromium
+      user: "1000"
+      description: "Download the chromium + ffmpeg builds playwright runs against"
+
+    # Chromium reads its own NSS store, not the OpenSSL bundle SSL_CERT_FILE points at, so
+    # without this every HTTPS navigation dies ERR_CERT_AUTHORITY_INVALID while curl/node
+    # are fine. Trusting one CA keeps verification on, unlike --ignore-https-errors. Runs
+    # as 1000 because the store is per-user.
+    - command: |
+        set -euo pipefail
+        ca=/usr/local/share/ca-certificates/proxy-ca.crt
+        db="$HOME/.pki/nssdb"
+        mkdir -p "$db"
+        certutil -d sql:"$db" -A -t "C,," -n sbx-proxy-ca -i "$ca"
+      user: "1000"
+      description: "Trust the sandbox proxy CA in chromium's NSS store so HTTPS works in the Playwright MCP"
+
+    # `playwright-sbx` can't collide with the user's own registration, so no guard needed.
+    # --executable-path reuses the chromium above rather than fetching a second (no
+    # @playwright/mcp release matches 1.61.1) and bypasses the revision check — untested
+    # pairing, drop the flag if the MCP stops launching after a bump. Playwright keeps old
+    # revisions, so take the highest: a bare `echo` collapses both into one unusable string.
+    - command: |
+        set -euo pipefail
+        chrome=$(ls -d "$HOME"/.cache/ms-playwright/chromium-*/chrome-linux64/chrome 2>/dev/null | sort -V | tail -1)
+        if [ -n "$chrome" ] && [ -x "$chrome" ]; then
+          claude mcp add --scope user playwright-sbx -- npx --yes @playwright/mcp --headless --isolated --no-sandbox --executable-path "$chrome"
+        else
+          echo "no executable chromium under $HOME/.cache/ms-playwright/chromium-*/chrome-linux64/" >&2
+          exit 1
+        fi
+      user: "1000"
+      description: "Register the Playwright MCP server with Claude Code"
+
+    # `gh skill install` does not exist — extensions are the only install path. Needs no
+    # extra egress: the release download resolves through hosts the default policy allows.
+    # user 1000 because extensions land in the agent's ~/.local/share/gh.
+    - command: |
+        set -euo pipefail
+        gh extension install github/gh-stack
+        gh stack --help >/dev/null
+      user: "1000"
+      description: "Install the gh-stack CLI extension (stacked-PR workflow, see .claude/skills/gh-stack)"
