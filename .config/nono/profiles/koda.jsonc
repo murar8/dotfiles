@@ -42,6 +42,8 @@
       "release-assets.githubusercontent.com",
       "yarnpkg.com",
       "classic.yarnpkg.com",
+      "runs-on.com",
+      "docs.aws.amazon.com",
     ],
     "credentials": ["github"],
     "custom_credentials": {
