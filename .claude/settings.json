@@ -8,6 +8,7 @@
   "permissions": {
     "disableAutoMode": "disable"
   },
+  "model": "fable",
   "worktree": {
     "baseRef": "head"
   },
@@ -28,6 +29,10 @@
   },
   "extraKnownMarketplaces": {},
   "effortLevel": "low",
+  "modelSettings": {
+    "claude-opus-5": {},
+    "claude-fable-5-1": {}
+  },
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
