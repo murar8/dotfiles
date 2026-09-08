@@ -169,6 +169,9 @@
       "release-assets.githubusercontent.com",
       // Read-only first-party docs, no user-generated content.
       "docs.aws.amazon.com",
+      // Yarn releases and classic registry; read-only, sibling of npmjs.
+      "yarnpkg.com",
+      "classic.yarnpkg.com",
     ],
     "tls_intercept": {
       "ca_env_vars": ["NODE_EXTRA_CA_CERTS"],

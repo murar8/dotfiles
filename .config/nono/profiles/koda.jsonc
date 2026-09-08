@@ -39,8 +39,6 @@
       "results-receiver.actions.githubusercontent.com",
       "cdn.sheetjs.com",
       "fastdl.mongodb.org",
-      "yarnpkg.com",
-      "classic.yarnpkg.com",
       "runs-on.com",
     ],
     "credentials": ["github_koda"],
