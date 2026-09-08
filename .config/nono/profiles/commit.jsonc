@@ -4,11 +4,10 @@
   "meta": {
     "name": "commit",
     "version": "0.4.0",
-    "description": "Commit/tag signing via the ssh-agent socket, no private key; pre-commit cache.",
+    "description": "Commit/tag signing via the ssh-agent socket, without the private key.",
     "author": "murar8",
   },
   "filesystem": {
-    "allow": ["$HOME/.cache/pre-commit"],
     "unix_socket": ["$XDG_RUNTIME_DIR/gcr/ssh"],
     // The host agent now binds under ~/.ssh/agent with a per-session random
     // filename, so the grant has to be the directory: _dir is connect-only and

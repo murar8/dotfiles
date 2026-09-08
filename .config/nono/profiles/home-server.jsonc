@@ -8,7 +8,11 @@
     "author": "murar8",
   },
   "filesystem": {
-    "allow": ["$HOME/Documents/Personal/home-server", "$HOME/.cache/treefmt"],
+    "allow": [
+      "$HOME/Documents/Personal/home-server",
+      "$HOME/.cache/treefmt",
+      "$HOME/.cache/pre-commit",
+    ],
   },
   "network": {
     "allow_domain": [
