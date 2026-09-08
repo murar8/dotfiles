@@ -167,6 +167,8 @@
       // Read-only, no upload path: `gh release download` and release asset
       // URLs redirect here; completes the GitHub set `developer` already has.
       "release-assets.githubusercontent.com",
+      // Actions step logs (`gh run view --log`); writes need a runner token.
+      "results-receiver.actions.githubusercontent.com",
       // Read-only first-party docs, no user-generated content.
       "docs.aws.amazon.com",
       // Yarn releases and classic registry; read-only, sibling of npmjs.

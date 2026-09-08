@@ -36,7 +36,6 @@
       // gh CI log/artifact redirects; GitHub rotates the blob account, so
       // wildcard. Matches any Azure storage account, not just GitHub's.
       "*.blob.core.windows.net",
-      "results-receiver.actions.githubusercontent.com",
       "cdn.sheetjs.com",
       "fastdl.mongodb.org",
       "runs-on.com",
