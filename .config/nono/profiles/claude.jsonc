@@ -4,16 +4,14 @@
   "meta": {
     "name": "claude",
     "version": "0.5.0",
-    "description": "Claude Code, with OAuth tokens captured as phantoms and the background daemon's control socket.",
+    "description": "Claude Code; OAuth tokens captured as phantoms, mcp-proxy egress.",
     "author": "murar8",
   },
   "groups": {
     "exclude": ["vscode_linux"],
   },
   "environment": {
-    "set_vars": {
-      "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
-    },
+    "set_vars": { "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1" },
   },
   "network": {
     // bridge.claudeusercontent.com stays out: it would carry remote MCP
@@ -28,14 +26,8 @@
           "host": "https://platform.claude.com",
           "path": "/v1/oauth/token",
           "response_fields": [
-            {
-              "path": "access_token",
-              "kind": "opaque",
-            },
-            {
-              "path": "refresh_token",
-              "kind": "opaque",
-            },
+            { "path": "access_token", "kind": "opaque" },
+            { "path": "refresh_token", "kind": "opaque" },
           ],
           "request_body": "auto",
           "request_nonce_fields": ["refresh_token"],
@@ -61,9 +53,6 @@
     },
   },
   "credential_routes": [
-    {
-      "name": "claude_code_oauth",
-      "provider": "claude_code",
-    },
+    { "name": "claude_code_oauth", "provider": "claude_code" },
   ],
 }

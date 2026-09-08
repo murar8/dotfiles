@@ -3,7 +3,7 @@
   "meta": {
     "name": "default",
     "version": "0.4.0",
-    "description": "Host baseline every profile inherits: nix_runtime, read-only configs, temp and device writes, pack registry.",
+    "description": "Host baseline: nix_runtime, read-only configs, temp/device writes, egress.",
     "author": "murar8",
   },
   "security": {
@@ -161,8 +161,15 @@
   },
   "network": {
     "network_profile": "developer",
-    // Pack registry `nolabs-ai/*` resolves against.
-    "allow_domain": ["registry.nono.sh"],
+    "allow_domain": [
+      // Pack registry `nolabs-ai/*` resolves against.
+      "registry.nono.sh",
+      // Read-only, no upload path: `gh release download` and release asset
+      // URLs redirect here; completes the GitHub set `developer` already has.
+      "release-assets.githubusercontent.com",
+      // Read-only first-party docs, no user-generated content.
+      "docs.aws.amazon.com",
+    ],
     "tls_intercept": {
       "ca_env_vars": ["NODE_EXTRA_CA_CERTS"],
     },

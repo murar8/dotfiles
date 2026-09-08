@@ -1,6 +1,6 @@
 {
   "$schema": "../profile.schema.json",
-  "extends": "default",
+  "extends": ["default", "commit"],
   "meta": {
     "name": "koda",
     "version": "0.6.0",
@@ -39,15 +39,13 @@
       "results-receiver.actions.githubusercontent.com",
       "cdn.sheetjs.com",
       "fastdl.mongodb.org",
-      "release-assets.githubusercontent.com",
       "yarnpkg.com",
       "classic.yarnpkg.com",
       "runs-on.com",
-      "docs.aws.amazon.com",
     ],
-    "credentials": ["github"],
+    "credentials": ["github_koda"],
     "custom_credentials": {
-      "github": {
+      "github_koda": {
         "upstream": "https://api.github.com",
         "credential_key": "github_koda",
         "env_var": "GH_TOKEN",

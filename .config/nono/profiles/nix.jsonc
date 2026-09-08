@@ -4,13 +4,12 @@
   "meta": {
     "name": "nix",
     "version": "0.2.0",
-    "description": "Nix daemon socket, client caches/state, and this host's substituters; /nix/store stays read-only.",
+    "description": "Nix daemon socket, client caches/state, substituters; /nix/store read-only.",
     "author": "murar8",
   },
   "filesystem": {
     "allow": [
       "$HOME/.cache/nix",
-      "$HOME/.cache/treefmt",
       "$HOME/.local/state/nix",
       "$HOME/.local/share/nix",
     ],

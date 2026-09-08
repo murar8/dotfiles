@@ -6,8 +6,9 @@ Everything else is additive and stackable. Credential-only profiles are wired
 into a base chain via `extends`, never passed on the CLI. `nono profile list`
 is the inventory.
 
-1. Every profile extends `default` — it is never implicit, and a missing base
-   passes `validate` but fails at runtime (no `/nix/store`, nothing can exec).
+1. Every profile reaches `default` through its `extends` chain — it is never
+   implicit, and a missing base passes `validate` but fails at runtime (no
+   `/nix/store`, nothing can exec).
    It shadows the built-in `default` and replaces its group set, so a built-in
    group you want (`homebrew_linux`, the macOS ones) must be added here.
    Check: `nono why --profile <name> --path ~/.gitconfig --op read`. Always pass
@@ -20,8 +21,8 @@ is the inventory.
    writable. Without it `git` cannot run at all — it opens `/dev/null` `O_RDWR`.
    `$TMPDIR` (`/tmp/nono-$UID`) stays read+write via `filesystem.allow`.
 4. Edit `profiles/` in place — `workdir: readwrite` covers this tree, so no
-   `profile-drafts/` + `nono profile promote` detour. Keep `meta.description` to
-   one line, covering only what the profile itself defines, never inherited
-   behavior.
+   `profile-drafts/` + `nono profile promote` detour. Keep `meta.description`
+   under 80 chars, covering only what the profile itself defines, never
+   inherited behavior.
 5. Tracked in the bare repo at `~/.dotfiles` (worktree `$HOME`); committing
    needs `dotfiles`, which grants it write.

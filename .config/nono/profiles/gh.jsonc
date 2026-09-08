@@ -8,9 +8,9 @@
     "author": "murar8",
   },
   "network": {
-    "credentials": ["github"],
+    "credentials": ["github_public"],
     "custom_credentials": {
-      "github": {
+      "github_public": {
         "upstream": "https://api.github.com",
         "credential_key": "github_public",
         "env_var": "GH_TOKEN",

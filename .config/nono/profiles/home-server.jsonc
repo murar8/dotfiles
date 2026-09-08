@@ -1,6 +1,6 @@
 {
   "$schema": "../profile.schema.json",
-  "extends": ["nix"],
+  "extends": ["nix", "commit"],
   "meta": {
     "name": "home-server",
     "version": "0.1.0",
@@ -8,19 +8,18 @@
     "author": "murar8",
   },
   "filesystem": {
-    "allow": ["$HOME/Documents/Personal/home-server"],
+    "allow": ["$HOME/Documents/Personal/home-server", "$HOME/.cache/treefmt"],
   },
   "network": {
     "allow_domain": [
       "static.perimeter81.com",
       "dl.google.com",
-      "release-assets.githubusercontent.com",
       "downloads.mongodb.com",
       "downloads.slack-edge.com",
     ],
-    "credentials": ["github"],
+    "credentials": ["github_home_server"],
     "custom_credentials": {
-      "github": {
+      "github_home_server": {
         "upstream": "https://api.github.com",
         "credential_key": "github_home_server",
         "env_var": "GH_TOKEN",
