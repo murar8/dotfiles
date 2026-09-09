@@ -2,7 +2,7 @@
   "$schema": "../profile.schema.json",
   "meta": {
     "name": "default",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "description": "Host baseline: nix_runtime, read-only configs, temp/device writes, egress.",
     "author": "murar8",
   },
@@ -90,8 +90,7 @@
     ],
   },
   "filesystem": {
-    // Literal uid: $UID expands in set_vars but not in filesystem rules.
-    "allow": ["/tmp/nono-1000"],
+    "allow": ["/tmp/nono-$UID"],
     "read": [
       "$HOME/.bootstrap",
       "$HOME/.dotfiles",
