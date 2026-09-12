@@ -50,21 +50,24 @@ require("which-key").add({
     { "<leader>a", group = "ai" },
     { "<leader>y", group = "yank" },
 })
-vim.keymap.set({ "n", "x" }, "<leader>aa", function()
-    yank_ref("claude", false, false)
-end, { desc = "Yank @file#L ref" })
-vim.keymap.set({ "n", "x" }, "<leader>af", function()
-    yank_ref("claude", false, true)
-end, { desc = "Yank @file ref" })
-vim.keymap.set({ "n", "x" }, "<leader>yy", function()
-    yank_ref("plain", false, false)
-end, { desc = "Yank file:line ref" })
-vim.keymap.set({ "n", "x" }, "<leader>yf", function()
-    yank_ref("plain", false, true)
-end, { desc = "Yank file path" })
-vim.keymap.set({ "n", "x" }, "<leader>yY", function()
-    yank_ref("plain", true, false)
-end, { desc = "Yank file:line ref (absolute)" })
-vim.keymap.set({ "n", "x" }, "<leader>yF", function()
-    yank_ref("plain", true, true)
-end, { desc = "Yank file path (absolute)" })
+---@type { lhs: string, style: "claude"|"plain", absolute: boolean, whole_file: boolean, desc: string }[]
+local maps = {
+    { lhs = "<leader>aa", style = "claude", absolute = false, whole_file = false, desc = "Yank @file#L ref" },
+    { lhs = "<leader>af", style = "claude", absolute = false, whole_file = true, desc = "Yank @file ref" },
+    { lhs = "<leader>yy", style = "plain", absolute = false, whole_file = false, desc = "Yank file:line ref" },
+    { lhs = "<leader>yf", style = "plain", absolute = false, whole_file = true, desc = "Yank file path" },
+    {
+        lhs = "<leader>yY",
+        style = "plain",
+        absolute = true,
+        whole_file = false,
+        desc = "Yank file:line ref (absolute)",
+    },
+    { lhs = "<leader>yF", style = "plain", absolute = true, whole_file = true, desc = "Yank file path (absolute)" },
+}
+
+for _, map in ipairs(maps) do
+    vim.keymap.set({ "n", "x" }, map.lhs, function()
+        yank_ref(map.style, map.absolute, map.whole_file)
+    end, { desc = map.desc })
+end

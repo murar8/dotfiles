@@ -31,9 +31,9 @@ vim.keymap.set("x", "<", "<gv", { desc = "Indent left" })
 vim.keymap.set("x", ">", ">gv", { desc = "Indent right" })
 
 -- Insert-mode undo break-points
-vim.keymap.set("i", ",", ",<c-g>u")
-vim.keymap.set("i", ".", ".<c-g>u")
-vim.keymap.set("i", ";", ";<c-g>u")
+for _, char in ipairs({ ",", ".", ";" }) do
+    vim.keymap.set("i", char, char .. "<c-g>u")
+end
 
 -- Save all files
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save all files" })
@@ -60,15 +60,14 @@ vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New file" })
 -- Diagnostics
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 
-vim.keymap.set("n", "]e", function()
-    vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
-end, { desc = "Next error" })
-vim.keymap.set("n", "[e", function()
-    vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
-end, { desc = "Previous error" })
-vim.keymap.set("n", "]w", function()
-    vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN })
-end, { desc = "Next warning" })
-vim.keymap.set("n", "[w", function()
-    vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN })
-end, { desc = "Previous warning" })
+for _, jump in ipairs({
+    { key = "e", label = "error", severity = vim.diagnostic.severity.ERROR },
+    { key = "w", label = "warning", severity = vim.diagnostic.severity.WARN },
+}) do
+    for prefix, count in pairs({ ["]"] = 1, ["["] = -1 }) do
+        local direction = count > 0 and "Next" or "Previous"
+        vim.keymap.set("n", prefix .. jump.key, function()
+            vim.diagnostic.jump({ count = count, severity = jump.severity })
+        end, { desc = direction .. " " .. jump.label })
+    end
+end

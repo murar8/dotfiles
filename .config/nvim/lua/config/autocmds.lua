@@ -1,8 +1,10 @@
--- Enter insert mode automatically in terminal buffers
+-- Enter insert mode automatically in terminal buffers. The `term://*` pattern
+-- skips the callback on most buffer switches; the buftype check covers terminal
+-- buffers that were renamed away from the default `term://` name.
 vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
     group = vim.api.nvim_create_augroup("config_term_insert", { clear = true }),
-    callback = function()
-        if vim.bo.buftype == "terminal" then
+    callback = function(event)
+        if vim.bo[event.buf].buftype == "terminal" then
             vim.cmd.startinsert()
         end
     end,
@@ -27,17 +29,6 @@ vim.api.nvim_create_autocmd("TermClose", {
                 vim.api.nvim_buf_delete(event.buf, { force = true })
             end
         end)
-    end,
-})
-
--- Disable 'autocomplete' (config/options.lua) in prompt inputs so the menu
--- doesn't pop over picker/ui.input text (e.g. Snacks grep on <leader>sg).
-vim.api.nvim_create_autocmd("BufEnter", {
-    group = vim.api.nvim_create_augroup("config_no_autocomplete_prompt", { clear = true }),
-    callback = function(event)
-        if vim.bo[event.buf].buftype == "prompt" then
-            vim.bo[event.buf].autocomplete = false
-        end
     end,
 })
 
@@ -66,9 +57,8 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("BufReadPost", {
     group = vim.api.nvim_create_augroup("config_last_loc", { clear = true }),
     callback = function(event)
-        local exclude = { "gitcommit" }
         local buf = event.buf
-        if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].last_loc then
+        if vim.bo[buf].filetype == "gitcommit" or vim.b[buf].last_loc then
             return
         end
         vim.b[buf].last_loc = true

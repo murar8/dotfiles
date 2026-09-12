@@ -1,3 +1,5 @@
+-- Neovim does not create the cache dir itself; jdtls' `-data` workspace lives
+-- under it (see plugins/lazy-lsp.lua).
 vim.fn.mkdir(vim.fn.stdpath("cache"), "p")
 
 require("config.options")

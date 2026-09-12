@@ -12,15 +12,47 @@ vim.pack.add({
 -- legacy `nix-shell --run` form would swallow the appended args.
 local in_shell = require("lazy-lsp.helpers").in_shell
 
-local function nix_formatter(pkg, bin)
-    if vim.fn.executable(bin) == 1 then
+local function nix_formatter(pkg)
+    if vim.fn.executable(pkg) == 1 then
         return nil -- already on PATH; use conform's built-in definition
     end
-    local prefix = in_shell({ pkg }, { bin })
+    local prefix = in_shell({ pkg }, { pkg })
     return {
         command = prefix[1],
         prepend_args = vim.list_slice(prefix, 2),
     }
+end
+
+local formatters = {}
+for _, pkg in ipairs({ "stylua", "shfmt", "nixfmt", "prettier" }) do
+    formatters[pkg] = nix_formatter(pkg)
+end
+
+local formatters_by_ft = {
+    lua = { "stylua" },
+    sh = { "shfmt" },
+    nix = { "nixfmt" },
+}
+-- prettier for all filetypes it supports (matches LazyVim's list).
+for _, ft in ipairs({
+    "css",
+    "graphql",
+    "handlebars",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "jsonc",
+    "less",
+    "markdown",
+    "markdown.mdx",
+    "scss",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "yaml",
+}) do
+    formatters_by_ft[ft] = { "prettier" }
 end
 
 require("conform").setup({
@@ -30,34 +62,8 @@ require("conform").setup({
     default_format_opts = {
         lsp_format = "fallback",
     },
-    formatters_by_ft = {
-        lua = { "stylua" },
-        sh = { "shfmt" },
-        nix = { "nixfmt" },
-        -- prettier for all filetypes it supports (matches LazyVim's list).
-        css = { "prettier" },
-        graphql = { "prettier" },
-        handlebars = { "prettier" },
-        html = { "prettier" },
-        javascript = { "prettier" },
-        javascriptreact = { "prettier" },
-        json = { "prettier" },
-        jsonc = { "prettier" },
-        less = { "prettier" },
-        markdown = { "prettier" },
-        ["markdown.mdx"] = { "prettier" },
-        scss = { "prettier" },
-        typescript = { "prettier" },
-        typescriptreact = { "prettier" },
-        vue = { "prettier" },
-        yaml = { "prettier" },
-    },
-    formatters = {
-        stylua = nix_formatter("stylua", "stylua"),
-        shfmt = nix_formatter("shfmt", "shfmt"),
-        nixfmt = nix_formatter("nixfmt", "nixfmt"),
-        prettier = nix_formatter("prettier", "prettier"),
-    },
+    formatters_by_ft = formatters_by_ft,
+    formatters = formatters,
     format_on_save = {
         timeout_ms = 1000,
     },

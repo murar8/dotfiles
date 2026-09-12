@@ -7,7 +7,6 @@ vim.opt.number = true -- Show line numbers
 vim.opt.relativenumber = true -- Relative line numbers (hybrid with number)
 vim.opt.cursorline = true -- Highlight the current line
 vim.opt.signcolumn = "yes" -- Always show the sign column
-vim.opt.showmode = true -- Show mode in the command line (no statusline plugin)
 vim.opt.laststatus = 3 -- Single global statusline
 vim.opt.list = true -- Show invisible characters
 vim.opt.conceallevel = 2 -- Hide markup except on the cursor line
@@ -54,7 +53,6 @@ vim.opt.confirm = true -- Ask to save instead of erroring on :q
 vim.opt.undofile = true -- Persistent undo
 vim.opt.timeoutlen = 300 -- Faster mapped-sequence timeout
 vim.opt.updatetime = 200 -- Idle ms before CursorHold / swap write
-vim.opt.spelllang = { "en" } -- Dictionary language for :set spell
 vim.opt.exrc = true -- Load project-local .nvim.lua/.nvimrc/.exrc (trust-prompted)
 
 -- Diagnostics
@@ -66,4 +64,4 @@ vim.diagnostic.config({ jump = { float = true } }) -- Show the float when jumpin
 -- triggered: messages longer than 'cmdheight' are collapsed with a `[+x]` spill
 -- indicator instead, expanded with `g<` (or ENTER right after a `:` command).
 -- Defaults are unchanged; messages go to the cmdline.
-require("vim._core.ui2").enable({ enable = true })
+require("vim._core.ui2").enable()

@@ -2,14 +2,17 @@ vim.pack.add({
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
 })
 
-require("gitsigns").setup({
-    on_attach = function(bufnr)
-        local gitsigns = require("gitsigns")
+local gitsigns = require("gitsigns")
 
-        local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            vim.keymap.set(mode, l, r, opts)
+require("which-key").add({
+    { "<leader>h", group = "hunk" },
+    { "<leader>t", group = "toggle" },
+})
+
+gitsigns.setup({
+    on_attach = function(bufnr)
+        local function map(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
         end
 
         -- Navigation
@@ -17,55 +20,60 @@ require("gitsigns").setup({
             if vim.wo.diff then
                 vim.cmd.normal({ "]c", bang = true })
             else
+                -- `Gitsigns.NavOpts` annotates every field as required, but they
+                -- all fall back to the values from `setup`; spelling them out
+                -- here would pin them instead.
+                ---@diagnostic disable-next-line: missing-fields
                 gitsigns.nav_hunk("next", { target = "all" })
             end
-        end)
+        end, "Next hunk")
 
         map("n", "[c", function()
             if vim.wo.diff then
                 vim.cmd.normal({ "[c", bang = true })
             else
+                ---@diagnostic disable-next-line: missing-fields
                 gitsigns.nav_hunk("prev", { target = "all" })
             end
-        end)
+        end, "Previous hunk")
 
         -- Actions
-        map("n", "<leader>hs", gitsigns.stage_hunk)
-        map("n", "<leader>hr", gitsigns.reset_hunk)
+        map("n", "<leader>hs", gitsigns.stage_hunk, "Stage hunk")
+        map("n", "<leader>hr", gitsigns.reset_hunk, "Reset hunk")
 
         map("v", "<leader>hs", function()
             gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-        end)
+        end, "Stage selected hunk")
 
         map("v", "<leader>hr", function()
             gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-        end)
+        end, "Reset selected hunk")
 
-        map("n", "<leader>hS", gitsigns.stage_buffer)
-        map("n", "<leader>hR", gitsigns.reset_buffer)
-        map("n", "<leader>hp", gitsigns.preview_hunk)
-        map("n", "<leader>hi", gitsigns.preview_hunk_inline)
+        map("n", "<leader>hS", gitsigns.stage_buffer, "Stage buffer")
+        map("n", "<leader>hR", gitsigns.reset_buffer, "Reset buffer")
+        map("n", "<leader>hp", gitsigns.preview_hunk, "Preview hunk")
+        map("n", "<leader>hi", gitsigns.preview_hunk_inline, "Preview hunk inline")
 
         map("n", "<leader>hb", function()
             gitsigns.blame_line({ full = true })
-        end)
+        end, "Blame line")
 
-        map("n", "<leader>hd", gitsigns.diffthis)
+        map("n", "<leader>hd", gitsigns.diffthis, "Diff against index")
 
         map("n", "<leader>hD", function()
             gitsigns.diffthis("~")
-        end)
+        end, "Diff against last commit")
 
         map("n", "<leader>hQ", function()
             gitsigns.setqflist("all")
-        end)
-        map("n", "<leader>hq", gitsigns.setqflist)
+        end, "Hunks to quickfix (all buffers)")
+        map("n", "<leader>hq", gitsigns.setqflist, "Hunks to quickfix")
 
         -- Toggles
-        map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-        map("n", "<leader>tw", gitsigns.toggle_word_diff)
+        map("n", "<leader>tb", gitsigns.toggle_current_line_blame, "Current line blame")
+        map("n", "<leader>tw", gitsigns.toggle_word_diff, "Word diff")
 
         -- Text object
-        map({ "o", "x" }, "ih", gitsigns.select_hunk)
+        map({ "o", "x" }, "ih", gitsigns.select_hunk, "Hunk")
     end,
 })
