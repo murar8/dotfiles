@@ -2,7 +2,7 @@
   "$schema": "../profile.schema.json",
   "meta": {
     "name": "default",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "description": "Host baseline: nix_runtime, read-only configs, temp/device writes, egress.",
     "author": "murar8",
   },
@@ -106,7 +106,9 @@
       "$HOME/.config/zed",
       "$HOME/.config/zellij",
       "$HOME/.config/yarn",
-      "$HOME/.config/nono",
+      // $NONO_CONFIG rather than the hardcoded $HOME/.config/nono, so this
+      // still resolves when XDG_CONFIG_HOME moves the tree.
+      "$NONO_CONFIG",
       // gh finds extensions only through its XDG data dir, which honours
       // neither GH_CONFIG_DIR nor the TMPDIR redirect below; without this
       // `gh <ext>` is not even a known command. Read-only on purpose — these
@@ -126,8 +128,6 @@
       "$HOME/.tmux.conf",
       "$HOME/.yarnrc",
       "$HOME/.ssh/id_ed25519.pub",
-      "/etc/passwd",
-      "/etc/group",
     ],
     "unix_socket": ["/run/nscd/socket"],
     "suppress_save_prompt": [
