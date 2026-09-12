@@ -8,7 +8,6 @@
   "permissions": {
     "disableAutoMode": "disable"
   },
-  "model": "fable",
   "worktree": {
     "baseRef": "head"
   },

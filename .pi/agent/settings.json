@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.84.4",
+  "lastChangelogVersion": "0.85.1",
   "theme": "dark",
   "enableInstallTelemetry": false,
   "hideThinkingBlock": false,
@@ -8,12 +8,13 @@
     "showTerminalProgress": true
   },
   "defaultProvider": "openrouter",
-  "defaultModel": "~x-ai/grok-latest",
+  "defaultModel": "deepseek/deepseek-v4.1-flash",
   "enabledModels": [
     "openrouter/~z-ai/glm-latest",
     "openrouter/~openai/gpt-latest",
     "openrouter/~google/gemini-flash-latest",
-    "openrouter/~deepseek/deepseek-v4-flash-latest"
+    "openrouter/~z-ai/glm-flash-latest",
+    "openrouter/deepseek/deepseek-v4.1-flash"
   ],
   "packages": [
     {
