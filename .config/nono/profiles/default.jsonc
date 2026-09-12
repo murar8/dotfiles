@@ -50,6 +50,7 @@
       "/.m2/repository",
       "/.gradle",
       "/.local/share/mise",
+      "/.local/share/nvim",
       "/.vscode",
       "/.config/Code",
       // In-tree build and test artifacts. Bare generic names (`dist`, `build`,
@@ -98,6 +99,7 @@
       "$HOME/.config/ghostty",
       "$HOME/.config/git",
       "$HOME/.config/helix",
+      "$HOME/.config/lazydocker",
       "$HOME/.config/lazygit",
       "$HOME/.config/looking-glass",
       "$HOME/.config/neovide",
@@ -115,6 +117,11 @@
       // are executables the host's own gh runs, so a writable grant would be an
       // exec path out of the sandbox. Install extensions from the host.
       "$HOME/.local/share/gh",
+      // Plugin/runtime trees only. `mason/bin` here is host-installed
+      // executables, so read-only on purpose — same reasoning as gh above.
+      // ~/.local/state/nvim stays out: shada carries command and register
+      // history and undo/ carries prior contents of every file ever edited.
+      "$HOME/.local/share/nvim",
     ],
     "read_file": [
       "$HOME/.bashrc",
